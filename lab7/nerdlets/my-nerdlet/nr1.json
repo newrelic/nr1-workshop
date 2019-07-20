@@ -1,0 +1,8 @@
+{
+    "schemaType": "NERDLET",
+    "id": "my-nerdlet",
+    "description": "Describe me",
+    "displayName": "Lab 7: Custom Data",
+    "entities": [{"domain": "BROWSER", "type": "APPLICATION"}],
+    "actionCategory": "monitor"
+}

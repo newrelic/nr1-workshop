@@ -16,7 +16,7 @@ After completing this lab you should understand:
 
 Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 
-**Reminder**: Make sure that you're ready to go with your `lab2` by ensuring you've run the following commands:
+**Reminder**: Make sure that you're ready to go with your `lab6` by ensuring you've run the following commands:
 
 ```bash
 # from the nr1-eap-workshop directory

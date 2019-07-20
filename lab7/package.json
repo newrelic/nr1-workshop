@@ -1,0 +1,31 @@
+{
+    "private": true,
+    "name": "lab7",
+    "description": "NR1 UI Package lab7",
+    "version": "0.1.0",
+    "scripts": {
+        "start": "nr1 package:serve",
+        "test": "exit 0"
+    },
+    "nr1": {
+        "uuid": "176d0307-b7db-4c04-854c-25d187a01131",
+        "sdkVersion": 2
+    },
+    "bugs": {
+        "email": "labs@newrelic.com"
+    },
+    "author": "New Relic Labs",
+    "dependencies": {
+        "js-base64": "^2.5.1",
+        "prop-types": "^15.6.2",
+        "randomcolor": "^0.5.4",
+        "react": "^16.6.3",
+        "react-dom": "^16.6.3",
+        "uuid": "^3.3.2"
+    },
+    "browserslist": [
+        "last 2 versions",
+        "not ie < 11",
+        "not dead"
+    ]
+}
