@@ -1,4 +1,4 @@
-# Workshop Overview
+# Overview
 
 The repo for NR1 EAP enablement training experience. In this repository, we'll store (or link to) a complete curriculum, including labs and workshop-specific documentation, built to support a self-paced training event focused on the New Relic One platform and developer experience.
 
@@ -6,11 +6,9 @@ The repo for NR1 EAP enablement training experience. In this repository, we'll s
 
 See the [Setup](SETUP.md) documentation.
 
-# Workshop Agenda
+# Agenda
 
 The workshop is a collaborative process between the New Relic Labs and the New Relic Developer Program. The workshop is comprised of hands-on exercises augmented by a handful of Slide presentations. It is meant to accompany a hackathon-style experience in which learners will work on real-world problems of their choosing with the instructors/mentors present to address questions and (as needed) go over confusing concepts with the entire cohort.
-
-## Agenda
 
 | Subject | Material |
 |---|---|
