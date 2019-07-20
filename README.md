@@ -23,7 +23,7 @@ The workshop is a collaborative process between the New Relic Labs and the New R
 | Lab 2: navigation and timeRange | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab2/INSTRUCTIONS.md) |
 | Lab 3: Grids, Stacks, and UI components | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab3/INSTRUCTIONS.md) |
 | **Working with the New Relic GraphQL API** | |
-| Introduction to NR1 GraphQL | [Understanding GraphQL](https://github.com/newrelic/nr1-eap-workshop/blob/master/GraphQL-TheBasics/INSTRUCTIONS.md) |
+| Introduction to NR1 GraphQL | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/GraphQL-TheBasics/INSTRUCTIONS.md) |
 | Lab 4: NR1 GraphQL components | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab4/INSTRUCTIONS.md) |
 | Lab 5: Custom GraphQL and Nerdlets | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab5/INSTRUCTIONS.md) |
 | **Advanced Topics** | |
