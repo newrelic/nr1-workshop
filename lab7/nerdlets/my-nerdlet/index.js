@@ -18,7 +18,7 @@ export default class MyNerdlet extends React.Component {
         //we're going to replace these in the lab INSTRUCTIONS.md, so watch while you can.
         return <Grid>
             <GridItem columnStart={1} columnEnd={12}>
-                <h1>Here's a little fun.</h1>
+                <h1>Here's a little fun with Grid...</h1>
             </GridItem>
             <GridItem columnStart={1} columnEnd={6}>
                 <iframe width="100%" height={height/3} src="https://www.youtube.com/embed/caIsN_PjaHY" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" ></iframe>
@@ -42,7 +42,7 @@ export default class MyNerdlet extends React.Component {
                 <iframe width="100%" height={height/12} src="https://www.youtube.com/embed/GM-e46xdcUo" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" ></iframe>
             </GridItem>
             <GridItem columnStart={6} columnEnd={11}>
-                <h2>The point is, it's really flexible...</h2>
+                <h2>The point is, it's really flexible.</h2>
             </GridItem>
             <GridItem columnStart={12} columnEnd={12}>
                 <iframe width="100%" height={height/12} src="https://www.youtube.com/embed/QH2-TGUlwu4" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" ></iframe>
