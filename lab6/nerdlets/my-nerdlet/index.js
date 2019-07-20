@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Spinner, Stack, StackItem, BillboardChart, PieChart, NerdGraphQuery } from 'nr1';
-import Select from 'react-select';
-import gql from 'graphql-tag';
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
