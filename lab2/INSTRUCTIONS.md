@@ -69,7 +69,7 @@ We need to start by adding a `Button` to the screen.
 
 ```javascript
 //look with your eyes at the Button
-import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Button, navigation } from 'nr1';
+import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Button, navigation, nerdlet } from 'nr1';
 ```
 
 2. Adjust the following code in the `render` method to include the new `StackItem` and `Button` components. In between the first and second "rows" of content within the `render` `return` statement, add the following:
@@ -84,13 +84,13 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
 
 ```javascript
     openEntity() {
-        const { entityGuid } = this.state;
-        navigation.openCard({
-            id: 'slicer-dicer.apm-overview',
-            urlState: {
-                entityId: entityGuid
-            }
+        const { entityGuid, appName } = this.state;
+        navigation.openEntity({
+            id: entityGuid,
+            type: 'APPLICATION',
+            domain: 'APM'
         });
+        nerdlet.setUrlState({ entityGuid, appName });
     }
 ```
 
@@ -106,7 +106,26 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
 6. Click on the button titled `Open <<App Name>>`. You should see a card open containing the APM Overview screen.
 ![APM Overview](../screenshots/lab2_screen05.png)
 
-_Note: Alternatively, you can call the `navigation.openEntity` and simply pass the entityId, **thusly**, which will change the entire context of the Nerdlet pane vs. just opening a card:_
+_Note: Alternatively, you can call the `navigation.openCard` **thusly**, which will open a card UI vs. replace the entire Nerdlet context:_
+
+```javascript
+    openEntity() {
+        const { entityGuid } = this.state;
+        navigation.openCard({
+            id: 'slicer-dicer.apm-overview',
+            urlState: {
+                entityId: entityGuid
+            }
+        });
+        nerdlet.setUrlState({ entityGuid, appName });
+    }
+```
+
+## Step 4: Save the Nerdlet state
+
+We have one remaining issue with the navigation flow of this example. After you click on the Button that takes you to the APM Overview nerdlet, a click on your browser back arrow takes you (correctly) to the Lab 2 Nerdlet; however (incorrectly) back to an empty state (i.e. not displaying the 2nd row). Let's fix that.
+
+1. Let's make a call to the `nerdlet.setUrlState` to save the `entityGuid` and `appName` before navigating away. To do this, let's change the `openEntity` method and add a call to `nerdlet.setUrlState`.
 
 ```javascript
     openEntity() {
@@ -116,30 +135,50 @@ _Note: Alternatively, you can call the `navigation.openEntity` and simply pass t
             type: 'APPLICATION',
             domain: 'APM'
         });
+        nerdlet.setUrlState(this.state);
     }
-
 ```
+
+2. Modify the component's ` constructor` to read from the Nerdlet state when instantiating by modifying the constructor thusly.
+
+```javascript
+    constructor(props) {
+        super(props);
+        this.accountId = 1606862; //New Relic Demotron.
+        this.state = {
+            entityGuid: this.props.nerdletUrlState.entityGuid,
+            appName: this.props.nerdletUrlState.appName
+        };
+        console.debug("Nerdlet props", this.props); //eslint-disable-line
+        this.openEntity = this.openEntity.bind(this);
+    }
+```
+
+3. Save the file and reload. Click on an `Application` in the `Lab 2 Nerdlet` table, click the `Button` (navigating away), and click back. You should see your context maintained in `Lab 2 Nerdlet`
+
+## Summary
 
 In the end, your `index.js` should look like this.
 
 ```javascript
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Button, navigation } from 'nr1';
+import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Button, navigation, nerdlet } from 'nr1';
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
         width: PropTypes.number,
         height: PropTypes.number,
-        launcherUrlState: PropTypes.object
+        launcherUrlState: PropTypes.object,
+        nerdletUrlState: PropTypes.object
     };
 
     constructor(props) {
         super(props);
         this.accountId = 1606862; //New Relic Demotron.
         this.state = {
-            entityGuid: null,
-            appName: null
+            entityGuid: this.props.nerdletUrlState.entityGuid,
+            appName: this.props.nerdletUrlState.appName
         };
         console.debug("Nerdlet props", this.props); //eslint-disable-line
         this.openEntity = this.openEntity.bind(this);
@@ -157,12 +196,12 @@ export default class MyNerdlet extends React.Component {
 
     openEntity() {
         const { entityGuid } = this.state;
-        navigation.openCard({
-            id: 'slicer-dicer.apm-overview',
-            urlState: {
-                entityId: entityGuid
-            }
+        navigation.openEntity({
+            id: entityGuid,
+            type: 'APPLICATION',
+            domain: 'APM'
         });
+        nerdlet.setUrlState(this.state);
     }
 
     render(){

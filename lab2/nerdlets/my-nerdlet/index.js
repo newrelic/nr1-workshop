@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Button, navigation } from 'nr1';
+import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Button, navigation, nerdlet } from 'nr1';
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
