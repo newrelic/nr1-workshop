@@ -23,7 +23,7 @@ The workshop is a collaborative process between the New Relic Labs and the New R
 | **Working with the New Relic GraphQL API** | |
 | Lab 4: Introduction to the New Relic GraphQL API | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab4/INSTRUCTIONS.md) |
 | Lab 5: NR1 GraphQL components | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab5/INSTRUCTIONS.md) |
-| Lab 6: Custom GraphQL and Nerdlets | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab6/INSTRUCTIONS.md) |
+| Lab 6: GraphQL and Nerdlets | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab6/INSTRUCTIONS.md) |
 | **Advanced Topics** | |
 | Lab 7: Passing 3rd party data into a Chart component | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab7/INSTRUCTIONS.md) |
 | Lab 8: Using 3rd Party Libraries to create custom visualizations | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab8/INSTRUCTIONS.md) |

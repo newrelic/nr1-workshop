@@ -1,4 +1,4 @@
-Lab 3: Custom GraphQL and Nerdlets
+Lab 6: GraphQL and Nerdlets
 ===========================================================
 
 The purpose of this lab is twofold:
