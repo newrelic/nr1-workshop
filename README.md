@@ -4,7 +4,7 @@ The repo for NR1 EAP enablement training experience. In this repository, we'll s
 
 ## Prerequisites
 
-See the [Setup](Setup.md) documentation.
+See the [Setup](SETUP.md) documentation.
 
 # Workshop Agenda
 

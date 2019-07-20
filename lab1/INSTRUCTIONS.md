@@ -9,7 +9,7 @@ After completing this lab you should understand:
 
 ## Step 0: Setup and Prerequisites
 
-Load the prequisites and follow the setup instructions in [Setup](../Setup.md).
+Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 
 **Reminder**: Make sure that you're ready to go with your `lab1` by ensuring you've run the following commands:
 
