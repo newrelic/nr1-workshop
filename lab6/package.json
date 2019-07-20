@@ -1,0 +1,28 @@
+{
+    "private": true,
+    "name": "lab6",
+    "description": "NR1 UI Package lab6",
+    "version": "0.1.0",
+    "scripts": {
+        "start": "nr1 package:serve",
+        "test": "exit 0"
+    },
+    "nr1": {
+        "uuid": "edbee40c-a369-4605-81e6-bf6f44832456",
+        "sdkVersion": 2
+    },
+    "bugs": {
+        "email": "labs@newrelic.com"
+    },
+    "author": "New Relic Labs",
+    "dependencies": {
+        "prop-types": "^15.6.2",
+        "react": "^16.6.3",
+        "react-dom": "^16.6.3"
+    },
+    "browserslist": [
+        "last 2 versions",
+        "not ie < 11",
+        "not dead"
+    ]
+}

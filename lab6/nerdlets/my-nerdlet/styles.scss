@@ -1,0 +1,16 @@
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+}
+.chart {
+  padding: 10px;
+  height: 300px;
+}
+.accountSelect {
+  width: fit-content;
+  min-width: 40%;
+  margin: 10px auto;
+}
