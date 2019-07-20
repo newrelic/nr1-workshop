@@ -9,13 +9,13 @@ After completing this lab you should understand:
 
 ## Step 0: Setup and Prerequisites
 
-Load the prequisites and follow the setup instructions in [Setup and Prequisites](../SetupAndPrerequisites.md).
+Load the prequisites and follow the setup instructions in [Setup](../Setup.md).
 
 **Reminder**: Make sure that you're ready to go with your `lab1` by ensuring you've run the following commands:
 
 ```bash
-# if we're not in the lab1 directory get there
-cd ../lab1
+# from the nr1-eap-workshop directory
+cd lab1
 npm install
 ```
 

@@ -1,0 +1,8 @@
+{
+    "schemaType": "LAUNCHER",
+    "id": "my-launcher",
+    "description": "Describe me",
+    "displayName": "Lab 2 Launcher",
+    "icon": "interface_placeholders_icon-placeholder",
+    "rootNerdletId": "lab2.lab2-nerdlet"
+}
