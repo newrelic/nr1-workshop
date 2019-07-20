@@ -74,7 +74,7 @@ _Note: There's a lot more code in this initial file. Take a few moments to revie
 2. We're going to add some libraries to to our project that we're going to need. So let's start with adding them to our package.json
 
 ```bash
-npm install --save graphql react-select
+npm install --save graphql graphql-tag react-select
 ```
 
 3. Next, let's add some imports to the top of our `lab6/nerdlets/my-nerdlet/index.js` file.
@@ -113,62 +113,6 @@ import gql from 'graphql-tag';
 _Note: you'll notice that - for the purposes of demonstration - we're being a bit more verbose in the code, building out a set of options and values for our `Select` component._
 
 ```javascript
-    _buildNerdGraphQuery() {
-        return `{
-            actor {
-              account(id: ${this.account_id}) {
-                cloud {
-                  providers {
-                    id
-                    name
-                    services {
-                      id
-                      name
-                      isEnabled
-                    }
-                  }
-                }
-              }
-            }
-          }`
-    }
-```
-
-6. Now, we're going to utilize one of the React lifecycle components, `componentDidMount` to execute a GraphQL request, process the results, and populate the component's `state.data`.
-
-```javascript
-    componentDidMount() {
-        const data = [];
-        //grab the nerdGraph object from the nr1.services
-        const nerdGraph = this.props.nr1.services.nerdGraph
-        //execute a nerdGraph query
-        nerdGraph.query(this._buildNerdGraphQuery()).then(results => {
-            console.log(results) // eslint-disable-line
-            //process the cloud.providers
-            results.raw.data.actor.account.cloud.providers.forEach(provider => {
-                //process each service in the provider
-                provider.services.forEach((service, id) => {
-                    data.push({
-                        id,
-                        data: [
-                            provider.name,
-                            service.name,
-                            service.isEnabled.toString(),
-                            provider.id,
-                            service.id
-                        ]
-                    })
-                })
-            })
-            //add the updated data array to the component's state
-            this.setState({data})
-        })
-    }
-```
-
-7. Add the following attribute definition for a `column` attribute of the component in the `constructor`. Replace the constructor with the following code.
-
-```javascript
     render() {
         const { accounts, selectedAccount } = this.state;
         if (accounts) {
@@ -196,7 +140,7 @@ _Note: you'll notice that - for the purposes of demonstration - we're being a bi
                 ...
 ```
 
-8. Our `Select` component referenced a `this.selectAccountBind` in the `onChange` event, so we need to define that.
+6. Our `Select` component referenced a `this.selectAccountBind` in the `onChange` event, so we need to define that.
 
 Add the following method to the `lab6/nerdlets/my-nerdlet/index.js` file:
 
@@ -347,11 +291,11 @@ export default class MyNerdlet extends React.Component {
 }
 ```
 
-9. Save `lab6/nerdlets/my-nerdlet/index.js` and reload. When the Nerdlet reloads, you should see a `Select` box with a list of the accounts to which you have access.
+7. Save `lab6/nerdlets/my-nerdlet/index.js` and reload. When the Nerdlet reloads, you should see a `Select` box with a list of the accounts to which you have access.
 
 ![Select](../screenshots/lab6_screen02.png)
 
-10. Choose one. You should see a screen that looks like the following.
+8. Choose one. You should see a screen that looks like the following.
 ![Services](../screenshots/lab6_screen03.png)
 
 # For Consideration / Discussion
