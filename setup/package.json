@@ -1,0 +1,28 @@
+{
+    "private": true,
+    "name": "setup",
+    "description": "NR1 UI Package setup",
+    "version": "0.1.0",
+    "scripts": {
+        "start": "nr1 package:serve",
+        "test": "exit 0"
+    },
+    "nr1": {
+        "uuid": "eb044e92-f184-4766-b712-7bde1d1421d8",
+        "sdkVersion": 2
+    },
+    "bugs": {
+        "email": "labs@newrelic.com"
+    },
+    "author": "New Relic Labs",
+    "dependencies": {
+        "prop-types": "^15.6.2",
+        "react": "^16.6.3",
+        "react-dom": "^16.6.3"
+    },
+    "browserslist": [
+        "last 2 versions",
+        "not ie < 11",
+        "not dead"
+    ]
+}

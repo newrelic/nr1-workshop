@@ -1,0 +1,8 @@
+{
+    "schemaType": "LAUNCHER",
+    "id": "my-launcher",
+    "description": "Describe me",
+    "displayName": "Setup Exercise",
+    "icon": "interface_placeholders_icon-placeholder",
+    "rootNerdletId": "setup.my-nerdlet"
+}
