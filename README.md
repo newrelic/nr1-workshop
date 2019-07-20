@@ -16,7 +16,7 @@ The workshop is a collaborative process between the New Relic Labs and the New R
 | Workshop Overview and Programmability Concepts | [Slides] |
 | Introduction to the NR1 SDK | [Slides] |
 | **Getting Started** | |
-| Lab 0: Creating your first package | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab0/INSTRUCTIONS.md) |
+| Lab 0: Creating your first package, launcher, and nerdlet | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab0/INSTRUCTIONS.md) |
 | Lab 1: Working with Chart components | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab1/INSTRUCTIONS.md) |
 | Lab 2: navigation and timeRange | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab2/INSTRUCTIONS.md) |
 | Lab 3: Grids, Stacks, and UI components | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab3/INSTRUCTIONS.md) |
