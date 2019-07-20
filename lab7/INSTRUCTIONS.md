@@ -61,7 +61,7 @@ _Note: the `entityId` is actually a Base64 encoded concatenation of the accountI
 2. Add the following imports near the top of your `lab7/nerdlets/my-nerdlet/index.js`
 
 ```javascript
-import { NrqlQuery, Spinner, LineChart } from 'nr1';
+import { NrqlQuery, Spinner, LineChart, DisplayText } from 'nr1';
 import { decodeGuid, loadEntity, generateForecastData } from './utils';
 ```
 
@@ -170,7 +170,7 @@ The final code in `lab7/nerdlets/my-nerdlet/index.js` should look something like
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, GridItem } from 'nr1';
-import { NrqlQuery, Spinner, LineChart } from 'nr1';
+import { NrqlQuery, Spinner, LineChart, DisplayText } from 'nr1';
 import { decodeEntityId, loadEntity, generateForecastData } from './utils';
 
 export default class MyNerdlet extends React.Component {
