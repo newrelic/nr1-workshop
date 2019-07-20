@@ -56,7 +56,7 @@ _Note: before you become concerned, cats and Star Trek have nothing to do with t
 
 ![entities](../screenshots/lab7_screen01.png)
 
-_Note: the `entityId` is actually a _
+_Note: the `entityId` is actually a Base64 encoded concatenation of the accountId, entity domain, entity type, and domain/type unique ID of that entity. We'll dissect that more below._
 
 2. Add the following imports near the top of your `lab7/nerdlets/my-nerdlet/index.js`
 
