@@ -12,7 +12,7 @@ The workshop is a collaborative process between the New Relic Labs and the New R
 
 | Subject | Material |
 |---|---|
-| Environment Setup Confirmation | [Setup](https://github.com/newrelic/nr1-eap-workshop/blob/master/Setup.md) |
+| Environment Setup Confirmation | [Setup](https://github.com/newrelic/nr1-eap-workshop/blob/master/SETUP.md) |
 | Workshop Overview and Programmability Concepts | [Slides] |
 | Introduction to the NR1 SDK | [Slides] |
 | **Getting Started** | |
@@ -26,5 +26,5 @@ The workshop is a collaborative process between the New Relic Labs and the New R
 | Lab 6: GraphQL and Nerdlets | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab6/INSTRUCTIONS.md) |
 | **Advanced Topics** | |
 | Lab 7: Passing custom data to a Chart component | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab7/INSTRUCTIONS.md) |
-| Lab 8: Using 3rd Party libraries to create custom visualizations | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab8/INSTRUCTIONS.md) |
+| Lab 8: Using 3rd Party libraries and custom visualizations (a.k.a. the Leaflet mapping exercise) | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab8/INSTRUCTIONS.md) |
 | Lab 9: Leveraging NerdStore to manage configuration data | [Lab Instructions](https://github.com/newrelic/nr1-eap-workshop/blob/master/lab9/INSTRUCTIONS.md) |
