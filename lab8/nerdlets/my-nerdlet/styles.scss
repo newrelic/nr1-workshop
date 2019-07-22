@@ -1,0 +1,34 @@
+@import '~leaflet/dist/leaflet.css';
+@import '../../components/summary-bar/styles.css';
+h1, h2 {
+  width: fit-content;
+  margin: 10px auto;
+}
+.details {
+  h1 {
+    margin: 10px;
+  }
+}
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+}
+.AAAVAC-wnd-Tabs-navigation {
+  button {
+    font-weight: 500;
+    margin: 0px 15px;
+    margin-top: 5px;
+    font-size: 1.2em;
+  }
+}
+.chart {
+  padding: 10px;
+  height: 300px;
+}
+.containerMap {
+  width: 100%;
+  z-index: 0;
+}
