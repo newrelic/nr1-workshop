@@ -574,7 +574,7 @@ _Note: you may need to do a `Ctrl+C` and then rerun `npm start` within the `lab8
 
 ## Step 7: Adding the JavaScriptErrorSummary for good measure
 
-A tabbed interface that has only one tab is a waste, so that's resolve that.
+A tabbed interface that has only one tab is a waste, so let's resolve that.
 
 1. In the file `lab8/nerdlets/my-nerdlet/index.js`, add the following code below the `TabsItem` that contains the `Map`:
 
