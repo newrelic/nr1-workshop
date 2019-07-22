@@ -80,7 +80,7 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
 </StackItem>}
 ```
 
-3. And then add the following method to the nerdlet in `lab2/nerdlets/my-nerdlet/index.js`. Note that we're using the `navigation` object's `openCard`.
+3. And then add the following method to the nerdlet in `lab2/nerdlets/my-nerdlet/index.js`. Note that we're using the `navigation` object's `openEntity`.
 
 ```javascript
     openEntity() {

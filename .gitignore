@@ -7,4 +7,5 @@ _site
 **/tmp
 **/.DS_Store
 lab1/nerdlets
+lab8/nerdlets/details
 .vscode/settings.json

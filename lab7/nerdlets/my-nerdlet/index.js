@@ -6,6 +6,8 @@ export default class MyNerdlet extends React.Component {
     static propTypes = {
         width: PropTypes.number,
         height: PropTypes.number,
+        launcherUrlState: PropTypes.object,
+        nerdletUrlState: PropTypes.object
     };
 
     constructor(props) {
