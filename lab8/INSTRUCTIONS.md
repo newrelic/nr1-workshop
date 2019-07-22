@@ -510,7 +510,83 @@ Component created successfully!
 nerdlet details is available at "./nerdlets/details"
 ```
 
-2. Open the file `lab8`
+2. Open the file `lab8/nerdlets/details/styles.scss` and add the following code:
+
+```scss
+@import '../../components/summary-bar/styles.css';
+```
+
+3. Save the file `lab8/nerdlets/details/styles.scss`.
+
+4. Now, open the file `lab8/nerdlets/details/index.js` and replace the contents with the following:
+
+```javascript
+import React from 'react';
+import PropTypes from 'prop-types';
+//import the needed summary stats
+import SummaryBar from '../../components/summary-bar';
+//import the appropriate NR1 components
+import { Grid, GridItem, TableChart } from 'nr1';
+
+export default class DetailsNerdlet extends React.Component {
+    static propTypes = {
+        width: PropTypes.number,
+        height: PropTypes.number.isRequired,
+        launcherUrlState: PropTypes.object.isRequired,
+        nerdletUrlState: PropTypes.object.isRequired
+    }
+
+    render() {
+        //get props, including nested props
+        const { height, launcherUrlState: { timeRange : { duration }} } = this.props;
+        //grab the necessary values from the navigation state
+        const { accountId, regionCode, countryCode, appName } =  this.props.nerdletUrlState;
+        //compute the duration in minutes
+        const durationInMinutes = duration/1000/60;
+        //generate the appropriate NRQL where fragment for countryCode and regionCode
+        const nrqlWhere = countryCode ? ` WHERE countryCode  = '${countryCode}' ${regionCode ? ` AND regionCode = '${regionCode}' ` : '' }` : '';
+        //use the Grid layout to make this easy, and calculate the height of the detail Table
+        return <Grid>
+            <GridItem columnStart={1} columnEnd={12}>
+                <SummaryBar {...this.props} {...this.props.nerdletUrlState} />
+            </GridItem>
+            <GridItem columnStart={1} columnEnd={12}>
+                <TableChart
+                    style={{height: height-75, width: '100%'}}
+                    accountId={accountId}
+                    query={`SELECT * from PageView WHERE appName = '${appName}' ${nrqlWhere} SINCE ${durationInMinutes} MINUTES AGO LIMIT 2000 `}
+                />
+            </GridItem>
+        </Grid>
+    }
+}
+```
+
+_Notice that we're making use of both `Grid`, `GridItem`, our custom `SummaryBar`, and the `TableChart`._
+
+5. Save the file `lab8/nerdlets/details/index.js` and reload the browser window.
+
+_Note: you may need to do a `Ctrl+C` and then rerun `npm start` within the `lab8` directory in your terminal window for the local server to recognize the `details` Nerdlet._
+
+6. Now click on a `CircleMarker` in the `Map`. You should see a card slide out that looks like the following:
+
+![Details](../screenshots/lab8_screen07.png)
+
+## Step 7: Adding the JavaScriptErrorSummary for good measure
+
+A tabbed interface that has only one tab is a waste, so that's resolve that.
+
+1. In the file `lab8/nerdlets/my-nerdlet/index.js`, add the following code below the `TabsItem` that contains the `Map`:
+
+```javascript
+    <TabsItem className="tab" label={`JavaScript Errors`} id={2}>
+        <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
+    </TabsItem>
+```
+
+2. Save the file and watch the reload in the browser. Click of the `JavaScript Errors` tab. You should see output like the following:
+
+![Details](../screenshots/lab8_screen08.png)
 
 The final code in `lab8/nerdlets/my-nerdlet/index.js` should look something like this:
 
@@ -652,7 +728,9 @@ export default class MyNerdlet extends React.Component {
 }
 ```
 
+Congrats! Now, go impress your colleagues, friends, and supervisors with your mad React and modern observability skills!
+
 # For Consideration / Discussion
 
-* What other types of data might you chose to intermingle with performance data?
-* Does it make sense why the `Lab 7: Custom Data` Nerdlet was only displaying for `Browser Application` instances? FYI, a value of `entities: [*]` makes a Nerdlet available for all Entity Types.
+* Why is this so cool? :) But seriously, a vizualization like this changes something about the way we think about the data. What is to be learned from this?
+* As we approach modern monitoring and observability problems, how do they think about data, and how can a (reasonably) infinitely flexible telemetry ingestion and visualization platform help them process and take action on decisions that matter for users faster? What other information is important to visualize as we solve problems and make decisions? Can we blend that information with what's available in New Relic to accelerate problem resolution?
