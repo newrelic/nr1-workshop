@@ -8,7 +8,7 @@ The purpose of this lab is build a more full-featured experience that incorporat
 
 After completing this lab you should have a basic understanding of:
 
-* How to leverage 3rd party visualizations in NR1
+* Understand one repeatable pattern (_it should be obvious that there are many ways to accomplish this_) to leverage 3rd party visualizations in NR1
 * Making use of the `Grid`, `Stack`, and `Tabs` components
 * How to interact with the `navigation` object to launch a custom NR1 Nerdlet
 
