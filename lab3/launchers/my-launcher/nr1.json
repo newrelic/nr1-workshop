@@ -1,0 +1,8 @@
+{
+    "schemaType": "LAUNCHER",
+    "id": "my-launcher",
+    "description": "Describe me",
+    "displayName": "my-launcher",
+    "icon": "interface_placeholders_icon-placeholder",
+    "rootNerdletId": "lab3.my-nerdlet"
+}
