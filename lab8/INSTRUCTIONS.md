@@ -8,7 +8,7 @@ The purpose of this lab is build a more full-featured experience that incorporat
 
 After completing this lab you should have a basic understanding of:
 
-* How to leverage 3rd party visualizations in NR1
+* Understand one repeatable pattern (_it should be obvious that there are many ways to accomplish this_) to leverage 3rd party visualizations in NR1
 * Making use of the `Grid`, `Stack`, and `Tabs` components
 * How to interact with the `navigation` object to launch a custom NR1 Nerdlet
 
@@ -126,7 +126,7 @@ Now, we're ready to create the skeleton of our `render` method.
             return <Spinner className="centered" />
         } else {
             return <Tabs>
-                <TabsItem className="tab" label={`Page Views`} id={1}>
+                <TabsItem label={`Page Views`} id={1}>
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
@@ -237,7 +237,7 @@ export default class MyNerdlet extends React.Component {
             return <Spinner className="centered" />
         } else {
             return <Tabs>
-                <TabsItem className="tab" label={`Page Views`} id={1}>
+                <TabsItem label={`Page Views`} id={1}>
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
@@ -431,7 +431,7 @@ export default class MyNerdlet extends React.Component {
             return <Spinner className="centered" />
         } else {
             return <Tabs>
-                <TabsItem className="tab" label={`Page Views`} id={1}>
+                <TabsItem label={`Page Views`} id={1}>
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
@@ -574,12 +574,12 @@ _Note: you may need to do a `Ctrl+C` and then rerun `npm start` within the `lab8
 
 ## Step 7: Adding the JavaScriptErrorSummary for good measure
 
-A tabbed interface that has only one tab is a waste, so that's resolve that.
+A tabbed interface that has only one tab is a waste, so let's resolve that.
 
 1. In the file `lab8/nerdlets/my-nerdlet/index.js`, add the following code below the `TabsItem` that contains the `Map`:
 
 ```javascript
-    <TabsItem className="tab" label={`JavaScript Errors`} id={2}>
+    <TabsItem label={`JavaScript Errors`} id={2}>
         <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
     </TabsItem>
 ```
@@ -671,7 +671,7 @@ export default class MyNerdlet extends React.Component {
             return <Spinner className="centered" />
         } else {
             return <Tabs>
-                <TabsItem className="tab" label={`Page Views`} id={1}>
+                <TabsItem label={`Page Views`} id={1}>
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
@@ -719,7 +719,7 @@ export default class MyNerdlet extends React.Component {
                         </StackItem>
                     </Stack>
                 </TabsItem>
-                <TabsItem className="tab" label={`JavaScript Errors`} id={2}>
+                <TabsItem label={`JavaScript Errors`} id={2}>
                     <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                 </TabsItem>
             </Tabs>;

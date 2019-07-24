@@ -56,6 +56,10 @@ _Note: if not, restart your local developer server by typing a `Ctrl+ESC` in the
         super(props);
         this.accountId = 1606862; //New Relic Demotron.
         console.debug("Init props", this.props); //eslint-disable-line
+        this.state = {
+            appId: null,
+            appName: null
+        };
     }
 
     componentWillUpdate(props) {
