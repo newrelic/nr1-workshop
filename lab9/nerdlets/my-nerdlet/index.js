@@ -73,7 +73,7 @@ export default class MyNerdlet extends React.Component {
             const eventType = entity ? entity.domain == 'BROWSER' ? 'PageView' : 'Transaction' : null;
             const { timeRange : { duration }} = launcherUrlState;
             const durationInMinutes = duration / 1000 / 60;
-            const label = entityType.domain == 'BROWSER' ? 'Browser Apps' : 'APM Services';
+            const label = entity.domain == 'BROWSER' ? 'Browser Apps' : 'APM Services';
             return (<React.Fragment><Grid>
                     {entities && entities.length > 0 ? <React.Fragment><GridItem columnStart={1} columnEnd={12} style={{padding: '10px'}}>
                         <DisplayText>Performance over Time<Button sizeType={Button.SIZE_TYPE.SLIM} style={{marginLeft: '25px'}} onClick={() => { this.setState({ openDialog: true }) }}><Icon name="interface_sign_plus" /> {label}</Button></DisplayText>
