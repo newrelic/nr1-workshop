@@ -1,0 +1,18 @@
+.centered {
+  margin: auto;
+  position: fixed;
+  top: 45%;
+  left: 45%;
+}
+.resultSet {
+  li {
+    padding-left: 5px;
+    font-size: 1.1em;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-bottom: 1px dotted grey
+  }
+  list-style: none;
+  max-height: 400px;
+  overflow: scroll;
+}
