@@ -47,7 +47,7 @@ npm install
 npm start
 ```
 
-7. In Google Chrome, navigate to the following URL `https://one.newrelic.com?use_version=d37b8d09&packages=local`
+7. In Google Chrome, navigate to the following URL `https://one.newrelic.com?use_version=45a97944&packages=local`
 
 ## Lab Instructions
 

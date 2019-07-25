@@ -38,7 +38,7 @@ your lab0-launcher is available at "./lab0/launchers/lab0-launcher"
 ```
 You'll notice that the CLI creates a `./lab0/launchers/lab0-launcher` directory: with a nr1.json configuration.
 
-2. Navigate in Google Chrome to https://one.newrelic.com?use_version=d37b8d09&packages=local and click on the Lab 0 Launcher.
+2. Navigate in Google Chrome to https://one.newrelic.com?use_version=45a97944&packages=local and click on the Lab 0 Launcher.
 
 ![lab0-launcher](../screenshots/lab0_screen01.png)
 
@@ -82,7 +82,7 @@ code .
 
 ![lab0-nerdlet-created](../screenshots/lab0_screen03.png)
 
-4. If you navigate back to https://one.newrelic.com?use_version=d37b8d09&packages=local and click on the Lab 0 Launcher. You'll notice that you get the same error message from Step 1.
+4. If you navigate back to https://one.newrelic.com?use_version=45a97944&packages=local and click on the Lab 0 Launcher. You'll notice that you get the same error message from Step 1.
 
 ![lab0-launcher-clicked](../screenshots/lab0_screen02.png)
 
@@ -108,7 +108,7 @@ This is because your launcher configuration needs to be updated to connect to th
 
 ```
 
-3. Save the nr1.json, then navigate back https://one.newrelic.com?use_version=d37b8d09&packages=local and click on the Lab 0 Launcher. Your browser window should look similar to below with the `lab0-nerdlet` launched.
+3. Save the nr1.json, then navigate back https://one.newrelic.com?use_version=45a97944&packages=local and click on the Lab 0 Launcher. Your browser window should look similar to below with the `lab0-nerdlet` launched.
 
 ![lab0-nerdlet](../screenshots/lab0_screen05.png)
 

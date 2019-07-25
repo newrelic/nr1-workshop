@@ -65,7 +65,7 @@ _Note: Take the time to review each of these files throughout the exercise to en
 
 ## Step 2: Accessing the Nerdlet
 
-1. Open a web browser to `https://one.newrelic.com?use_version=d37b8d09&packages=local` c
+1. Open a web browser to `https://one.newrelic.com?use_version=45a97944&packages=local` c
 2. Click on the `Entity Explorer`
 3. Click on `Browswer Applications` category in the left-hand navigation
 4. Click on any browser application from the list

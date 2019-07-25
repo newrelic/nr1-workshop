@@ -40,7 +40,7 @@ _Note: we're going to cover how to not hardcode the accountIds for NRQL queries 
 
 ## Step 2: Implementing the time picker
 
-1. Go back to the [Nerdlet interface](https://one.newrelic.com/launcher/lab2.my-launcher?packages=local&use_version=d37b8d09), and change the value of the Time Window in the top right corner of the UI. <img src="../screenshots/lab2_screen03.png" width="200" align="right" style="margin:10px" />
+1. Go back to the [Nerdlet interface](https://one.newrelic.com/launcher/lab2.my-launcher?packages=local&use_version=45a97944), and change the value of the Time Window in the top right corner of the UI. <img src="../screenshots/lab2_screen03.png" width="200" align="right" style="margin:10px" />
 
 Notice that the time windows and charts in the Nerdlet do not refresh and do not respond to changes in the time window. (_Hint: That's because we haven't told them to use the selected time range yet!_) Let's do something about that.
 
