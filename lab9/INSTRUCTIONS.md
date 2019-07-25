@@ -2,6 +2,8 @@
 Lab 9: Leveraging NerdStore to manage configuration data
 ===========================================================
 
+*Note: There are a number of redacted screenshots in this lab due to the fact that I was exploring non-demo data. You screens will look different based on your data.*
+
 The purpose of this lab is demonstrate the use of NerdStore as a storage mechanism.
 
 After completing this lab you should know:
