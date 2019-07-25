@@ -154,37 +154,39 @@ It would be nice if, either when there was an error loading the configurations o
 1. Open the file `lab9/nerdlets/my-nerdlet/index.js` and add modify the `catch` statement in the `_loadEntity` method:
 
 ```javascript
-            //leave the code above the same.
-            }).catch(error => {
-                console.error(error);
-                this.setState({ entityType: {domain: entity.domain, type: entity.type}, entity, entities: [ entity ], errorToast: true });
-            });
-            //leave the code below the same.
+    //leave the code above the same.
+    }).catch(error => {
+        console.error(error);
+        this.setState({ entityType: {domain: entity.domain, type: entity.type}, entity, entities: [ entity ], errorToast: true });
+    });
+    //leave the code below the same.
 ```
 
 2. At the end of the `NerdStoreUserCollectionMutation.mutate` call in the `onSearchSelect` method, add the following `then` statement:
 
 ```javascript
-            .then(() => {
-                this.setState({ addToast: true });
-            });
+    .then(() => {
+        this.setState({ addToast: true });
+    });
 ```
 
-3. Add the following code at the `render` method, just above the `LineChart` component:
+3. Add the following code at the `render` method, just above the `return` call:
 
 ```javascript
-    {this.state.addToast && <Toast
-        type={'normal'}
-        title={'Configs saved successfully'}
-        description={''}
-        onDestroy={() => {this.setState({addToast: false})}}
-    />}
-    {this.state.errorToast && <Toast
-        type={'critical'}
-        title={'An error occurred loading configs.'}
-        description={''}
-        onDestroy={() => {this.setState({errorToast: false})}}
-    />}
+    if (this.state.addToast) {
+        Toast.showToast({
+            type: 'normal',
+            title: 'Configs saved successfully.',
+            onDestroy: () => {this.setState({addToast: false}); }
+        });
+    }
+    if (this.state.errorToast) {
+        Toast.showToast({
+            type: 'critical',
+            title: 'An error occurred loading configs.',
+            onDestroy: () => {this.setState({errorToast: false}); }
+        });
+    }
 ```
 
 4. Save the file and watch the reload happen. Add entities to your comparison.
@@ -312,6 +314,20 @@ export default class MyNerdlet extends React.Component {
             const { timeRange : { duration }} = launcherUrlState;
             const durationInMinutes = duration / 1000 / 60;
             const label = entity.domain == 'BROWSER' ? 'Browser Apps' : 'APM Services';
+            if (this.state.addToast) {
+                Toast.showToast({
+                    type: 'normal',
+                    title: 'Configs saved successfully.',
+                    onDestroy: () => {this.setState({addToast: false}); }
+                });
+            }
+            if (this.state.errorToast) {
+                Toast.showToast({
+                    type: 'critical',
+                    title: 'An error occurred loading configs.',
+                    onDestroy: () => {this.setState({errorToast: false}); }
+                });
+            }
             return (<React.Fragment><Grid>
                     {entities && entities.length > 0 ? <React.Fragment><GridItem columnStart={1} columnEnd={12} style={{padding: '10px'}}>
                         <DisplayText>Performance over Time<Button sizeType={Button.SIZE_TYPE.SLIM} style={{marginLeft: '25px'}} onClick={() => { this.setState({ openDialog: true }) }}><Icon name="interface_sign_plus" /> {label}</Button></DisplayText>
