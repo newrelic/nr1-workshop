@@ -61,12 +61,8 @@ export default class AddEntityDialog extends Component {
       EntitySearchQuery.query({ filters }).then(rs => {
         //console.log("onSearch results", rs);
         if (rs.data) {
-          const results = rs.data.actor.entitySearch.results.entities.map(entity => {
-            //console.debug("Checking", entity);
-            if (!entities || !entities.find(ex => ex.id == entity.id)) {
-              return entity;
-            }
-          });
+          //filter the results to those that are NOT already in the entities prop AND those that are reporting some status or another (non-alert services won't show up in the charts and will therefore be confusing for the example)
+          const results = rs.data.actor.entitySearch.results.entities.filter(entity => !entities || (!entities.find(ex => ex.id == entity.id) && entity.alertSeverity != "NOT_REPORTING" && entity.alertSeverity != "NOT_CONFIGURED" ));
           //console.debug("Found the following in the search", results);
           this.setState({ isLoading: false, results });
         } else {
