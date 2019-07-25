@@ -18,6 +18,7 @@ export default class MyNerdlet extends React.Component {
         console.debug(props); //eslint-disable-line
         //initiate the state
         this.state = {
+            entity: null,
             entities: [],
             entityType: { domain: 'APM', type: 'APPLICATION'},
             openDialog: false
@@ -27,19 +28,21 @@ export default class MyNerdlet extends React.Component {
 
     componentDidMount() {
         if (this.props.nerdletUrlState && this.props.nerdletUrlState.entityId) {
-            loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
-                this.setState({ entityType: {domain: entity.domain, type: entity.type}, entities: [ entity ]});
-            });
+            this._loadState(this.props.nerdletUrlState.entityId);
         }
     }
 
     componentWillUpdate(nextProps) {
         if (this.props && nextProps.nerdletUrlState && nextProps.nerdletUrlState.entityId != this.props.nerdletUrlState.entityId) {
-            loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
-                this.setState({ entityType: {domain: entity.domain, type: entity.type}, entities: [ entity ]});
-            });
+            this._loadState(nextProps.nerdletUrlState.entityId);
         }
         return true;
+    }
+
+    _loadState(entityId) {
+        loadEntity(entityId).then(entity => {
+            this.setState({ entityType: {domain: entity.domain, type: entity.type}, entities: [ entity ], entity});
+        });
     }
 
     /**
