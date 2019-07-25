@@ -21,7 +21,9 @@ export default class MyNerdlet extends React.Component {
             entity: null,
             entities: [],
             entityType: { domain: 'APM', type: 'APPLICATION'},
-            openDialog: false
+            openDialog: false,
+            addToast: false,
+            errorToast: false
         }
         this.onSearchSelect = this.onSearchSelect.bind(this);
     }
@@ -98,6 +100,9 @@ export default class MyNerdlet extends React.Component {
                     {openDialog && <AddEntityDialog
                         openDialog={openDialog}
                         entities={entities}
+                        onClose={() => {
+                            this.setState({ openDialog: false });
+                        }}
                         onSearchSelect={this.onSearchSelect}
                     />}
                 </Grid>

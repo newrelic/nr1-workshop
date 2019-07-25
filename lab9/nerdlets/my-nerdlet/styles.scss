@@ -16,3 +16,7 @@
   max-height: 400px;
   overflow: scroll;
 }
+.myToast {
+  position: absolute;
+  z-index: 1001;
+}
