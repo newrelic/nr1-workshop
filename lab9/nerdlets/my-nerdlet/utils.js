@@ -48,15 +48,28 @@ export const loadEntity = (entityId) => {
   });
 }
 
+/**
+ * Colors based on the following values:
+ * CRITICAL
+ * WARNING
+ * NOT_ALERTING
+ * NOT_CONFIGURED
+ * NOT_REPORTING
+ * @param {*} e
+ */
 export const alertSeverityToColor = (e) => {
-    const alertSeverity = e.alertSeverity ? e.alertSeverity : e;
+    const alertSeverity = e && e.alertSeverity ? e.alertSeverity : e;
     switch (alertSeverity) {
         case "WARNING":
             return 'yellow';
         case "CRITICAL":
             return 'red';
+        case "NOT_CONFIGURED":
+            return 'lightgrey';
         case "NOT_REPORTING":
             return 'grey';
+        case "NOT_ALERTING":
+            return 'lightgreen';
         default:
             return 'green';
     }

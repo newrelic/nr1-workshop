@@ -39,7 +39,7 @@ export default class AddEntityDialog extends Component {
   onSearch(e) {
     const query = e.target.value;
     //console.debug("onSearch", query);
-    if (query && query.length > 3) {
+    if (query && query.length > 2) {
       const { entityType } = this.props;
       this.setState({ isLoading: true });
       const filters = [{
@@ -63,7 +63,7 @@ export default class AddEntityDialog extends Component {
         if (rs.data) {
           const results = rs.data.actor.entitySearch.results.entities.map(entity => {
             //console.debug("Checking", entity);
-            if (!entities || !entities.find(ex => ex.id = entity.id)) {
+            if (!entities || !entities.find(ex => ex.id == entity.id)) {
               return entity;
             }
           });
@@ -86,7 +86,7 @@ export default class AddEntityDialog extends Component {
     const { results, isLoading, openDialog } = this.state;
     const { entityType } = this.props;
     const label = entityType.domain == 'BROWSER' ? 'Browser Apps' : 'APM Services';
-    //console.log(results);
+    console.log(results);
     return (
       <Dialog hidden={!openDialog} onClose={(...args) => {
           this.setState({ openDialog: false });
