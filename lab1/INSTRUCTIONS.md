@@ -123,7 +123,7 @@ import { TableChart, Stack, StackItem } from 'nr1';
                 alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                 directionType={Stack.DIRECTION_TYPE.VERTICAL}
                 distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                spacingType={Stack.SPACING_TYPE.EXTRA_LOOSE}>
+                gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                 <StackItem>
                     <TableChart query={nrql} accountId={this.accountId} className="chart" />
                 </StackItem>
@@ -167,7 +167,7 @@ That all results in the following block of code. Copy/reproduce the code below a
                     alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
                     distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                    spacingType={Stack.SPACING_TYPE.EXTRA_LOOSE}>
+                    gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
                         <TableChart query={nrql} accountId={this.accountId} className="chart" />
                     </StackItem>
@@ -176,7 +176,7 @@ That all results in the following block of code. Copy/reproduce the code below a
                             alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                             distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                            spacingType={Stack.SPACING_TYPE.EXTRA_LOOSE}>
+                            gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
                                 <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>
                             </StackItem>
@@ -265,7 +265,7 @@ export default class MyNerdlet extends React.Component {
                     alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
                     distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                    spacingType={Stack.SPACING_TYPE.EXTRA_LOOSE}>
+                    gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
                         <TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
                             //for learning purposes, we'll write to the console.
@@ -278,7 +278,7 @@ export default class MyNerdlet extends React.Component {
                             alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                             distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                            spacingType={Stack.SPACING_TYPE.EXTRA_LOOSE}>
+                            gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
                                 <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>
                             </StackItem>
