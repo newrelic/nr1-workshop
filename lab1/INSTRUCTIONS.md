@@ -39,7 +39,7 @@ npm start
 
 You'll notice that the CLI creates three files in the `nerdlets/my-nerdlet` directory: index.js, styles.scss, and a nr1.json configuration.
 
-2. Assuming the the developer server is still running (i.e. `npm start`), validate (in a web browser) that you can click on and see the `Lab 1 Launcher` launcher by navigating in Google Chrome to `https://one.newrelic.com?use_version=d37b8d09&packages=local` and click on the `Lab 1 Launcher`.
+2. Assuming the the developer server is still running (i.e. `npm start`), validate (in a web browser) that you can click on and see the `Lab 1 Launcher` launcher by navigating in Google Chrome to `https://one.newrelic.com?use_version=45a97944&packages=local` and click on the `Lab 1 Launcher`.
 
 3. Change the `displayName` property of the Nerdlet in `nerdlets/lab1-nerdlet/nr1.json` to `Lab 1 Nerdlet` and save that file.
 

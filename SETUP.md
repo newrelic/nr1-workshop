@@ -52,5 +52,5 @@ npm start
 Your terminal output should look like the following:
 ![terminal](screenshots/setup_screen01.png)
 
-8. Open Google Chrome and navigate to the following URL `https://one.newrelic.com?use_version=d37b8d09&packages=local`, and click on the New Relic One Launcher named `Setup Exercise`. You should see the following.
+8. Open Google Chrome and navigate to the following URL `https://one.newrelic.com?use_version=45a97944&packages=local`, and click on the New Relic One Launcher named `Setup Exercise`. You should see the following.
 ![Congratulations](screenshots/setup_screen02.png)

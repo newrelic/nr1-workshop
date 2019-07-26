@@ -1,4 +1,4 @@
-# workshop/lab3
+# workshop/lab9
 
 This repo has been spun up locally only.
 
@@ -40,8 +40,8 @@ sudo ./nr1/bin/nr1 certs:generate
 # if you haven't cloned the workshop repo already
 git clone git@github.com:newrelic/nr1-eap-workshop.git
 
-# then change directory into lab2
-cd workshop/lab3
+# then change directory into lab9
+cd workshop/lab9
 
 npm install
 npm start
@@ -51,4 +51,4 @@ npm start
 
 ## Lab Instructions
 
-[Let's dive deeper into the New Relic One UI](INSTRUCTIONS.md)!
+[Everything you wanted to know about NerdStore _but were afraid to ask_](INSTRUCTIONS.md).

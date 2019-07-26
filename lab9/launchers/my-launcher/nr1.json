@@ -1,0 +1,8 @@
+{
+    "schemaType": "LAUNCHER",
+    "id": "my-launcher",
+    "description": "Performance Comparison between Services or Browser apps.",
+    "displayName": "Lab 9: Perf. Compare",
+    "icon": "interface_placeholders_icon-placeholder",
+    "rootNerdletId": "lab9.my-nerdlet"
+}
