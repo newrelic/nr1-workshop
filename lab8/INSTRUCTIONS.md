@@ -130,7 +130,7 @@ Now, we're ready to create the skeleton of our `render` method.
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        spacingType={Stack.SPACING_TYPE.TIGHT}
+                        gapType={Stack.GAP_TYPE.TIGHT}
                     >
                         <StackItem grow={true}>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
@@ -241,7 +241,7 @@ export default class MyNerdlet extends React.Component {
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        spacingType={Stack.SPACING_TYPE.TIGHT}
+                        gapType={Stack.GAP_TYPE.TIGHT}
                     >
                         <StackItem grow={true}>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
@@ -435,7 +435,7 @@ export default class MyNerdlet extends React.Component {
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        spacingType={Stack.SPACING_TYPE.TIGHT}
+                        gapType={Stack.GAP_TYPE.TIGHT}
                     >
                         <StackItem grow={true}>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
@@ -675,7 +675,7 @@ export default class MyNerdlet extends React.Component {
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        spacingType={Stack.SPACING_TYPE.TIGHT}
+                        gapType={Stack.GAP_TYPE.TIGHT}
                     >
                         <StackItem grow={true}>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />

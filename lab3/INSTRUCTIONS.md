@@ -113,7 +113,7 @@ render() {
                 alginmentType={Stack.ALIGNMENT_TYPE.FILL}
                 directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                 distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                spacingType={Stack.SPACING_TYPE.NORMAL}>
+                gapType={Stack.GAP_TYPE.NORMAL}>
                 <StackItem>
                     <div className="gry-div">Item 1</div>
                 </StackItem>
@@ -153,7 +153,7 @@ render() {
             className="inner-stack"
             alginmentType={Stack.ALIGNMENT_TYPE.FILL}
             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-            spacingType={Stack.SPACING_TYPE.NORMAL}>
+            gapType={Stack.GAP_TYPE.NORMAL}>
             <StackItem grow="true">
                 <div className="gry-div">Item 1</div>
             </StackItem>
@@ -207,7 +207,7 @@ render(){
                     <Stack
                         lignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                        spacingType={Stack.SPACING_TYPE.LOOSE}>
+                        gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <div className="gry-div">Chart 1</div>
                         </StackItem>
@@ -215,7 +215,7 @@ render(){
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                        spacingType={Stack.SPACING_TYPE.LOOSE}>
+                        gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <div className="gry-div">Chart 2</div>
                         </StackItem>
@@ -229,7 +229,7 @@ render(){
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}xs
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                        spacingType={Stack.SPACING_TYPE.TIGHT}
+                        gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
                             <div className="gry-div">Chart 4</div>
@@ -272,7 +272,7 @@ render(){
                     <Stack
                         lignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                        spacingType={Stack.SPACING_TYPE.LOOSE}>
+                        gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <LineChart
                                 query={throughput+since}
@@ -287,7 +287,7 @@ render(){
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                        spacingType={Stack.SPACING_TYPE.LOOSE}>
+                        gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <AreaChart
                                 query={throughput+since}
@@ -308,7 +308,7 @@ render(){
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}xs
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                        spacingType={Stack.SPACING_TYPE.TIGHT}
+                        gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
                             <PieChart
@@ -449,7 +449,7 @@ render() {
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                        spacingType={Stack.SPACING_TYPE.LOOSE}>
+                        gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <LineChart
                                     query={throughput+since+this.state.facet}
@@ -464,7 +464,7 @@ render() {
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                        spacingType={Stack.SPACING_TYPE.LOOSE}>
+                        gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <AreaChart
                                     query={throughput+since+this.state.facet}
@@ -486,7 +486,7 @@ render() {
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}xs
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                        spacingType={Stack.SPACING_TYPE.TIGHT}
+                        gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
                             <PieChart
@@ -659,7 +659,7 @@ export default class MyNerdlet extends React.Component {
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                        spacingType={Stack.SPACING_TYPE.LOOSE}>
+                        gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <LineChart
                                     query={throughput+since+this.state.facet}
@@ -674,7 +674,7 @@ export default class MyNerdlet extends React.Component {
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                        spacingType={Stack.SPACING_TYPE.LOOSE}>
+                        gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <AreaChart
                                     query={throughput+since+this.state.facet}
@@ -696,7 +696,7 @@ export default class MyNerdlet extends React.Component {
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}xs
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                        spacingType={Stack.SPACING_TYPE.TIGHT}
+                        gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
                             <PieChart
