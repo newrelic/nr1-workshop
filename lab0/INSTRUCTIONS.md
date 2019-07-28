@@ -48,7 +48,7 @@ npm insatall
 nr1 package:serve
 # Note: Once you start the local server, it will automatically listen for changes in the file system. To issue commands while the local server is running, simply open a new terminal and change to the lab0 directory. 
 ```
-Navigate in Google Chrome to https://one.newrelic.com?packages=local and click on the Lab 0 Launcher. 
+Navigate in Google Chrome to https://one.newrelic.com/?use_version=45a97944&packages=local and click on the Lab 0 Launcher. 
 
 ![lab0-launcher](../screenshots/lab0_screen01.png)
 
@@ -113,7 +113,7 @@ code .
 
 ```
 
-3. Save the nr1.json, then navigate back https://one.newrelic.com?packages=local and click on the Lab 0 Launcher. Your browser window should look similar to below with the `lab0-nerdlet` launched.
+3. Save the nr1.json, then navigate back https://one.newrelic.com/?use_version=45a97944&packages=local and click on the Lab 0 Launcher. Your browser window should look similar to below with the `lab0-nerdlet` launched.
 
 ![lab0-nerdlet](../screenshots/lab0_screen05.png)
 
