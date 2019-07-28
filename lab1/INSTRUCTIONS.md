@@ -125,7 +125,9 @@ import { TableChart, Stack, StackItem } from 'nr1';
                 distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                 gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                 <StackItem>
-                    <TableChart query={nrql} accountId={this.accountId} className="chart" />
+                    <div className="chart">
+                        <TableChart query={nrql} accountId={this.accountId} className="chart" />
+                    </div>
                 </StackItem>
             </Stack>
         )
@@ -169,7 +171,9 @@ That all results in the following block of code. Copy/reproduce the code below a
                     distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
-                        <TableChart query={nrql} accountId={this.accountId} className="chart" />
+                        <div className="chart">
+                            <TableChart query={nrql} accountId={this.accountId} className="chart" />
+                        </div>
                     </StackItem>
                     {appId && <StackItem>
                         <Stack
@@ -178,10 +182,14 @@ That all results in the following block of code. Copy/reproduce the code below a
                             distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
-                                <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>
+                                <div className="chart">
+                                    <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>
+                                </div>
                             </StackItem>
                             <StackItem>
-                                <ScatterChart accountId={this.accountId} query={apdexNrql} className="chart"/>
+                                <div className="chart">
+                                    <ScatterChart accountId={this.accountId} query={apdexNrql} className="chart"/>
+                                </div>
                             </StackItem>
                         </Stack>
                     </StackItem>}
@@ -213,11 +221,13 @@ The onClickTable receives four parameters that each provide a different view of 
 - chart: the entire JS object used to generate the chart, both headings and data rows
 
 ```javascript
-    <TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
-        //for learning purposes, we'll write to the console.
-        console.debug([dataEl, row, chart]) //eslint-disable-line
-        this.setApplication(row.appId, row.appName)
-    }}/>
+    <div className="chart">
+        <TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+            //for learning purposes, we'll write to the console.
+            console.debug([dataEl, row, chart]) //eslint-disable-line
+            this.setApplication(row.appId, row.appName)
+        }}/>
+    </div>
 ```
 
 1. The resulting `index.js` should look like the following:
@@ -267,11 +277,13 @@ export default class MyNerdlet extends React.Component {
                     distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
-                        <TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
-                            //for learning purposes, we'll write to the console.
-                            console.debug([dataEl, row, chart]) //eslint-disable-line
-                            this.setApplication(row.appId, row.appName)
-                        }}/>
+                        <div className="chart">
+                            <TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+                                //for learning purposes, we'll write to the console.
+                                console.debug([dataEl, row, chart]) //eslint-disable-line
+                                this.setApplication(row.appId, row.appName)
+                            }}/>
+                        </div>
                     </StackItem>
                     {appId && <StackItem>
                         <Stack
@@ -280,10 +292,14 @@ export default class MyNerdlet extends React.Component {
                             distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
-                                <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>
+                                <div className="chart">
+                                    <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>
+                                </div>
                             </StackItem>
                             <StackItem>
-                                <ScatterChart accountId={this.accountId} query={apdexNrql} className="chart"/>
+                                <div className="chart">
+                                    <ScatterChart accountId={this.accountId} query={apdexNrql} className="chart"/>
+                                </div>
                             </StackItem>
                         </Stack>
                     </StackItem>}
@@ -312,17 +328,19 @@ Based on what you've executed above, apply that learning in the following:
 4. Add a `onLineClick` attribute to your `LineChart` that processes `onClick` events in the same way that the `TableChart` `onTableClick` operates (i.e. calling the `this.setApplication` method). See the following:
 
 ```javascript
-<LineChart
-    query={`SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`}
-    className="chart"
-    accountId={this.accountId}
-    onClickLine={(line) => {
-        //more console logging for learning purposes
-        console.debug(line); //eslint-disable=line
-        const params = line.metadata.label.split(",");
-        this.setApplication(params[1], params[0]);
-    }}
-/>
+    <div className="chart">
+        <LineChart
+            query={`SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`}
+            className="chart"
+            accountId={this.accountId}
+            onClickLine={(line) => {
+                //more console logging for learning purposes
+                console.debug(line); //eslint-disable=line
+                const params = line.metadata.label.split(",");
+                this.setApplication(params[1], params[0]);
+            }}
+        />
+    </div>
 ```
 
 ![Something like this](../screenshots/lab1_screen05.png)
