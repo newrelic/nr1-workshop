@@ -1,7 +1,7 @@
 Lab 1: Working with Chart components
 ===========================================================
 
-The NR1 Chart components allow you to easily add data visualizations to your New Relic One Add-on. The components take care of everything: from ploting to fetching data, but they can also receive data externally to support custom data sets. The purpose of this lab is to create a Nerdlet that displays data from a custom NRQL query using the Chart components.
+The NR1 Chart components allow you to easily add data visualizations to your New Relic One nerdpack. The components take care of everything: from plotting to fetching data, but they can also receive data externally to support custom data sets. The purpose of this lab is to create a Nerdlet that displays data from a custom NRQL query using the Chart components.
 
 After completing this lab you should understand:
 
