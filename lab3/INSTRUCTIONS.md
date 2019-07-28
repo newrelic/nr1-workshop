@@ -139,7 +139,7 @@ render() {
     }
 ```
 
-The power is using `<Stack>` and `<Stack>` components is being able to use their props and easily create a layout that is best for your Add-on. Let's update props of the code we added before and see what happens to our layout.
+The power is using `<Stack>` and `<Stack>` components is being able to use their props and easily create a layout that is best for your nerdpack. Let's update props of the code we added before and see what happens to our layout.
 
 Change the render method within your `lab3/nerdlets/my-nerdlet/index.js` with the code below and look at the difference in your browser.
 
@@ -186,7 +186,7 @@ Your browser should now look similar to the snapshot below:
 _Note: For more documentation on the `Stack` and `StackItem`and their props view the `nr1` object documentation at: [ADD LINK]
 
 
-## Step 3: Building an Add-on with UI Components
+## Step 3: Building an nerdpack with UI Components
 
 1. Creating your layout using `<Grid>`, `<GridItem>`, `<Stack>`, and `<StackItem>` compnents
 
@@ -196,7 +196,7 @@ Update the import statement with your code people:
 import { Grid, GridItem, Stack, StackItem, ChartGroup, AreaChart, BarChart, LineChart, TableChart, PieChart, Button, TextField, Dialog, Toast } from 'nr1';
 ```
 
-Using the Grid and Stack components you can easily create any layout you wish within your Add-on. Replace the render method within your `lab3/nerdlets/my-nerdlet/index.js` with the code below:
+Using the Grid and Stack components you can easily create any layout you wish within your nerdpack. Replace the render method within your `lab3/nerdlets/my-nerdlet/index.js` with the code below:
 
 ```javascript
 render(){
