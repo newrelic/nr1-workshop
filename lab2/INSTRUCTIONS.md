@@ -230,24 +230,28 @@ export default class MyNerdlet extends React.Component {
                             distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.TIGHT}>
                             <StackItem>
-                                <TableChart query={nrql+since} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
-                                    //for learning purposes, we'll write to the console.
-                                    console.debug([dataEl, row, chart]) //eslint-disable-line
-                                    this.setApplication(row.entityGuid, row.appName)
-                                }}/>
+                                <div className="chart">
+                                    <TableChart query={nrql+since} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+                                        //for learning purposes, we'll write to the console.
+                                        console.debug([dataEl, row, chart]) //eslint-disable-line
+                                        this.setApplication(row.entityGuid, row.appName)
+                                    }}/>
+                                </div>
                             </StackItem>
                             <StackItem>
-                            <LineChart
-                                query={trxOverTime+since}
-                                className="chart"
-                                accountId={this.accountId}
-                                onClickLine={(line) => {
-                                    //more console logging for learning purposes
-                                    console.debug(line); //eslint-disable=line
-                                    const params = line.metadata.label.split(",");
-                                    this.setApplication(params[1], params[0]);
-                                }}
-                            />
+                                <div className="chart">
+                                    <LineChart
+                                        query={trxOverTime+since}
+                                        className="chart"
+                                        accountId={this.accountId}
+                                        onClickLine={(line) => {
+                                            //more console logging for learning purposes
+                                            console.debug(line); //eslint-disable=line
+                                            const params = line.metadata.label.split(",");
+                                            this.setApplication(params[1], params[0]);
+                                        }}
+                                    />
+                                </div>
                             </StackItem>
                         </Stack>
                     </StackItem>
@@ -262,11 +266,15 @@ export default class MyNerdlet extends React.Component {
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
                                 <h2>Transaction counts for {appName}</h2>
-                                <LineChart accountId={this.accountId} query={tCountNrql+since} className="chart"/>
+                                <div className="chart">
+                                    <LineChart accountId={this.accountId} query={tCountNrql+since} className="chart"/>
+                                </div>
                             </StackItem>
                             <StackItem>
                                 <h2>Apdex for {appName}</h2>
-                                <ScatterChart accountId={this.accountId} query={apdexNrql+since} className="chart"/>
+                                <div className="chart">
+                                    <ScatterChart accountId={this.accountId} query={apdexNrql+since} className="chart"/>
+                                </div>
                             </StackItem>
                         </Stack>
                     </StackItem>}
