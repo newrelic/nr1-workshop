@@ -1,10 +1,10 @@
 Lab 0: Building your first nerdpack
 =======================================================
 
-The purpose of this lab is to provide hands on experience building on top of the New Relic One platform. Following the instructions in this lab, you will be up and running quickly. First, let's make sure you understand a few key concepts that you'll be working with. 
+The purpose of this lab is to provide hands on experience building on top of the New Relic One platform. Following the instructions in this lab, you will be up and running quickly. First, let's make sure you understand a few key concepts that you'll be working with.
 * Launcher: An entry point into the New Relic One platform that is loaded on the "Home" page.
-* Nerdlet: A visual component that renders inside the New Relic One platform at a well defined exetension point. For example, a Launcher can invoke a nerdlet (as you will see shortly). At their core, nerdlets are React.js components. 
-* Nerdpack: A collection of artifacts, e.g. nerdlets, that are "packaged" up and published into the New Relic One platform. 
+* Nerdlet: A visual component that renders inside the New Relic One platform at a well defined exetension point. For example, a Launcher can invoke a nerdlet (as you will see shortly). At their core, nerdlets are React.js components.
+* Nerdpack: A collection of artifacts, e.g. nerdlets, that are "packaged" up and published into the New Relic One platform.
 
 
 In Lab0, you will create a launcher and then add a nerdlet to it that will be invoked when the user clicks on the launcher. After this lab you should understand:
@@ -42,17 +42,17 @@ your lab0-launcher is available at "./lab0/launchers/lab0-launcher"
 ```
 You'll notice that the CLI creates a `./lab0/launchers/lab0-launcher` directory: with a nr1.json configuration.
 
-2. Now that you have a launcher, you can install the dependencies and start the local server. 
+2. Now that you have a launcher, you can install the dependencies and start the local server.
 ```bash
-npm insatall
+npm install
 nr1 package:serve
-# Note: Once you start the local server, it will automatically listen for changes in the file system. To issue commands while the local server is running, simply open a new terminal and change to the lab0 directory. 
+# Note: Once you start the local server, it will automatically listen for changes in the file system. To issue commands while the local server is running, simply open a new terminal and change to the lab0 directory.
 ```
-Navigate in Google Chrome to https://one.newrelic.com/?use_version=45a97944&packages=local and click on the Lab 0 Launcher. 
+Navigate in Google Chrome to https://one.newrelic.com/?use_version=45a97944&packages=local and click on the Lab 0 Launcher.
 
 ![lab0-launcher](../screenshots/lab0_screen01.png)
 
-3. Your browser should look like the screenshot below showing a 404 error message. Why? Remember that a launcher is the entry point on the Home page to a specific nerdlet. Currently, the Lab 0 launcher is not connected to a nerdlet, which causes an error to be displayed. Let's fix that by creating a nerdlet and connecting it to the Lab 0 Launcher. 
+3. Your browser should look like the screenshot below showing a 404 error message. Why? Remember that a launcher is the entry point on the Home page to a specific nerdlet. Currently, the Lab 0 launcher is not connected to a nerdlet, which causes an error to be displayed. Let's fix that by creating a nerdlet and connecting it to the Lab 0 Launcher.
 
 ![lab0-launcher-clicked](../screenshots/lab0_screen02.png)
 
