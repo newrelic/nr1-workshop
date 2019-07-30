@@ -273,7 +273,7 @@ render(){
                     <GridItem
                         columnSpan={8}>
                         <Stack
-                            lignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.LOOSE}>
                             <StackItem>
