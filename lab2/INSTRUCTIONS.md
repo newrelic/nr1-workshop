@@ -48,7 +48,7 @@ Notice that the time windows and charts in the Nerdlet do not refresh and do not
 
 ```javascript
 const { duration } = this.props.launcherUrlState.timeRange;
-const since = ` SINCE ${duration/1000/60} SECONDS AGO `;
+const since = ` SINCE ${duration/1000/60} MINUTES AGO `;
 ```
 
 1. Now, we're going to make `duration` part of each of the four query objects.

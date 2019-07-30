@@ -423,7 +423,7 @@ Update the your render method with the code below:
 ```javascript
 render() {
         const { duration } = this.props.launcherUrlState.timeRange;
-        const since = ` SINCE ${duration/1000/60} SECONDS AGO `;
+        const since = ` SINCE ${duration/1000/60} MINUTES AGO `;
         const errors = `SELECT count(error) FROM Transaction TIMESERIES`;
         const throughput = `SELECT count(*) as 'throughput' FROM Transaction TIMESERIES`;
         const transaction_apdex_by_appname = `SELECT count(*) as 'transaction', apdex(duration) as 'apdex' FROM Transaction limit 25`;
