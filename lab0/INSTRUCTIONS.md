@@ -143,6 +143,8 @@ You'll notice that the CLI creates a `/lab0-package` directory: including a laun
 
 ![lab0-package](../screenshots/lab0_screen06.png)
 
+If you go into the `lab0-package` directory and run `npm install && npm start` you will be able to run your package!
+
 # For Consideration / Discussion
 
 - How do you use a nerdlet to build custom visaulizations? How do you access your account data?
