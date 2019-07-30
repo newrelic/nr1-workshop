@@ -48,7 +48,7 @@ _Note: Each exercise exists as a folder in this repository. Following the materi
 7. Now start the `setup` NR1 package.
 
 ```bash
-# ex. change directory into lab2
+# ex. change directory into setup
 cd workshop/setup
 
 npm install
