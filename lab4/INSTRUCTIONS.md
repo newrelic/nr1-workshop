@@ -5,7 +5,7 @@ GraphQL has some key differences when compared to REST. For example, it's the cl
 
 The exercises in this section that will give you some hands on experience using "GraphiQL" a web based tool that will issue queries to New Relic's GraphQL service. These are designed to be walked through in order, as the concepts in the lessons build on each other. Start now with Schema Introspection and work your way through to being able to issue a GraphQL query that pulls data from multiple sources, including NRQL!
 * [Exercise 0 - Your first query](0-BasicQuery.md) 
-* [Exercise 1 - Learning about Schemas](0-SchemaIntrospection.md)
+* [Exercise 1 - Learning about Schemas](1-SchemaIntrospection.md)
 * [Exercise 2 - Retrieving Infrastructure Information](2-InfrastructureServices.md)
 * [Exercise 3 - Using Mutations to Update Data](3-Mutation-InfrastructureServices.md)
 * [Exercise 4 - Using NRQL with GraphQL](4-QueryWithNRQL.md)
