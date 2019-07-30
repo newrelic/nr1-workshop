@@ -110,7 +110,7 @@ render() {
             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <Stack
                 className="inner-stack"
-                alginmentType={Stack.ALIGNMENT_TYPE.FILL}
+                alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                 directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                 distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                 gapType={Stack.GAP_TYPE.NORMAL}>
@@ -126,7 +126,7 @@ render() {
             </Stack>
             <Stack
                 className="inner-stack"
-                alginmentType={Stack.ALIGNMENT_TYPE.FILL}
+                alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                 directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
                 <StackItem className="inner-stack">
                     <div className="gry-div">Item 4: This field grows</div>
@@ -151,7 +151,7 @@ render() {
         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
         <Stack
             className="inner-stack"
-            alginmentType={Stack.ALIGNMENT_TYPE.FILL}
+            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
             gapType={Stack.GAP_TYPE.NORMAL}>
             <StackItem grow="true">
@@ -165,7 +165,7 @@ render() {
             </StackItem>
         </Stack>
         <Stack
-            alginmentType={Stack.ALIGNMENT_TYPE.FILL}
+            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
             distributionType={Stack.DISTRIBUTION_TYPE.FILL}
             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <StackItem className="inner-stack">
