@@ -254,6 +254,15 @@ Your Nerdlet should look similar to below:
 
 Now that you have your layout done, let's add a some chart components. Replace the render method within your `lab3/nerdlets/my-nerdlet/index.js` with the code below:
 
+Add the following code to your `index.js` file. ABOVE the `render` method.
+
+```javascript
+constructor(props) {
+        super(props);
+        this.accountId =  1606862; //New Relic Demotron.
+        console.debug("Nerdlet props", this.props); //eslint-disable-line
+    }
+```
 Add the following code to your `index.js` file. IN the `render` method before the `return`
 
 ```javascript
