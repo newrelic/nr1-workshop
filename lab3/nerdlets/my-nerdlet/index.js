@@ -66,7 +66,7 @@ export default class MyNerdlet extends React.Component {
                 type={this.state.toastType}
                 title={this.state.toastTitle}
                 description={this.state.toastDisplay}
-                onDestroy={()=>{this.setState({showToast: false})}}
+                onHideEnd={()=>{this.setState({showToast: false})}}
                 />
             }
             <ChartGroup>

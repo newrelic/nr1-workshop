@@ -542,7 +542,7 @@ Add the code below to your `index.js` file between the `<React.Fragment>` and `<
     type={this.state.toastType}
     title={this.state.toastTitle}
     description={this.state.toastDisplay}
-    onDestroy={()=>{this.setState({showToast: false})}}
+    onHideEnd={()=>{this.setState({showToast: false})}}
     />
 }
 ```
@@ -624,7 +624,7 @@ export default class MyNerdlet extends React.Component {
                 type={this.state.toastType}
                 title={this.state.toastTitle}
                 description={this.state.toastDisplay}
-                onDestroy={()=>{this.setState({showToast: false})}}
+                onHideEnd={()=>{this.setState({showToast: false})}}
                 />
             }
             <ChartGroup>
