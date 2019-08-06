@@ -65,7 +65,7 @@ _Note: Take the time to review each of these files throughout the exercise to en
 
 ## Step 2: Accessing the Nerdlet
 
-1. Open a web browser to `https://one.newrelic.com?use_version=45a97944&packages=local` c
+1. Open a web browser to `https://one.newrelic.com?packages=local` c
 2. Click on the `Entity Explorer`
 3. Click on `Browswer Applications` category in the left-hand navigation
 4. Click on any browser application from the list
@@ -671,7 +671,7 @@ export default class MyNerdlet extends React.Component {
             return <Spinner className="centered" />
         } else {
             return <Tabs>
-                <TabsItem label={`Page Views`} id={1}>
+                <TabsItem label={`Page Views`} itemKey={1}>
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
@@ -719,7 +719,7 @@ export default class MyNerdlet extends React.Component {
                         </StackItem>
                     </Stack>
                 </TabsItem>
-                <TabsItem label={`JavaScript Errors`} id={2}>
+                <TabsItem label={`JavaScript Errors`} itemKey={2}>
                     <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                 </TabsItem>
             </Tabs>;

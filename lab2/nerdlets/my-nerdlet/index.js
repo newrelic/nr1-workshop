@@ -6,7 +6,8 @@ export default class MyNerdlet extends React.Component {
     static propTypes = {
         width: PropTypes.number,
         height: PropTypes.number,
-        launcherUrlState: PropTypes.object
+        launcherUrlState: PropTypes.object,
+        nerdletUrlState: PropTypes.object
     };
 
     constructor(props) {
@@ -20,8 +21,10 @@ export default class MyNerdlet extends React.Component {
     }
 
     componentWillUpdate(props) {
-        if (this.props) {
+        if (this.props && props && this.state.entityGuid != props.nerdletUrlState.entityGuid) {
             console.debug("New props", props); //eslint-disable-line
+            const { entityGuid, appName } = props.nerdletUrlState;
+            this.setState({ entityGuid, appName });
         }
     }
 

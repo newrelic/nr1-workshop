@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 //import appropriate NR1 components, include spark lines! (shout out to Ed Tutfe)
-import { Stack, StackItem, SparklineChart, BillboardChart, DisplayText } from 'nr1';
+import { Stack, StackItem, SparklineChart, BillboardChart, HeadingText } from 'nr1';
 
 export default class SummaryBar extends Component {
   static propTypes = {
@@ -24,10 +24,10 @@ export default class SummaryBar extends Component {
       <Stack
           alignmentType={Stack.ALIGNMENT_TYPE.FILL}
           directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-          spacingType={Stack.SPACING_TYPE.TIGHT}
+          gapType={Stack.GAP_TYPE.TIGHT}
       >
           <StackItem className="inline">
-            {countryCode ? <DisplayText>{regionCode ? `${regionCode}, ` : ''}{countryCode} Stats</DisplayText> : <DisplayText>Overall</DisplayText> }
+            {countryCode ? <HeadingText>{regionCode ? `${regionCode}, ` : ''}{countryCode} Stats</HeadingText> : <HeadingText>Overall</HeadingText> }
           </StackItem>
           <StackItem className="inline">
               <BillboardChart className="microchart" accountId={accountId} query={`FROM PageView SELECT count(*) as 'Page Views' SINCE ${durationInMinutes} MINUTES AGO WHERE appName = '${appName}' ${nrqlWhere}`}/>

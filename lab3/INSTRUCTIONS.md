@@ -51,7 +51,7 @@ import {Grid, GridItem} from 'nr1';
     }
 ```
 
-3. Save your `index.js` file and in Google Chrome, navigate to the following URL `https://one.newrelic.com?use_version=45a97944&packages=local` and click my launcher.
+3. Save your `index.js` file and in Google Chrome, navigate to the following URL `https://one.newrelic.com?packages=local` and click my launcher.
 
 Your browsers should show a `Grid` with `GridItems` that looks something similar to below:
 
@@ -108,6 +108,7 @@ render() {
             className="stack"
             alignmentType={Stack.ALIGNMENT_TYPE.FILL}
             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+            <StackItem>
             <Stack
                 className="inner-stack"
                 alignmentType={Stack.ALIGNMENT_TYPE.FILL}
@@ -124,6 +125,8 @@ render() {
                     <div className="gry-div">Item 3</div>
                 </StackItem>
             </Stack>
+            </StackItem>
+            <StackItem>
             <Stack
                 className="inner-stack"
                 alignmentType={Stack.ALIGNMENT_TYPE.FILL}
@@ -135,11 +138,12 @@ render() {
                     <div className="gry-div">Item 5: But, this one doesn't</div>
                 </StackItem>
             </Stack>
+            </StackItem>
         </Stack>
     }
 ```
 
-The power is using `<Stack>` and `<Stack>` components is being able to use their props and easily create a layout that is best for your nerdpack. Let's update props of the code we added before and see what happens to our layout.
+The power is using `<Stack>` and `<StackItem>` components is being able to use their props and easily create a layout that is best for your nerdpack. Let's update props of the code we added before and see what happens to our layout.
 
 Change the render method within your `lab3/nerdlets/my-nerdlet/index.js` with the code below and look at the difference in your browser.
 
@@ -149,6 +153,7 @@ render() {
         className="stack"
         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+        <StackItem>
         <Stack
             className="inner-stack"
             alignmentType={Stack.ALIGNMENT_TYPE.FILL}
@@ -164,6 +169,8 @@ render() {
                 <div className="gry-div">Item 3: Now this one doesnt grow</div>
             </StackItem>
         </Stack>
+        </StackItem>
+        <StackItem>
         <Stack
             alignmentType={Stack.ALIGNMENT_TYPE.FILL}
             distributionType={Stack.DISTRIBUTION_TYPE.FILL}
@@ -175,6 +182,7 @@ render() {
                 <div className="gry">Item 5: But, this one doesn't</div>
             </StackItem>
         </Stack>
+        </StackItem>
     </Stack>
     }
 ```
@@ -183,7 +191,7 @@ Your browser should now look similar to the snapshot below:
 
 ![Lab3 Nerdlet with updated Stack layout](../screenshots/lab3_screen04.png)
 
-_Note: For more documentation on the `Stack` and `StackItem`and their props view the `nr1` object documentation at: [ADD LINK]
+_Note: For more documentation on the `Stack` and `StackItem` and their props view the `nr1` object documentation at: https://github.com/newrelic/eap-cli/tree/master/docs
 
 
 ## Step 3: Building an nerdpack with UI Components
@@ -193,15 +201,14 @@ _Note: For more documentation on the `Stack` and `StackItem`and their props view
 Update the import statement with your code people:
 
 ```javascript
-import { Grid, GridItem, Stack, StackItem, ChartGroup, AreaChart, BarChart, LineChart, TableChart, PieChart, Button, TextField, Dialog, Toast } from 'nr1';
+import { Grid, GridItem, Stack, StackItem, ChartGroup, AreaChart, BarChart, LineChart, TableChart, PieChart, Button, TextField, Modal, Toast } from 'nr1';
 ```
 
 Using the Grid and Stack components you can easily create any layout you wish within your nerdpack. Replace the render method within your `lab3/nerdlets/my-nerdlet/index.js` with the code below:
 
 ```javascript
-render(){
-    return <ChartGroup>
-        <div className="grid">
+    render() {
+        return <ChartGroup>
             <Grid className="grid">
                 <GridItem
                     columnSpan={8}>
@@ -241,8 +248,7 @@ render(){
                     </Stack>
                 </GridItem>
             </Grid>
-        </div>
-    </ChartGroup>
+        </ChartGroup>;
     }
 ```
 
@@ -257,12 +263,13 @@ Now that you have your layout done, let's add a some chart components. Replace t
 Add the following code to your `index.js` file. ABOVE the `render` method.
 
 ```javascript
-constructor(props) {
+    constructor(props) {
         super(props);
         this.accountId =  1606862; //New Relic Demotron.
         console.debug("Nerdlet props", this.props); //eslint-disable-line
     }
 ```
+
 Add the following code to your `index.js` file. IN the `render` method before the `return`
 
 ```javascript
@@ -272,81 +279,70 @@ Add the following code to your `index.js` file. IN the `render` method before th
     const throughput = `SELECT count(*) as 'throughput' FROM Transaction TIMESERIES`;
     const transaction_apdex_by_appname = `SELECT count(*) as 'transaction', apdex(duration) as 'apdex' FROM Transaction limit 25`;
 ```
+
 Replace the `render` method in your `index.js` with the code below.
 
 ```javascript
-render(){
+    render() {
         return <ChartGroup>
-            <div className="grid">
-                <Grid className="grid">
-                    <GridItem
-                        columnSpan={8}>
-                        <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                            gapType={Stack.GAP_TYPE.LOOSE}>
-                            <StackItem>
-                                <div className="chart">
-                                <LineChart
-                                    query={throughput+since}
-                                    accountId={this.accountId}
-                                    className="chart"
-                                    onClickLine={(line) => {
-                                        console.debug(line); //eslint-disable-line
-                                    }}
-                                />
-                                </div>
-                            </StackItem>
-                        </Stack>
-                        <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                            gapType={Stack.GAP_TYPE.LOOSE}>
-                            <StackItem>
-                            <div className="chart">
-                                <AreaChart
-                                    query={throughput+since}
-                                    accountId={this.accountId}
-                                    className="chart"
-                                    onClickLine={(line) => {
-                                        console.debug(line); //eslint-disable-line
-                                    }}
-                                />
-                                </div>
-                            </StackItem>
-                            <StackItem>
-                            <div className="chart">
-                                <BarChart className="chart" query={errors+since} accountId={this.accountId} />
-                                </div>
-                            </StackItem>
-                        </Stack>
-                    </GridItem>
-                    <GridItem
-                        columnSpan={4}>
-                        <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}xs
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                            gapType={Stack.GAP_TYPE.TIGHT}
-                            directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                            <StackItem>
-                            <div className="chart">
-                                <PieChart
-                                    className="chart"
-                                    query={transaction_apdex_by_appname+since}
-                                    accountId={this.accountId}
-                                />
-                                </div>
-                            </StackItem>
-                            <StackItem>
-                            <div className="chart">
-                                <TableChart className="chart" query={transaction_apdex_by_appname+since} accountId={this.accountId}/>
-                            </div>
-                            </StackItem>
-                        </Stack>
-                    </GridItem>
-                </Grid>
-                </div>
-            </ChartGroup>
+            <Grid className="grid">
+                <GridItem
+                    columnSpan={8}>
+                    <Stack
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
+                        gapType={Stack.GAP_TYPE.LOOSE}>
+                        <StackItem>
+                            <LineChart
+                                query={throughput+since}
+                                accountId={this.accountId}
+                                className="chart"
+                                onClickLine={(line) => {
+                                    console.debug(line); //eslint-disable-line
+                                }}
+                            />
+                        </StackItem>
+                    </Stack>
+                    <Stack
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
+                        gapType={Stack.GAP_TYPE.LOOSE}>
+                        <StackItem>
+                            <AreaChart
+                                query={throughput+since}
+                                accountId={this.accountId}
+                                className="chart"
+                                onClickLine={(line) => {
+                                    console.debug(line); //eslint-disable-line
+                                }}
+                            />
+                        </StackItem>
+                        <StackItem>
+                            <BarChart className="chart" query={errors+since} accountId={this.accountId} />
+                        </StackItem>
+                    </Stack>
+                </GridItem>
+                <GridItem
+                    columnSpan={4}>
+                    <Stack
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}xs
+                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
+                        gapType={Stack.GAP_TYPE.TIGHT}
+                        directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+                        <StackItem>
+                            <PieChart
+                                className="chart"
+                                query={transaction_apdex_by_appname+since}
+                                accountId={this.accountId}
+                            />
+                        </StackItem>
+                        <StackItem>
+                            <TableChart className="chart" query={transaction_apdex_by_appname+since} accountId={this.accountId}/>
+                        </StackItem>
+                    </Stack>
+                </GridItem>
+            </Grid>
+        </ChartGroup>
     }
 ```
 
@@ -363,25 +359,25 @@ In the next few steps we'll add some UI components that updates the UI and add m
 Add the following methods to your code above your render method. These will come in handy later to help us interact with the UI.
 
 ```javascript
- handleChange(e){
+    handleChange(e){
         this.setState({value: e.target.value})
     }
 
     onSubmit(e){
         e.preventDefault();
-        this.setState({hideDialog: false})
+        this.setState({hideModal: false})
     }
 
     confirmFacet(e){
         e.preventDefault();
         this.popToast('normal', 'Facet Updated', `The FACET ${this.state.value} has been added to your query.`)
-        this.setState({facet: 'FACET '+this.state.value, hideDialog: true});
+        this.setState({facet: 'FACET '+this.state.value, hideModal: true});
     }
 
     rejectFacet(e){
         e.preventDefault();
         this.popToast('critical', 'Facet Rejected', `The FACET ${this.state.value} has been rejected.`)
-        this.setState({facet: '', value: '', hideDialog: true});
+        this.setState({facet: '', value: '', hideModal: true});
     }
 
     popToast(toastType, toastTitle, toastDisplay){
@@ -392,13 +388,13 @@ Add the following methods to your code above your render method. These will come
 Update your constructor method with the code below. This will come in handy as well a little later.
 
 ```javascript
-constructor(props) {
+    constructor(props) {
         super(props);
         this.accountId =  1606862; //New Relic Demotron.
         this.state = {
             value: '',
             facet: '',
-            hideDialog: true,
+            hideModal: true,
             showToast: false,
             toastType: 'normal',
             toastTitle: '',
@@ -414,14 +410,14 @@ constructor(props) {
     }
 ```
 
-1. Using the `<TextField>`, `<Button>`, and `<Dialog>` component to get and confirm user input
+1. Using the `<TextField>`, `<Button>`, and `<Modal>` component to get and confirm user input
 
-We want to be able to FACET the chart in our Nerdlet to get better more detail from our instrumentation. To do this we will use the `<TextField>` and `<Button>` components to submit the FACET by and verify the input using a `<Dialog>` component.
+We want to be able to FACET the chart in our Nerdlet to get better more detail from our instrumentation. To do this we will use the `<TextField>` and `<Button>` components to submit the FACET by and verify the input using a `<Modal>` component.
 
 Update the your render method with the code below:
 
 ```javascript
-render() {
+    render() {
         const { duration } = this.props.launcherUrlState.timeRange;
         const since = ` SINCE ${duration/1000/60} MINUTES AGO `;
         const errors = `SELECT count(error) FROM Transaction TIMESERIES`;
@@ -429,112 +425,100 @@ render() {
         const transaction_apdex_by_appname = `SELECT count(*) as 'transaction', apdex(duration) as 'apdex' FROM Transaction limit 25`;
         return <React.Fragment>
             <ChartGroup>
-            <div className="grid">
-                <Grid className="grid">
-                    <GridItem
-                        columnSpan={8}>
-                        <form onSubmit={this.onSubmit}>
+            <Grid className="grid">
+                <GridItem
+                    columnSpan={8}>
+                    <form onSubmit={this.onSubmit}>
+                        <Stack>
+                            <StackItem grow={true}>
+                                <TextField
+                                    value={this.state.value}
+                                    onChange={this.handleChange}
+                                />
+                            </StackItem>
+                            <StackItem>
+                                <Button variantType="primary">Facet</Button>
+                            </StackItem>
+                        </Stack>
+                        <Modal
+                            hidden={this.state.hideModal}
+                            onClose={() => {this.setState({facet: '', value: '', hideModal: true})}}
+                        >
                             <Stack>
-                                <StackItem grow={true}>
-                                    <TextField
-                                        value={this.state.value}
-                                        onChange={this.handleChange}
-                                    />
-                                </StackItem>
                                 <StackItem>
-                                    <Button variantType="primary">Facet</Button>
+                                    <h1 className="Modal-headline">Are you sure you want to apply this facet?</h1>
+                                    <p className="facet-value">Facet by: <strong>{this.state.value}</strong></p>
+                                    <Stack>
+                                        <StackItem>
+                                            <Button
+                                                onClick={this.rejectFacet}
+                                            >No</Button>
+                                        </StackItem>
+                                        <StackItem>
+                                            <Button
+                                                onClick={this.confirmFacet}
+                                            >Yes</Button>
+                                        </StackItem>
+                                    </Stack>
                                 </StackItem>
                             </Stack>
-                            <Dialog
-                                hidden={this.state.hideDialog}
-                                onClose={() => {this.setState({facet: '', value: '', hideDialog: true})}}
-                            >
-                                <Stack>
-                                    <StackItem>
-                                        <h1 className="dialog-headline">Are you sure you want to apply this facet?</h1>
-                                        <p className="facet-value">Facet by: <strong>{this.state.value}</strong></p>
-                                        <Stack>
-                                            <StackItem>
-                                                <Button
-                                                    onClick={this.rejectFacet}
-                                                >No</Button>
-                                            </StackItem>
-                                            <StackItem>
-                                                <Button
-                                                    onClick={this.confirmFacet}
-                                                >Yes</Button>
-                                            </StackItem>
-                                        </Stack>
-                                    </StackItem>
-                                </Stack>
-                            </Dialog>
-                        </form>
+                        </Modal>
+                    </form>
 
-                        <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                            gapType={Stack.GAP_TYPE.LOOSE}>
-                            <StackItem>
-                                <div className="chart">
-                                <LineChart
-                                        query={throughput+since+this.state.facet}
-                                        accountId={this.accountId}
-                                        className="chart"
-                                        onClickLine={(line) => {
-                                            console.debug(line); //eslint-disable-line
-                                    }}
-                                />
-                                </div>
-                            </StackItem>
-                        </Stack>
-                        <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                            gapType={Stack.GAP_TYPE.LOOSE}>
-                            <StackItem>
-                            <div className="chart">
-                                <AreaChart
-                                        query={throughput+since+this.state.facet}
-                                        accountId={this.accountId}
-                                        className="chart"
-                                        onClickLine={(line) => {
-                                            console.debug(line); //eslint-disable-line
-                                    }}
-                                />
-                            </div>
-                            </StackItem>
-                            <StackItem>
-                            <div className="chart">
-                                <BarChart className="chart" query={errors+since+this.state.facet} accountId={this.accountId} />
-                                </div>
-                            </StackItem>
-                        </Stack>
-                    </GridItem>
-                    <GridItem
-                        columnSpan={4}>
-                        <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}xs
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                            gapType={Stack.GAP_TYPE.TIGHT}
-                            directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                            <StackItem>
-                            <div className="chart">
-                                <PieChart
-                                    className="chart"
-                                    query={transaction_apdex_by_appname+since+this.state.facet}
+                    <Stack
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
+                        gapType={Stack.GAP_TYPE.LOOSE}>
+                        <StackItem>
+                            <LineChart
+                                    query={throughput+since+this.state.facet}
                                     accountId={this.accountId}
-                                />
-                                </div>
-                            </StackItem>
-                            <StackItem>
-                            <div className="chart">
-                                <TableChart className="chart" query={transaction_apdex_by_appname+since+this.state.facet} accountId={this.accountId} />
-                            </div>
-                            </StackItem>
-                        </Stack>
-                    </GridItem>
-                </Grid>
-            </div>
+                                    className="chart"
+                                    onClickLine={(line) => {
+                                        console.debug(line); //eslint-disable-line
+                                }}
+                            />
+                        </StackItem>
+                    </Stack>
+                    <Stack
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
+                        gapType={Stack.GAP_TYPE.LOOSE}>
+                        <StackItem>
+                            <AreaChart
+                                    query={throughput+since+this.state.facet}
+                                    accountId={this.accountId}
+                                    className="chart"
+                                    onClickLine={(line) => {
+                                        console.debug(line); //eslint-disable-line
+                                }}
+                            />
+                        </StackItem>
+                        <StackItem>
+                            <BarChart className="chart" query={errors+since+this.state.facet} accountId={this.accountId} />
+                        </StackItem>
+                    </Stack>
+                </GridItem>
+                <GridItem
+                    columnSpan={4}>
+                    <Stack
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}xs
+                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
+                        gapType={Stack.GAP_TYPE.TIGHT}
+                        directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+                        <StackItem>
+                            <PieChart
+                                className="chart"
+                                query={transaction_apdex_by_appname+since+this.state.facet}
+                                accountId={this.accountId}
+                            />
+                        </StackItem>
+                        <StackItem>
+                            <TableChart className="chart" query={transaction_apdex_by_appname+since+this.state.facet} accountId={this.accountId} />
+                        </StackItem>
+                    </Stack>
+                </GridItem>
+            </Grid>
         </ChartGroup>
     </React.Fragment>
     }
@@ -544,9 +528,9 @@ Your browser should look similar to below:
 
 ![Lab3 Nerdlet with Input](../screenshots/lab3_screen07.png)
 
-Enter the  FACET `appName` in the `<TextField>` and click the FACET button. And, you see the `<Dialog>` similar to below:
+Enter the  FACET `appName` in the `<TextField>` and click the FACET button. And, you see the `<Modal>` similar to below:
 
-![Lab3 Nerdlet with Dialog](../screenshots/lab3_screen08.png)
+![Lab3 Nerdlet with Modal](../screenshots/lab3_screen08.png)
 
 2. Adding the `<Toast>` component for user notifications after UI has been updated.
 
@@ -574,7 +558,7 @@ In the end, your `index.js` should look like this.
 ```javascript
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, GridItem, Stack, StackItem, ChartGroup, AreaChart, BarChart, LineChart, TableChart, PieChart, Button, TextField, Dialog, Toast } from 'nr1';
+import { Grid, GridItem, Stack, StackItem, ChartGroup, AreaChart, BarChart, LineChart, TableChart, PieChart, Button, TextField, Modal, Toast } from 'nr1';
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
@@ -588,7 +572,7 @@ export default class MyNerdlet extends React.Component {
         this.state = {
             value: '',
             facet: '',
-            hideDialog: true,
+            hideModal: true,
             showToast: false,
             toastType: 'normal',
             toastTitle: '',
@@ -609,19 +593,19 @@ export default class MyNerdlet extends React.Component {
 
     onSubmit(e){
         e.preventDefault();
-        this.setState({hideDialog: false})
+        this.setState({hideModal: false})
     }
 
     confirmFacet(e){
         e.preventDefault();
         this.popToast('normal', 'Facet Updated', `The FACET ${this.state.value} has been added to your query.`)
-        this.setState({facet: 'FACET '+this.state.value, hideDialog: true});
+        this.setState({facet: 'FACET '+this.state.value, hideModal: true});
     }
 
     rejectFacet(e){
         e.preventDefault();
         this.popToast('critical', 'Facet Rejected', `The FACET ${this.state.value} has been rejected.`)
-        this.setState({facet: '', value: '', hideDialog: true});
+        this.setState({facet: '', value: '', hideModal: true});
     }
 
     popToast(toastType, toastTitle, toastDisplay){
@@ -635,8 +619,15 @@ export default class MyNerdlet extends React.Component {
         const throughput = `SELECT count(*) as 'throughput' FROM Transaction TIMESERIES`;
         const transaction_apdex_by_appname = `SELECT count(*) as 'transaction', apdex(duration) as 'apdex' FROM Transaction limit 25`;
         return <React.Fragment>
+            { this.state.showToast &&
+                <Toast
+                type={this.state.toastType}
+                title={this.state.toastTitle}
+                description={this.state.toastDisplay}
+                onDestroy={()=>{this.setState({showToast: false})}}
+                />
+            }
             <ChartGroup>
-            <div className="grid">
                 <Grid className="grid">
                     <GridItem
                         columnSpan={8}>
@@ -652,13 +643,13 @@ export default class MyNerdlet extends React.Component {
                                     <Button variantType="primary">Facet</Button>
                                 </StackItem>
                             </Stack>
-                            <Dialog
-                                hidden={this.state.hideDialog}
-                                onClose={() => {this.setState({facet: '', value: '', hideDialog: true})}}
+                            <Modal
+                                hidden={this.state.hideModal}
+                                onClose={() => {this.setState({facet: '', value: '', hideModal: true})}}
                             >
                                 <Stack>
                                     <StackItem>
-                                        <h1 className="dialog-headline">Are you sure you want to apply this facet?</h1>
+                                        <h1 className="Modal-headline">Are you sure you want to apply this facet?</h1>
                                         <p className="facet-value">Facet by: <strong>{this.state.value}</strong></p>
                                         <Stack>
                                             <StackItem>
@@ -674,15 +665,13 @@ export default class MyNerdlet extends React.Component {
                                         </Stack>
                                     </StackItem>
                                 </Stack>
-                            </Dialog>
+                            </Modal>
                         </form>
-
                         <Stack
                             alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.LOOSE}>
                             <StackItem>
-                                <div className="chart">
                                 <LineChart
                                         query={throughput+since+this.state.facet}
                                         accountId={this.accountId}
@@ -691,7 +680,6 @@ export default class MyNerdlet extends React.Component {
                                             console.debug(line); //eslint-disable-line
                                     }}
                                 />
-                                </div>
                             </StackItem>
                         </Stack>
                         <Stack
@@ -699,7 +687,6 @@ export default class MyNerdlet extends React.Component {
                             distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.LOOSE}>
                             <StackItem>
-                            <div className="chart">
                                 <AreaChart
                                         query={throughput+since+this.state.facet}
                                         accountId={this.accountId}
@@ -708,12 +695,9 @@ export default class MyNerdlet extends React.Component {
                                             console.debug(line); //eslint-disable-line
                                     }}
                                 />
-                            </div>
                             </StackItem>
                             <StackItem>
-                            <div className="chart">
                                 <BarChart className="chart" query={errors+since+this.state.facet} accountId={this.accountId} />
-                                </div>
                             </StackItem>
                         </Stack>
                     </GridItem>
@@ -725,24 +709,20 @@ export default class MyNerdlet extends React.Component {
                             gapType={Stack.GAP_TYPE.TIGHT}
                             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                             <StackItem>
-                            <div className="chart">
                                 <PieChart
                                     className="chart"
                                     query={transaction_apdex_by_appname+since+this.state.facet}
                                     accountId={this.accountId}
                                 />
-                                </div>
                             </StackItem>
                             <StackItem>
-                            <div className="chart">
                                 <TableChart className="chart" query={transaction_apdex_by_appname+since+this.state.facet} accountId={this.accountId} />
-                            </div>
                             </StackItem>
                         </Stack>
                     </GridItem>
                 </Grid>
-            </div>
         </ChartGroup>
     </React.Fragment>
     }
+}
 ```

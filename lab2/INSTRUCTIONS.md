@@ -40,7 +40,7 @@ _Note: we're going to cover how to not hardcode the accountIds for NRQL queries 
 
 ## Step 2: Implementing the time picker
 
-1. Go back to the [Nerdlet interface](https://one.newrelic.com/launcher/lab2.my-launcher?packages=local&use_version=45a97944), and change the value of the Time Window in the top right corner of the UI. <img src="../screenshots/lab2_screen03.png" width="200" align="right" style="margin:10px" />
+1. Go back to the [Nerdlet interface](https://one.newrelic.com/launcher/lab2.my-launcher?packages=local), and change the value of the Time Window in the top right corner of the UI. <img src="../screenshots/lab2_screen03.png" width="200" align="right" style="margin:10px" />
 
 Notice that the time windows and charts in the Nerdlet do not refresh and do not respond to changes in the time window. (_Hint: That's because we haven't told them to use the selected time range yet!_) Let's do something about that.
 
@@ -129,13 +129,13 @@ We have one remaining issue with the navigation flow of this example. After you 
 
 ```javascript
     openEntity() {
-        const { entityGuid } = this.state;
+        const { entityGuid, appName } = this.state;
         navigation.openEntity({
             id: entityGuid,
             type: 'APPLICATION',
             domain: 'APM'
         });
-        nerdlet.setUrlState(this.state);
+        nerdlet.setUrlState({ entityGuid, appName });
     }
 ```
 
@@ -185,8 +185,10 @@ export default class MyNerdlet extends React.Component {
     }
 
     componentWillUpdate(props) {
-        if (this.props) {
+        if (this.props && props && this.state.entityGuid != props.nerdletUrlState.entityGuid) {
             console.debug("New props", props); //eslint-disable-line
+            const { entityGuid, appName } = props.nerdletUrlState;
+            this.setState({ entityGuid, appName });
         }
     }
 
@@ -230,28 +232,24 @@ export default class MyNerdlet extends React.Component {
                             distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.TIGHT}>
                             <StackItem>
-                                <div className="chart">
-                                    <TableChart query={nrql+since} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
-                                        //for learning purposes, we'll write to the console.
-                                        console.debug([dataEl, row, chart]) //eslint-disable-line
-                                        this.setApplication(row.entityGuid, row.appName)
-                                    }}/>
-                                </div>
+                                <TableChart query={nrql+since} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+                                    //for learning purposes, we'll write to the console.
+                                    console.debug([dataEl, row, chart]) //eslint-disable-line
+                                    this.setApplication(row.entityGuid, row.appName)
+                                }}/>
                             </StackItem>
                             <StackItem>
-                                <div className="chart">
-                                    <LineChart
-                                        query={trxOverTime+since}
-                                        className="chart"
-                                        accountId={this.accountId}
-                                        onClickLine={(line) => {
-                                            //more console logging for learning purposes
-                                            console.debug(line); //eslint-disable=line
-                                            const params = line.metadata.label.split(",");
-                                            this.setApplication(params[1], params[0]);
-                                        }}
-                                    />
-                                </div>
+                                <LineChart
+                                    query={trxOverTime+since}
+                                    className="chart"
+                                    accountId={this.accountId}
+                                    onClickLine={(line) => {
+                                        //more console logging for learning purposes
+                                        console.debug(line); //eslint-disable=line
+                                        const params = line.metadata.label.split(",");
+                                        this.setApplication(params[1], params[0]);
+                                    }}
+                                />
                             </StackItem>
                         </Stack>
                     </StackItem>
@@ -266,15 +264,11 @@ export default class MyNerdlet extends React.Component {
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
                                 <h2>Transaction counts for {appName}</h2>
-                                <div className="chart">
-                                    <LineChart accountId={this.accountId} query={tCountNrql+since} className="chart"/>
-                                </div>
+                                <LineChart accountId={this.accountId} query={tCountNrql+since} className="chart"/>
                             </StackItem>
                             <StackItem>
                                 <h2>Apdex for {appName}</h2>
-                                <div className="chart">
-                                    <ScatterChart accountId={this.accountId} query={apdexNrql+since} className="chart"/>
-                                </div>
+                                <ScatterChart accountId={this.accountId} query={apdexNrql+since} className="chart"/>
                             </StackItem>
                         </Stack>
                     </StackItem>}
