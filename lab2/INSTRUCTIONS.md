@@ -28,7 +28,7 @@ npm install
 
 1. If you'd like, open the `lab2/nerdlets/my-nerdlet/index.js` and change the value in the constructor of `this.accountId` to an account you want to review.
 
-_Note: we're going to cover how to not hardcode the accountIds for NRQL queries later._
+_Note: we're going to cover how to **not** hardcode the accountIds for NRQL queries later._
 
 2. Open a browser and check out the `Lab 2 Nerdlet` by going to the homepage and clicking on `Lab 2 Launcher`. Click around and verify that it's working. You should see something like this:
 ![Lab2 Nerdlet Open for Business](../screenshots/lab2_screen01.png)
@@ -90,7 +90,6 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
             type: 'APPLICATION',
             domain: 'APM'
         });
-        nerdlet.setUrlState({ entityGuid, appName });
     }
 ```
 
@@ -110,14 +109,13 @@ _Note: Alternatively, you can call the `navigation.openCard` **thusly**, which w
 
 ```javascript
     openEntity() {
-        const { entityGuid } = this.state;
+        const { entityGuid, appName } = this.state;
         navigation.openCard({
             id: 'slicer-dicer.apm-overview',
             urlState: {
                 entityId: entityGuid
             }
         });
-        nerdlet.setUrlState({ entityGuid, appName });
     }
 ```
 
@@ -130,12 +128,12 @@ We have one remaining issue with the navigation flow of this example. After you 
 ```javascript
     openEntity() {
         const { entityGuid, appName } = this.state;
+        nerdlet.setUrlState({ entityGuid, appName });
         navigation.openEntity({
             id: entityGuid,
             type: 'APPLICATION',
             domain: 'APM'
         });
-        nerdlet.setUrlState({ entityGuid, appName });
     }
 ```
 
@@ -184,26 +182,18 @@ export default class MyNerdlet extends React.Component {
         this.openEntity = this.openEntity.bind(this);
     }
 
-    componentWillUpdate(props) {
-        if (this.props && props && this.state.entityGuid != props.nerdletUrlState.entityGuid) {
-            console.debug("New props", props); //eslint-disable-line
-            const { entityGuid, appName } = props.nerdletUrlState;
-            this.setState({ entityGuid, appName });
-        }
-    }
-
     setApplication(entityGuid, appName) {
         this.setState({ entityGuid, appName })
     }
 
     openEntity() {
-        const { entityGuid } = this.state;
+        const { entityGuid, appName } = this.state;
+        nerdlet.setUrlState({ appName, entityGuid }, { replaceHistory: true });
         navigation.openEntity({
             id: entityGuid,
             type: 'APPLICATION',
             domain: 'APM'
         });
-        nerdlet.setUrlState(this.state);
     }
 
     render(){
