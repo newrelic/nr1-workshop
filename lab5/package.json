@@ -12,16 +12,11 @@
         "sdkVersion": 2
     },
     "dependencies": {
-        "d3": "^3.5.17",
         "graphql": "^14.4.2",
         "graphql-tag": "^2.10.1",
-        "leaflet": "^1.5.1",
-        "lodash.get": "^4.4.2",
         "prop-types": "^15.6.2",
         "react": "^16.6.3",
-        "react-dom": "^16.6.3",
-        "react-leaflet": "^2.4.0",
-        "uuid": "^3.3.2"
+        "react-dom": "^16.6.3"
     },
     "browserslist": [
         "last 2 versions",

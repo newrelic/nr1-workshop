@@ -47,8 +47,8 @@ npm install
 npm start
 ```
 
-7. In Google Chrome, navigate to the following URL `https://one.newrelic.com?use_version=d37b8d09&packages=local`
+1. In Google Chrome, navigate to the following URL `https://one.newrelic.com?packages=local`
 
 ## Lab Instructions
 
-[Let's go forth and make filter Maps!](INSTRUCTIONS.md)!
+[Let's learn about Entity queries](INSTRUCTIONS.md).

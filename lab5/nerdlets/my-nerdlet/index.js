@@ -1,7 +1,5 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
-import get from 'lodash.get';
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
@@ -10,16 +8,14 @@ export default class MyNerdlet extends React.Component {
     };
 
     constructor(props){
-        super(props)
+        super(props);
+        console.debug(props); //eslint-disable-line
         this.state = {
-            entityName: "Portal",
-            hideModal: true,
-            showToast: false,
-        }
-        this.accountId = 1606862; //New Relic Demotron.
+            entityName: "Portal"
+        };
     }
 
     render() {
-        return <h1>Welcome to lab5</h1>
- }
+        return (<h1>Hello World lab5!</h1>);
+    }
 }
