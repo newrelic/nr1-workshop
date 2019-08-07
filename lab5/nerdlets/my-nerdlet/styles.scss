@@ -1,0 +1,15 @@
+.header{
+    text-align: center;
+    margin: 5px 0;
+}
+.table{
+max-height: 400px;
+width: 100%;
+border: 1px solid #dedede;
+margin-bottom: 10px;
+overflow-y: scroll;
+    .table-data{
+        border: 1px solid #dedede;
+        padding: 5px 20px;
+    }
+}
