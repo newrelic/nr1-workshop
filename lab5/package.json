@@ -1,0 +1,29 @@
+{
+    "private": true,
+    "name": "lab5",
+    "description": "NR1 UI Package lab5",
+    "version": "0.1.0",
+    "scripts": {
+        "start": "nr1 package:serve",
+        "test": "exit 0"
+    },
+    "nr1": {
+        "uuid": "e67a1a99-46c7-4381-ad48-242885d243ec",
+        "sdkVersion": 2
+    },
+    "dependencies": {
+        "graphql": "^14.4.2",
+        "graphql-tag": "^2.10.1",
+        "prop-types": "^15.6.2",
+        "react": "^16.6.3",
+        "react-dom": "^16.6.3"
+    },
+    "browserslist": [
+        "last 2 versions",
+        "not ie < 11",
+        "not dead"
+    ],
+    "devDependencies": {
+        "file-loader": "^4.1.0"
+    }
+}
