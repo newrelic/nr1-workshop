@@ -20,8 +20,7 @@ npm install
 ```
 
 ## Step 1: Creating a new Nerdlet
-
-The nerdlet code that you create in this exercise will be accessed through a prebuilt launcher that is delivered as part of Lab 1. We will cover the details of launchers in a future exercise.
+The Nerdlet code that you create in this exercise will be accessed through a prebuilt launcher that is delivered as part of Lab 1. We will cover the details of launchers in a future exercise.
 
 1. Run the `nr1 create` command and choose the option `nerdlet` as well as provide a name of `lab1-nerdlet`. See the following:
 
@@ -34,12 +33,12 @@ Component created successfully!
 nerdlet lab1-nerdlet is available at "./nerdlets/lab1-nerdlet"
 
 #And if it's not already running, execute the following
-npm start
+nr1 package:serve
 ```
 
 You'll notice that the CLI creates three files in the `nerdlets/my-nerdlet` directory: index.js, styles.scss, and a nr1.json configuration.
 
-2. Assuming the the developer server is still running (i.e. `npm start`), validate (in a web browser) that you can click on and see the `Lab 1 Launcher` launcher by navigating in Google Chrome to `https://one.newrelic.com?packages=local` and click on the `Lab 1 Launcher`.
+2. Assuming the the developer server is still running (via `nr1 package:serve`), validate (in a web browser) that you can click on and see the `Lab 1 Launcher` launcher by navigating in Google Chrome to https://one.newrelic.com?packages=local and click on the `Lab 1 Launcher`.
 
 3. Change the `displayName` property of the Nerdlet in `nerdlets/lab1-nerdlet/nr1.json` to `Lab 1 Nerdlet` and save that file.
 
@@ -47,7 +46,7 @@ You'll notice that the CLI creates three files in the `nerdlets/my-nerdlet` dire
 
 ![lab1-nerdlet](../screenshots/lab1_screen01.png)
 
-_Note: if not, restart your local developer server by typing a `Ctrl+ESC` in the Terminal and then running `npm start`._
+_Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the Terminal and then running `nr1 package:serve`._
 
 5. Next, we're going to prep the Nerdlet to be able to generate some charts. Add the following code to your `MyNerdlet` class in `nerdlets/lab1-nerdlet/index.js`.
 
@@ -111,7 +110,7 @@ import { TableChart, Stack, StackItem } from 'nr1';
 }
 ```
 
-3. Now, let's use the `TableChart` to display a simple table with apdex information. Replace the `render` method of `lab1/nerdlets/lab1-nerdlet/index.js` with the following, save the file, and validate the the component renders. The nerdlet framework will recognize the `query` object passed as an argument into the `TableChart` in the `render` method, and will, under the covers, execute the NRQL statement as part of a GraphQL query.
+3. Now, let's use the `TableChart` to display a simple table with apdex information. Replace the `render` method of `lab1/nerdlets/lab1-nerdlet/index.js` with the following, save the file, and validate the the component renders. The Nerdlet framework will recognize the `query` object passed as an argument into the `TableChart` in the `render` method, and will, under the covers, execute the NRQL statement as part of a GraphQL query.
 
 ```javascript
     render(){
@@ -205,7 +204,7 @@ _Note that the line containing `{appId && <Stack...` ensures that the lower sect
 
 Note that the second row of additional charts is never drawm because the `state.appId` is always NULL. There's presently no way to set its value. Let's fix that.
 
-4. Add the following method to your nerdlet React component, e.g. after the `contructor(props)` we added above:
+4. Add the following method to your Nerdlet React component, e.g. after the `contructor(props)` we added above:
 
 ```javascript
     setApplication(inAppId, inAppName) {
@@ -347,4 +346,4 @@ Based on what you've executed above, apply that learning in the following:
 
 # For Consideration / Discussion
 
-- What was the purpose of the `ChartGroup`? What is it doing for us?
+- _What was the purpose of the `ChartGroup`? What is it doing for us?__

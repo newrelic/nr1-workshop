@@ -2,11 +2,9 @@
 
 Getting ready to build on the New Relic One platform is quick and easy. Essentially, what you will be doing in these setup instructions is readying your system to run a local server that seamlessly and securely connects into the New Relic One platform. This connection will makes building visual extension a breeze because you can see your changes in real time. Enjoy!
 
-
 # Setup Instructions
 
-
-1. In Google Chrome, navigate to <a href="https://github.com/newrelic/eap-cli/tree/master/dist" target="_blank">`https://github.com/newrelic/eap-cli/tree/master/dist`</a>, and click on the latest release of the NR1 CLI. (ex. `nr1-v0.3.0-alpha.11`)
+1. In Google Chrome, navigate to https://github.com/newrelic/eap-cli/tree/master/dist, and click on the latest release of the NR1 CLI. (ex. `nr1-v0.3.0-alpha.11`)
 2. Download the appropriate zipped bundle of the NR1 CLI and **unzip it to your home folder** (ex. for Mac it would be `nr1-v0.3.0-alpha.11-darwin-x64.tar.gz`).
 3. Open a Terminal window. From the command line you should the following:
 
@@ -58,5 +56,5 @@ nr1 package:serve
 Your terminal output should look like the following:
 ![terminal](screenshots/setup_screen01.png)
 
-8. Open Google Chrome and navigate to the following URL `https://one.newrelic.com?&packages=local`, and click on the New Relic One Launcher named `Setup Exercise`. You should see the following.
+8. Open Google Chrome and navigate to  https://one.newrelic.com?&packages=local, and click on the New Relic One Launcher named `Setup Exercise`. You should see the following.
 ![Congratulations](screenshots/setup_screen02.png)

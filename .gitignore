@@ -6,6 +6,10 @@ _site
 **/coverage
 **/tmp
 **/.DS_Store
+lab0/lab0-package
+lab0/launchers
+lab0/nerdlets
+lab0/package-lock.json
 lab1/nerdlets
 lab8/nerdlets/details
 .vscode/settings.json
