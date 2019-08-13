@@ -117,7 +117,7 @@ code .
 
 ![lab0-nerdlet](../screenshots/lab0_screen05.png)
 
-_Note: if not, restart your local developer server by typing a Ctrl+c in the Terminal and then running nr1 package:serve.
+_Note: if not, restart your local developer server by typing `Ctrl`+`c` in the Terminal and then running `nr1 package:serve`.
 
 # Step 4: Creating a package
 
@@ -137,8 +137,8 @@ nr1 create
 ? What kind of component do you want to create? package
 ? Name your component. lab0-package
 Component created successfully!
-
 ```
+
 You'll notice that the CLI creates a `/lab0-package` directory: including a launchers and nerdlets folder, and all the needed internal files.
 
 ![lab0-package](../screenshots/lab0_screen06.png)
