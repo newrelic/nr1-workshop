@@ -6,7 +6,7 @@ Getting ready to build on the New Relic One platform is quick and easy. Essentia
 # Setup Instructions
 
 
-1. In Google Chrome, navigate to `https://github.com/newrelic/eap-cli/tree/master/dist`, and click on the latest release of the NR1 CLI. (ex. `nr1-v0.3.0-alpha.11`)
+1. In Google Chrome, navigate to <a href="https://github.com/newrelic/eap-cli/tree/master/dist" target="_blank">`https://github.com/newrelic/eap-cli/tree/master/dist`</a>, and click on the latest release of the NR1 CLI. (ex. `nr1-v0.3.0-alpha.11`)
 2. Download the appropriate zipped bundle of the NR1 CLI and **unzip it to your home folder** (ex. for Mac it would be `nr1-v0.3.0-alpha.11-darwin-x64.tar.gz`).
 3. Open a Terminal window. From the command line you should the following:
 
@@ -43,7 +43,7 @@ sudo ./nr1/bin/nr1 certs:generate
 git clone git@github.com:newrelic/nr1-eap-workshop.git
 ```
 
-_Note: Each exercise exists as a folder in this repository. Following the material will involve going into that directory, running `npm install`, standing up the local development server by running `npm start`, and following the INSTRUCTIONS.md in the given folder._
+_Note: Each exercise exists as a folder in this repository. Following the material will involve going into that directory, running `npm install`, standing up the local development server by running `nr1 package:serve`, and following the INSTRUCTIONS.md in the given folder._
 
 7. Now start the `setup` NR1 package.
 
