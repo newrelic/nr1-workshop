@@ -105,7 +105,7 @@ import { NerdGraphQuery, Spinner, HeadingText, Grid, GridItem } from 'nr1';
                         {({loading, error, data}) => {
                             console.debug([loading, data, error]); //eslint-disable-line
                             if (loading) {
-                                return <Spinner className="centered" />;
+                                return <Spinner fillContainer />;
                             }
                             if (error) {
                                 return <HeadingText>{error}</HeadingText>;
@@ -145,7 +145,7 @@ import { NerdGraphQuery, EntityByIdQuery, EntitiesByNameQuery, EntitiesByDomainT
             {({loading, error, data}) => {
                 console.debug([loading, data, error]); //eslint-disable-line
                 if (loading) {
-                    return <Spinner className="centered" />;
+                    return <Spinner fillContainer />;
                 }
                 if (error) {
                     return <HeadingText>{error}</HeadingText>;
@@ -173,7 +173,7 @@ Your browser should show a small table that displays the name and domain of your
         {({loading, error, data}) => {
             console.debug([loading, data, error]); //eslint-disable-line
             if (loading) {
-                return <Spinner className="centered" />;
+                return <Spinner fillContainer />;
             }
             if (error) {
                 return <DisplayText>{error}</DisplayText>;
@@ -201,7 +201,7 @@ Your browser should show a small table that displays the name and domain of your
             {({loading, error, data}) => {
                 console.debug([loading, data, error]); //eslint-disable-line
                 if (loading) {
-                    return <Spinner className="centered" />;
+                    return <Spinner fillContainer />;
                 }
                 if (error) {
                     return <HeadingText>{error}</HeadingText>;
@@ -228,7 +228,7 @@ Your browser should show a small table that displays the name and domain of your
             {({loading, error, data}) => {
                 console.debug([loading, data, error]); //eslint-disable-line
                 if (loading) {
-                    return <Spinner className="centered" />;
+                    return <Spinner fillContainer />;
                 }
                 if (error) {
                     return <DisplayText>{error}</DisplayText>;
@@ -300,7 +300,7 @@ export default class MyNerdlet extends React.Component {
                     {({loading, error, data}) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
-                            return <Spinner className="centered" />;
+                            return <Spinner fillContainer />;
                         }
                         if (error) {
                             return <HeadingText>{error}</HeadingText>;
@@ -318,7 +318,7 @@ export default class MyNerdlet extends React.Component {
                     {({loading, error, data}) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
-                            return <Spinner className="centered" />;
+                            return <Spinner fillContainer />;
                         }
                         if (error) {
                             return <HeadingText>{error}</HeadingText>;
@@ -335,7 +335,7 @@ export default class MyNerdlet extends React.Component {
                 {({loading, error, data}) => {
                     console.debug([loading, data, error]); //eslint-disable-line
                     if (loading) {
-                        return <Spinner className="centered" />;
+                        return <Spinner fillContainer />;
                     }
                     if (error) {
                         return <DisplayText>{error}</DisplayText>;
@@ -352,7 +352,7 @@ export default class MyNerdlet extends React.Component {
                     {({loading, error, data}) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
-                            return <Spinner className="centered" />;
+                            return <Spinner fillContainer />;
                         }
                         if (error) {
                             return <HeadingText>{error}</HeadingText>;
@@ -369,7 +369,7 @@ export default class MyNerdlet extends React.Component {
                     {({loading, error, data}) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
-                            return <Spinner className="centered" />;
+                            return <Spinner fillContainer />;
                         }
                         if (error) {
                             return <DisplayText>{error}</DisplayText>;

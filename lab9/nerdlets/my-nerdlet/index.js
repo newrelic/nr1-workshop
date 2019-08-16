@@ -161,7 +161,7 @@ export default class MyNerdlet extends React.Component {
                             style={{height: `${height*.5}px`}}
                         />
                     </GridItem>
-                    </React.Fragment> : <Spinner className="centered" />}
+                    </React.Fragment> : <Spinner fillContainer />}
                     {openModal && <AddEntityModal
                         openModal={openModal}
                         entities={entities}

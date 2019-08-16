@@ -98,7 +98,7 @@ export default class AddEntityModal extends Component {
           </StackItem>
           <StackItem>
             {isLoading ?
-              <Spinner className="centered" /> :
+              <Spinner fillContainer /> :
               <div>
                 {results && <p>{results.length} {results.length == 1 ? 'result' : 'results'}...</p>}
                 <ul className="resultSet">

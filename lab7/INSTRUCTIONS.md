@@ -82,7 +82,7 @@ _If you're thinking, "based on what I've already learned, a `LineChart` doesn't 
                 {({ loading, data, error })  => {
                     console.debug([loading, data, error]); //eslint-disable-line
                     if (loading) {
-                        return <Spinner className="centered" />;
+                        return <Spinner fillContainer />;
                     }
                     if (error) {
                         return <DisplayText>{error}</DisplayText>;
@@ -91,7 +91,7 @@ _If you're thinking, "based on what I've already learned, a `LineChart` doesn't 
                 }}
             </NrqlQuery>
         } else {
-            return <Spinner className="centered" />
+            return <Spinner fillContainer />
         }
     }
 ```
@@ -217,7 +217,7 @@ export default class MyNerdlet extends React.Component {
                 {({ loading, data, error })  => {
                     console.debug([loading, data, error]); //eslint-disable-line
                     if (loading) {
-                        return <Spinner className="centered" />;
+                        return <Spinner fillContainer />;
                     }
                     if (error) {
                         return <DisplayText>{error}</DisplayText>;
@@ -228,7 +228,7 @@ export default class MyNerdlet extends React.Component {
             </NrqlQuery>
 
         } else {
-            return <Spinner className="centered" />
+            return <Spinner fillContainer />
         }
     }
 }

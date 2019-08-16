@@ -22,7 +22,7 @@ cd lab2
 npm install
 ```
 
-## Step 1: Verifying our Nerdlet and reviewing the Nerdlet API docs
+## Step 1: Verifying our Nerdlet and reviewing the [Nerdlet API docs](http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html)
 
 ![Nerdlet 2 Launcher](../screenshots/lab2_screen00.png)
 
