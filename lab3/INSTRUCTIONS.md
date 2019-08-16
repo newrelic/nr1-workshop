@@ -191,7 +191,7 @@ Your browser should now look similar to the snapshot below:
 
 ![Lab3 Nerdlet with updated Stack layout](../screenshots/lab3_screen04.png)
 
-_Note: For more documentation on the `Stack` and `StackItem` and their props view the `nr1` object documentation at: https://github.com/newrelic/eap-cli/tree/master/docs
+_Note: For more documentation on the `Stack` and `StackItem` and their props view the `nr1` object documentation at: http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html
 
 
 ## Step 3: Building an nerdpack with UI Components
