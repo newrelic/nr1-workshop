@@ -33,12 +33,12 @@ Component created successfully!
 nerdlet lab1-nerdlet is available at "./nerdlets/lab1-nerdlet"
 
 #And if it's not already running, execute the following
-nr1 package:serve
+nr1 nerdpack:serve
 ```
 
 You'll notice that the CLI creates three files in the `nerdlets/my-nerdlet` directory: index.js, styles.scss, and a nr1.json configuration.
 
-2. Assuming the the developer server is still running (via `nr1 package:serve`), validate (in a web browser) that you can click on and see the `Lab 1 Launcher` launcher by navigating in Google Chrome to https://one.newrelic.com?packages=local and click on the `Lab 1 Launcher`.
+2. Assuming the the developer server is still running (via `nr1 nerdpack:serve`), validate (in a web browser) that you can click on and see the `Lab 1 Launcher` launcher by navigating in Google Chrome to https://one.newrelic.com?packages=local and click on the `Lab 1 Launcher`.
 
 3. Change the `displayName` property of the Nerdlet in `nerdlets/lab1-nerdlet/nr1.json` to `Lab 1 Nerdlet` and save that file.
 
@@ -46,7 +46,7 @@ You'll notice that the CLI creates three files in the `nerdlets/my-nerdlet` dire
 
 ![lab1-nerdlet](../screenshots/lab1_screen01.png)
 
-_Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the Terminal and then running `nr1 package:serve`._
+_Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the Terminal and then running `nr1 nerdpack:serve`._
 
 5. Next, we're going to prep the Nerdlet to be able to generate some charts. Add the following code to your `MyNerdlet` class in `nerdlets/lab1-nerdlet/index.js`.
 

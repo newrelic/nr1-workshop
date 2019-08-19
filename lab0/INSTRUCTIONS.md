@@ -44,7 +44,7 @@ You'll notice that the CLI creates a `./lab0/launchers/lab0-launcher` directory:
 
 ```bash
 npm install
-nr1 package:serve
+nr1 nerdpack:serve
 # Note: Once you start the local server, it will automatically listen for changes in the file system. To issue commands while the local server is running, simply open a new terminal and change to the lab0 directory.
 ```
 Navigate in Google Chrome to https://one.newrelic.com/?packages=local and click on the Lab 0 Launcher.
@@ -113,7 +113,7 @@ code .
 
 ![lab0-nerdlet](../screenshots/lab0_screen05.png)
 
-_Note: if not, restart your local developer server by typing `Ctrl`+`c` in the Terminal and then running `nr1 package:serve`._
+_Note: if not, restart your local developer server by typing `Ctrl`+`c` in the Terminal and then running `nr1 nerdpack:serve`._
 
 # Step 4: Creating a Nerdpack
 
