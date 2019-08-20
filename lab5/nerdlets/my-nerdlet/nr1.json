@@ -2,7 +2,7 @@
     "schemaType": "NERDLET",
     "id": "lab5-nerdlet",
     "displayName": "NerdGraph Nerdlet",
-    "description": "Explore using GraphQL in Nerdlet.",
+    "description": "Explore using NerdGraph in Nerdlet.",
     "entities": [{"domain": "BROWSER", "type": "APPLICATION"}, { "domain": "APM",  "type": "APPLICATION" }],
     "actionCategory": "monitor"
 }

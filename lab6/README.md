@@ -51,4 +51,4 @@ npm start
 
 ## Lab Instructions
 
-[Who wants to execute some GraphQL in a Nerdlet](INSTRUCTIONS.md)?
+[Who wants to execute some NerdGraph in a Nerdlet](INSTRUCTIONS.md)?

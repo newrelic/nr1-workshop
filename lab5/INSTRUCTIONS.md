@@ -1,13 +1,13 @@
-Lab 5: Using  NR1 GraphQL components
+Lab 5: Using  NR1 NerdGraph components
 ==============================================================================================
 
-The purpose of this lab is to build on the concepts we've already explored, using `GraphQL` and exploring the `NerdGrpah` components to access New Relic's `GraphQL` API within your Nerdlets.
+The purpose of this lab is to build on the concepts we've already explored, using `NerdGraph` and exploring the `NerdGrpah` components to access New Relic's `NerdGraph` API within your Nerdlets.
 
 After completing this lab you should understand:
 
-* Be more confident in your ability to incorporate `GraphQL`.
+* Be more confident in your ability to incorporate `NerdGraph`.
 * Gain more practical experience with nerdGraph
-* Have access to the GraphQL API form your Nerdlets
+* Have access to the `NerdGraph` API form your Nerdlets
 
 ## Step 0: Setup and Prerequisites
 
@@ -24,7 +24,7 @@ npm start
 
 Open the [Traffic Explorer Nerdlet here.](https://one.newrelic.com/launcher/lab5.my-launcher?packages=local#launcher=eyJ0aW1lUmFuZ2UiOnsiYmVnaW5fdGltZSI6bnVsbCwiZW5kX3RpbWUiOm51bGwsImR1cmF0aW9uIjoxODAwMDAwfX0=&pane=eyJuZXJkbGV0SWQiOiJsYWI1Lm15LW5lcmRsZXQifQ==)
 
-## Step 1: Using the GraphQL API within your Nerdlet
+## Step 1: Using the NerdGraph API within your Nerdlet
 
 1. We need to import the appropriate libraries into our Nerdlet. Open `lab5/nerdlets/lab5-nerdlet/index.js` and add the following near the top of the file.
 
@@ -33,9 +33,9 @@ import { NerdGraphQuery, Stack, StackItem, HeaderText} from 'nr1';
 import gql from 'graphql-tag';
 ```
 
-2. The `NerdGraphQuery` component is going to allow us to access the New Relic GraphQL API and have access to the power of GraphQl inside of your Nerdlet.
+2. The `NerdGraphQuery` component is going to allow us to access the New Relic NerdGraph API and have access to the power of GraphQl inside of your Nerdlet.
 
-Let's update our render method in the `index.js` to use the `NerdGraphQuery` component and make our first GraphQL query.
+Let's update our render method in the `index.js` to use the `NerdGraphQuery` component and make our first NerdGraph query.
 
 ```javascript
 render() {

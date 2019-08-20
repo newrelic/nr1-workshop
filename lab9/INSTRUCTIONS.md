@@ -53,14 +53,14 @@ Next, we're going to exercise the functionality of the `Perf. Comparison` nerdle
 - for this `User`
 - for use and retrieval the next time *we* enter this `Nerdlet`
 
-### Introducing NerdStore
+### Introducing NerdStorage
 
-NerdStore exists to address these problems.
+NerdStorage exists to address these problems.
 - It's a simple document database provided by the NR1 interface.
 - It's capable of storing data for an `Entity`, `Account`, or `User`.
 - A single document must be less than 64k
 - The document identifier/name must be less than 128 characters
-Retrieval of documents is available through both `GraphQL` and through the prebuilt components in `nr1` of `UserStorageQuery`, `EntityStorageQuery`, and `AccountStorageQuery`.
+Retrieval of documents is available through both `NerdGraph` and through the prebuilt components in `nr1` of `UserStorageQuery`, `EntityStorageQuery`, and `AccountStorageQuery`.
 - Each of the predefined components has a `query` and `mutate` method that corresponds to expected, standard patterns that the [`Apollo GraphQL`](https://apollographql.com) library uses.
 - `UserStorageQuery` takes a required `collection` prop and an optional `documentId` prop.
 - `AccountStorageQuery` takes required `collection` and `accountId` props and an optional `documentId` prop.
@@ -70,13 +70,13 @@ _Note: The `entityId` are the guids that are returned from components like `Enti
 
 Let's make use of this service to address our "save the state" feature in this Nerdlet. For the purposes of this exercise, we're going to use the `UserStorageQuery` component only. Hopefully, you can extrapolate the uses of the other components.
 
-## Step 2: Save the set of entities for this Nerdlet using `NerdStoreUserCollectionMutation`
+## Step 2: Save the set of entities for this Nerdlet using `NerdStorageUserCollectionMutation`
 
 
 1. Open the file `lab9/nerdlets/my-nerdlet/index.js` and replace the `nr1` import statement with the following:
 
 ```javascript
-import { LineChart, TableChart, Grid, GridItem, Spinner, DisplayText, Button, Icon, NerdStoreUserCollectionQuery, NerdStoreUserCollectionMutation, Toast } from 'nr1';
+import { LineChart, TableChart, Grid, GridItem, Spinner, DisplayText, Button, Icon, NerdStorageUserCollectionQuery, NerdStorageUserCollectionMutation, Toast } from 'nr1';
 ```
 
 2. In `lab9/nerdlets/my-nerdlet/index.js` and look at the `onSearchSelect` method. Beyond saving the `state`, we're going to save this data to `NerdStorage`. Replace `onSearchSelect` with the following:
@@ -85,7 +85,7 @@ import { LineChart, TableChart, Grid, GridItem, Spinner, DisplayText, Button, Ic
     onSearchSelect(entity) {
         const { entities } = this.state;
         entities.push(entity);
-        //after the state is saved (technically asynchronously), we're going to save the list of entities to NerdStore
+        //after the state is saved (technically asynchronously), we're going to save the list of entities to NerdStorage
         this.setState({ entities }, () => {
             const { entity, entities } = this.state;
             UserStorageQuery.mutate({
@@ -111,7 +111,7 @@ import { LineChart, TableChart, Grid, GridItem, Spinner, DisplayText, Button, Ic
 
 ![Business as usual](../screenshots/lab9_screen02.png)
 
-## Step 3: Retrieve the set of entities for this Nerdlet using `NerdStoreUserCollectionQuery`
+## Step 3: Retrieve the set of entities for this Nerdlet using `NerdStorageUserCollectionQuery`
 
 Now, we're going to try to load the saved entity set for this `User` and `Entity` using `UserStorageQuery`.
 
@@ -270,7 +270,7 @@ export default class MyNerdlet extends React.Component {
     onSearchSelect(entity) {
         const { entities } = this.state;
         entities.push(entity);
-        //after the state is saved (technically asynchronously), we're going to save the list of entities to NerdStore
+        //after the state is saved (technically asynchronously), we're going to save the list of entities to NerdStorage
         this.setState({ entities }, () => {
             const { entity, entities } = this.state;
             UserStorageQuery.mutate({
@@ -377,8 +377,8 @@ export default class MyNerdlet extends React.Component {
 
 # Extra Credit
 
-Just like the `NerdStoreUserCollectionMutation.mutate` has an `action` of `NerdStoreUserCollectionMutation.ACTION_TYPE.WRITE_DOCUMENT`, it also has a `NerdStoreUserCollectionMutation.ACTION_TYPE.DELETE_DOCUMENT`. Add a `Button` on the screen that allows the user to delete their configuration.
+Just like the `NerdStorageUserCollectionMutation.mutate` has an `action` of `NerdStorageUserCollectionMutation.ACTION_TYPE.WRITE_DOCUMENT`, it also has a `NerdStorageUserCollectionMutation.ACTION_TYPE.DELETE_DOCUMENT`. Add a `Button` on the screen that allows the user to delete their configuration.
 
 # For Consideration / Discussion
 
-* Given that, behind the scenes, the `NerdStore` uses the New Relic GraphQL API to store and retrieve data, what ways could you make use of this utility in your projects?
+* Given that, behind the scenes, the `NerdStorage` uses the New Relic NerdGraph API to store and retrieve data, what ways could you make use of this utility in your projects?

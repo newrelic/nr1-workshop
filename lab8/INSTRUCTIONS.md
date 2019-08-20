@@ -270,7 +270,7 @@ export default class MyNerdlet extends React.Component {
 
 ## Step 5: Populating the Map with data from a NrqlQuery component
 
-Now, we're going to make use of both the `NrqlQuery` and `CircleMarker` components to populate the `Map` with details. If you're familiar with React and the Apollo GraphQL library, some of this code will look quite familiar, as NR1 leverages Apollo behind the scenes to pull data from New Relic's GraphQL API.
+Now, we're going to make use of both the `NrqlQuery` and `CircleMarker` components to populate the `Map` with details. If you're familiar with React and the Apollo GraphQL library, some of this code will look quite familiar, as NR1 leverages Apollo behind the scenes to pull data from New Relic's NerdGraph API.
 
 1. **Replace** the following code to the `render` method within the **second** `StackItem` within the file `lab8/nerdlets/my-nerdlet/index.js`:
 
@@ -325,7 +325,7 @@ Notice that we're referencing (within the `CircleMarker` component) two methods 
 
     openDetails(pt) {
         navigation.openCard({
-            id: 'lab8.details',
+            id: '09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details',
             urlState: {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
@@ -336,7 +336,7 @@ Notice that we're referencing (within the `CircleMarker` component) two methods 
     }
 ```
 
-_Notice that the `openDetails` method leverages the `navigation` object in NR1 to open a card with a new Nerdlet id'd as `lab8.details`. We'll get to that._
+_Notice that the `openDetails` method leverages the `navigation` object in NR1 to open a card with a new Nerdlet id'd as `09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details`. We'll get to that._
 
 3. Finally, add the following line to the `constructor` method of the Nerdlet:
 
@@ -396,7 +396,7 @@ export default class MyNerdlet extends React.Component {
 
     openDetails(pt) {
         navigation.openCard({
-            id: 'lab8.details',
+            id: '09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details',
             urlState: {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
@@ -651,7 +651,7 @@ export default class MyNerdlet extends React.Component {
 
     openDetails(pt) {
         navigation.openCard({
-            id: 'lab8.details',
+            id: '09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details',
             urlState: {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],

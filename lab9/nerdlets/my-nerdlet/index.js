@@ -73,7 +73,7 @@ export default class MyNerdlet extends React.Component {
     onSearchSelect(entity) {
         const { entities } = this.state;
         entities.push(entity);
-        //after the state is saved (technically asynchronously), we're going to save the list of entities to NerdStore
+        //after the state is saved (technically asynchronously), we're going to save the list of entities to NerdStorage
         this.setState({ entities }, () => {
             const { entity, entities } = this.state;
             UserStorageQuery.mutate({

@@ -51,4 +51,4 @@ npm start
 
 ## Lab Instructions
 
-[Everything you wanted to know about NerdStore _but were afraid to ask_](INSTRUCTIONS.md).
+[Everything you wanted to know about NerdStorage _but were afraid to ask_](INSTRUCTIONS.md).
