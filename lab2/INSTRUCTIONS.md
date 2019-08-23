@@ -5,7 +5,7 @@ The purpose of this lab is explore more of the built-in capabilities of the `pro
 
 After completing this lab you should:
 
-* Have a grasp on the navigation paradigms in New Relic One and how teh NR1 SDK exposes them.
+* Have a grasp on the navigation paradigms in New Relic One and how the NR1 SDK exposes them.
 * Be able to incorporate the `timeRange` fields that are set by the New Relic One time picker into your Nerdlets.
 
 ![Time Picker](../screenshots/lab2_timepicker_example.png)
