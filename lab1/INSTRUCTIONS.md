@@ -346,4 +346,4 @@ Based on what you've executed above, apply that learning in the following:
 
 # For Consideration / Discussion
 
-- _What was the purpose of the `ChartGroup`? What is it doing for us?__
+- _What was the purpose of the `ChartGroup`? What is it doing for us?_
