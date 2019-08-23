@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { EntitySearchQuery, Dialog, Stack, StackItem, TextField, Spinner } from 'nr1';
+import { EntitySearchQuery, Modal, Stack, StackItem, TextField, Spinner } from 'nr1';
 import { alertSeverityToColor, decodeEntityFromEntityId } from './utils';
 
-export default class AddEntityDialog extends Component {
+export default class AddEntityModal extends Component {
   static propTypes = {
     entities: PropTypes.arrayOf(PropTypes.object),
     entityType: PropTypes.shape({
@@ -12,7 +12,7 @@ export default class AddEntityDialog extends Component {
     }),
     onSearchSelect: PropTypes.func,
     onClose: PropTypes.func,
-    openDialog: PropTypes.bool
+    openModal: PropTypes.bool
   };
 
   static defaultProps = {
@@ -24,15 +24,15 @@ export default class AddEntityDialog extends Component {
     this.state = {
       results: null,
       isLoading: false,
-      openDialog: this.props.openDialog
+      openModal: this.props.openModal
     };
     this.onClick = this.onClick.bind(this);
     this.onSearch = this.onSearch.bind(this);
   }
 
   componentWillUpdate(nextProps) {
-    if (this.state.openDialog != nextProps.openDialog) {
-      this.setState({ openDialog: nextProps.openDialog });
+    if (this.state.openModal != nextProps.openModal) {
+      this.setState({ openModal: nextProps.openModal });
     }
   }
 
@@ -79,13 +79,13 @@ export default class AddEntityDialog extends Component {
   }
 
   render() {
-    const { results, isLoading, openDialog } = this.state;
+    const { results, isLoading, openModal } = this.state;
     const { entityType } = this.props;
     const label = entityType.domain == 'BROWSER' ? 'Browser Apps' : 'APM Services';
     console.log(results);
     return (
-      <Dialog hidden={!openDialog} onClose={(...args) => {
-          this.setState({ openDialog: false });
+      <Modal hidden={!openModal} onClose={(...args) => {
+          this.setState({ openModal: false });
           //console.debug(args);
         }}>
         <Stack directionType={Stack.DIRECTION_TYPE.VERTICAL} distributionType="fill">
@@ -98,7 +98,7 @@ export default class AddEntityDialog extends Component {
           </StackItem>
           <StackItem>
             {isLoading ?
-              <Spinner className="centered" /> :
+              <Spinner fillContainer /> :
               <div>
                 {results && <p>{results.length} {results.length == 1 ? 'result' : 'results'}...</p>}
                 <ul className="resultSet">
@@ -112,7 +112,7 @@ export default class AddEntityDialog extends Component {
             }
           </StackItem>
         </Stack>
-      </Dialog>
+      </Modal>
     )
   }
 }

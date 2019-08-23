@@ -4,7 +4,7 @@
     "description": "NR1 UI Package lab8",
     "version": "0.1.0",
     "scripts": {
-        "start": "nr1 package:serve",
+        "start": "nr1 nerdpack:serve",
         "test": "exit 0"
     },
     "nr1": {

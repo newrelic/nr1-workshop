@@ -65,7 +65,7 @@ _Note: Take the time to review each of these files throughout the exercise to en
 
 ## Step 2: Accessing the Nerdlet
 
-1. Open a web browser to `https://one.newrelic.com?use_version=45a97944&packages=local` c
+1. Open a web browser to `https://one.newrelic.com?packages=local` c
 2. Click on the `Entity Explorer`
 3. Click on `Browswer Applications` category in the left-hand navigation
 4. Click on any browser application from the list
@@ -123,7 +123,7 @@ Now, we're ready to create the skeleton of our `render` method.
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
         if (!entity) {
-            return <Spinner className="centered" />
+            return <Spinner fillContainer />
         } else {
             return <Tabs>
                 <TabsItem label={`Page Views`} id={1}>
@@ -234,7 +234,7 @@ export default class MyNerdlet extends React.Component {
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
         if (!entity) {
-            return <Spinner className="centered" />
+            return <Spinner fillContainer />
         } else {
             return <Tabs>
                 <TabsItem label={`Page Views`} id={1}>
@@ -270,7 +270,7 @@ export default class MyNerdlet extends React.Component {
 
 ## Step 5: Populating the Map with data from a NrqlQuery component
 
-Now, we're going to make use of both the `NrqlQuery` and `CircleMarker` components to populate the `Map` with details. If you're familiar with React and the Apollo GraphQL library, some of this code will look quite familiar, as NR1 leverages Apollo behind the scenes to pull data from New Relic's GraphQL API.
+Now, we're going to make use of both the `NrqlQuery` and `CircleMarker` components to populate the `Map` with details. If you're familiar with React and the Apollo GraphQL library, some of this code will look quite familiar, as NR1 leverages Apollo behind the scenes to pull data from New Relic's NerdGraph API.
 
 1. **Replace** the following code to the `render` method within the **second** `StackItem` within the file `lab8/nerdlets/my-nerdlet/index.js`:
 
@@ -282,7 +282,7 @@ Now, we're going to make use of both the `NrqlQuery` and `CircleMarker` componen
             {results => {
                 console.debug(results);
                 if (results.loading) {
-                   return <Spinner className="centered" />
+                   return <Spinner fillContainer />
                 } else {
                     console.debug(results.data.facets);
                     return <Map
@@ -325,7 +325,7 @@ Notice that we're referencing (within the `CircleMarker` component) two methods 
 
     openDetails(pt) {
         navigation.openCard({
-            id: 'lab8.details',
+            id: '09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details',
             urlState: {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
@@ -336,7 +336,7 @@ Notice that we're referencing (within the `CircleMarker` component) two methods 
     }
 ```
 
-_Notice that the `openDetails` method leverages the `navigation` object in NR1 to open a card with a new Nerdlet id'd as `lab8.details`. We'll get to that._
+_Notice that the `openDetails` method leverages the `navigation` object in NR1 to open a card with a new Nerdlet id'd as `09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details`. We'll get to that._
 
 3. Finally, add the following line to the `constructor` method of the Nerdlet:
 
@@ -396,7 +396,7 @@ export default class MyNerdlet extends React.Component {
 
     openDetails(pt) {
         navigation.openCard({
-            id: 'lab8.details',
+            id: '09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details',
             urlState: {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
@@ -428,7 +428,7 @@ export default class MyNerdlet extends React.Component {
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
         if (!entity) {
-            return <Spinner className="centered" />
+            return <Spinner fillContainer />
         } else {
             return <Tabs>
                 <TabsItem label={`Page Views`} id={1}>
@@ -448,7 +448,7 @@ export default class MyNerdlet extends React.Component {
                                 {results => {
                                     console.debug(results);
                                     if (results.loading) {
-                                       return <Spinner className="centered" />
+                                       return <Spinner fillContainer />
                                     } else {
                                         console.debug(results.data.facets);
                                         return <Map
@@ -651,7 +651,7 @@ export default class MyNerdlet extends React.Component {
 
     openDetails(pt) {
         navigation.openCard({
-            id: 'lab8.details',
+            id: '09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details',
             urlState: {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
@@ -668,10 +668,10 @@ export default class MyNerdlet extends React.Component {
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
         if (!entity) {
-            return <Spinner className="centered" />
+            return <Spinner fillContainer />
         } else {
             return <Tabs>
-                <TabsItem label={`Page Views`} id={1}>
+                <TabsItem label={`Page Views`} itemKey={1}>
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
@@ -688,7 +688,7 @@ export default class MyNerdlet extends React.Component {
                                 {results => {
                                     console.debug(results);
                                     if (results.loading) {
-                                       return <Spinner className="centered" />
+                                       return <Spinner fillContainer />
                                     } else {
                                         console.debug(results.data.facets);
                                         return <Map
@@ -719,7 +719,7 @@ export default class MyNerdlet extends React.Component {
                         </StackItem>
                     </Stack>
                 </TabsItem>
-                <TabsItem label={`JavaScript Errors`} id={2}>
+                <TabsItem label={`JavaScript Errors`} itemKey={2}>
                     <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                 </TabsItem>
             </Tabs>;

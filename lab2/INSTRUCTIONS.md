@@ -5,7 +5,7 @@ The purpose of this lab is explore more of the built-in capabilities of the `pro
 
 After completing this lab you should:
 
-* Have a grasp on the navigation paradigms in New Relic One and how teh NR1 SDK exposes them.
+* Have a grasp on the navigation paradigms in New Relic One and how the NR1 SDK exposes them.
 * Be able to incorporate the `timeRange` fields that are set by the New Relic One time picker into your Nerdlets.
 
 ![Time Picker](../screenshots/lab2_timepicker_example.png)
@@ -22,13 +22,13 @@ cd lab2
 npm install
 ```
 
-## Step 1: Verifying our Nerdlet and reviewing the Nerdlet API docs
+## Step 1: Verifying our Nerdlet and reviewing the [Nerdlet API docs](http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html)
 
 ![Nerdlet 2 Launcher](../screenshots/lab2_screen00.png)
 
 1. If you'd like, open the `lab2/nerdlets/my-nerdlet/index.js` and change the value in the constructor of `this.accountId` to an account you want to review.
 
-_Note: we're going to cover how to not hardcode the accountIds for NRQL queries later._
+_Note: we're going to cover how to **not** hardcode the accountIds for NRQL queries later._
 
 2. Open a browser and check out the `Lab 2 Nerdlet` by going to the homepage and clicking on `Lab 2 Launcher`. Click around and verify that it's working. You should see something like this:
 ![Lab2 Nerdlet Open for Business](../screenshots/lab2_screen01.png)
@@ -40,7 +40,7 @@ _Note: we're going to cover how to not hardcode the accountIds for NRQL queries 
 
 ## Step 2: Implementing the time picker
 
-1. Go back to the [Nerdlet interface](https://one.newrelic.com/launcher/lab2.my-launcher?packages=local&use_version=45a97944), and change the value of the Time Window in the top right corner of the UI. <img src="../screenshots/lab2_screen03.png" width="200" align="right" style="margin:10px" />
+1. Go back to the [Nerdlet interface](https://one.newrelic.com/launcher/lab2.my-launcher?packages=local), and change the value of the Time Window in the top right corner of the UI. <img src="../screenshots/lab2_screen03.png" width="200" align="right" style="margin:10px" />
 
 Notice that the time windows and charts in the Nerdlet do not refresh and do not respond to changes in the time window. (_Hint: That's because we haven't told them to use the selected time range yet!_) Let's do something about that.
 
@@ -90,7 +90,6 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
             type: 'APPLICATION',
             domain: 'APM'
         });
-        nerdlet.setUrlState({ entityGuid, appName });
     }
 ```
 
@@ -110,14 +109,13 @@ _Note: Alternatively, you can call the `navigation.openCard` **thusly**, which w
 
 ```javascript
     openEntity() {
-        const { entityGuid } = this.state;
+        const { entityGuid, appName } = this.state;
         navigation.openCard({
             id: 'slicer-dicer.apm-overview',
             urlState: {
                 entityId: entityGuid
             }
         });
-        nerdlet.setUrlState({ entityGuid, appName });
     }
 ```
 
@@ -129,13 +127,13 @@ We have one remaining issue with the navigation flow of this example. After you 
 
 ```javascript
     openEntity() {
-        const { entityGuid } = this.state;
+        const { entityGuid, appName } = this.state;
+        nerdlet.setUrlState({ entityGuid, appName });
         navigation.openEntity({
             id: entityGuid,
             type: 'APPLICATION',
             domain: 'APM'
         });
-        nerdlet.setUrlState(this.state);
     }
 ```
 
@@ -184,24 +182,18 @@ export default class MyNerdlet extends React.Component {
         this.openEntity = this.openEntity.bind(this);
     }
 
-    componentWillUpdate(props) {
-        if (this.props) {
-            console.debug("New props", props); //eslint-disable-line
-        }
-    }
-
     setApplication(entityGuid, appName) {
         this.setState({ entityGuid, appName })
     }
 
     openEntity() {
-        const { entityGuid } = this.state;
+        const { entityGuid, appName } = this.state;
+        nerdlet.setUrlState({ appName, entityGuid }, { replaceHistory: true });
         navigation.openEntity({
             id: entityGuid,
             type: 'APPLICATION',
             domain: 'APM'
         });
-        nerdlet.setUrlState(this.state);
     }
 
     render(){
@@ -230,28 +222,24 @@ export default class MyNerdlet extends React.Component {
                             distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.TIGHT}>
                             <StackItem>
-                                <div className="chart">
-                                    <TableChart query={nrql+since} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
-                                        //for learning purposes, we'll write to the console.
-                                        console.debug([dataEl, row, chart]) //eslint-disable-line
-                                        this.setApplication(row.entityGuid, row.appName)
-                                    }}/>
-                                </div>
+                                <TableChart query={nrql+since} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+                                    //for learning purposes, we'll write to the console.
+                                    console.debug([dataEl, row, chart]) //eslint-disable-line
+                                    this.setApplication(row.entityGuid, row.appName)
+                                }}/>
                             </StackItem>
                             <StackItem>
-                                <div className="chart">
-                                    <LineChart
-                                        query={trxOverTime+since}
-                                        className="chart"
-                                        accountId={this.accountId}
-                                        onClickLine={(line) => {
-                                            //more console logging for learning purposes
-                                            console.debug(line); //eslint-disable=line
-                                            const params = line.metadata.label.split(",");
-                                            this.setApplication(params[1], params[0]);
-                                        }}
-                                    />
-                                </div>
+                                <LineChart
+                                    query={trxOverTime+since}
+                                    className="chart"
+                                    accountId={this.accountId}
+                                    onClickLine={(line) => {
+                                        //more console logging for learning purposes
+                                        console.debug(line); //eslint-disable=line
+                                        const params = line.metadata.label.split(",");
+                                        this.setApplication(params[1], params[0]);
+                                    }}
+                                />
                             </StackItem>
                         </Stack>
                     </StackItem>
@@ -266,15 +254,11 @@ export default class MyNerdlet extends React.Component {
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
                                 <h2>Transaction counts for {appName}</h2>
-                                <div className="chart">
-                                    <LineChart accountId={this.accountId} query={tCountNrql+since} className="chart"/>
-                                </div>
+                                <LineChart accountId={this.accountId} query={tCountNrql+since} className="chart"/>
                             </StackItem>
                             <StackItem>
                                 <h2>Apdex for {appName}</h2>
-                                <div className="chart">
-                                    <ScatterChart accountId={this.accountId} query={apdexNrql+since} className="chart"/>
-                                </div>
+                                <ScatterChart accountId={this.accountId} query={apdexNrql+since} className="chart"/>
                             </StackItem>
                         </Stack>
                     </StackItem>}

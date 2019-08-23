@@ -40,14 +40,14 @@ sudo ./nr1/bin/nr1 certs:generate
 # if you haven't cloned the workshop repo already
 git clone git@github.com:newrelic/nr1-eap-workshop.git
 
-# then change directory into lab2
+# then change directory into lab3
 cd workshop/lab3
 
 npm install
 npm start
 ```
 
-7. In Google Chrome, navigate to the following URL `https://one.newrelic.com?use_version=45a97944&packages=local`
+7. In Google Chrome, navigate to the following URL `https://one.newrelic.com?packages=local`
 
 ## Lab Instructions
 

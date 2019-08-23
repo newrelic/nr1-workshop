@@ -1,5 +1,5 @@
 # Prerequisite - Understanding GraphQL
-The purpose of this section is to orient you to GraphQL, a "query language" for New Relic's API. Naturally, this secction is very "New Relic focused." There are links provided at that bottom of this page for more general GraphQL information. 
+The purpose of this section is to orient you to GraphQL, a "query language" for New Relic's API. Naturally, this secction is very "New Relic focused." There are links provided at that bottom of this page for more general GraphQL information.
 
 GraphQL has some key differences when compared to REST. For example, it's the client, not the server, that determines what data will be returned. Also, it becomes easy to collect data from multiple sources. In the case of New Relic, we'll see you can get account information, data about infrastructure, and issue a NRQL request, **all in one GraphQL query**.
 
@@ -12,8 +12,8 @@ The exercises in this section that will give you some hands on experience using 
 
 ## Getting an API Key
 To use the [GraphiQL](https://api.newrelic.com/graphiql) in the following exercises, you will need to have the proper API key. You will need Admin permissions to issue this key.
-* From the Account Settings Menu, select Users & Roles. 
-* Click on the specific user to see their detail information. 
+* From the Account Settings Menu, select Users & Roles.
+* Click on the specific user to see their detail information.
 * Click on the `API Keys` link.
 * On the right hand side, click the `New API key` link.
 

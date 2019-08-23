@@ -1,0 +1,17 @@
+.header {
+    text-align: center;
+    margin: 5px 0;
+}
+.container {
+    max-height: 200px;
+    width: 100%;
+    overflow: scroll;
+}
+.table {
+    border: 1px solid #dedede;
+    margin-bottom: 10px;
+    .table-data {
+        border: 1px solid #dedede;
+        padding: 5px 10px;
+    }
+}

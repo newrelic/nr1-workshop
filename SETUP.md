@@ -2,61 +2,48 @@
 
 Getting ready to build on the New Relic One platform is quick and easy. Essentially, what you will be doing in these setup instructions is readying your system to run a local server that seamlessly and securely connects into the New Relic One platform. This connection will makes building visual extension a breeze because you can see your changes in real time. Enjoy!
 
-
 # Setup Instructions
 
+In Google Chrome, navigate to the [New Relic One Developer Center](https://one.newrelic.com/launcher/developer-center.launcher#pane=eyJuZXJkbGV0SWQiOiJkZXZlbG9wZXItY2VudGVyLmRldmVsb3Blci1jZW50ZXIifQ==), and follow the instructions.
 
-1. In Google Chrome, navigate to `https://github.com/newrelic/eap-cli/tree/master/dist`, and click on the latest release of the NR1 CLI. (ex. `nr1-v0.3.0-alpha.11`)
-2. Download the appropriate zipped bundle of the NR1 CLI and **unzip it to your home folder** (ex. for Mac it would be `nr1-v0.3.0-alpha.11-darwin-x64.tar.gz`).
-3. Open a Terminal window. From the command line you should the following:
+![New Relic ONE Developer Center](screenshots/setup_screen00.png)
 
-```bash
-# To verify that you've unzipped the NR1 CLI, run this command and see similar output
-ls ~/nr1
-README.md node_modules package-lock.json bin oclif.manifest.json package.json
-```
+1. Choose an account from the dropdown on the left, click `Start Building`, and accept the developer terms of use.
 
-4. From the command line, run the following:
+![Terms of Use](screenshots/setup_screen01.png)
 
-```bash
-#Create an alias to the cli
-ln -s ~/nr1/bin/nr1 /usr/local/bin/nr1
+2. Download the appropriate CLI.
 
-#Verify that you can execute nr1
-nr1 --version
+![CLI link](screenshots/setup_screen03.png)
 
-#You should see output to the terminal window
-```
+3. Follow the instructions on the screen.
 
-5. If you haven't done so yet, generate your personal SSL cert for your development environment.
+![Step by step instructions](screenshots/setup_screen02.png)
 
-```bash
-cd ~
-sudo ./nr1/bin/nr1 certs:generate
-#The cert will be saved to a hidden folder
-```
 
-6. And if you haven't already cloned the workshop repo, do that now.
+4. And if you haven't already cloned the workshop repo, do that now.
 
 ```bash
 # if you haven't cloned the workshop repo already
 git clone git@github.com:newrelic/nr1-eap-workshop.git
 ```
 
-_Note: Each exercise exists as a folder in this repository. Following the material will involve going into that directory, running `npm install`, standing up the local development server by running `npm start`, and following the INSTRUCTIONS.md in the given folder._
+_Note: Each exercise exists as a folder in this repository. Following the material will involve going into that directory, running `npm install`, standing up the local development server by running `nr1 nerdpack:serve`, and following the INSTRUCTIONS.md in the given folder._
 
-7. Now start the `setup` NR1 package.
+5. Now start the `setup` NR1 package.
 
 ```bash
-# ex. change directory into lab2
+# ex. change directory into setup
 cd workshop/setup
 
 npm install
-nr1 package:serve
+nr1 nerdpack:serve
 ```
 
 Your terminal output should look like the following:
-![terminal](screenshots/setup_screen01.png)
+![terminal](screenshots/setup_screen04.png)
 
-8. Open Google Chrome and navigate to the following URL `https://one.newrelic.com?&packages=local`, and click on the New Relic One Launcher named `Setup Exercise`. You should see the following.
-![Congratulations](screenshots/setup_screen02.png)
+6. Open Google Chrome and navigate to  https://one.newrelic.com?&packages=local, and click on the New Relic One Launcher named `Setup Exercise`. You should see the following.
+![Congratulations](screenshots/setup_screen05.png)
+
+Great. Now let's get going.

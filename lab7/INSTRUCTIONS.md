@@ -36,7 +36,7 @@ You'll notice that this `Nerdlet` doesn't have a corresponding `Launcher`, so we
 }
 ```
 
-2. Open a web browser to `https://one.newrelic.com?use_version=45a97944&packages=local` c
+2. Open a web browser to `https://one.newrelic.com?packages=local` c
 3. Click on the `Entity Explorer`
 4. Click on `Browswer Applications` category in the left-hand navigation
 5. Click on any browser application from the list
@@ -82,7 +82,7 @@ _If you're thinking, "based on what I've already learned, a `LineChart` doesn't 
                 {({ loading, data, error })  => {
                     console.debug([loading, data, error]); //eslint-disable-line
                     if (loading) {
-                        return <Spinner className="centered" />;
+                        return <Spinner fillContainer />;
                     }
                     if (error) {
                         return <DisplayText>{error}</DisplayText>;
@@ -91,7 +91,7 @@ _If you're thinking, "based on what I've already learned, a `LineChart` doesn't 
                 }}
             </NrqlQuery>
         } else {
-            return <Spinner className="centered" />
+            return <Spinner fillContainer />
         }
     }
 ```
@@ -217,7 +217,7 @@ export default class MyNerdlet extends React.Component {
                 {({ loading, data, error })  => {
                     console.debug([loading, data, error]); //eslint-disable-line
                     if (loading) {
-                        return <Spinner className="centered" />;
+                        return <Spinner fillContainer />;
                     }
                     if (error) {
                         return <DisplayText>{error}</DisplayText>;
@@ -228,7 +228,7 @@ export default class MyNerdlet extends React.Component {
             </NrqlQuery>
 
         } else {
-            return <Spinner className="centered" />
+            return <Spinner fillContainer />
         }
     }
 }

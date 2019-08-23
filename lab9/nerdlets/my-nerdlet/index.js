@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LineChart, TableChart, Grid, GridItem, Spinner, DisplayText, Button, Icon, NerdStoreUserCollectionQuery, NerdStoreUserCollectionMutation, Toast } from 'nr1';
+import { LineChart, TableChart, Grid, GridItem, Spinner, HeadingText, Button, Icon, UserStorageQuery, Toast } from 'nr1';
 import { loadEntity, decodeEntityFromEntityId, distanceOfTimeInWords } from './utils';
-import AddEntityDialog from './add-entity-dialog';
+import AddEntityModal from './add-entity-modal';
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
@@ -21,7 +21,7 @@ export default class MyNerdlet extends React.Component {
             entity: null,
             entities: [],
             entityType: { domain: 'APM', type: 'APPLICATION'},
-            openDialog: false,
+            openModal: false,
             addToast: false,
             errorToast: false
         }
@@ -49,12 +49,12 @@ export default class MyNerdlet extends React.Component {
      */
     _loadState(entityId) {
         loadEntity(entityId).then(entity => {
-            NerdStoreUserCollectionQuery.query({
+            UserStorageQuery.query({
                 collection: 'entityList-v0',
                 documentId: entity.id
             }).then(({data}) => {
-                if (data.currentUser.nerdStoreDocument) {
-                    const entities = JSON.parse(data.currentUser.nerdStoreDocument);
+                if (data.actor.nerdStorageDocument) {
+                    const entities = JSON.parse(data.actor.nerdStorageDocument);
                     this.setState({ entityType: {domain: entity.domain, type: entity.type}, entity, entities });
                 } else {
                     this.setState({ entityType: {domain: entity.domain, type: entity.type}, entity, entities: [ entity ] });
@@ -73,11 +73,11 @@ export default class MyNerdlet extends React.Component {
     onSearchSelect(entity) {
         const { entities } = this.state;
         entities.push(entity);
-        //after the state is saved (technically asynchronously), we're going to save the list of entities to NerdStore
+        //after the state is saved (technically asynchronously), we're going to save the list of entities to NerdStorage
         this.setState({ entities }, () => {
             const { entity, entities } = this.state;
-            NerdStoreUserCollectionMutation.mutate({
-                action: NerdStoreUserCollectionMutation.ACTION_TYPE.WRITE_DOCUMENT,
+            UserStorageQuery.mutate({
+                action: UserStorageQuery.ACTION_TYPE.WRITE_DOCUMENT,
                 collection: 'entityList-v0',
                 documentId: entity.id,
                 document: entities.map(entity => {
@@ -106,12 +106,12 @@ export default class MyNerdlet extends React.Component {
     render() {
         const { height, launcherUrlState, nerdletUrlState } = this.props;
         if (!nerdletUrlState || !nerdletUrlState.entityId) {
-            return <AddEntityDialog
+            return <AddEntityModal
                      onSearchSelect={this.onSearchSelect}
                    />;
         } else {
             //entityId is four-item array of accountId|domain|type|id
-            const { entities, openDialog } = this.state;
+            const { entities, openModal } = this.state;
             const entity = decodeEntityFromEntityId(nerdletUrlState.entityId);
             const { accountId } = entity;
             const eventType = entity ? entity.domain == 'BROWSER' ? 'PageView' : 'Transaction' : null;
@@ -134,7 +134,7 @@ export default class MyNerdlet extends React.Component {
             }
             return (<React.Fragment><Grid>
                     {entities && entities.length > 0 ? <React.Fragment><GridItem columnStart={1} columnEnd={12} style={{padding: '10px'}}>
-                        <DisplayText>Performance over Time<Button sizeType={Button.SIZE_TYPE.SLIM} style={{marginLeft: '25px'}} onClick={() => { this.setState({ openDialog: true }) }}><Icon name="interface_sign_plus" /> {label}</Button></DisplayText>
+                        <HeadingText>Performance over Time<Button sizeType={Button.SIZE_TYPE.SLIM} style={{marginLeft: '25px'}} onClick={() => { this.setState({ openModal: true }) }}><Icon name="interface_sign_plus" /> {label}</Button></HeadingText>
                         <p style={{marginBottom: '10px'}}>{distanceOfTimeInWords(duration)}</p>
                         {this.state.addToast && <Toast
                             type={'normal'}
@@ -161,12 +161,12 @@ export default class MyNerdlet extends React.Component {
                             style={{height: `${height*.5}px`}}
                         />
                     </GridItem>
-                    </React.Fragment> : <Spinner className="centered" />}
-                    {openDialog && <AddEntityDialog
-                        openDialog={openDialog}
+                    </React.Fragment> : <Spinner fillContainer />}
+                    {openModal && <AddEntityModal
+                        openModal={openModal}
                         entities={entities}
                         onClose={() => {
-                            this.setState({ openDialog: false });
+                            this.setState({ openModal: false });
                         }}
                         onSearchSelect={this.onSearchSelect}
                     />}

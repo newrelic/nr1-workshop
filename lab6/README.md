@@ -47,8 +47,8 @@ npm install
 npm start
 ```
 
-7. In Google Chrome, navigate to the following URL `https://one.newrelic.com?use_version=45a97944&packages=local`
+7. In Google Chrome, navigate to the following URL `https://one.newrelic.com?packages=local`
 
 ## Lab Instructions
 
-[Who wants to execute some GraphQL in a Nerdlet](INSTRUCTIONS.md)?
+[Who wants to execute some NerdGraph in a Nerdlet](INSTRUCTIONS.md)?
