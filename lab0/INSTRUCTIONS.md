@@ -138,6 +138,8 @@ You'll notice that the CLI creates a `/lab0-package` directory: including `launc
 
 ![lab0-package](../screenshots/lab0_screen06.png)
 
+If you go into the `lab0-package` directory and run `npm install && npm start` you will be able to run your package!
+
 # For Consideration / Discussion
 
 - _How do you use a Nerdlet to build custom visualizations?_
