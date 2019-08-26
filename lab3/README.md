@@ -40,7 +40,7 @@ sudo ./nr1/bin/nr1 certs:generate
 # if you haven't cloned the workshop repo already
 git clone git@github.com:newrelic/nr1-eap-workshop.git
 
-# then change directory into lab2
+# then change directory into lab3
 cd workshop/lab3
 
 npm install

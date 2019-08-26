@@ -3,7 +3,7 @@ Lab 0: Building your first Nerdpack
 
 The purpose of this lab is to provide hands on experience building on top of the New Relic One platform. Following the instructions in this lab, you will be up and running quickly. First, let's make sure you understand a few key concepts that you'll be working with.
 * **Launcher**: An entry point into the New Relic One platform that is loaded on the "Home" page.
-* **Nerdlet**: A visual component that renders inside the New Relic One platform at a well defined exetension point. For example, a Launcher can invoke a Nerdlet (as you will see shortly). At their core, Nerdlets are React.js components.
+* **Nerdlet**: A visual component that renders inside the New Relic One platform at a well defined extension point. For example, a Launcher can invoke a Nerdlet (as you will see shortly). At their core, Nerdlets are React.js components.
 * **Nerdpack** (aka Package): A collection of artifacts, e.g. Nerdlets, that are "packaged" up and published into the New Relic One platform.
 
 In Lab0, you will create a Launcher and then add a Nerdlet to it that will be invoked when the user clicks on the Launcher. After this lab you should understand:
@@ -25,7 +25,7 @@ npm install
 ```
 
 # Step 1: Create a Launcher
-Launchers are a type of artifact within a Nerdpack that is selectable form the New Relic One homepage, and serves as an entry to a Nerdlet.
+Launchers are a type of artifact within a Nerdpack that is selectable from the New Relic One homepage, and serves as an entry to a Nerdlet.
 
 1. Use the NR1 CLI to create a Launcher
 
@@ -118,7 +118,7 @@ _Note: if not, restart your local developer server by typing `Ctrl`+`c` in the T
 # Step 4: Creating a Nerdpack
 
 ## What is a Nerdpack?
-A Nerdpack is a deployable unit that contains one or more artifacts. A Nerdlet is the main artifact in a Nerdpack, but Nerdpacks can also include Launchers, overlays, hooks, and entites.
+A Nerdpack is a deployable unit that contains one or more artifacts. A Nerdlet is the main artifact in a Nerdpack, but Nerdpacks can also include Launchers, overlays, hooks, and entities.
 
 In steps 1-3 we were creating a `lab0` Nerdpack. Yet, there is a quicker way to create a Nerdpack with a Launcher and Nerdlet already connected.
 
@@ -137,6 +137,8 @@ Component created successfully!
 You'll notice that the CLI creates a `/lab0-package` directory: including `launchers` and `nerdlets` folders, and all of the needed internal files.
 
 ![lab0-package](../screenshots/lab0_screen06.png)
+
+If you go into the `lab0-package` directory and run `npm install && npm start` you will be able to run your package!
 
 # For Consideration / Discussion
 
