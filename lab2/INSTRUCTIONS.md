@@ -105,12 +105,12 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
 6. Click on the button titled `Open <<App Name>>`. You should see a card open containing the APM Overview screen.
 ![APM Overview](../screenshots/lab2_screen05.png)
 
-_Note: Alternatively, you can call the `navigation.openCard` **thusly**, which will open a card UI vs. replace the entire Nerdlet context:_
+_Note: Alternatively, you can call the `navigation.openStackedNerdlet` **thusly**, which will open a card UI vs. replace the entire Nerdlet context:_
 
 ```javascript
     openEntity() {
         const { entityGuid, appName } = this.state;
-        navigation.openCard({
+        navigation.openStackedNerdlet({
             id: 'slicer-dicer.apm-overview',
             urlState: {
                 entityId: entityGuid

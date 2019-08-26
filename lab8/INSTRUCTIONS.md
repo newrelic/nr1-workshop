@@ -324,7 +324,7 @@ Notice that we're referencing (within the `CircleMarker` component) two methods 
     }
 
     openDetails(pt) {
-        navigation.openCard({
+        navigation.openStackedNerdlet({
             id: '09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details',
             urlState: {
                 regionCode: pt.name[0],
@@ -395,7 +395,7 @@ export default class MyNerdlet extends React.Component {
     }
 
     openDetails(pt) {
-        navigation.openCard({
+        navigation.openStackedNerdlet({
             id: '09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details',
             urlState: {
                 regionCode: pt.name[0],
@@ -650,7 +650,7 @@ export default class MyNerdlet extends React.Component {
     }
 
     openDetails(pt) {
-        navigation.openCard({
+        navigation.op({
             id: '09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details',
             urlState: {
                 regionCode: pt.name[0],
