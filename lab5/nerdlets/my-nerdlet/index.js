@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
+        nerdletUrlState: PropTypes.object.isRequired
     };
 
     constructor(props){

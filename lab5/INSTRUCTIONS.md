@@ -64,10 +64,10 @@ In your console, you should see an output matched the basic query you made using
 
 The `NerdGraphQuery` component returns set of data when making a query. The `loading`, `error`, and `data` objects that are all accessible from a child function within the `NerdGraphQuery`. Next we'll make some updated to our `index.js` file to output our account list on the screen
 
-1. Update your import statement in the `index.js` files with the code below to add the `Spinner` and `DisplayText` from the `nr1` library:
+1. Update your import statement in the `index.js` files with the code below to add the `Spinner` and `BlockText` from the `nr1` library:
 
 ```javascript
-import { NerdGraphQuery, Spinner, HeadingText, Grid, GridItem } from 'nr1';
+import { NerdGraphQuery, Spinner, HeadingText, BlockText, Grid, GridItem } from 'nr1';
 ```
 
 2. Above your render method, add the render helper fuctions from the code below:
@@ -108,7 +108,7 @@ import { NerdGraphQuery, Spinner, HeadingText, Grid, GridItem } from 'nr1';
                                 return <Spinner fillContainer />;
                             }
                             if (error) {
-                                return <HeadingText>{error}</HeadingText>;
+                                return <BlockText>{error}</BlockText>;
                             }
 
                             return <Fragment>
@@ -134,14 +134,14 @@ Using the `NerdGraphQuery` allows you to access data from using any type of quer
 1. We need to import the pre-defined entity queries from the nr1 library. Update the import statement in your `index.js` file with the code below:
 
 ```javascript
-import { NerdGraphQuery, EntityByIdQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText } from 'nr1';
+import { NerdGraphQuery, EntitiesByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText } from 'nr1';
 ```
 
-2. To query data about the `entity` that we have currently selected we will use the `EntityByIdQuery`. Add a seconf `StackItem` just below the first in the `render` method:
+2. To query data about the `entity` that we have currently selected we will use the `EntityByGuidQuery`. Add a seconf `StackItem` just below the first in the `render` method:
 
 ```javascript
     <StackItem className="container">
-        <EntityByIdQuery entityId={this.props.nerdletUrlState.entityId}>
+        <EntityByGuidQuery entityGuid={this.props.nerdletUrlState.entityGuid}>
             {({loading, error, data}) => {
                 console.debug([loading, data, error]); //eslint-disable-line
                 if (loading) {
@@ -155,7 +155,7 @@ import { NerdGraphQuery, EntityByIdQuery, EntitiesByNameQuery, EntitiesByDomainT
                         {this._renderTable(data.actor.entities)}
                 </Fragment>
             }}
-        </EntityByIdQuery>
+        </EntityByGuidQuery>
     </StackItem>
 ```
 
@@ -163,7 +163,7 @@ import { NerdGraphQuery, EntityByIdQuery, EntitiesByNameQuery, EntitiesByDomainT
 
 ![Entity By Id Query](../screenshots/lab5_screen03.png)
 
-Your browser should show a small table that displays the name and domain of your current `entity` as a part of the data object that is returned from the `EntityByIdQuery`.
+Your browser should show a small table that displays the name and domain of your current `entity` as a part of the data object that is returned from the `EntityByGuidQuery`.
 
 4. A quick way to search for `entities` by name we will use the `EntitiesByNameQuery` and pass the `name` prop equal to "portal'. Add the code below to your `index.js` file in the `render` method under the last `StackItem` component.
 
@@ -176,7 +176,7 @@ Your browser should show a small table that displays the name and domain of your
                 return <Spinner fillContainer />;
             }
             if (error) {
-                return <DisplayText>{error}</DisplayText>;
+                return <BlockText>{JSON.stringify(error)}</BlockText>;
             }
             return <Fragment>
                 <HeadingText>Entity by Domain Type</HeadingText>
@@ -204,7 +204,7 @@ Your browser should show a small table that displays the name and domain of your
                     return <Spinner fillContainer />;
                 }
                 if (error) {
-                    return <HeadingText>{error}</HeadingText>;
+                    return <BlockText>{JSON.stringify(error)}</BlockText>;
                 }
                 return <Fragment>
                     <HeadingText>Entity by Name</HeadingText>
@@ -231,7 +231,7 @@ Your browser should show a small table that displays the name and domain of your
                     return <Spinner fillContainer />;
                 }
                 if (error) {
-                    return <DisplayText>{error}</DisplayText>;
+                    return <BlockText>{JSON.stringify(error)}</BlockText>;
                 }
                 return <Fragment>
                     <HeadingText>Entity Count</HeadingText>
@@ -256,13 +256,12 @@ In the end, your `index.js` should look like this.
 ```javascript
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
-import { NerdGraphQuery, EntityByIdQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText } from 'nr1';
+import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText, BlockText } from 'nr1';
 import gql from 'graphql-tag';
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
+        nerdletUrlState: PropTypes.object.isRequired
     };
 
     constructor(props){
@@ -303,7 +302,7 @@ export default class MyNerdlet extends React.Component {
                             return <Spinner fillContainer />;
                         }
                         if (error) {
-                            return <HeadingText>{error}</HeadingText>;
+                            return <BlockText>{JSON.stringify(error)}</BlockText>;
                         }
 
                         return <Fragment>
@@ -314,21 +313,21 @@ export default class MyNerdlet extends React.Component {
                 </NerdGraphQuery>
             </StackItem>
             <StackItem className="container">
-                <EntityByIdQuery entityId={this.props.nerdletUrlState.entityId}>
+                <EntityByGuidQuery entityGuid={this.props.nerdletUrlState.entityGuid}>
                     {({loading, error, data}) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
                             return <Spinner fillContainer />;
                         }
                         if (error) {
-                            return <HeadingText>{error}</HeadingText>;
+                            return <BlockText>{JSON.stringify(error)}</BlockText>;
                         }
-                        return <Fragment className="fragment">
+                        return <Fragment>
                                 <HeadingText>Entity by ID</HeadingText>
                                 {this._renderTable(data.actor.entities)}
                         </Fragment>
                     }}
-                </EntityByIdQuery>
+                </EntityByGuidQuery>
             </StackItem>
             <StackItem className="container">
                 <EntitiesByDomainTypeQuery entityDomain="BROWSER" entityType="APPLICATION">
@@ -338,7 +337,7 @@ export default class MyNerdlet extends React.Component {
                         return <Spinner fillContainer />;
                     }
                     if (error) {
-                        return <DisplayText>{error}</DisplayText>;
+                        return <BlockText>{JSON.stringify(error)}</BlockText>;
                     }
                     return <Fragment>
                         <HeadingText>Entity by Domain Type</HeadingText>
@@ -355,7 +354,7 @@ export default class MyNerdlet extends React.Component {
                             return <Spinner fillContainer />;
                         }
                         if (error) {
-                            return <HeadingText>{error}</HeadingText>;
+                            return <BlockText>{JSON.stringify(error)}</BlockText>;
                         }
                         return <Fragment>
                             <HeadingText>Entity by Name</HeadingText>
@@ -372,7 +371,7 @@ export default class MyNerdlet extends React.Component {
                             return <Spinner fillContainer />;
                         }
                         if (error) {
-                            return <DisplayText>{error}</DisplayText>;
+                            return <BlockText>{JSON.stringify(error)}</BlockText>;
                         }
                         return <Fragment>
                             <HeadingText>Entity Count</HeadingText>
