@@ -43,7 +43,7 @@ nr1 nerdpack:serve
 Your terminal output should look like the following:
 ![terminal](screenshots/setup_screen04.png)
 
-6. Open Google Chrome and navigate to  https://one.newrelic.com?&packages=local, and click on the New Relic One Launcher named `Setup Exercise`. You should see the following.
+6. Open Google Chrome and navigate to  https://one.newrelic.com?nerdpacks=local, and click on the New Relic One Launcher named `Setup Exercise`. You should see the following.
 ![Congratulations](screenshots/setup_screen05.png)
 
 Great. Now let's get going.

@@ -24,7 +24,7 @@ cd lab6
 npm install
 ```
 
-Open a web browser to `https://one.newrelic.com?packages=local`, and click on the Launcher titled `Lab 6: GraphQL and Nerdlets`. You should come to screen that looks like the following.
+Open a web browser to `https://one.newrelic.com?nerdpacks=local`, and click on the Launcher titled `Lab 6: GraphQL and Nerdlets`. You should come to screen that looks like the following.
 
 ![Spinning wheel of death](../screenshots/lab6_screen00.png)
 

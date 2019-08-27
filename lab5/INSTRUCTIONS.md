@@ -22,7 +22,7 @@ npm install
 npm start
 ```
 
-Open the [Traffic Explorer Nerdlet here.](https://one.newrelic.com/launcher/lab5.my-launcher?packages=local#launcher=eyJ0aW1lUmFuZ2UiOnsiYmVnaW5fdGltZSI6bnVsbCwiZW5kX3RpbWUiOm51bGwsImR1cmF0aW9uIjoxODAwMDAwfX0=&pane=eyJuZXJkbGV0SWQiOiJsYWI1Lm15LW5lcmRsZXQifQ==)
+Open the [Traffic Explorer Nerdlet here.](https://one.newrelic.com/launcher/lab5.my-launcher?nerdpacks=local#launcher=eyJ0aW1lUmFuZ2UiOnsiYmVnaW5fdGltZSI6bnVsbCwiZW5kX3RpbWUiOm51bGwsImR1cmF0aW9uIjoxODAwMDAwfX0=&pane=eyJuZXJkbGV0SWQiOiJsYWI1Lm15LW5lcmRsZXQifQ==)
 
 ## Step 1: Using the NerdGraph API within your Nerdlet
 

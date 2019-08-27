@@ -9,7 +9,7 @@ npm install
 npm start
 ```
 
-Visit https://one.newrelic.com/?packages=local and :sparkles:
+Visit https://one.newrelic.com/?nerdpacks=local and :sparkles:
 
 ## Creating new artifacts
 

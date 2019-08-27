@@ -24,7 +24,7 @@ cd lab9
 npm install
 ```
 
-Navigate to in your browser to `https://one.newrelic.com?packages=local`, choose `Entity Explorer` > `Browser applications` > choose an app > click on `Lab 9: Perf. Compare` > Click on the button `+ Browser Apps`.
+Navigate to in your browser to `https://one.newrelic.com?nerdpacks=local`, choose `Entity Explorer` > `Browser applications` > choose an app > click on `Lab 9: Perf. Compare` > Click on the button `+ Browser Apps`.
 
 ![Add an entity to your comparison](../screenshots/lab9_screen00.png)
 
