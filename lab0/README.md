@@ -27,15 +27,7 @@ nr1 --version
 #You should see output to the terminal window
 ```
 
-6. If you haven't done so yet, generate your personal SSL cert for your development environment.
-
-```bash
-cd ~
-sudo ./nr1/bin/nr1 certs:generate
-#The cert will be saved to a hidden folder
-```
-
-7. And if you haven't already cloned the workshop repo, do that now.
+6. And if you haven't already cloned the workshop repo, do that now.
 
 ```bash
 # if you haven't cloned the workshop repo already
