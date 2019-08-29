@@ -65,9 +65,9 @@ _Note: Take the time to review each of these files throughout the exercise to en
 
 ## Step 2: Accessing the Nerdlet
 
-1. Open a web browser to `https://one.newrelic.com?nerdpacks=local` c
+1. Open a web browser to `https://one.newrelic.com?nerdpacks=local`
 2. Click on the `Entity Explorer`
-3. Click on `Browswer Applications` category in the left-hand navigation
+3. Click on `Browser Applications` category in the left-hand navigation
 4. Click on any browser application from the list
 5. You should **now** see a menu option in the left-hand navigation called `Lab 8: Location Performance`
 6. Click on `Lab 8: Location Performance`
@@ -86,7 +86,7 @@ import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
-import { loadEntity, decodeEntityId } from './utils';
+import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 ```
@@ -96,14 +96,14 @@ import JavaScriptErrorSummary from './javascript-error-summary';
 
 ```javascript
     componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
-            this.setState({ entity});
+        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
+            this.setState({ entity });
         });
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityId != nextProps.nerdletUrlState.entityId) {
-            loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
+            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
                 this.setState({ entity });
             });
         }
@@ -118,7 +118,7 @@ Now, we're ready to create the skeleton of our `render` method.
 ```javascript
     render() {
         const { entity, zoom, center } = this.state;
-        const accountId = decodeEntityId(this.props.nerdletUrlState.entityId)[0];
+        const accountId = decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
         const { duration } = this.props.launcherUrlState.timeRange;
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
@@ -183,7 +183,7 @@ import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
-import { loadEntity, decodeEntityId } from './utils';
+import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 
@@ -213,14 +213,14 @@ export default class MyNerdlet extends React.Component {
     }
 
     componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
-            this.setState({ entity});
+        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
+            this.setState({ entity });
         });
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityId != nextProps.nerdletUrlState.entityId) {
-            loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
+            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
                 this.setState({ entity });
             });
         }
@@ -229,7 +229,7 @@ export default class MyNerdlet extends React.Component {
 
     render() {
         const { entity, zoom, center } = this.state;
-        const accountId = decodeEntityId(this.props.nerdletUrlState.entityId)[0];
+        const accountId = decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
         const { duration } = this.props.launcherUrlState.timeRange;
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
@@ -330,7 +330,7 @@ Notice that we're referencing (within the `CircleMarker` component) two methods 
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
                 appName: this.state.entity.name,
-                accountId: decodeEntityId(this.props.nerdletUrlState.entityId)[0]
+                accountId: decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0]
             }
         });
     }
@@ -358,7 +358,7 @@ import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
-import { loadEntity, decodeEntityId } from './utils';
+import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 
@@ -401,20 +401,20 @@ export default class MyNerdlet extends React.Component {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
                 appName: this.state.entity.name,
-                accountId: decodeEntityId(this.props.nerdletUrlState.entityId)[0]
+                accountId: decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0]
             }
         });
     }
 
     componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
-            this.setState({ entity});
+        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
+            this.setState({ entity });
         });
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityId != nextProps.nerdletUrlState.entityId) {
-            loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
+            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
                 this.setState({ entity });
             });
         }
@@ -423,7 +423,7 @@ export default class MyNerdlet extends React.Component {
 
     render() {
         const { entity, zoom, center } = this.state;
-        const accountId = decodeEntityId(this.props.nerdletUrlState.entityId)[0];
+        const accountId = decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
         const { duration } = this.props.launcherUrlState.timeRange;
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
@@ -579,7 +579,7 @@ A tabbed interface that has only one tab is a waste, so let's resolve that.
 1. In the file `lab8/nerdlets/my-nerdlet/index.js`, add the following code below the `TabsItem` that contains the `Map`:
 
 ```javascript
-    <TabsItem label={`JavaScript Errors`} id={2}>
+    <TabsItem label={`JavaScript Errors`} itemKey={2}>
         <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
     </TabsItem>
 ```
@@ -598,7 +598,7 @@ import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
-import { loadEntity, decodeEntityId } from './utils';
+import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 
@@ -629,14 +629,14 @@ export default class MyNerdlet extends React.Component {
     }
 
     componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
-            this.setState({ entity});
+        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
+            this.setState({ entity });
         });
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityId != nextProps.nerdletUrlState.entityId) {
-            loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
+            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
                 this.setState({ entity });
             });
         }
@@ -656,14 +656,14 @@ export default class MyNerdlet extends React.Component {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
                 appName: this.state.entity.name,
-                accountId: decodeEntityId(this.props.nerdletUrlState.entityId)[0]
+                accountId: decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0]
             }
         });
     }
 
     render() {
         const { entity, zoom, center } = this.state;
-        const accountId = decodeEntityId(this.props.nerdletUrlState.entityId)[0];
+        const accountId = decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
         const { duration } = this.props.launcherUrlState.timeRange;
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;

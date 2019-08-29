@@ -1,13 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import the appropriate NR1 components
-import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from 'nr1';
-//import our 3rd party libraries for the geo mapping features
-import { CircleMarker, Map, TileLayer } from 'react-leaflet';
-//import utilities we're going to need
-import { loadEntity, decodeEntityId } from './utils';
-import SummaryBar from '../../components/summary-bar';
-import JavaScriptErrorSummary from './javascript-error-summary';
 
 const COLORS = [
     "#2dc937",
