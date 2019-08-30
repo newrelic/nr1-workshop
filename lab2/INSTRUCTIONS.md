@@ -138,7 +138,7 @@ We have one remaining issue with the navigation flow of this example. After you 
     }
 ```
 
-2. Modify the component's ` constructor` to read from the Nerdlet state when instantiating by modifying the constructor thusly.
+2. Add nerdletUrlState to the propTypes, and modify the component's ` constructor` to read from the Nerdlet state when instantiating by modifying the constructor thusly.
 
 ```javascript
     constructor(props) {
@@ -199,11 +199,11 @@ export default class MyNerdlet extends React.Component {
 
     render(){
         const { duration } = this.props.launcherUrlState.timeRange;
-        const since = ` SINCE ${duration/1000/60} SECONDS AGO `;
+        const since = ` SINCE ${duration/1000/60} MINUTES AGO `;
         const { entityGuid, appName } = this.state;
         const nrql = `SELECT count(*) as 'transactions', apdex(duration) as 'apdex', percentile(duration, 99, 90, 70) FROM Transaction facet appName, entityGuid limit 25`;
-        const tCountNrql = `SELECT count(*) FROM Transaction WHERE entityGuid = ${entityGuid} TIMESERIES`;
-        const apdexNrql = `SELECT apdex(duration) FROM Transaction WHERE entityGuid = ${entityGuid} TIMESERIES`;
+        const tCountNrql = `SELECT count(*) FROM Transaction WHERE entityGuid = '${entityGuid}' TIMESERIES`;
+        const apdexNrql = `SELECT apdex(duration) FROM Transaction WHERE entityGuid = '${entityGuid}' TIMESERIES`;
         const trxOverTime = `SELECT count(*) as 'transactions' FROM Transaction facet appName, entityGuid limit 25 TIMESERIES`;
         //return the JSX we're rendering
         return (
