@@ -2,7 +2,7 @@
     "schemaType": "LAUNCHER",
     "id": "my-launcher",
     "description": "Describe me",
-    "displayName": "my-launcher",
+    "displayName": "Lab 3 Launcher",
     "icon": "interface_placeholders_icon-placeholder",
     "rootNerdletId": "1b129dcd-55b9-4b6c-8617-7427983e569b.my-nerdlet"
 }
