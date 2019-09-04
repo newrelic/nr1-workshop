@@ -1,31 +1,31 @@
 import { Base64 } from 'js-base64';
 import { EntityByGuidQuery } from 'nr1';
 
-export const encodeEntityId = (accountId, domain, type, domainId) => {
+export const encodeEntityGuid = (accountId, domain, type, domainId) => {
   const urlSafeChars = {'+': '-', '/': '_', '=': ''};
   //id = md5(id)
   const id = `${accountId}|${domain}|${type}|${domainId}`
-  const entityId = Base64.encode(id).replace(/[+=]/, (c => urlSafeChars[c]));
-  return entityId;
+  const entityGuid = Base64.encode(id).replace(/[+=]/, (c => urlSafeChars[c]));
+  return entityGuid;
 }
 
 /**
  * Returns an array of [accountId, domain, type, domainId]
- * @param {*} entityId
+ * @param {*} entityGuid
  */
-export const decodeEntityId = (entityId) => {
-  return Base64.decode(entityId).split("|");
+export const decodeEntityGuid = (entityGuid) => {
+  return Base64.decode(entityGuid).split("|");
 }
 
 /**
  * Return object of the breakdown of the entity GUID.
  *
- * @param {string} entityId
+ * @param {string} entityGuid
  */
-export const decodeEntityFromEntityId = (entityId) => {
-  const decodedId = decodeEntityId(entityId);
+export const decodeEntityFromEntityGuid = (entityGuid) => {
+  const decodedId = decodeEntityGuid(entityGuid);
   return {
-      id: entityId,
+      id: entityGuid,
       accountId: decodedId[0],
       domain: decodedId[1],
       type: decodedId[2],

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { EntitySearchQuery, Modal, Stack, StackItem, TextField, Spinner } from 'nr1';
-import { alertSeverityToColor, decodeEntityFromEntityId } from './utils';
+import { alertSeverityToColor, decodeEntityFromEntityGuid } from './utils';
 
 export default class AddEntityModal extends Component {
   static propTypes = {
@@ -52,7 +52,7 @@ export default class AddEntityModal extends Component {
       }];
       const { entities } = this.props;
       if (entities) {
-        const entity = decodeEntityFromEntityId(entities[0].id);
+        const entity = decodeEntityFromEntityGuid(entities[0].id);
         filters.push({
           type:'tag',
           value: { key: 'accountId', value: entity.accountId }

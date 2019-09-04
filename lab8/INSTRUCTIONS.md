@@ -86,7 +86,7 @@ import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
-import { loadEntity, decodeEntityId } from './utils';
+import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 ```
@@ -96,14 +96,14 @@ import JavaScriptErrorSummary from './javascript-error-summary';
 
 ```javascript
     componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
             this.setState({ entity});
         });
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityId != nextProps.nerdletUrlState.entityId) {
-            loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
+            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
                 this.setState({ entity });
             });
         }
@@ -118,7 +118,7 @@ Now, we're ready to create the skeleton of our `render` method.
 ```javascript
     render() {
         const { entity, zoom, center } = this.state;
-        const accountId = decodeEntityId(this.props.nerdletUrlState.entityId)[0];
+        const accountId = decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
         const { duration } = this.props.launcherUrlState.timeRange;
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
@@ -183,7 +183,7 @@ import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
-import { loadEntity, decodeEntityId } from './utils';
+import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 
@@ -213,14 +213,14 @@ export default class MyNerdlet extends React.Component {
     }
 
     componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
             this.setState({ entity});
         });
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityId != nextProps.nerdletUrlState.entityId) {
-            loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
+            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
                 this.setState({ entity });
             });
         }
@@ -229,7 +229,7 @@ export default class MyNerdlet extends React.Component {
 
     render() {
         const { entity, zoom, center } = this.state;
-        const accountId = decodeEntityId(this.props.nerdletUrlState.entityId)[0];
+        const accountId = decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
         const { duration } = this.props.launcherUrlState.timeRange;
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
@@ -330,7 +330,7 @@ Notice that we're referencing (within the `CircleMarker` component) two methods 
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
                 appName: this.state.entity.name,
-                accountId: decodeEntityId(this.props.nerdletUrlState.entityId)[0]
+                accountId: decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0]
             }
         });
     }
@@ -358,7 +358,7 @@ import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
-import { loadEntity, decodeEntityId } from './utils';
+import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 
@@ -401,20 +401,20 @@ export default class MyNerdlet extends React.Component {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
                 appName: this.state.entity.name,
-                accountId: decodeEntityId(this.props.nerdletUrlState.entityId)[0]
+                accountId: decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0]
             }
         });
     }
 
     componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
             this.setState({ entity});
         });
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityId != nextProps.nerdletUrlState.entityId) {
-            loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
+            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
                 this.setState({ entity });
             });
         }
@@ -423,7 +423,7 @@ export default class MyNerdlet extends React.Component {
 
     render() {
         const { entity, zoom, center } = this.state;
-        const accountId = decodeEntityId(this.props.nerdletUrlState.entityId)[0];
+        const accountId = decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
         const { duration } = this.props.launcherUrlState.timeRange;
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
@@ -598,7 +598,7 @@ import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
-import { loadEntity, decodeEntityId } from './utils';
+import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 
@@ -629,14 +629,14 @@ export default class MyNerdlet extends React.Component {
     }
 
     componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
             this.setState({ entity});
         });
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityId != nextProps.nerdletUrlState.entityId) {
-            loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
+            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
                 this.setState({ entity });
             });
         }
@@ -656,14 +656,14 @@ export default class MyNerdlet extends React.Component {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
                 appName: this.state.entity.name,
-                accountId: decodeEntityId(this.props.nerdletUrlState.entityId)[0]
+                accountId: decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0]
             }
         });
     }
 
     render() {
         const { entity, zoom, center } = this.state;
-        const accountId = decodeEntityId(this.props.nerdletUrlState.entityId)[0];
+        const accountId = decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
         const { duration } = this.props.launcherUrlState.timeRange;
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;

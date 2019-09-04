@@ -134,7 +134,7 @@ Using the `NerdGraphQuery` allows you to access data from using any type of quer
 1. We need to import the pre-defined entity queries from the nr1 library. Update the import statement in your `index.js` file with the code below:
 
 ```javascript
-import { NerdGraphQuery, EntitiesByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText } from 'nr1';
+import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText } from 'nr1';
 ```
 
 2. To query data about the `entity` that we have currently selected we will use the `EntityByGuidQuery`. Add a seconf `StackItem` just below the first in the `render` method:

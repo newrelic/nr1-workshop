@@ -113,7 +113,7 @@ _Note: Alternatively, you can call the `navigation.openStackedNerdlet` **thusly*
         navigation.openStackedNerdlet({
             id: 'slicer-dicer.apm-overview',
             urlState: {
-                entityId: entityGuid
+                entityGuid
             }
         });
     }

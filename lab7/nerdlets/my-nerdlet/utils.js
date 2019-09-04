@@ -1,27 +1,27 @@
 import { Base64 } from 'js-base64';
 import uuidv4 from 'uuid';
 import randomColor from 'randomcolor';
-import { EntitiesByGuidQuery } from 'nr1';
+import { EntityByGuidQuery } from 'nr1';
 
-export const encodeEntityId = (accountId, domain, type, domainId) => {
+export const encodeEntityGuid = (accountId, domain, type, domainId) => {
   const urlSafeChars = {'+': '-', '/': '_', '=': ''};
   //id = md5(id)
   const id = `${accountId}|${domain}|${type}|${domainId}`
-  const entityId = Base64.encode(id).replace(/[+=]/, (c => urlSafeChars[c]));
-  return entityId;
+  const entityGuid = Base64.encode(id).replace(/[+=]/, (c => urlSafeChars[c]));
+  return entityGuid;
 }
 
 /**
  * Returns an array of [accountId, domain, type, domainId]
- * @param {*} entityId
+ * @param {*} entityGuid
  */
-export const decodeEntityId = (entityId) => {
-  return Base64.decode(entityId).split("|");
+export const decodeEntityGuid = (entityGuid) => {
+  return Base64.decode(entityGuid).split("|");
 }
 
 export const loadEntity = (entityGuid) => {
   return new Promise(resolve => {
-    EntitiesByGuidQuery.query({ entityGuid }).then(results => {
+    EntityByGuidQuery.query({ entityGuid }).then(results => {
       //console.debug(results);
       resolve(results.data.actor.entities[0]);
     }).catch(error => {

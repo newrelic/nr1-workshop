@@ -5,7 +5,7 @@ import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
-import { loadEntity, decodeEntityId } from './utils';
+import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 

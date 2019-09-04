@@ -64,9 +64,9 @@ Retrieval of documents is available through both `NerdGraph` and through the pre
 - Each of the predefined components has a `query` and `mutate` method that corresponds to expected, standard patterns that the [`Apollo GraphQL`](https://apollographql.com) library uses.
 - `UserStorageQuery` takes a required `collection` prop and an optional `documentId` prop.
 - `AccountStorageQuery` takes required `collection` and `accountId` props and an optional `documentId` prop.
-- `EntityStorageQuery` takes required `collection` and `entityId` props and an optional `documentId` prop.
+- `EntityStorageQuery` takes required `collection` and `entityGuid` props and an optional `documentId` prop.
 
-_Note: The `entityId` are the guids that are returned from components like `EntitySearchQuery` see `lab9/nerdlets/my-nerdlet/add-entity-modal.js` for an example._
+_Note: The `entityGuid` are the guids that are returned from components like `EntitySearchQuery` see `lab9/nerdlets/my-nerdlet/add-entity-modal.js` for an example._
 
 Let's make use of this service to address our "save the state" feature in this Nerdlet. For the purposes of this exercise, we're going to use the `UserStorageQuery` component only. Hopefully, you can extrapolate the uses of the other components.
 
@@ -120,10 +120,10 @@ Now, we're going to try to load the saved entity set for this `User` and `Entity
 ```javascript
     /**
      * Load the entity using the loadEntity utils function, then look up if there's a entityList-v0 collection for this entity and user.
-     * @param {string} entityId
+     * @param {string} entityGuid
      */
-    _loadState(entityId) {
-        loadEntity(entityId).then(entity => {
+    _loadState(entityGuid) {
+        loadEntity(entityGuid).then(entity => {
             UserStorageQuery.query({
                 collection: 'entityList-v0',
                 documentId: entity.id
@@ -197,7 +197,7 @@ The final code in `lab9/nerdlets/my-nerdlet/index.js` should look something like
 import React from 'react';
 import PropTypes from 'prop-types';
 import { LineChart, TableChart, Grid, GridItem, Spinner, DisplayText, Button, Icon, UserStorageQuery, Toast } from 'nr1';
-import { loadEntity, decodeEntityFromEntityId, distanceOfTimeInWords } from './utils';
+import { loadEntity, decodeEntityFromEntityGuid, distanceOfTimeInWords } from './utils';
 import AddEntityModal from './add-entity-modal';
 
 export default class MyNerdlet extends React.Component {
@@ -225,26 +225,26 @@ export default class MyNerdlet extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.nerdletUrlState && this.props.nerdletUrlState.entityId) {
+        if (this.props.nerdletUrlState && this.props.nerdletUrlState.entityGuid) {
             console.debug("Calling loadState with props"); //eslint-disable-line
-            this._loadState(this.props.nerdletUrlState.entityId);
+            this._loadState(this.props.nerdletUrlState.entityGuid);
         }
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props && nextProps.nerdletUrlState && nextProps.nerdletUrlState.entityId && nextProps.nerdletUrlState.entityId != this.props.nerdletUrlState.entityId) {
+        if (this.props && nextProps.nerdletUrlState && nextProps.nerdletUrlState.entityGuid && nextProps.nerdletUrlState.entityGuid != this.props.nerdletUrlState.entityGuid) {
             console.debug("Calling loadState with nextProps"); //eslint-disable-line
-            this._loadState(nextProps.nerdletUrlState.entityId);
+            this._loadState(nextProps.nerdletUrlState.entityGuid);
         }
         return true;
     }
 
     /**
      * Load the entity using the loadEntity utils function, then look up if there's a entityList-v0 collection for this entity and user.
-     * @param {string} entityId
+     * @param {string} entityGuid
      */
-    _loadState(entityId) {
-        loadEntity(entityId).then(entity => {
+    _loadState(entityGuid) {
+        loadEntity(entityGuid).then(entity => {
             UserStorageQuery.query({
                 collection: 'entityList-v0',
                 documentId: entity.id
@@ -302,14 +302,14 @@ export default class MyNerdlet extends React.Component {
 
     render() {
         const { height, launcherUrlState, nerdletUrlState } = this.props;
-        if (!nerdletUrlState || !nerdletUrlState.entityId) {
+        if (!nerdletUrlState || !nerdletUrlState.entityGuid) {
             return <AddEntityModal
                      onSearchSelect={this.onSearchSelect}
                    />;
         } else {
-            //entityId is four-item array of accountId|domain|type|id
+            //entityGuid is four-item array of accountId|domain|type|id
             const { entities, openModal } = this.state;
-            const entity = decodeEntityFromEntityId(nerdletUrlState.entityId);
+            const entity = decodeEntityFromEntityGuid(nerdletUrlState.entityGuid);
             const { accountId } = entity;
             const eventType = entity ? entity.domain == 'BROWSER' ? 'PageView' : 'Transaction' : null;
             const { timeRange : { duration }} = launcherUrlState;

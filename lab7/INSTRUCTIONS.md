@@ -52,11 +52,11 @@ _Note: before you become concerned, cats and Star Trek have nothing to do with t
 ## Step 2: Charting a timeseries of `PageView` events
 
 
-1. Before we get going, take a moment to look at the `props` being printed out in the browser's `Console`. There's new content in the the `nerdletUrlState`, specifically an `entityId`. This is going to prove important in our `render` method.
+1. Before we get going, take a moment to look at the `props` being printed out in the browser's `Console`. There's new content in the the `nerdletUrlState`, specifically an `entityGuid`. This is going to prove important in our `render` method.
 
 ![entities](../screenshots/lab7_screen01.png)
 
-_Note: the `entityId` is actually a Base64 encoded concatenation of the accountId, entity domain, entity type, and domain/type unique ID of that entity. We'll dissect that more below._
+_Note: the `entityGuid` is actually a Base64 encoded concatenation of the accountId, entity domain, entity type, and domain/type unique ID of that entity. We'll dissect that more below._
 
 2. Add the following imports near the top of your `lab7/nerdlets/my-nerdlet/index.js`
 
@@ -113,28 +113,28 @@ constructor(props) {
 
 5. Open the `lab7/nerdlets/my-nerdlet/utils.js` and review each of the methods in that file. We're going to make use of three of them now.
 
-6. Add the following method to `lab7/nerdlets/my-nerdlet/index.js`. We're going to use this a shorthand way of getting the accountId from a decoded EntityId.
+6. Add the following method to `lab7/nerdlets/my-nerdlet/index.js`. We're going to use this a shorthand way of getting the accountId from a decoded EntityGuid.
 
 ```javascript
     _getAccountId() {
-        return decodeEntityId(this.props.nerdletUrlState.entityId)[0];
+        return decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
     }
 ```
 
-_Note: the New Relic entityId is a GUID that is made up of four components: an accountId, an entity domain, an entity type, and a unique ID within that domain/type combo all base64 encoded. So when you have an entityId, you are a decode away from access to all of that information._
+_Note: the New Relic entityGuid is a GUID that is made up of four components: an accountId, an entity domain, an entity type, and a unique ID within that domain/type combo all base64 encoded. So when you have an entityGuid, you are a decode away from access to all of that information._
 
 7. Now, we need to load the Entity from New Relic so that we can get access to the Browser Applicaton name. To do that, we're going to make use of two React lifecycle methods and a utility method from our `utils` file. Add the following to `lab7/nerdlets/my-nerdlet/index.js`.
 
 ```javascript
     componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
             this.setState({ entity});
         });
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityId != nextProps.nerdletUrlState.entityId) {
-            loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
+            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
                 this.setState({ entity});
             });
         }
@@ -171,7 +171,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, GridItem } from 'nr1';
 import { NrqlQuery, Spinner, LineChart, DisplayText } from 'nr1';
-import { decodeEntityId, loadEntity, generateForecastData } from './utils';
+import { decodeEntityGuid, loadEntity, generateForecastData } from './utils';
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
@@ -181,7 +181,7 @@ export default class MyNerdlet extends React.Component {
     };
 
     _getAccountId() {
-        return decodeEntityId(this.props.nerdletUrlState.entityId)[0];
+        return decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
     }
 
     constructor(props) {
@@ -193,14 +193,14 @@ export default class MyNerdlet extends React.Component {
     }
 
     componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
             this.setState({ entity});
         });
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityId != nextProps.nerdletUrlState.entityId) {
-            loadEntity(this.props.nerdletUrlState.entityId).then(entity => {
+        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
+            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
                 this.setState({ entity});
             });
         }
