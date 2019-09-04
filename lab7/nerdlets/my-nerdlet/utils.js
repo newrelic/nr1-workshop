@@ -1,7 +1,7 @@
 import { Base64 } from 'js-base64';
 import uuidv4 from 'uuid';
 import randomColor from 'randomcolor';
-import { EntitiesByIdsQuery } from 'nr1';
+import { EntitiesByGuidQuery } from 'nr1';
 
 export const encodeEntityId = (accountId, domain, type, domainId) => {
   const urlSafeChars = {'+': '-', '/': '_', '=': ''};
@@ -19,9 +19,9 @@ export const decodeEntityId = (entityId) => {
   return Base64.decode(entityId).split("|");
 }
 
-export const loadEntity = (entityId) => {
+export const loadEntity = (entityGuid) => {
   return new Promise(resolve => {
-    EntitiesByIdsQuery.query({ entityIds: [entityId]}).then(results => {
+    EntitiesByGuidQuery.query({ entityGuid }).then(results => {
       //console.debug(results);
       resolve(results.data.actor.entities[0]);
     }).catch(error => {
