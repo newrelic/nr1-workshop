@@ -82,7 +82,6 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
 
 3. And then add the following method to the nerdlet in `lab2/nerdlets/my-nerdlet/index.js`. Note that we're using the `navigation` object's `openEntity`.
 
-FIXME: this does not work, although the alternative option below does
 ```javascript
     openEntity() {
         const { entityGuid, appName } = this.state;
@@ -94,7 +93,7 @@ FIXME: this does not work, although the alternative option below does
     }
 ```
 
-4. Add the following line to the nerdlet's `constructor` method.
+1. Add the following line to the nerdlet's `constructor` method.
 
 ```javascript
     this.openEntity = this.openEntity.bind(this);

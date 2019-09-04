@@ -4,7 +4,8 @@ Lab 3: Grids, Stacks, and UI components
 The purpose of this lab is learn how to create advanced layouts in your Nerdlet as well as the `navigation` class in the `nr1` library.
 
 After completing this lab you should:
-* FIXME
+* Understand how to work with the `Stack` and `Grid` components
+* Become familiar with how to interact with the `navigation` object
 
 ## Step 0: Setup and Prerequisites
 
