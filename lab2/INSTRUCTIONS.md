@@ -86,7 +86,7 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
     openEntity() {
         const { entityGuid, appName } = this.state;
         navigation.openEntity({
-            id: entityGuid,
+            guid: entityGuid,
             type: 'APPLICATION',
             domain: 'APM'
         });
@@ -105,16 +105,15 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
 6. Click on the button titled `Open <<App Name>>`. You should see a card open containing the APM Overview screen.
 ![APM Overview](../screenshots/lab2_screen05.png)
 
-_Note: Alternatively, you can call the `navigation.openStackedNerdlet` **thusly**, which will open a card UI vs. replace the entire Nerdlet context:_
+_Note: Alternatively, you can call the `navigation.openStackedEntity` **thusly**, which will open a card UI vs. replace the entire Nerdlet context:_
 
 ```javascript
     openEntity() {
         const { entityGuid, appName } = this.state;
-        navigation.openStackedNerdlet({
-            id: 'slicer-dicer.apm-overview',
-            urlState: {
-                entityGuid
-            }
+        navigation.openStackedEntity({
+            guid: entityGuid,
+            type: 'APPLICATION',
+            domain: 'APM'
         });
     }
 ```
@@ -130,7 +129,7 @@ We have one remaining issue with the navigation flow of this example. After you 
         const { entityGuid, appName } = this.state;
         nerdlet.setUrlState({ entityGuid, appName });
         navigation.openEntity({
-            id: entityGuid,
+            guid: entityGuid,
             type: 'APPLICATION',
             domain: 'APM'
         });
@@ -190,7 +189,7 @@ export default class MyNerdlet extends React.Component {
         const { entityGuid, appName } = this.state;
         nerdlet.setUrlState({ appName, entityGuid }, { replaceHistory: true });
         navigation.openEntity({
-            id: entityGuid,
+            guid: entityGuid,
             type: 'APPLICATION',
             domain: 'APM'
         });
