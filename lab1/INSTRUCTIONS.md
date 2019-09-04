@@ -36,7 +36,7 @@ nerdlet lab1-nerdlet is available at "./nerdlets/lab1-nerdlet"
 nr1 nerdpack:serve
 ```
 
-You'll notice that the CLI creates three files in the `nerdlets/my-nerdlet` directory: index.js, styles.scss, and a nr1.json configuration.
+You'll notice that the CLI creates three files in the `nerdlets/lab1-nerdlet` directory: index.js, styles.scss, and a nr1.json configuration.
 
 2. Assuming the the developer server is still running (via `nr1 nerdpack:serve`), validate (in a web browser) that you can click on and see the `Lab 1 Launcher` launcher by navigating in Google Chrome to https://one.newrelic.com?nerdpacks=local and click on the `Lab 1 Launcher`.
 
@@ -48,7 +48,7 @@ You'll notice that the CLI creates three files in the `nerdlets/my-nerdlet` dire
 
 _Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the Terminal and then running `nr1 nerdpack:serve`._
 
-5. Next, we're going to prep the Nerdlet to be able to generate some charts. Add the following code to your `MyNerdlet` class in `nerdlets/lab1-nerdlet/index.js`.
+5. Next, we're going to prep the Nerdlet to be able to generate some charts. Add the following code to your `Lab1Nerdlet` class in `nerdlets/lab1-nerdlet/index.js`.
 
 ```javascript
     constructor(props) {
@@ -236,7 +236,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart } from 'nr1';
 
-export default class MyNerdlet extends React.Component {
+export default class Lab1Nerdlet extends React.Component {
     static propTypes = {
         width: PropTypes.number,
         height: PropTypes.number,
@@ -324,7 +324,7 @@ Based on what you've executed above, apply that learning in the following:
 2. Within the first, **new** `StackItem` element, place the existing `TableChart`.
 3. Next to the `TableChart` in the second `StackItem`, add a `LineChart` using the following NRQL query: `SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`.
 
-4. Add a `onLineClick` attribute to your `LineChart` that processes `onClick` events in the same way that the `TableChart` `onTableClick` operates (i.e. calling the `this.setApplication` method). See the following:
+4. Add a `onClickLine` attribute to your `LineChart` that processes `onClick` events in the same way that the `TableChart` `onTableClick` operates (i.e. calling the `this.setApplication` method). See the following:
 
 ```javascript
     <div className="chart">
