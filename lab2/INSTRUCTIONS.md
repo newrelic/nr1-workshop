@@ -36,7 +36,7 @@ _Note: we're going to cover how to **not** hardcode the accountIds for NRQL quer
 2. Open the Devtools in your browser (Ctrl+Click > `Inspect` menu item > Opens the DevTools window, select `Console` tab > `Debug` in left hand nav), and look at the props from the Nerdlet that we wrote into the Nerdlet's `constructor`.
 ![nr1 properties](../screenshots/lab2_screen02.png)
 
-3. Note the prop `launcherUrlState` that contains a `timeRange` object that itself contains three attributes: `begin_time`, `end_time`, and `duration`. This will be the basis of our
+3. Note the prop `launcherUrlState` that contains a `timeRange` object that itself contains three attributes: `begin_time`, `end_time`, and `duration`. This will be the basis of our next step.
 
 ## Step 2: Implementing the time picker
 
@@ -82,6 +82,7 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
 
 3. And then add the following method to the nerdlet in `lab2/nerdlets/my-nerdlet/index.js`. Note that we're using the `navigation` object's `openEntity`.
 
+FIXME: this does not work, although the alternative option below does
 ```javascript
     openEntity() {
         const { entityGuid, appName } = this.state;
@@ -137,7 +138,7 @@ We have one remaining issue with the navigation flow of this example. After you 
     }
 ```
 
-2. Modify the component's ` constructor` to read from the Nerdlet state when instantiating by modifying the constructor thusly.
+2. Add nerdletUrlState to the propTypes, and modify the component's ` constructor` to read from the Nerdlet state when instantiating by modifying the constructor thusly.
 
 ```javascript
     constructor(props) {
@@ -198,11 +199,11 @@ export default class MyNerdlet extends React.Component {
 
     render(){
         const { duration } = this.props.launcherUrlState.timeRange;
-        const since = ` SINCE ${duration/1000/60} SECONDS AGO `;
+        const since = ` SINCE ${duration/1000/60} MINUTES AGO `;
         const { entityGuid, appName } = this.state;
         const nrql = `SELECT count(*) as 'transactions', apdex(duration) as 'apdex', percentile(duration, 99, 90, 70) FROM Transaction facet appName, entityGuid limit 25`;
-        const tCountNrql = `SELECT count(*) FROM Transaction WHERE entityGuid = ${entityGuid} TIMESERIES`;
-        const apdexNrql = `SELECT apdex(duration) FROM Transaction WHERE entityGuid = ${entityGuid} TIMESERIES`;
+        const tCountNrql = `SELECT count(*) FROM Transaction WHERE entityGuid = '${entityGuid}' TIMESERIES`;
+        const apdexNrql = `SELECT apdex(duration) FROM Transaction WHERE entityGuid = '${entityGuid}' TIMESERIES`;
         const trxOverTime = `SELECT count(*) as 'transactions' FROM Transaction facet appName, entityGuid limit 25 TIMESERIES`;
         //return the JSX we're rendering
         return (

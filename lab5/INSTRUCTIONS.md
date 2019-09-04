@@ -3,11 +3,11 @@ Lab 5: Using  NR1 NerdGraph components
 
 The purpose of this lab is to build on the concepts we've already explored, using `NerdGraph` and exploring the `NerdGrpah` components to access New Relic's `NerdGraph` API within your Nerdlets.
 
-After completing this lab you should understand:
+After completing this lab you should:
 
 * Be more confident in your ability to incorporate `NerdGraph`.
 * Gain more practical experience with nerdGraph
-* Have access to the `NerdGraph` API form your Nerdlets
+* Have access to the `NerdGraph` API from your Nerdlets
 
 ## Step 0: Setup and Prerequisites
 
@@ -22,7 +22,7 @@ npm install
 npm start
 ```
 
-Open the [Traffic Explorer Nerdlet here.](https://one.newrelic.com/launcher/lab5.my-launcher?nerdpacks=local#launcher=eyJ0aW1lUmFuZ2UiOnsiYmVnaW5fdGltZSI6bnVsbCwiZW5kX3RpbWUiOm51bGwsImR1cmF0aW9uIjoxODAwMDAwfX0=&pane=eyJuZXJkbGV0SWQiOiJsYWI1Lm15LW5lcmRsZXQifQ==)
+Open the [Traffic Explorer Nerdlet here.](https://one.newrelic.com/launcher/lab5.my-launcher?nerdpacks=local#launcher=eyJ0aW1lUmFuZ2UiOnsiYmVnaW5fdGltZSI6bnVsbCwiZW5kX3RpbWUiOm51bGwsImR1cmF0aW9uIjoxODAwMDAwfX0=&pane=eyJuZXJkbGV0SWQiOiJsYWI1Lm15LW5lcmRsZXQifQ==) FIXME this is probably broken, was this supposed to work without the launcher?
 
 ## Step 1: Using the NerdGraph API within your Nerdlet
 
@@ -33,7 +33,7 @@ import { NerdGraphQuery, Stack, StackItem, HeaderText} from 'nr1';
 import gql from 'graphql-tag';
 ```
 
-2. The `NerdGraphQuery` component is going to allow us to access the New Relic NerdGraph API and have access to the power of GraphQl inside of your Nerdlet.
+2. The `NerdGraphQuery` component is going to allow us to access the New Relic NerdGraph API and have access to the power of GraphQL inside of your Nerdlet.
 
 Let's update our render method in the `index.js` to use the `NerdGraphQuery` component and make our first NerdGraph query.
 
@@ -108,7 +108,7 @@ import { NerdGraphQuery, Spinner, HeadingText, BlockText, Grid, GridItem } from 
                                 return <Spinner fillContainer />;
                             }
                             if (error) {
-                                return <BlockText>{error}</BlockText>;
+                                return <BlockText>{error.message}</BlockText>;
                             }
 
                             return <Fragment>
@@ -137,7 +137,9 @@ Using the `NerdGraphQuery` allows you to access data from using any type of quer
 import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText } from 'nr1';
 ```
 
-2. To query data about the `entity` that we have currently selected we will use the `EntityByGuidQuery`. Add a seconf `StackItem` just below the first in the `render` method:
+2. To query data about the `entity` that we have currently selected we will use the `EntityByGuidQuery`. Add a second `StackItem` just below the first in the `render` method:
+
+FIXME: There is no entity to select in this UI and entityGuid is undefined
 
 ```javascript
     <StackItem className="container">
@@ -148,7 +150,7 @@ import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomai
                     return <Spinner fillContainer />;
                 }
                 if (error) {
-                    return <HeadingText>{error}</HeadingText>;
+                    return <HeadingText>{error.message}</HeadingText>;
                 }
                 return <Fragment className="fragment">
                         <HeadingText>Entity by ID</HeadingText>
@@ -159,13 +161,11 @@ import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomai
     </StackItem>
 ```
 
- 3. Save and go back to the browser window and reload the current page, you should see a list with names and ids for all of the accounts your user has access to. You should be looking at a screen like the following:
-
 ![Entity By Id Query](../screenshots/lab5_screen03.png)
 
 Your browser should show a small table that displays the name and domain of your current `entity` as a part of the data object that is returned from the `EntityByGuidQuery`.
 
-4. A quick way to search for `entities` by name we will use the `EntitiesByNameQuery` and pass the `name` prop equal to "portal'. Add the code below to your `index.js` file in the `render` method under the last `StackItem` component.
+3. To quickly search through your account entities by domain and type we will use the `EntitiesByDomainTypeQuery`, add the code below to your `render` method under the last `StackItem`:
 
 ```javascript
     <StackItem className="container">
@@ -187,13 +187,14 @@ Your browser should show a small table that displays the name and domain of your
     </StackItem>
 ```
 
- 5. Save and go back to the browser window and reload the current page, you should see another table with all of the entities that match name you queried.
+ 4. Save and go back to the browser window and reload the current page, you should another table that displays the name, domain, and type of the entities we've queried by domain
 
  Your screen will look like the following:
 
-![Entity By name Query](../screenshots/lab5_screen04.png)
+![Entity By domain Query](../screenshots/lab5_screen04.png)
 
-6. To quickly search through your account entities by domain and type we will use the `EntitiesByDomainTypeQuery`, add the code below to your `render` method under the last `StackItem`:
+5. For a quick way to search for `entities` by name we will use the `EntitiesByNameQuery` and pass the `name` prop equal to "portal'. Add the code below to your `index.js` file in the `render` method under the last `StackItem` component.
+
 
 ```javascript
     <StackItem className="container">
@@ -215,12 +216,12 @@ Your browser should show a small table that displays the name and domain of your
     </StackItem>
 ```
 
-7. Save and go back to the browser window and reload the current page, you should another table that displays the name, domain, and type of the entities we've queried by domain. You should be looking at a screen like the following:
+6. Save and go back to the browser window and reload the current page, you should see another table with all of the entities that match name you queried. You should be looking at a screen like the following:
 
 ![Entity By name Query](../screenshots/lab5_screen05.png)
 
 
-8. Finally, using the `EntityCountQuey` you can quickly query the number of entities available for each entityDomain and entityType. Update your `index.js` file, adding the code below to your `render` method under the last `StackItem`.
+7. Finally, using the `EntityCountQuey` you can quickly query the number of entities available for each entityDomain and entityType. Update your `index.js` file, adding the code below to your `render` method under the last `StackItem`.
 
 ```javascript
     <StackItem className="container">
@@ -243,7 +244,7 @@ Your browser should show a small table that displays the name and domain of your
     </StackItem>
 ```
 
-9. Save and go back to the browser window and reload the current page, under the table for `EntityByNameQuery` you will see one more table. This new table should be displaying the data object from the `EntityCountQuery` showing the number of entities available for each entityDomain and entityType.
+8. Save and go back to the browser window and reload the current page, under the table for `EntityByNameQuery` you will see one more table. This new table should be displaying the data object from the `EntityCountQuery` showing the number of entities available for each entityDomain and entityType.
 
 You should be looking at a screen like the following:
 

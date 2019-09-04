@@ -22,6 +22,7 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 # from the nr1-eap-workshop directory
 cd lab6
 npm install
+npm start
 ```
 
 Open a web browser to `https://one.newrelic.com?nerdpacks=local`, and click on the Launcher titled `Lab 6: GraphQL and Nerdlets`. You should come to screen that looks like the following.

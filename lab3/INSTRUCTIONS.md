@@ -4,10 +4,11 @@ Lab 3: Grids, Stacks, and UI components
 The purpose of this lab is learn how to create advanced layouts in your Nerdlet as well as the `navigation` class in the `nr1` library.
 
 After completing this lab you should:
+* FIXME
 
 ## Step 0: Setup and Prerequisites
 
-Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
+Load the prerequisites and follow the setup instructions in [Setup](../SETUP.md).
 
 **Reminder**: Make sure that you're ready to go with your `lab3` by ensuring you've run the following commands:
 
@@ -20,7 +21,7 @@ npm start
 
 ## Step 1: Using the Grid and Grid Items Components
 
-The `<Grid>` UI component is a layout component that only accepts `GridItem` components and works as standard 12-column grid system. Each `<GridItem>` within a `<Grid>` can have be give a column span of 1-12 that determines it's width and a can not exceed 12 columns without wrapping.
+The `<Grid>` UI component is a layout component that only accepts `GridItem` components and works as standard 12-column grid system. Each `<GridItem>` within a `<Grid>` can have a column span of 1-12 that determines it's width and a can not exceed 12 columns without wrapping.
 
 1. Import the `<Grid>` and `<GridItem>` from the `nr1` library.
 
@@ -84,7 +85,7 @@ Your browser should show a `Grid` with `GridItems` that looks something similar 
 
 ![Lab3 Nerdlet with 2 Column Grid](../screenshots/lab3_screen02.png)
 
-_Note: For more documentation on the `Grid` and `GridItem`and their props view the `nr1` object documentation at: [ADD LINK]
+_Note: For more documentation on the `Grid` and `GridItem`and their props view the `nr1` [object documentation](http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html#components/Grid)
 
 ## Step 2: Using Stack and StackItems Components
 
@@ -135,7 +136,7 @@ render() {
                     <div className="gry-div">Item 4: This field grows</div>
                 </StackItem>
                 <StackItem className="inner-stack">
-                    <div className="gry-div">Item 5: But, this one doesn't</div>
+                    <div className="gry-div">Item 5: But, this one doesn't</div> FIXME: what does "grow", and why would this identical stack item not "grow"
                 </StackItem>
             </Stack>
             </StackItem>
@@ -235,7 +236,7 @@ Using the Grid and Stack components you can easily create any layout you wish wi
                 <GridItem
                     columnSpan={4}>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}xs
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
@@ -259,28 +260,6 @@ Your Nerdlet should look similar to below:
 2. Adding Chart Components to you `<Grid>` and `<Stack>`
 
 Now that you have your layout done, let's add a some chart components. Replace the render method within your `lab3/nerdlets/my-nerdlet/index.js` with the code below:
-
-Add the following code to your `index.js` file. ABOVE the `render` method.
-
-```javascript
-    constructor(props) {
-        super(props);
-        this.accountId =  1606862; //New Relic Demotron.
-        console.debug("Nerdlet props", this.props); //eslint-disable-line
-    }
-```
-
-Add the following code to your `index.js` file. IN the `render` method before the `return`
-
-```javascript
-    const { duration } = this.props.launcherUrlState.timeRange;
-    const since = ` SINCE ${duration/1000/60} SECONDS AGO `;
-    const errors = `SELECT count(error) FROM Transaction TIMESERIES`;
-    const throughput = `SELECT count(*) as 'throughput' FROM Transaction TIMESERIES`;
-    const transaction_apdex_by_appname = `SELECT count(*) as 'transaction', apdex(duration) as 'apdex' FROM Transaction limit 25`;
-```
-
-Replace the `render` method in your `index.js` with the code below.
 
 ```javascript
     render() {
@@ -325,7 +304,7 @@ Replace the `render` method in your `index.js` with the code below.
                 <GridItem
                     columnSpan={4}>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}xs
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
@@ -344,6 +323,26 @@ Replace the `render` method in your `index.js` with the code below.
             </Grid>
         </ChartGroup>
     }
+```
+
+Add the following code to your `index.js` file. ABOVE the `render` method.
+
+```javascript
+    constructor(props) {
+        super(props);
+        this.accountId =  1606862; //New Relic Demotron.
+        console.debug("Nerdlet props", this.props); //eslint-disable-line
+    }
+```
+
+Add the following code to your `index.js` file. IN the `render` method before the `return`
+
+```javascript
+    const { duration } = this.props.launcherUrlState.timeRange;
+    const since = ` SINCE ${duration/1000/60} MINUTES AGO `;
+    const errors = `SELECT count(error) FROM Transaction TIMESERIES`;
+    const throughput = `SELECT count(*) as 'throughput' FROM Transaction TIMESERIES`;
+    const transaction_apdex_by_appname = `SELECT count(*) as 'transaction', apdex(duration) as 'apdex' FROM Transaction limit 25`;
 ```
 
 Your Nerdlet should look similar to below:
@@ -414,7 +413,7 @@ Update your constructor method with the code below. This will come in handy as w
 
 We want to be able to FACET the chart in our Nerdlet to get better more detail from our instrumentation. To do this we will use the `<TextField>` and `<Button>` components to submit the FACET by and verify the input using a `<Modal>` component.
 
-Update the your render method with the code below:
+Update the render method with the code below:
 
 ```javascript
     render() {
@@ -502,7 +501,7 @@ Update the your render method with the code below:
                 <GridItem
                     columnSpan={4}>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}xs
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
@@ -704,7 +703,7 @@ export default class MyNerdlet extends React.Component {
                     <GridItem
                         columnSpan={4}>
                         <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}xs
+                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.TIGHT}
                             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
