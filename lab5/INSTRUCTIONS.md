@@ -60,7 +60,7 @@ render() {
 
 In your console, you should see an output matched the basic query you made using [GraphiQL](https://api.newrelic.com/graphiql) in `lab4`
 
-## Step 2: Using the NerdGrpahQuery components
+## Step 2: Using the NerdGraphQuery components
 
 The `NerdGraphQuery` component returns set of data when making a query. The `loading`, `error`, and `data` objects that are all accessible from a child function within the `NerdGraphQuery`. Next we'll make some updated to our `index.js` file to output our account list on the screen
 
