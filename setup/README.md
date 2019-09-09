@@ -5,6 +5,7 @@
 Run the following scripts:
 
 ```
+nr1 nerdpack:uuid -gf
 npm install
 npm start
 ```

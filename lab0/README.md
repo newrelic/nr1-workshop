@@ -36,6 +36,7 @@ git clone git@github.com:newrelic/nr1-eap-workshop.git
 # then change directory into lab0
 cd workshop/lab0
 
+nr1 nerdpack:uuid -gf
 npm install
 npm start
 ```
