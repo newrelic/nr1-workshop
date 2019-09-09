@@ -1,14 +1,13 @@
-Lab 6: GraphQL and Nerdlets
-===========================================================
+# Lab 6: GraphQL and Nerdlets
 
 The purpose of this lab is twofold:
 
-1. to expose learners to the fundamentals of New Relic's GraphQL interface, and
-2. to offer hands-on experience in interacting with the part of the NR1 SDK that can issue GraphQL requests, `NerdGraphQuery`.
+1. To expose learners to the fundamentals of New Relic's GraphQL interface, and
+2. To offer hands-on experience in interacting with the part of the NR1 SDK that can issue GraphQL requests, `NerdGraphQuery`.
 
 After completing this lab you should understand:
 
-* How to isue `queries` to New Relic's GraphQL service
+* How to issue `queries` to New Relic's GraphQL service
 * How to issue a request to the New Relic `NerdGraphQuery` service from within a Nerdlet
 * A pattern/practice for making use of data from an asynchronous request in a Nerdlet
 
@@ -21,6 +20,7 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 ```bash
 # from the nr1-eap-workshop directory
 cd lab6
+nr1 nerdpack:uuid -gf
 npm install
 npm start
 ```
