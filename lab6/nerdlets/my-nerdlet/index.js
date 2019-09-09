@@ -48,7 +48,11 @@ export default class MyNerdlet extends React.Component {
     render() {
         const { accounts, selectedAccount } = this.state;
         if (accounts) {
-            //we're going to put some option logic here
+
+            // 
+            // INSERT DROPDOWN COMPONENT HERE (sorry for yelling)
+            //
+
             return <Stack alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                 directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                 <StackItem>
