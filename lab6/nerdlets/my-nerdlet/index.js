@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Spinner, Stack, StackItem, BillboardChart, PieChart, NerdGraphQuery } from 'nr1';
+import { Dropdown, DropdownItem, Spinner, Stack, StackItem, BillboardChart, PieChart, NerdGraphQuery } from 'nr1';
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
@@ -47,17 +47,19 @@ export default class MyNerdlet extends React.Component {
 
     render() {
         const { accounts, selectedAccount } = this.state;
+        
+        //
+        // Insert filtering logic here
+        //
+
         if (accounts) {
-
-            // 
-            // INSERT DROPDOWN COMPONENT HERE (sorry for yelling)
-            //
-
             return <Stack alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                 directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                <StackItem>
-                    <div>We're going to replace this with a Select component</div>
-                </StackItem>
+                {selectedAccount &&
+                    <StackItem>
+                        <div>We're going to replace this with our <Dropdown></Dropdown> component</div>
+                    </StackItem>
+                }
                 {selectedAccount &&
                     <StackItem>
                         <Stack

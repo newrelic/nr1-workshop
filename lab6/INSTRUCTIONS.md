@@ -78,10 +78,9 @@ _Note: There's a lot more code in this initial file. Take a few moments to revie
 npm install --save graphql graphql-tag react-select
 ```
 
-3. Next, let's add some imports to the top of our `lab6/nerdlets/my-nerdlet/index.js` file.
+3. Next, let's add an import to the top of our `lab6/nerdlets/my-nerdlet/index.js` file.
 
 ```javascript
-import Select from 'react-select';
 import gql from 'graphql-tag';
 ```
 
@@ -104,18 +103,28 @@ import gql from 'graphql-tag';
             const accounts = results.data.actor.accounts.map(account => {
                 return account;
             });
-            this.setState({ accounts });
+            const account = accounts.length > 0 && accounts[0];
+            this.setState({ selectedAccount: account, accounts });
         }).catch((error) => { console.log(error); })
     }
 ```
 
-5. Add the following logic to the `render` method to make use of our new `state` data using the `Select` component we imported earlier.
-
-_Note: you'll notice that - for the purposes of demonstration - we're being a bit more verbose in the code, building out a set of options and values for our `Select` component._
+5. Add the following filter logic and `Dropdown` and `DropdownItem` components to the `render` method to make use of our new `state` data.
 
 ```javascript
     render() {
         const { accounts, selectedAccount } = this.state;
+
+        // Logic for filtering our account listing Dropdown
+        const {filter} = (this.state || {})
+
+        if(filter && filter.length > 0) {
+            const re = new RegExp(filter, 'i')
+            accounts = accounts.filter(a => {
+                return a.name.match(re)
+            })
+        }
+
         if (accounts) {
             const options = accounts.map(account => {
                 return {
@@ -128,20 +137,24 @@ _Note: you'll notice that - for the purposes of demonstration - we're being a bi
             console.log([accounts, selectedAccount, selectedOption, options]);
             return <Stack alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                 directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                <StackItem>
-                    <Select
-                        value={selectedOption}
-                        onChange={this.selectAccountBind}
-                        options={options}
-                        className="accountSelect"
-                    />
-                </StackItem>
+                {selectedAccount &&
+                    <StackItem>
+                        <Dropdown title={selectedAccount.name} filterable label="Account"
+                            onChangeFilter={(event) => this.setState({filter: event.target.value})}>
+                        {accounts.map(a => {
+                            return <DropdownItem key={a.id} onClick={() => selectAccount(a)}>
+                            {a.name}
+                            </DropdownItem>
+                        })}
+                        </Dropdown>
+                    </StackItem>
+                }
                 {selectedAccount && ...
                 ...
                 ...
 ```
 
-6. Our `Select` component referenced a `this.selectAccountBind` in the `onChange` event, so we need to define that.
+6. Our `Dropdown` component references a `selectAccount` in the `onClick` event, so we need to define that.
 
 Add the following method to the `lab6/nerdlets/my-nerdlet/index.js` file:
 
@@ -158,7 +171,7 @@ Add the following method to the `lab6/nerdlets/my-nerdlet/index.js` file:
 and add this declaration to the `constructor` method:
 
 ```javascript
-    this.selectAccountBind = this.selectAccount.bind(this);
+    this.selectAccount = this.selectAccount.bind(this)
 ```
 
 Note: At this point, your `lab6/nerdlets/my-nerdlet/index.js` file should look like the following:
@@ -166,8 +179,7 @@ Note: At this point, your `lab6/nerdlets/my-nerdlet/index.js` file should look l
 ```javascript
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Spinner, Stack, StackItem, BillboardChart, PieChart, NerdGraphQuery } from 'nr1';
-import Select from 'react-select';
+import { Dropdown, DropdownItem, Spinner, Stack, StackItem, BillboardChart, PieChart, NerdGraphQuery } from 'nr1';
 import gql from 'graphql-tag';
 
 export default class MyNerdlet extends React.Component {
@@ -179,12 +191,13 @@ export default class MyNerdlet extends React.Component {
 
     constructor(props) {
         super(props)
+        this.selectAccount = this.selectAccount.bind(this)
+
         console.debug(props) // eslint-disable-line
         this.state = {
             accounts: null,
             selectedAccount: null
         }
-        this.selectAccountBind = this.selectAccount.bind(this);
     }
 
     /**
@@ -214,7 +227,7 @@ export default class MyNerdlet extends React.Component {
         ];
     }
 
-    componentDidMount() {
+        componentDidMount() {
         //being verbose for demonstration purposes only
         const q = NerdGraphQuery.query({ query: gql`{
             actor {
@@ -230,11 +243,12 @@ export default class MyNerdlet extends React.Component {
             const accounts = results.data.actor.accounts.map(account => {
                 return account;
             });
-            this.setState({ accounts });
+            const account = accounts.length > 0 && accounts[0];
+            this.setState({ selectedAccount: account, accounts });
         }).catch((error) => { console.log(error); })
     }
 
-    /**
+     /**
      * Option contains a label, value, and the account object.
      * @param {Object} option
      */
@@ -244,26 +258,32 @@ export default class MyNerdlet extends React.Component {
 
     render() {
         const { accounts, selectedAccount } = this.state;
+
+        // Logic for filtering our account listing Dropdown
+        const {filter} = (this.state || {})
+
+        if(filter && filter.length > 0) {
+            const re = new RegExp(filter, 'i')
+            accounts = accounts.filter(a => {
+                return a.name.match(re)
+            })
+        }
+
         if (accounts) {
-            const options = accounts.map(account => {
-                return {
-                    label: account.name,
-                    value: account.id,
-                    account
-                }
-            });
-            const selectedOption = selectedAccount ? { label: selectedAccount.name, value: selectedAccount.id, account: selectedAccount } : null;
-            console.log([accounts, selectedAccount, selectedOption, options]);
             return <Stack alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                 directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                <StackItem>
-                    <Select
-                        value={selectedOption}
-                        onChange={this.selectAccountBind}
-                        options={options}
-                        className="accountSelect"
-                    />
-                </StackItem>
+                {selectedAccount &&
+                    <StackItem>
+                        <Dropdown title={selectedAccount.name} filterable label="Account"
+                            onChangeFilter={(event) => this.setState({filter: event.target.value})}>
+                        {accounts.map(a => {
+                            return <DropdownItem key={a.id} onClick={() => selectAccount(a)}>
+                            {a.name}
+                            </DropdownItem>
+                        })}
+                        </Dropdown>
+                    </StackItem>
+                }
                 {selectedAccount &&
                     <StackItem>
                         <Stack
