@@ -16,6 +16,8 @@
     },
     "author": "New Relic Labs",
     "dependencies": {
+        "graphql": "^14.5.4",
+        "graphql-tag": "^2.10.1",
         "prop-types": "^15.6.2",
         "react": "^16.6.3",
         "react-dom": "^16.6.3"
