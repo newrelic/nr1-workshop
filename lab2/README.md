@@ -31,7 +31,7 @@ nr1 --version
 
 ```bash
 # if you haven't cloned the workshop repo already
-git clone git@github.com:newrelic/nr1-eap-workshop.git
+git clone git@github.com:newrelic/nr1-workshop.git
 
 # then change directory into lab2
 cd workshop/lab2

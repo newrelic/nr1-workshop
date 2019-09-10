@@ -19,7 +19,7 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 **Reminder**: Make sure that you're ready to go with your `lab9` by ensuring you've run the following commands:
 
 ```bash
-# from the nr1-eap-workshop directory
+# from the nr1-workshop directory
 cd lab9
 npm install
 ```

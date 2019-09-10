@@ -88,7 +88,7 @@ export default class AddEntityModal extends Component {
           this.setState({ openModal: false });
           //console.debug(args);
         }}>
-        <Stack directionType={Stack.DIRECTION_TYPE.VERTICAL} distributionType="fill">
+        <Stack directionType={Stack.DIRECTION_TYPE.VERTICAL}>
           <StackItem>
             <TextField
               label={`Search ${label}`}

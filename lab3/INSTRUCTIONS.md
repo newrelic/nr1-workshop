@@ -14,7 +14,7 @@ Load the prerequisites and follow the setup instructions in [Setup](../SETUP.md)
 **Reminder**: Make sure that you're ready to go with your `lab3` by ensuring you've run the following commands:
 
 ```bash
-# from the nr1-eap-workshop directory
+# from the nr1-workshop directory
 cd lab3
 npm install
 npm start
@@ -108,38 +108,34 @@ Replace the render method within `lab3/nerdlets/my-nerdlet/index.js` file and ta
 render() {
     return <Stack
             className="stack"
-            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <StackItem>
-            <Stack
-                className="inner-stack"
-                alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                gapType={Stack.GAP_TYPE.NORMAL}>
-                <StackItem>
-                    <div className="gry-div">Item 1</div>
-                </StackItem>
-                <StackItem>
-                    <div className="gry-div">Item 2</div>
-                </StackItem>
-                <StackItem>
-                    <div className="gry-div">Item 3</div>
-                </StackItem>
-            </Stack>
+                <Stack
+                    className="inner-stack"
+                    directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
+                    gapType={Stack.GAP_TYPE.NORMAL}>
+                    <StackItem>
+                        <div className="gry-div">Item 1</div>
+                    </StackItem>
+                    <StackItem>
+                        <div className="gry-div">Item 2</div>
+                    </StackItem>
+                    <StackItem>
+                        <div className="gry-div">Item 3</div>
+                    </StackItem>
+                </Stack>
             </StackItem>
             <StackItem>
-            <Stack
-                className="inner-stack"
-                alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
-                <StackItem className="inner-stack">
-                    <div className="gry-div">Item 4: This field grows</div>
-                </StackItem>
-                <StackItem className="inner-stack">
-                    <div className="gry-div">Item 5: But, this one doesn't</div> FIXME: what does "grow", and why would this identical stack item not "grow"
-                </StackItem>
-            </Stack>
+                <Stack
+                    className="inner-stack"
+                    directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
+                    <StackItem className="inner-stack">
+                        <div className="gry-div">Item 4: This field grows</div>
+                    </StackItem>
+                    <StackItem className="inner-stack">
+                        <div className="gry-div">Item 5: But, this one doesn't</div> FIXME: what does "grow", and why would this identical stack item not "grow"
+                    </StackItem>
+                </Stack>
             </StackItem>
         </Stack>
     }
@@ -153,37 +149,33 @@ Change the render method within your `lab3/nerdlets/my-nerdlet/index.js` with th
 render() {
     return <Stack
         className="stack"
-        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
         <StackItem>
-        <Stack
-            className="inner-stack"
-            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-            directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-            gapType={Stack.GAP_TYPE.NORMAL}>
-            <StackItem grow="true">
-                <div className="gry-div">Item 1</div>
-            </StackItem>
-            <StackItem grow="true">
-                <div className="gry-div">Item 2</div>
-            </StackItem>
-            <StackItem>
-                <div className="gry-div">Item 3: Now this one doesnt grow</div>
-            </StackItem>
-        </Stack>
+            <Stack
+                className="inner-stack"
+                directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
+                gapType={Stack.GAP_TYPE.NORMAL}>
+                <StackItem grow="true">
+                    <div className="gry-div">Item 1</div>
+                </StackItem>
+                <StackItem grow="true">
+                    <div className="gry-div">Item 2</div>
+                </StackItem>
+                <StackItem>
+                    <div className="gry-div">Item 3: Now this one doesnt grow</div>
+                </StackItem>
+            </Stack>
         </StackItem>
         <StackItem>
-        <Stack
-            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-            distributionType={Stack.DISTRIBUTION_TYPE.FILL}
-            directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-            <StackItem className="inner-stack">
-                <div className="gry">Item 4: This field grows</div>
-            </StackItem>
-            <StackItem className="inner-stack">
-                <div className="gry">Item 5: But, this one doesn't</div>
-            </StackItem>
-        </Stack>
+            <Stack
+                directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+                <StackItem className="inner-stack">
+                    <div className="gry">Item 4: This field grows</div>
+                </StackItem>
+                <StackItem className="inner-stack">
+                    <div className="gry">Item 5: But, this one doesn't</div>
+                </StackItem>
+            </Stack>
         </StackItem>
     </Stack>
     }
@@ -215,16 +207,13 @@ Using the Grid and Stack components you can easily create any layout you wish wi
                 <GridItem
                     columnSpan={8}>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
+                        directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <div className="gry-div">Chart 1</div>
                         </StackItem>
                     </Stack>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <div className="gry-div">Chart 2</div>
@@ -237,8 +226,6 @@ Using the Grid and Stack components you can easily create any layout you wish wi
                 <GridItem
                     columnSpan={4}>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
@@ -269,8 +256,6 @@ Now that you have your layout done, let's add a some chart components. Replace t
                 <GridItem
                     columnSpan={8}>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <LineChart
@@ -284,8 +269,7 @@ Now that you have your layout done, let's add a some chart components. Replace t
                         </StackItem>
                     </Stack>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
+                        directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <AreaChart
@@ -305,8 +289,6 @@ Now that you have your layout done, let's add a some chart components. Replace t
                 <GridItem
                     columnSpan={4}>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
@@ -466,8 +448,6 @@ Update the render method with the code below:
                     </form>
 
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <LineChart
@@ -481,8 +461,6 @@ Update the render method with the code below:
                         </StackItem>
                     </Stack>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <AreaChart
@@ -502,8 +480,6 @@ Update the render method with the code below:
                 <GridItem
                     columnSpan={4}>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
@@ -668,8 +644,6 @@ export default class MyNerdlet extends React.Component {
                             </Modal>
                         </form>
                         <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.LOOSE}>
                             <StackItem>
                                 <LineChart
@@ -683,8 +657,6 @@ export default class MyNerdlet extends React.Component {
                             </StackItem>
                         </Stack>
                         <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.LOOSE}>
                             <StackItem>
                                 <AreaChart
@@ -704,8 +676,6 @@ export default class MyNerdlet extends React.Component {
                     <GridItem
                         columnSpan={4}>
                         <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.TIGHT}
                             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                             <StackItem>

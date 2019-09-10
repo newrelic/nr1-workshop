@@ -22,10 +22,8 @@ export default class SummaryBar extends Component {
     //output a series of micro-charts to show overall KPI's
     return (
       <Stack
-          alignmentType={Stack.ALIGNMENT_TYPE.FILL}
           directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-          gapType={Stack.GAP_TYPE.TIGHT}
-      >
+          gapType={Stack.GAP_TYPE.TIGHT}>
           <StackItem className="inline">
             {countryCode ? <HeadingText>{regionCode ? `${regionCode}, ` : ''}{countryCode} Stats</HeadingText> : <HeadingText>Overall</HeadingText> }
           </StackItem>

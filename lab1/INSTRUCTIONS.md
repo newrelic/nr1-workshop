@@ -14,8 +14,9 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 **Reminder**: Make sure that you're ready to go with your `lab1` by ensuring you've run the following commands:
 
 ```bash
-# from the nr1-eap-workshop directory
+# from the nr1-workshop directory
 cd lab1
+nr1 nerdpack:serve -gf
 npm install
 ```
 
@@ -68,7 +69,7 @@ _Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the
     }
 ```
 
-_Note: The value of the accountId just needs to be a New Relic account to which you have access. Feel free to replace `1606862` with any valid New Relic accountId to which you have access._
+_Note: The value of the accountId just needs to be a New Relic account to which you have access. Replace `1606862` with any valid New Relic accountId to which you have access._
 
 6. Save `index.js` and watch the `Lab 1 Nerdlet` reload in your Browser.
 7. Ctrl+click (or right click) on the web browser screen displaying our Nerdlet and choose the menu item `Inspect`.
@@ -119,9 +120,7 @@ import { TableChart, Stack, StackItem } from 'nr1';
         //return the JSX we're rendering
         return (
             <Stack
-                alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                 directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                 gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                 <StackItem>
                     <div className="chart">
@@ -165,9 +164,7 @@ That all results in the following block of code. Copy/reproduce the code below a
         return (
             <ChartGroup>
                 <Stack
-                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                    distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
                         <div className="chart">
@@ -176,9 +173,7 @@ That all results in the following block of code. Copy/reproduce the code below a
                     </StackItem>
                     {appId && <StackItem>
                         <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
                                 <div className="chart">
@@ -271,9 +266,7 @@ export default class Lab1Nerdlet extends React.Component {
         return (
             <ChartGroup>
                 <Stack
-                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                    distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
                         <div className="chart">
@@ -286,9 +279,7 @@ export default class Lab1Nerdlet extends React.Component {
                     </StackItem>
                     {appId && <StackItem>
                         <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
                                 <div className="chart">

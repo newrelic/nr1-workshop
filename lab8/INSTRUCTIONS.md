@@ -19,7 +19,7 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 **Reminder**: Make sure that you're ready to go with your `lab8` by ensuring you've run the following commands:
 
 ```bash
-# from the nr1-eap-workshop directory
+# from the nr1-workshop directory
 cd lab8
 npm install
 ```
@@ -128,10 +128,8 @@ Now, we're ready to create the skeleton of our `render` method.
             return <Tabs>
                 <TabsItem label={`Page Views`} id={1}>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        gapType={Stack.GAP_TYPE.TIGHT}
-                    >
+                        gapType={Stack.GAP_TYPE.TIGHT}>
                         <StackItem grow={true}>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                         </StackItem>
@@ -239,10 +237,8 @@ export default class MyNerdlet extends React.Component {
             return <Tabs>
                 <TabsItem label={`Page Views`} id={1}>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        gapType={Stack.GAP_TYPE.TIGHT}
-                    >
+                        gapType={Stack.GAP_TYPE.TIGHT}>
                         <StackItem grow={true}>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                         </StackItem>
@@ -433,10 +429,8 @@ export default class MyNerdlet extends React.Component {
             return <Tabs>
                 <TabsItem label={`Page Views`} id={1}>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        gapType={Stack.GAP_TYPE.TIGHT}
-                    >
+                        gapType={Stack.GAP_TYPE.TIGHT}>
                         <StackItem grow={true}>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                         </StackItem>
@@ -673,10 +667,8 @@ export default class MyNerdlet extends React.Component {
             return <Tabs>
                 <TabsItem label={`Page Views`} itemKey={1}>
                     <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        gapType={Stack.GAP_TYPE.TIGHT}
-                    >
+                        gapType={Stack.GAP_TYPE.TIGHT}>
                         <StackItem grow={true}>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                         </StackItem>

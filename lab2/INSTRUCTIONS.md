@@ -17,7 +17,7 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 **Reminder**: Make sure that you're ready to go with your `lab2` by ensuring you've run the following commands:
 
 ```bash
-# from the nr1-eap-workshop directory
+# from the nr1-workshop directory
 cd lab2
 npm install
 ```
@@ -207,18 +207,14 @@ export default class MyNerdlet extends React.Component {
         return (
             <ChartGroup>
                 <Stack
-                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                    distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                     gapType={Stack.GAP_TYPE.TIGHT}>
                     <StackItem>
                         <h1>Reviewing Transactions in account {this.accountId}</h1>
                     </StackItem>
                     <StackItem>
                         <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.TIGHT}>
                             <StackItem>
                                 <TableChart query={nrql+since} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
@@ -247,9 +243,7 @@ export default class MyNerdlet extends React.Component {
                     </StackItem>}
                     {entityGuid && <StackItem>
                         <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
                                 <h2>Transaction counts for {appName}</h2>
