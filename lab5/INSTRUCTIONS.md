@@ -62,7 +62,7 @@ In your console, you should see an output matched the basic query you made using
 
 ## Step 2: Using the NerdGraphQuery components
 
-The `NerdGraphQuery` component returns set of data when making a query. The `loading`, `error`, and `data` objects that are all accessible from a child function within the `NerdGraphQuery`. Next we'll make some updated to our `index.js` file to output our account list on the screen
+The `NerdGraphQuery` component returns set of data when making a query. The `loading`, `error`, and `data` objects that are all accessible from a child function within the `NerdGraphQuery`. Next we'll make some changes to our `index.js` file to output our account list on the screen.
 
 1. Update your import statement in the `index.js` files with the code below to add the `Spinner` and `BlockText` from the `nr1` library:
 
@@ -123,15 +123,15 @@ import { NerdGraphQuery, Spinner, HeadingText, BlockText, Grid, GridItem } from 
     }
 ```
 
- Go back to the browser window and reload the current page, you should see a list with names and ids for all of the accounts your user has access to. You should be looking at a screen like the following:
+ 4. Go back to the browser window and reload the current page, you should see a list with names and IDs for all of the accounts your user has access to. You should be looking at a screen like the following:
 
 ![Accounts Table](../screenshots/lab5_screen02.png)
 
 ## Step 3: Using the Pre-Defined Entity Query Components
 
-Using the `NerdGraphQuery` allows you to access data from using any type of query to `NerdGraph`, but for convenience, additional components are provided, with pre-defined Entity Queries
+Using the `NerdGraphQuery` allows you to access data from using any type of query to `NerdGraph`, but for convenience, additional components are provided, with pre-defined Entity Queries.
 
-1. We need to import the pre-defined entity queries from the nr1 library. Update the import statement in your `index.js` file with the code below:
+1. We need to import the pre-defined entity queries from the `nr1` library. Update the import statement in your `index.js` file with the code below:
 
 ```javascript
 import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText } from 'nr1';
@@ -221,7 +221,7 @@ Your browser should show a small table that displays the name and domain of your
 ![Entity By name Query](../screenshots/lab5_screen05.png)
 
 
-7. Finally, using the `EntityCountQuey` you can quickly query the number of entities available for each entityDomain and entityType. Update your `index.js` file, adding the code below to your `render` method under the last `StackItem`.
+7. Finally, using the `EntityCountQuery` you can quickly query the number of entities available for each entityDomain and entityType. Update your `index.js` file, adding the code below to your `render` method under the last `StackItem`.
 
 ```javascript
     <StackItem className="container">

@@ -8,7 +8,7 @@ The purpose of this lab is twofold:
 
 After completing this lab you should understand:
 
-* How to isue `queries` to New Relic's GraphQL service
+* How to issue `queries` to New Relic's GraphQL service
 * How to issue a request to the New Relic `NerdGraphQuery` service from within a Nerdlet
 * A pattern/practice for making use of data from an asynchronous request in a Nerdlet
 
@@ -31,7 +31,7 @@ Open a web browser to `https://one.newrelic.com?nerdpacks=local`, and click on t
 
 ## Step 1: Interacting with New Relic's GraphQL service
 
-1. Navigate to the New Relic GraphiQL interface at: `https://api.newrelic.com/graphiql`
+1. Navigate to the New Relic GraphiQL interface at: [https://api.newrelic.com/graphiql] (https://api.newrelic.com/graphiql)
 
 2. If you don't have a valid **API Key**, create one using the drop down option in the center/top of the interface (see below):
 ![GraphiQL](../screenshots/lab6_screen01.png)
@@ -72,7 +72,7 @@ code lab6/nerdlets/my-nerdlet/index.js
 
 _Note: There's a lot more code in this initial file. Take a few moments to review what's going on. If you trace the logic in the `render` method, it'll become obvious why we're getting the `Spinner` on the screen: we haven't loaded any accounts._
 
-2. We're going to add some libraries to to our project that we're going to need. So let's start with adding them to our package.json
+2. We're going to add some libraries to to our project that we're going to need. So let's start with adding them to our package.json vi `npm` in the terminal:
 
 ```bash
 npm install --save graphql graphql-tag react-select

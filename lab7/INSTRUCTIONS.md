@@ -121,7 +121,7 @@ constructor(props) {
     }
 ```
 
-_Note: the New Relic entityGuid is a GUID that is made up of four components: an accountId, an entity domain, an entity type, and a unique ID within that domain/type combo all base64 encoded. So when you have an entityGuid, you are a decode away from access to all of that information._
+_Note: the New Relic `entityGuid` is a GUID that is made up of four components: an accountId, an entity domain, an entity type, and a unique ID within that domain/type combo all base64 encoded. So when you have an entityGuid, you are a decode away from access to all of that information._
 
 7. Now, we need to load the Entity from New Relic so that we can get access to the Browser Applicaton name. To do that, we're going to make use of two React lifecycle methods and a utility method from our `utils` file. Add the following to `lab7/nerdlets/my-nerdlet/index.js`.
 

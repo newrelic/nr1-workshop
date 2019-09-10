@@ -200,7 +200,7 @@ _Note: For more documentation on the `Stack` and `StackItem` and their props vie
 
 1. Creating your layout using `<Grid>`, `<GridItem>`, `<Stack>`, and `<StackItem>` compnents
 
-Update the import statement with your code people:
+Update the import statement with your code:
 
 ```javascript
 import { Grid, GridItem, Stack, StackItem, ChartGroup, AreaChart, BarChart, LineChart, TableChart, PieChart, Button, TextField, Modal, Toast } from 'nr1';
@@ -350,13 +350,13 @@ Your Nerdlet should look similar to below:
 
 ![Lab3 Nerdlet with Charts](../screenshots/lab3_screen06.png)
 
-## Interacting with the New Relic One UI
+## Step 4: Interacting with the New Relic One UI
 
 The NR1 library also exposes components that allow you to interact with the New Relic One UI.
 
 In the next few steps we'll add some UI components that updates the UI and add more detail to our charts.
 
-Add the following methods to your code above your render method. These will come in handy later to help us interact with the UI.
+1. Add the following methods to your code above your render method. These will come in handy later to help us interact with the UI.
 
 ```javascript
     handleChange(e){
@@ -385,7 +385,7 @@ Add the following methods to your code above your render method. These will come
     }
 ```
 
-Update your constructor method with the code below. This will come in handy as well a little later.
+2. Update your constructor method with the code below. This will come in handy as well a little later.
 
 ```javascript
     constructor(props) {
@@ -410,9 +410,7 @@ Update your constructor method with the code below. This will come in handy as w
     }
 ```
 
-1. Using the `<TextField>`, `<Button>`, and `<Modal>` component to get and confirm user input
-
-We want to be able to FACET the chart in our Nerdlet to get better more detail from our instrumentation. To do this we will use the `<TextField>` and `<Button>` components to submit the FACET by and verify the input using a `<Modal>` component.
+3. We want to be able to `FACET` the chart in our Nerdlet to get better more detail from our instrumentation. To do this we will use the `<TextField>` and `<Button>` components to submit the `FACET` by and verify the input using a `<Modal>` component.
 
 Update the render method with the code below:
 
@@ -528,11 +526,11 @@ Your browser should look similar to below:
 
 ![Lab3 Nerdlet with Input](../screenshots/lab3_screen07.png)
 
-Enter the  FACET `appName` in the `<TextField>` and click the FACET button. And, you see the `<Modal>` similar to below:
+4. Enter the  FACET `appName` in the `<TextField>` and click the FACET button. And, you see the `<Modal>` similar to below:
 
 ![Lab3 Nerdlet with Modal](../screenshots/lab3_screen08.png)
 
-2. Adding the `<Toast>` component for user notifications after UI has been updated.
+5. Adding the `<Toast>` component for user notifications after UI has been updated.
 
 Add the code below to your `index.js` file between the `<React.Fragment>` and `<ChartGroup>` components
 
@@ -547,7 +545,7 @@ Add the code below to your `index.js` file between the `<React.Fragment>` and `<
 }
 ```
 
-Refresh your browser and FACET your charts by `host`. Your browser should look similar to below.
+6. Refresh your browser and `FACET` your charts by `host`. Your browser should look similar to below.
 
 ![Lab3 Nerdlet with Toast](../screenshots/lab3_screen09.png)
 

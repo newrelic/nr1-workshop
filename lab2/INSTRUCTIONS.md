@@ -22,7 +22,7 @@ cd lab2
 npm install
 ```
 
-## Step 1: Verifying our Nerdlet and reviewing the [Nerdlet API docs](http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html)
+## Step 1: Verifying our Nerdlet and reviewing the [New Relic One SDK docs](http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html)
 
 ![Nerdlet 2 Launcher](../screenshots/lab2_screen00.png)
 
@@ -40,7 +40,7 @@ _Note: we're going to cover how to **not** hardcode the accountIds for NRQL quer
 
 ## Step 2: Implementing the time picker
 
-1. Go back to the [Nerdlet interface](https://one.newrelic.com/launcher/lab2.my-launcher?nerdpacks=local), and change the value of the Time Window in the top right corner of the UI. <img src="../screenshots/lab2_screen03.png" width="200" align="right" style="margin:10px" />
+1. Change the value of the Time Window in the top right corner of the UI. <img src="../screenshots/lab2_screen03.png" width="200" align="right" style="margin:10px" />
 
 Notice that the time windows and charts in the Nerdlet do not refresh and do not respond to changes in the time window. (_Hint: That's because we haven't told them to use the selected time range yet!_) Let's do something about that.
 
@@ -51,17 +51,17 @@ const { duration } = this.props.launcherUrlState.timeRange;
 const since = ` SINCE ${duration/1000/60} MINUTES AGO `;
 ```
 
-1. Now, we're going to make `duration` part of each of the four query objects.
+3. Now, we're going to make `duration` part of each of the four query objects.
 * `TableComponent`: `query={nrql+since}`
 * upper `LineChart`: `query={trxOverT+since}`
 * lower `LineChart`: `query={tCountNrql+since}`
 * `ScatterChart`: `query={apdexNrql+since}`
 
-3. Save the file and reload. Now try to change the time window again. You should see your charts reading and re-rendering based on the `timeRange`.
+4. Save the file and reload. Now try to change the time window again. You should see your charts reading and re-rendering based on the `timeRange`.
 
 ## Step 3: Load and display an Entity
 
-In this portion of the pageant, we're going to call another Nerdlet, specifically the overview experience for an APM Service, using the `navigation` object to open a predefined portion of NR1. We're also going to utilize the `Button` component.
+In this step we're going to call another Nerdlet, specifically the overview experience for an APM Service, using the `navigation` object to open a predefined portion of NR1. We're also going to utilize the `Button` component.
 
 We need to start by adding a `Button` to the screen.
 
@@ -93,7 +93,7 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
     }
 ```
 
-1. Add the following line to the nerdlet's `constructor` method.
+4. Add the following line to the nerdlet's `constructor` method.
 
 ```javascript
     this.openEntity = this.openEntity.bind(this);

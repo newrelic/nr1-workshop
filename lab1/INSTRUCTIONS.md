@@ -36,17 +36,17 @@ nerdlet lab1-nerdlet is available at "./nerdlets/lab1-nerdlet"
 nr1 nerdpack:serve
 ```
 
-You'll notice that the CLI creates three files in the `nerdlets/lab1-nerdlet` directory: index.js, styles.scss, and a nr1.json configuration.
+You'll notice that the CLI creates three files in the `nerdlets/lab1-nerdlet` directory: `index.js`, `styles.scss`, and a `nr1.json` configuration.
 
-2. Assuming the the developer server is still running (via `nr1 nerdpack:serve`), validate (in a web browser) that you can click on and see the `Lab 1 Launcher` launcher by navigating in Google Chrome to https://one.newrelic.com?nerdpacks=local and click on the `Lab 1 Launcher`.
+2. Assuming the the development server is still running (via `nr1 nerdpack:serve`), validate (in a web browser) that you can click on and see the `Lab 1 Launcher` launcher by navigating in Google Chrome to https://one.newrelic.com?nerdpacks=local and click on the `Lab 1 Launcher`.
 
 3. Change the `displayName` property of the Nerdlet in `nerdlets/lab1-nerdlet/nr1.json` to `Lab 1 Nerdlet` and save that file.
+
+_Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the Terminal and then running `nr1 nerdpack:serve`._
 
 4. Check Google Chrome. You should see the following:
 
 ![lab1-nerdlet](../screenshots/lab1_screen01.png)
-
-_Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the Terminal and then running `nr1 nerdpack:serve`._
 
 5. Next, we're going to prep the Nerdlet to be able to generate some charts. Add the following code to your `Lab1Nerdlet` class in `nerdlets/lab1-nerdlet/index.js`.
 
@@ -202,9 +202,9 @@ _Note that the line containing `{appId && <Stack...` ensures that the lower sect
 
 3. Save the file and reload the page in the web browser.
 
-Note that the second row of additional charts is never drawm because the `state.appId` is always NULL. There's presently no way to set its value. Let's fix that.
+Note that the second row of additional charts is never drawn because the `state.appId` is always NULL. We're not currently setting its value. Let's fix that.
 
-4. Add the following method to your Nerdlet React component, e.g. after the `contructor(props)` we added above:
+4. Add the following method to your Nerdlet React component after the `contructor(props)` we added above:
 
 ```javascript
     setApplication(inAppId, inAppName) {
@@ -212,12 +212,12 @@ Note that the second row of additional charts is never drawm because the `state.
     }
 ```
 
-1. Add a new attribute named `onClickTable` to the existing `TableChart` as a way to configure a `click` event on the table rows.
+5. Add a new attribute named `onClickTable` to the existing `TableChart` as a way to configure a `click` event on the table rows.
 
-The onClickTable receives four parameters that each provide a different view of the overall data.
-- dataEl: The inner contents of the specific Table element on which the user clicked.
-- row: a JS object of the data that makes up the entire row of that table
-- chart: the entire JS object used to generate the chart, both headings and data rows
+The `onClickTable` receives three parameters that each provide a different view of the overall data.
+- `dataEl`: The inner contents of the specific Table element on which the user clicked.
+- `row`: a JS object of the data that makes up the entire row of that table
+- `chart`: the entire JS object used to generate the chart, both headings and data rows
 
 ```javascript
     <div className="chart">
@@ -229,7 +229,7 @@ The onClickTable receives four parameters that each provide a different view of 
     </div>
 ```
 
-1. The resulting `index.js` should look like the following:
+6. The resulting `index.js` should look like this:
 
 ```javascript
 import React from 'react';
@@ -309,7 +309,7 @@ export default class Lab1Nerdlet extends React.Component {
 }
 ```
 
-1. Save the file and reload the page. You should be able to click on an application and see the resulting second row of charts. :sparkles:
+7. Save the file and reload the page. You should be able to click on a row in the table and see the resulting charts below. :sparkles:
 
 ![Full example](../screenshots/lab1_screen04.png)
 

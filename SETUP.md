@@ -6,7 +6,7 @@ It's quick and easy to set up your environment to build [New Relic One applicati
 
 To set up your environment to build a New Relic One application: 
 
-1. In Google Chrome, go to [one.newrelic.com](one.newrelic.com) and select **Extend New Relic One** to enter the [developer denter](https://one.newrelic.com/launcher/developer-center.launcher#pane=eyJuZXJkbGV0SWQiOiJkZXZlbG9wZXItY2VudGVyLmRldmVsb3Blci1jZW50ZXIifQ==). Follow the instructions.
+1. In Google Chrome, go to [one.newrelic.com](one.newrelic.com) and select **Extend New Relic One** to enter the [developer center](https://one.newrelic.com/launcher/developer-center.launcher#pane=eyJuZXJkbGV0SWQiOiJkZXZlbG9wZXItY2VudGVyLmRldmVsb3Blci1jZW50ZXIifQ==). Follow the instructions.
 
 2. To prepare to do the workshop, you need to clone the workshop repo: 
 

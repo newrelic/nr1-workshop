@@ -93,28 +93,11 @@ your lab0-nerdlet is available at "./nerdlets/lab0-nerdlet"
 
 You'll notice that the CLI creates three files in the `./nerdlets/lab0-nerdlet` directory: `index.js`, `styles.scss`, and a `nr1.json` configuration.
 
-2. Open the project in your text editor or IDE (reminder: these instructions assume Visual Studio Code, but you are free to use the IDE of your choice. Here's a shout out to all the VI users!!)
-
-```bash
-# if you're not there already, navigate to the workshop directory
-cd nr1-eap-workshop/lab0
-# open the current project directory in your IDE
-code .
-# voilà
-```
-
-3. A Nerdlet is created and added to the `./lab0/nerdlets` folder. Your code editor should look similar to the screenshot below:
-
-![lab0-nerdlet-created](../screenshots/lab0_screen03.png)
-
-
 # Step 3: Connecting your Launcher and Nerdlet
 
-1. Within `./lab0/launchers/lab0-launcher` open the Launcher's `nr1.json` configuration file and add the correct `rootNerdletId`.
+1. Within `./lab0/launchers/lab0-launcher` open the Launcher's `nr1.json` configuration file and add the correct `rootNerdletId`. 
 
-![lab0-launcher](../screenshots/lab0_screen04.png)
-
-2. Replace the code within `./lab0/launchers/lab0-launcher/nr1.json` with the JSON object below.
+The `rootNerdletId` value is a combination of the package ID (the `nr1.uuid` value in `lab0/package.json`) and the name we gave the nerdlet earlier (lab0-nerdlet).
 
 ```bash
 {
@@ -127,13 +110,11 @@ code .
 }
 ```
 
-3. To draw the association precisesly, open the file `lab0/package.json` and find the value of the attribute `nr1.uuid`. That uuid is the identifier of your package.
+2. Save the `nr1.json`, then navigate back https://one.newrelic.com/?nerdpacks=local and click on the `Lab0Launcher`. Your browser window should look similar to below with the `lab0-nerdlet` launched. 
 
-4. Save the `nr1.json`, then navigate back https://one.newrelic.com/?nerdpacks=local and click on the `Lab0Launcher`. Your browser window should look similar to below with the `lab0-nerdlet` launched.
+**Note:** You may need to restart the development server in order for the changes to take effect. To restart, type `Ctrl`+`c` in the Terminal and then running `nr1 nerdpack:serve`.
 
 ![lab0-nerdlet](../screenshots/lab0_screen05.png)
-
-_Note: if not, restart your local developer server by typing `Ctrl`+`c` in the Terminal and then running `nr1 nerdpack:serve`._
 
 # Step 4: Creating a Nerdpack
 
