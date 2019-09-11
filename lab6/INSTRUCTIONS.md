@@ -75,7 +75,7 @@ _Note: There's a lot more code in this initial file. Take a few moments to revie
 2. We're going to add some libraries to to our project that we're going to need. So let's start with adding them to our package.json
 
 ```bash
-npm install --save graphql graphql-tag react-select
+npm install --save graphql graphql-tag
 ```
 
 3. Next, let's add an import to the top of our `lab6/nerdlets/my-nerdlet/index.js` file.
