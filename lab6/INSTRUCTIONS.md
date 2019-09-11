@@ -135,7 +135,10 @@ import gql from 'graphql-tag';
             });
             const selectedOption = selectedAccount ? { label: selectedAccount.name, value: selectedAccount.id, account: selectedAccount } : null;
             console.log([accounts, selectedAccount, selectedOption, options]);
-            return <Stack directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+            return <Stack
+                alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
+                directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                 {selectedAccount &&
                     <StackItem>
                         <Dropdown title={selectedAccount.name} filterable label="Account"
@@ -269,7 +272,10 @@ export default class MyNerdlet extends React.Component {
         }
 
         if (accounts) {
-            return <Stack directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+            return <Stack
+                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                    gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
+                    directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                 {selectedAccount &&
                     <StackItem>
                         <Dropdown title={selectedAccount.name} filterable label="Account"
@@ -285,6 +291,8 @@ export default class MyNerdlet extends React.Component {
                 {selectedAccount &&
                     <StackItem>
                         <Stack
+                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                            gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
                             {this.nrqlChartData().map((d, i) => <StackItem key={i} shrink={true}>
                                 <h2>{d.title}</h2>

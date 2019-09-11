@@ -1,29 +1,31 @@
 {
-    "private": true,
-    "name": "lab9",
-    "description": "NR1 UI Package lab9",
-    "version": "0.1.0",
-    "scripts": {
-        "start": "nr1 nerdpack:serve",
-        "test": "exit 0"
-    },
-    "nr1": {
-        "uuid": "2106217f-0576-4391-ba12-c6e61a840314",
-        "sdkVersion": 2
-    },
-    "bugs": {
-        "email": "labs@newrelic.com"
-    },
-    "author": "New Relic Labs",
-    "dependencies": {
-        "js-base64": "^2.5.1",
-        "prop-types": "^15.6.2",
-        "react": "^16.6.3",
-        "react-dom": "^16.6.3"
-    },
-    "browserslist": [
-        "last 2 versions",
-        "not ie < 11",
-        "not dead"
-    ]
+  "private": true,
+  "name": "lab9",
+  "description": "NR1 UI Package lab9",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "nr1 nerdpack:serve",
+    "test": "exit 0"
+  },
+  "nr1": {
+    "uuid": "b4acb39d-b5ba-44a4-9a90-5ec24fa5a070",
+    "sdkVersion": 2
+  },
+  "bugs": {
+    "email": "labs@newrelic.com"
+  },
+  "author": "New Relic Labs",
+  "dependencies": {
+    "js-base64": "^2.5.1",
+    "moment": "^2.24.0",
+    "moment-duration-format": "^2.3.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not ie < 11",
+    "not dead"
+  ]
 }

@@ -81,7 +81,6 @@ git clone git@github.com:newrelic/nr1-workshop.git
 
 # then change directory into lab9
 cd workshop/lab9
-
 nr1 nerdpack:uuid -gf
 npm install
 npm start

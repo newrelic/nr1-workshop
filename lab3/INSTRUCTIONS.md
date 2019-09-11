@@ -107,11 +107,11 @@ Replace the render method within `lab3/nerdlets/my-nerdlet/index.js` file and ta
 ```javascript
 render() {
     return <Stack
-            className="stack"
+            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <StackItem>
                 <Stack
-                    className="inner-stack"
+                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                     gapType={Stack.GAP_TYPE.NORMAL}>
                     <StackItem>
@@ -127,12 +127,12 @@ render() {
             </StackItem>
             <StackItem>
                 <Stack
-                    className="inner-stack"
+                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
-                    <StackItem className="inner-stack">
+                    <StackItem grow>
                         <div className="gry-div">Item 4: This field grows</div>
                     </StackItem>
-                    <StackItem className="inner-stack">
+                    <StackItem>
                         <div className="gry-div">Item 5: But, this one doesn't</div> FIXME: what does "grow", and why would this identical stack item not "grow"
                     </StackItem>
                 </Stack>
@@ -148,34 +148,25 @@ Change the render method within your `lab3/nerdlets/my-nerdlet/index.js` with th
 ```javascript
 render() {
     return <Stack
-        className="stack"
+        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
         <StackItem>
             <Stack
-                className="inner-stack"
                 directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                 gapType={Stack.GAP_TYPE.NORMAL}>
-                <StackItem grow="true">
-                    <div className="gry-div">Item 1</div>
+                <StackItem grow>
+                    <div className="gry-div">Item 1: grows</div>
                 </StackItem>
-                <StackItem grow="true">
-                    <div className="gry-div">Item 2</div>
+                <StackItem grow>
+                    <div className="gry-div">Item 2: grows</div>
                 </StackItem>
                 <StackItem>
-                    <div className="gry-div">Item 3: Now this one doesnt grow</div>
+                    <div className="gry-div">Item 3: Now this one doesn't grow</div>
                 </StackItem>
             </Stack>
         </StackItem>
-        <StackItem>
-            <Stack
-                directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                <StackItem className="inner-stack">
-                    <div className="gry">Item 4: This field grows</div>
-                </StackItem>
-                <StackItem className="inner-stack">
-                    <div className="gry">Item 5: But, this one doesn't</div>
-                </StackItem>
-            </Stack>
+        <StackItem style={{backgroundColor: 'blue'}}>
+            <div className="gry">Item 4: here too</div>
         </StackItem>
     </Stack>
     }
@@ -188,7 +179,7 @@ Your browser should now look similar to the snapshot below:
 _Note: For more documentation on the `Stack` and `StackItem` and their props view the `nr1` object documentation at: http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html
 
 
-## Step 3: Building an nerdpack with UI Components
+## Step 3: Building an Nerdpack with UI Components
 
 1. Creating your layout using `<Grid>`, `<GridItem>`, `<Stack>`, and `<StackItem>` compnents
 
@@ -203,7 +194,7 @@ Using the Grid and Stack components you can easily create any layout you wish wi
 ```javascript
     render() {
         return <ChartGroup>
-            <Grid className="grid">
+            <Grid>
                 <GridItem
                     columnSpan={8}>
                     <Stack
@@ -257,7 +248,7 @@ Now that you have your layout done, let's add a some chart components. Replace t
                     columnSpan={8}>
                     <Stack
                         gapType={Stack.GAP_TYPE.LOOSE}>
-                        <StackItem>
+                        <StackItem grow>
                             <LineChart
                                 query={throughput+since}
                                 accountId={this.accountId}
@@ -449,7 +440,7 @@ Update the render method with the code below:
 
                     <Stack
                         gapType={Stack.GAP_TYPE.LOOSE}>
-                        <StackItem>
+                        <StackItem grow>
                             <LineChart
                                     query={throughput+since+this.state.facet}
                                     accountId={this.accountId}
@@ -645,7 +636,7 @@ export default class MyNerdlet extends React.Component {
                         </form>
                         <Stack
                             gapType={Stack.GAP_TYPE.LOOSE}>
-                            <StackItem>
+                            <StackItem grow>
                                 <LineChart
                                         query={throughput+since+this.state.facet}
                                         accountId={this.accountId}

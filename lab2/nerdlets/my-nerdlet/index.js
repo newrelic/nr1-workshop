@@ -73,7 +73,7 @@ export default class MyNerdlet extends React.Component {
                     {entityGuid && <StackItem>
                         <Stack
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                            gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
+                            gapType={Stack.GAP_TYPE.TIGHT}>
                             <StackItem>
                                 <h2>Transaction counts for {appName}</h2>
                                 <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>

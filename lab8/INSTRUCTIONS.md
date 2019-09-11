@@ -128,12 +128,13 @@ Now, we're ready to create the skeleton of our `render` method.
             return <Tabs>
                 <TabsItem label={`Page Views`} id={1}>
                     <Stack
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
                         gapType={Stack.GAP_TYPE.TIGHT}>
-                        <StackItem grow={true}>
+                        <StackItem>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                         </StackItem>
-                        <StackItem grow={true}>
+                        <StackItem>
                         </StackItem>
                     </Stack>
                 </TabsItem>
@@ -237,12 +238,13 @@ export default class MyNerdlet extends React.Component {
             return <Tabs>
                 <TabsItem label={`Page Views`} id={1}>
                     <Stack
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
                         gapType={Stack.GAP_TYPE.TIGHT}>
-                        <StackItem grow={true}>
+                        <StackItem>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                         </StackItem>
-                        <StackItem grow={true}>
+                        <StackItem>
                             <Map
                             className="containerMap"
                             style={{height: `${height-125}px`}}
@@ -429,12 +431,13 @@ export default class MyNerdlet extends React.Component {
             return <Tabs>
                 <TabsItem label={`Page Views`} id={1}>
                     <Stack
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
                         gapType={Stack.GAP_TYPE.TIGHT}>
-                        <StackItem grow={true}>
+                        <StackItem>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                         </StackItem>
-                        <StackItem grow={true}>
+                        <StackItem>
                         <NrqlQuery
                                 formatType={NrqlQuery.FORMAT_TYPE.RAW}
                                 accountId={accountId}
@@ -667,12 +670,13 @@ export default class MyNerdlet extends React.Component {
             return <Tabs>
                 <TabsItem label={`Page Views`} itemKey={1}>
                     <Stack
+                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
                         gapType={Stack.GAP_TYPE.TIGHT}>
-                        <StackItem grow={true}>
+                        <StackItem>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                         </StackItem>
-                        <StackItem grow={true}>
+                        <StackItem>
                             <NrqlQuery
                                 formatType={NrqlQuery.FORMAT_TYPE.RAW}
                                 accountId={accountId}

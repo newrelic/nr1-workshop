@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { EntitySearchQuery, Modal, Stack, StackItem, TextField, Spinner } from 'nr1';
-import { alertSeverityToColor, decodeEntityFromEntityGuid } from './utils';
+import { alertSeverityToColor } from './utils';
 
 export default class AddEntityModal extends Component {
   static propTypes = {
+    entity: PropTypes.object,
     entities: PropTypes.arrayOf(PropTypes.object),
     entityType: PropTypes.shape({
       type: PropTypes.string.isRequired,
@@ -36,11 +37,14 @@ export default class AddEntityModal extends Component {
     }
   }
 
-  onSearch(e) {
+  async onSearch(e) {
     const query = e.target.value;
     //console.debug("onSearch", query);
     if (query && query.length > 2) {
-      const { entityType } = this.props;
+      let { entityType, entity, entities } = this.props;
+      if (entity) {
+        entityType = { type: entity.type, domain: entity.domain };
+      }
       this.setState({ isLoading: true });
       const filters = [{
         type: 'searchQuery',
@@ -50,27 +54,29 @@ export default class AddEntityModal extends Component {
         type: 'entityType',
         value: { type: entityType.type, domain: entityType.domain }
       }];
-      const { entities } = this.props;
-      if (entities) {
-        const entity = decodeEntityFromEntityGuid(entities[0].id);
+      if (entity) {
         filters.push({
           type:'tag',
           value: { key: 'accountId', value: entity.accountId }
         });
       }
-      EntitySearchQuery.query({ filters }).then(rs => {
-        //console.log("onSearch results", rs);
-        if (rs.data) {
-          //filter the results to those that are NOT already in the entities prop AND those that are reporting some status or another (non-alert services won't show up in the charts and will therefore be confusing for the example)
-          const results = rs.data.actor.entitySearch.results.entities.filter(entity => !entities || (!entities.find(ex => ex.id == entity.id) && entity.alertSeverity != "NOT_REPORTING" && entity.alertSeverity != "NOT_CONFIGURED" ));
-          //console.debug("Found the following in the search", results);
-          this.setState({ isLoading: false, results });
-        } else {
-          this.setState({ isLoading: false });
-        }
-      }).catch(error => {
-          console.error(error); //eslint-disable-line
-      });
+      const rs  = await EntitySearchQuery.query({ filters });
+      console.debug(rs);
+      if (rs.data) {
+        //filter the results to those that are NOT already in the entities prop AND those that are reporting some status or another (non-alert services won't show up in the charts and will therefore be confusing for the example)
+        const results = rs.data.actor.entitySearch.results.entities.filter((entity) => {
+          if (!entities) {
+            return true;
+          }
+          if (!entities.find(ex => ex.guid == entity.guid)) {
+            return true;
+          }
+          return entity.alertSeverity != "NOT_REPORTING" && entity.alertSeverity != "NOT_CONFIGURED";
+        });
+        this.setState({ isLoading: false, results });
+      } else {
+        this.setState({ isLoading: false });
+      }
     }
   }
 

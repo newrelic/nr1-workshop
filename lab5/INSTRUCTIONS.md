@@ -19,6 +19,7 @@ Load the prequisites and follow the setup instructions in [Setup and Prequisites
 # if we're not in the lab5 directory get there
 cd ../lab5
 npm install
+nr1 nerdpack:uuid -gf
 npm start
 ```
 
@@ -29,8 +30,7 @@ Open https://one.newrelic.com?nerdpacks=local and click on the `Lab 5 Launcher`.
 1. We need to import the appropriate libraries into our Nerdlet. Open `lab5/nerdlets/lab5-nerdlet/index.js` and add the following near the top of the file.
 
 ```javascript
-import { NerdGraphQuery, Stack, StackItem, HeaderText} from 'nr1';
-import gql from 'graphql-tag';
+import { NerdGraphQuery, Stack, StackItem, HeadingText, Spinner } from 'nr1'
 ```
 
 2. The `NerdGraphQuery` component is going to allow us to access the New Relic NerdGraph API and have access to the power of GraphQL inside of your Nerdlet.
@@ -40,7 +40,7 @@ Let's update our render method in the `index.js` to use the `NerdGraphQuery` com
 ```javascript
 render() {
     return (
-        <NerdGraphQuery query={gql `{actor {user {name email}}}`}>
+        <NerdGraphQuery query={`{actor {user {name email}}}`}>
             {({loading, error, data}) => {
                 console.debug([loading, data, error]); //eslint-disable-line
                 return null
@@ -101,7 +101,7 @@ import { NerdGraphQuery, Stack, StackItem, Spinner, HeadingText, BlockText } fro
         return (<Stack directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <StackItem>
                 <div className="container">
-                    <NerdGraphQuery query={gql `{actor {accounts {id name}}}`}>
+                    <NerdGraphQuery query={`{actor {accounts {id name}}}`}>
                         {({loading, error, data}) => {
                             console.debug([loading, data, error]); //eslint-disable-line
                             if (loading) {
@@ -139,8 +139,6 @@ import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomai
 
 2. To query data about the `entity` that we have currently selected we will use the `EntityByGuidQuery`. Add a second `StackItem` just below the first in the `render` method:
 
-FIXME: There is no entity to select in this UI and entityGuid is undefined
-
 ```javascript
     <StackItem className="container">
         <EntityByGuidQuery entityGuid={this.props.nerdletUrlState.entityGuid}>
@@ -161,11 +159,19 @@ FIXME: There is no entity to select in this UI and entityGuid is undefined
     </StackItem>
 ```
 
+# Important!
+
+In order to get this section to render, you're going to need to navigate to the `Home > Entity Explorer > _Select a Service_ > NerdGraph Nerdlet`. Do that now.
+
+![Entity By Id Query](../screenshots/lab5_screen03a.png)
+
+And you should see the following.
+
 ![Entity By Id Query](../screenshots/lab5_screen03.png)
 
 Your browser should show a small table that displays the name and domain of your current `entity` as a part of the data object that is returned from the `EntityByGuidQuery`.
 
-3. To quickly search through your account entities by domain and type we will use the `EntitiesByDomainTypeQuery`, add the code below to your `render` method under the last `StackItem`:
+1. To quickly search through your account entities by domain and type we will use the `EntitiesByDomainTypeQuery`, add the code below to your `render` method under the last `StackItem`:
 
 ```javascript
     <StackItem className="container">
@@ -258,7 +264,6 @@ In the end, your `index.js` should look like this.
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText, BlockText } from 'nr1';
-import gql from 'graphql-tag';
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
@@ -296,7 +301,7 @@ export default class MyNerdlet extends React.Component {
     render() {
         return (<Stack directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <StackItem className="container">
-                <NerdGraphQuery query={gql `{actor {accounts {id name}}}`}>
+                <NerdGraphQuery query={`{actor {accounts {id name}}}`}>
                     {({loading, error, data}) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {

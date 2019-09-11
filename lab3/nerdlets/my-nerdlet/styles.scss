@@ -3,23 +3,16 @@
     padding: 10px 10px 20px;
     margin: 40px;
 }
-.stack{
-    width: 100%;
-    padding: 15px;
-}
-.inner-stack{
-    width: 100%;
-    margin-bottom: 10px;
-}
 .chart {
     padding: 10px;
+    min-width: 33vw;
     width: 100%;
     height: 300px;
 }
-.gry, .gry-div{
+.gry, .gry-div {
     background: #ccc;
     height: 100px;
-    width: 100%;
+    width: 24vw;
 }
 .dialog-headline{
     margin-bottom: 20px;
