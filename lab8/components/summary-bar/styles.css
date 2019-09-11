@@ -1,18 +1,4 @@
 .microchart {
   height: 75px;
-  width: 85px;
-}
-.inline {
-  padding-left: 20px;
-  padding-right: 20px;
-  display: flex;
-  flex-direction: row;
-  border-right: 1px dotted grey;
-  span, h2 {
-    margin: auto 5px;
-    font-weight: 500;
-  }
-  span {
-    font-size: 1.2em;
-  }
+  width: 10vw;
 }

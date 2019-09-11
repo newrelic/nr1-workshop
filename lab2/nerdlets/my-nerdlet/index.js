@@ -39,18 +39,14 @@ export default class MyNerdlet extends React.Component {
         return (
             <ChartGroup>
                 <Stack
-                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                    distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                     gapType={Stack.GAP_TYPE.TIGHT}>
                     <StackItem>
                         <h1>Reviewing Transactions in account {this.accountId}</h1>
                     </StackItem>
                     <StackItem>
                         <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.TIGHT}>
                             <StackItem>
                                 <TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
@@ -76,10 +72,8 @@ export default class MyNerdlet extends React.Component {
                     </StackItem>
                     {entityGuid && <StackItem>
                         <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
-                            gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
+                            gapType={Stack.GAP_TYPE.TIGHT}>
                             <StackItem>
                                 <h2>Transaction counts for {appName}</h2>
                                 <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>

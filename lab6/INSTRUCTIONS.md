@@ -18,7 +18,7 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 **Reminder**: Make sure that you're ready to go with your `lab6` by ensuring you've run the following commands:
 
 ```bash
-# from the nr1-eap-workshop directory
+# from the nr1-workshop directory
 cd lab6
 nr1 nerdpack:uuid -gf
 npm install
@@ -135,7 +135,9 @@ import gql from 'graphql-tag';
             });
             const selectedOption = selectedAccount ? { label: selectedAccount.name, value: selectedAccount.id, account: selectedAccount } : null;
             console.log([accounts, selectedAccount, selectedOption, options]);
-            return <Stack alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+            return <Stack
+                alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
                 directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                 {selectedAccount &&
                     <StackItem>
@@ -270,8 +272,10 @@ export default class MyNerdlet extends React.Component {
         }
 
         if (accounts) {
-            return <Stack alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+            return <Stack
+                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                    gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
+                    directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                 {selectedAccount &&
                     <StackItem>
                         <Dropdown title={selectedAccount.name} filterable label="Account"
@@ -287,8 +291,9 @@ export default class MyNerdlet extends React.Component {
                 {selectedAccount &&
                     <StackItem>
                         <Stack
-                            directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}>
+                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                            gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
+                            directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
                             {this.nrqlChartData().map((d, i) => <StackItem key={i} shrink={true}>
                                 <h2>{d.title}</h2>
                                 {d.chartType == 'pie' ? <PieChart

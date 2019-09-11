@@ -14,8 +14,9 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 **Reminder**: Make sure that you're ready to go with your `lab1` by ensuring you've run the following commands:
 
 ```bash
-# from the nr1-eap-workshop directory
+# from the nr1-workshop directory
 cd lab1
+nr1 nerdpack:serve -gf
 npm install
 ```
 
@@ -68,7 +69,7 @@ _Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the
     }
 ```
 
-_Note: The value of the accountId just needs to be a New Relic account to which you have access. Feel free to replace `1606862` with any valid New Relic accountId to which you have access._
+_Note: The value of the accountId just needs to be a New Relic account to which you have access. Replace `1606862` with any valid New Relic accountId to which you have access._
 
 6. Save `index.js` and watch the `Lab 1 Nerdlet` reload in your Browser.
 7. Ctrl+click (or right click) on the web browser screen displaying our Nerdlet and choose the menu item `Inspect`.
@@ -105,8 +106,8 @@ import { TableChart, Stack, StackItem } from 'nr1';
 ```scss
 .chart {
     padding: 10px;
-    width: 100%;
-    height: 300px;
+    width: 48vw;
+    height: 45vh;
 }
 ```
 
@@ -119,14 +120,10 @@ import { TableChart, Stack, StackItem } from 'nr1';
         //return the JSX we're rendering
         return (
             <Stack
-                alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                 directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                 gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                 <StackItem>
-                    <div className="chart">
-                        <TableChart query={nrql} accountId={this.accountId} className="chart" />
-                    </div>
+                    <TableChart query={nrql} accountId={this.accountId} className="chart" />
                 </StackItem>
             </Stack>
         )
@@ -165,30 +162,20 @@ That all results in the following block of code. Copy/reproduce the code below a
         return (
             <ChartGroup>
                 <Stack
-                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                    distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
-                        <div className="chart">
-                            <TableChart query={nrql} accountId={this.accountId} className="chart" />
-                        </div>
+                        <TableChart query={nrql} accountId={this.accountId} className="chart" />
                     </StackItem>
                     {appId && <StackItem>
                         <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
-                                <div className="chart">
-                                    <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>
-                                </div>
+                                <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>
                             </StackItem>
                             <StackItem>
-                                <div className="chart">
-                                    <ScatterChart accountId={this.accountId} query={apdexNrql} className="chart"/>
-                                </div>
+                                <ScatterChart accountId={this.accountId} query={apdexNrql} className="chart"/>
                             </StackItem>
                         </Stack>
                     </StackItem>}
@@ -220,13 +207,11 @@ The onClickTable receives four parameters that each provide a different view of 
 - chart: the entire JS object used to generate the chart, both headings and data rows
 
 ```javascript
-    <div className="chart">
-        <TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+    <TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
             //for learning purposes, we'll write to the console.
             console.debug([dataEl, row, chart]) //eslint-disable-line
             this.setApplication(row.appId, row.appName)
-        }}/>
-    </div>
+    }}/>
 ```
 
 1. The resulting `index.js` should look like the following:
@@ -271,34 +256,24 @@ export default class Lab1Nerdlet extends React.Component {
         return (
             <ChartGroup>
                 <Stack
-                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                    distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
-                        <div className="chart">
                             <TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
                                 //for learning purposes, we'll write to the console.
                                 console.debug([dataEl, row, chart]) //eslint-disable-line
                                 this.setApplication(row.appId, row.appName)
                             }}/>
-                        </div>
                     </StackItem>
                     {appId && <StackItem>
                         <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
-                                <div className="chart">
-                                    <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>
-                                </div>
+                                <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>
                             </StackItem>
                             <StackItem>
-                                <div className="chart">
-                                    <ScatterChart accountId={this.accountId} query={apdexNrql} className="chart"/>
-                                </div>
+                                <ScatterChart accountId={this.accountId} query={apdexNrql} className="chart"/>
                             </StackItem>
                         </Stack>
                     </StackItem>}
@@ -327,19 +302,17 @@ Based on what you've executed above, apply that learning in the following:
 4. Add a `onClickLine` attribute to your `LineChart` that processes `onClick` events in the same way that the `TableChart` `onTableClick` operates (i.e. calling the `this.setApplication` method). See the following:
 
 ```javascript
-    <div className="chart">
-        <LineChart
-            query={`SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`}
-            className="chart"
-            accountId={this.accountId}
-            onClickLine={(line) => {
-                //more console logging for learning purposes
-                console.debug(line); //eslint-disable=line
-                const params = line.metadata.label.split(",");
-                this.setApplication(params[1], params[0]);
-            }}
-        />
-    </div>
+    <LineChart
+        query={`SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`}
+        className="chart"
+        accountId={this.accountId}
+        onClickLine={(line) => {
+            //more console logging for learning purposes
+            console.debug(line); //eslint-disable=line
+            const params = line.metadata.label.split(",");
+            this.setApplication(params[1], params[0]);
+        }}
+    />
 ```
 
 ![Something like this](../screenshots/lab1_screen05.png)

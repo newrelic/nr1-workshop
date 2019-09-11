@@ -4,5 +4,5 @@
     "description": "Describe me",
     "displayName": "Lab 6: NerdGraph and Nerdlets",
     "icon": "hardware-&-software_software_query",
-    "rootNerdletId": "edbee40c-a369-4605-81e6-bf6f44832456.my-nerdlet"
+    "rootNerdletId": "my-nerdlet"
 }

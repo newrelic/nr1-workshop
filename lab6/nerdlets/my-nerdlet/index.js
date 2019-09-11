@@ -47,14 +47,13 @@ export default class MyNerdlet extends React.Component {
 
     render() {
         const { accounts, selectedAccount } = this.state;
-        
+
         //
         // Insert filtering logic here
         //
 
         if (accounts) {
-            return <Stack alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+            return <Stack directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                 {selectedAccount &&
                     <StackItem>
                         <div>We're going to replace this with our <Dropdown></Dropdown> component</div>
@@ -63,8 +62,7 @@ export default class MyNerdlet extends React.Component {
                 {selectedAccount &&
                     <StackItem>
                         <Stack
-                            directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                            distributionType={Stack.DISTRIBUTION_TYPE.FILL_EVENLY}>
+                            directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
                             {this.nrqlChartData().map((d, i) => <StackItem key={i} shrink={true}>
                                 <h2>{d.title}</h2>
                                 {d.chartType == 'pie' ? <PieChart

@@ -19,7 +19,7 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 **Reminder**: Make sure that you're ready to go with your `lab8` by ensuring you've run the following commands:
 
 ```bash
-# from the nr1-eap-workshop directory
+# from the nr1-workshop directory
 cd lab8
 npm install
 ```
@@ -130,12 +130,11 @@ Now, we're ready to create the skeleton of our `render` method.
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        gapType={Stack.GAP_TYPE.TIGHT}
-                    >
-                        <StackItem grow={true}>
+                        gapType={Stack.GAP_TYPE.TIGHT}>
+                        <StackItem>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                         </StackItem>
-                        <StackItem grow={true}>
+                        <StackItem>
                         </StackItem>
                     </Stack>
                 </TabsItem>
@@ -241,12 +240,11 @@ export default class MyNerdlet extends React.Component {
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        gapType={Stack.GAP_TYPE.TIGHT}
-                    >
-                        <StackItem grow={true}>
+                        gapType={Stack.GAP_TYPE.TIGHT}>
+                        <StackItem>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                         </StackItem>
-                        <StackItem grow={true}>
+                        <StackItem>
                             <Map
                             className="containerMap"
                             style={{height: `${height-125}px`}}
@@ -435,12 +433,11 @@ export default class MyNerdlet extends React.Component {
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        gapType={Stack.GAP_TYPE.TIGHT}
-                    >
-                        <StackItem grow={true}>
+                        gapType={Stack.GAP_TYPE.TIGHT}>
+                        <StackItem>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                         </StackItem>
-                        <StackItem grow={true}>
+                        <StackItem>
                         <NrqlQuery
                                 formatType={NrqlQuery.FORMAT_TYPE.RAW}
                                 accountId={accountId}
@@ -675,12 +672,11 @@ export default class MyNerdlet extends React.Component {
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        gapType={Stack.GAP_TYPE.TIGHT}
-                    >
-                        <StackItem grow={true}>
+                        gapType={Stack.GAP_TYPE.TIGHT}>
+                        <StackItem>
                             <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                         </StackItem>
-                        <StackItem grow={true}>
+                        <StackItem>
                             <NrqlQuery
                                 formatType={NrqlQuery.FORMAT_TYPE.RAW}
                                 accountId={accountId}

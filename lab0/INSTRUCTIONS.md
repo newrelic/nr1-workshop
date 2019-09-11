@@ -20,8 +20,9 @@ Load the prerequisites and follow the setup instructions in [Setup](../SETUP.md)
 **Reminder**: Make sure that you're ready to go with your `lab0` by ensuring you've run the following commands:
 
 ```bash
-# from the nr1-eap-workshop directory
+# from the nr1-workshop directory
 cd lab0
+nr1 nerdpack:uuid -gf
 ```
 
 # Step 1: Create a Launcher
@@ -31,7 +32,7 @@ Launchers are a type of artifact within a Nerdpack that is selectable from the N
 1. Use the NR1 CLI to create a new Launcher
 
 ```bash
-# assuming we're in nr1-eap-workshop/lab0
+# assuming we're in nr1-workshop/lab0
 nr1 create
 ? What kind of component do you want to create? launcher
 # chose launcher and name your component lab0-launcher
@@ -51,7 +52,7 @@ You'll notice that the CLI creates a `./launchers/lab0-launcher` directory: with
     "displayName": "Lab0Launcher",
     "description": "",
     "icon": "interface_placeholders_icon-placeholder",
-    "rootNerdletId": "4c9c902e-5ebb-4ac7-be85-1e7fe75cd04e.replace-me-with-nerdlet-id"
+    "rootNerdletId": "replace-me-with-nerdlet-id"
 }
 ```
 
@@ -82,7 +83,7 @@ A Nerdlet is where the bulk of the code in your Nerdpack will live.
 1. Use the CLI to create a Nerdlet.
 
 ```bash
-# assuming we're in nr1-eap-workshop/lab0
+# assuming we're in nr1-workshop/lab0
 nr1 create
 ? What kind of component do you want to create? nerdlet
 ? Name your component. lab0-nerdlet
@@ -97,7 +98,7 @@ You'll notice that the CLI creates three files in the `./nerdlets/lab0-nerdlet` 
 
 ```bash
 # if you're not there already, navigate to the workshop directory
-cd nr1-eap-workshop/lab0
+cd nr1-workshop/lab0
 # open the current project directory in your IDE
 code .
 # voilà

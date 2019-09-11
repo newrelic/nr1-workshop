@@ -4,5 +4,5 @@
     "description": "Describe me",
     "displayName": "Lab 5 Launcher",
     "icon": "interface_placeholders_icon-placeholder",
-    "rootNerdletId": "e67a1a99-46c7-4381-ad48-242885d243ec.lab5-nerdlet"
+    "rootNerdletId": "lab5-nerdlet"
 }
