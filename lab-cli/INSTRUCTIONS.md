@@ -1,7 +1,7 @@
 Lab 10: Working with the CLI
 ============================
 
-The purpose of this lab is exercise the features of the nr1 CLI, specifically the `credentials` and `nerdpack` commands. In [`Lab 0`](../lab0), you used the `create` command to generate a nerdpack, launcher, and nerdlet. After this lab is complete, you'll understand:
+The purpose of this lab is exercise the features of the nr1 CLI, specifically the `profiles` and `nerdpack` commands. In [`Lab 0`](../lab0), you used the `create` command to generate a nerdpack, launcher, and nerdlet. After this lab is complete, you'll understand:
 
 * The management of profiles (named APIkeys) in your `nr1` development environment
 * Generating profile/APIkey-specific uuid's for a Nerdpack
