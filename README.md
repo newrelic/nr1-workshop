@@ -28,3 +28,4 @@ The workshop is a collaborative process between the New Relic Labs and the New R
 | Lab 7: Passing custom data to a Chart component | [Lab Instructions](https://github.com/newrelic/nr1-workshop/blob/master/lab7/INSTRUCTIONS.md) |
 | Lab 8: Using 3rd Party libraries and custom visualizations (a.k.a. the Leaflet mapping exercise) | [Lab Instructions](https://github.com/newrelic/nr1-workshop/blob/master/lab8/INSTRUCTIONS.md) |
 | Lab 9: Leveraging NerdStorage to manage configuration data | [Lab Instructions](https://github.com/newrelic/nr1-workshop/blob/master/lab9/INSTRUCTIONS.md) |
+| Lab 10: Publishing and deploying your Nerdpack | [Lab Instructions](https://github.com/newrelic/nr1-workshop/blob/master/lab-cli/INSTRUCTIONS.md) |
