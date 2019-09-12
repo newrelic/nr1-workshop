@@ -15,14 +15,16 @@ Load the prerequisites and follow the setup instructions in [Setup](../SETUP.md)
 
 # Step 1: Understand CLI credential storage
 
-Previously, when you setup the NR1 CLI in the [Developer Center](https://one.newrelic.com/launcher/developer-center.launcher), you ran a command, `nr1 credentials:add` under the `Save your credentials` heading. Let's take a look at what's going on there.
+Previously, when you setup the NR1 CLI in the [Developer Center](https://one.newrelic.com/launcher/developer-center.launcher), you ran a command, `nr1 profiles:add` under the `Save your credentials` heading. Let's take a look at what's going on there.
+
+![Developer Center](../screenshots/lab10_screen01.png)
 
 The credentials for a given user/CLI are stored in a JSON file. On Mac, it's `~/.newrelic/credentials.json`.
 
 1. Run the following command and if you have multiple APIkeys installed you'll see something like this.
 
 ```bash
-nr1 credentials:list
+nr1 profiles:list
 Name            Region  API Key
 account2        us      <hidden>
 default         us      <hidden>
@@ -126,6 +128,10 @@ nr1 nerdpack:subscribe --channel=BETA
 *Note: if that Nerdpack is `nr1-top`, navigation to `Entities > Hosts > <Select a Host> > Top`.*
 
 Finally, let's imagine that there's a problem with the `Nerdpack` and we need to rollback or remove access from our `Nerdpack`.
+
+For reference, here's what your console output could look like.
+
+![Console](../screenshots/lab10_screen02.png)
 
 # Step 5: Unsubscribe from a Channel
 
