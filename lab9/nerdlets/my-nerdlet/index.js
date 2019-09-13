@@ -49,7 +49,7 @@ export default class MyNerdlet extends React.Component {
     async _loadState(entityGuid) {
         const entity = await EntityByGuidQuery.query({ entityGuid }).then(results => {
             console.debug(results);
-            return results.data.actor.entities[0];
+            return results.data.entities[0];
         }).catch(error => {
             console.error(error); //eslint-disable-line
         });

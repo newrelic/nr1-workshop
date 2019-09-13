@@ -152,7 +152,7 @@ import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomai
                 }
                 return <Fragment className="fragment">
                         <HeadingText>Entity by ID</HeadingText>
-                        {this._renderTable(data.actor.entities)}
+                        {this._renderTable(data.entities)}
                 </Fragment>
             }}
         </EntityByGuidQuery>
@@ -330,7 +330,7 @@ export default class MyNerdlet extends React.Component {
                         }
                         return <Fragment>
                                 <HeadingText>Entity by ID</HeadingText>
-                                {this._renderTable(data.actor.entities)}
+                                {this._renderTable(data.entities)}
                         </Fragment>
                     }}
                 </EntityByGuidQuery>
