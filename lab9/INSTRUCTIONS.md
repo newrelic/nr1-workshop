@@ -296,7 +296,7 @@ export default class MyNerdlet extends React.Component {
         }
         const { entities, entity, openModal } = this.state;
         if (!entity) {
-            return <Spinner fillContainer />
+            return <Spinner/>
         }
         const { accountId } = entity;
         const eventType = entity ? entity.domain == 'BROWSER' ? 'PageView' : 'Transaction' : null;
@@ -305,7 +305,7 @@ export default class MyNerdlet extends React.Component {
         const label = entity.domain == 'BROWSER' ? 'Browser Apps' : 'APM Services';
         return (<React.Fragment><Grid>
             {entities && entities.length > 0 ? <React.Fragment><GridItem columnStart={1} columnEnd={12} style={{padding: '10px'}}>
-            <HeadingText>Performance over Time<Button sizeType={Button.SIZE_TYPE.SLIM} style={{marginLeft: '25px'}} onClick={() => { this.setState({ openModal: true }) }}><Icon type={Icon.TYPE.INTERFACE__SIGN__PLUS} /> {label}</Button></HeadingText>
+            <HeadingText>Performance over Time<Button sizeType={Button.SIZE_TYPE.SMALL} style={{marginLeft: '25px'}} onClick={() => { this.setState({ openModal: true }) }}><Icon type={Icon.TYPE.INTERFACE__SIGN__PLUS} /> {label}</Button></HeadingText>
             <p style={{marginBottom: '10px'}}>{distanceOfTimeInWords(duration)}</p>
             <LineChart
                 accountId={accountId}
@@ -320,7 +320,7 @@ export default class MyNerdlet extends React.Component {
                     style={{height: `${height*.5}px`}}
                 />
             </GridItem>
-            </React.Fragment> : <Spinner fillContainer />}
+            </React.Fragment> : <Spinner/>}
             </Grid>
             {openModal && <AddEntityModal
                 {...this.state}

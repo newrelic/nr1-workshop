@@ -311,7 +311,7 @@ export default class MyNerdlet extends React.Component {
                 }
             </Stack>
         } else {
-            return <Spinner fillContainer />
+            return <Spinner/>
         }
     }
 }

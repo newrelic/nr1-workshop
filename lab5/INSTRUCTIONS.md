@@ -105,7 +105,7 @@ import { NerdGraphQuery, Stack, StackItem, Spinner, HeadingText, BlockText } fro
                         {({loading, error, data}) => {
                             console.debug([loading, data, error]); //eslint-disable-line
                             if (loading) {
-                                return <Spinner fillContainer />;
+                                return <Spinner/>;
                             }
                             if (error) {
                                 return <BlockText>{error.message}</BlockText>;
@@ -145,7 +145,7 @@ import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomai
             {({loading, error, data}) => {
                 console.debug([loading, data, error]); //eslint-disable-line
                 if (loading) {
-                    return <Spinner fillContainer />;
+                    return <Spinner/>;
                 }
                 if (error) {
                     return <HeadingText>{error.message}</HeadingText>;
@@ -179,7 +179,7 @@ Your browser should show a small table that displays the name and domain of your
         {({loading, error, data}) => {
             console.debug([loading, data, error]); //eslint-disable-line
             if (loading) {
-                return <Spinner fillContainer />;
+                return <Spinner/>;
             }
             if (error) {
                 return <BlockText>{JSON.stringify(error)}</BlockText>;
@@ -208,7 +208,7 @@ Your browser should show a small table that displays the name and domain of your
             {({loading, error, data}) => {
                 console.debug([loading, data, error]); //eslint-disable-line
                 if (loading) {
-                    return <Spinner fillContainer />;
+                    return <Spinner/>;
                 }
                 if (error) {
                     return <BlockText>{JSON.stringify(error)}</BlockText>;
@@ -235,7 +235,7 @@ Your browser should show a small table that displays the name and domain of your
             {({loading, error, data}) => {
                 console.debug([loading, data, error]); //eslint-disable-line
                 if (loading) {
-                    return <Spinner fillContainer />;
+                    return <Spinner/>;
                 }
                 if (error) {
                     return <BlockText>{JSON.stringify(error)}</BlockText>;
@@ -305,7 +305,7 @@ export default class MyNerdlet extends React.Component {
                     {({loading, error, data}) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
-                            return <Spinner fillContainer />;
+                            return <Spinner/>;
                         }
                         if (error) {
                             return <BlockText>{JSON.stringify(error)}</BlockText>;
@@ -323,7 +323,7 @@ export default class MyNerdlet extends React.Component {
                     {({loading, error, data}) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
-                            return <Spinner fillContainer />;
+                            return <Spinner/>;
                         }
                         if (error) {
                             return <BlockText>{JSON.stringify(error)}</BlockText>;
@@ -340,7 +340,7 @@ export default class MyNerdlet extends React.Component {
                 {({loading, error, data}) => {
                     console.debug([loading, data, error]); //eslint-disable-line
                     if (loading) {
-                        return <Spinner fillContainer />;
+                        return <Spinner/>;
                     }
                     if (error) {
                         return <BlockText>{JSON.stringify(error)}</BlockText>;
@@ -357,7 +357,7 @@ export default class MyNerdlet extends React.Component {
                     {({loading, error, data}) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
-                            return <Spinner fillContainer />;
+                            return <Spinner/>;
                         }
                         if (error) {
                             return <BlockText>{JSON.stringify(error)}</BlockText>;
@@ -374,7 +374,7 @@ export default class MyNerdlet extends React.Component {
                     {({loading, error, data}) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
-                            return <Spinner fillContainer />;
+                            return <Spinner/>;
                         }
                         if (error) {
                             return <BlockText>{JSON.stringify(error)}</BlockText>;
