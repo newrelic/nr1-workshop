@@ -668,7 +668,7 @@ export default class MyNerdlet extends React.Component {
             return <Spinner/>
         } else {
             return <Tabs>
-                <TabsItem label={`Page Views`} itemKey={1}>
+                <TabsItem label={`Page Views`} value={1}>
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
@@ -715,7 +715,7 @@ export default class MyNerdlet extends React.Component {
                         </StackItem>
                     </Stack>
                 </TabsItem>
-                <TabsItem label={`JavaScript Errors`} itemKey={2}>
+                <TabsItem label={`JavaScript Errors`} value={2}>
                     <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                 </TabsItem>
             </Tabs>;
