@@ -55,17 +55,11 @@ _Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the
     constructor(props) {
         super(props);
         this.accountId = 1606862; //New Relic Demotron.
-        console.debug("Init props", this.props); //eslint-disable-line
         this.state = {
             appId: null,
             appName: null
         };
-    }
-
-    componentWillUpdate(props) {
-        if (this.props) {
-            console.debug("New props", props);
-        }
+        console.debug("Nerdlet constructor", this); //eslint-disable-line
     }
 ```
 
@@ -78,8 +72,6 @@ _Note: The value of the accountId just needs to be a New Relic account to which 
 10. Go back to the browser window and reload the current page, and then go back to the DevTools window. You should be looking at a screen like the following:
 ![Dev Tools > Console > verbose](../screenshots/lab1_screen02.png)
 You may get a notification at the top of your debug window indicating that you do not have the 'React DevTools' loaded. If you would like to load the [React DevTools extension](https://github.com/facebook/react-devtools), you can click on this link and load the [chrome extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) (or [firefox exetension](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)). You should become familiar with using the developer tools as a way to explore the values of your objects on the client. Take a moment now to explore the objects returned to the console.
-
-1.  Explore the `props` passed into the Nerdlet using the `Console`, particularly the `launcherUrlState.timeRange` property. Change the value in the Time Picker in the top left-hand corner of New Relic One and see what happens in the `Console`. This will give you an initial sense of the data and capabilities that are part of the _context_ of each Nerdlet.
 
 ## Step 2: Exploring the Chart components
 
@@ -222,10 +214,6 @@ import PropTypes from 'prop-types';
 import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart } from 'nr1';
 
 export default class Lab1Nerdlet extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-    };
 
     constructor(props) {
         super(props);
@@ -234,13 +222,7 @@ export default class Lab1Nerdlet extends React.Component {
             appId: null,
             appName: null
         };
-        console.debug("Nerdlet props", this.props); //eslint-disable-line
-    }
-
-    componentWillUpdate(props) {
-        if (this.props) {
-            console.debug("New props", props); //eslint-disable-line
-        }
+        console.debug("Nerdlet constructor", this); //eslint-disable-line
     }
 
     setApplication(inAppId, inAppName) {
