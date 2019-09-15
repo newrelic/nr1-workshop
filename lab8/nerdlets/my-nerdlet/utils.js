@@ -21,7 +21,7 @@ export const loadEntity = (entityGuid) => {
   return new Promise(resolve => {
     EntityByGuidQuery.query({ entityGuid }).then(results => {
       //console.debug(results);
-      resolve(results.data.actor.entities[0]);
+      resolve(results.data.entities[0]);
     }).catch(error => {
       console.error(error);
     });

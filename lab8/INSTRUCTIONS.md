@@ -123,7 +123,7 @@ Now, we're ready to create the skeleton of our `render` method.
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
         if (!entity) {
-            return <Spinner fillContainer />
+            return <Spinner/>
         } else {
             return <Tabs>
                 <TabsItem label={`Page Views`} id={1}>
@@ -233,7 +233,7 @@ export default class MyNerdlet extends React.Component {
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
         if (!entity) {
-            return <Spinner fillContainer />
+            return <Spinner/>
         } else {
             return <Tabs>
                 <TabsItem label={`Page Views`} id={1}>
@@ -280,7 +280,7 @@ Now, we're going to make use of both the `NrqlQuery` and `CircleMarker` componen
             {results => {
                 console.debug(results);
                 if (results.loading) {
-                   return <Spinner fillContainer />
+                   return <Spinner/>
                 } else {
                     console.debug(results.data.facets);
                     return <Map
@@ -426,7 +426,7 @@ export default class MyNerdlet extends React.Component {
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
         if (!entity) {
-            return <Spinner fillContainer />
+            return <Spinner/>
         } else {
             return <Tabs>
                 <TabsItem label={`Page Views`} id={1}>
@@ -445,7 +445,7 @@ export default class MyNerdlet extends React.Component {
                                 {results => {
                                     console.debug(results);
                                     if (results.loading) {
-                                       return <Spinner fillContainer />
+                                       return <Spinner/>
                                     } else {
                                         console.debug(results.data.facets);
                                         return <Map
@@ -665,10 +665,10 @@ export default class MyNerdlet extends React.Component {
         const durationInMinutes = duration/1000/60;
         const { height } = this.props;
         if (!entity) {
-            return <Spinner fillContainer />
+            return <Spinner/>
         } else {
             return <Tabs>
-                <TabsItem label={`Page Views`} itemKey={1}>
+                <TabsItem label={`Page Views`} value={1}>
                     <Stack
                         alignmentType={Stack.ALIGNMENT_TYPE.FILL}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
@@ -684,7 +684,7 @@ export default class MyNerdlet extends React.Component {
                                 {results => {
                                     console.debug(results);
                                     if (results.loading) {
-                                       return <Spinner fillContainer />
+                                       return <Spinner/>
                                     } else {
                                         console.debug(results.data.facets);
                                         return <Map
@@ -715,7 +715,7 @@ export default class MyNerdlet extends React.Component {
                         </StackItem>
                     </Stack>
                 </TabsItem>
-                <TabsItem label={`JavaScript Errors`} itemKey={2}>
+                <TabsItem label={`JavaScript Errors`} value={2}>
                     <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
                 </TabsItem>
             </Tabs>;

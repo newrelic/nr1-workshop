@@ -16,7 +16,7 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 ```bash
 # from the nr1-workshop directory
 cd lab1
-nr1 nerdpack:serve -gf
+nr1 nerdpack:uuid -gf
 npm install
 ```
 
