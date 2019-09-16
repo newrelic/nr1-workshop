@@ -103,7 +103,7 @@ import { LineChart, TableChart, Grid, GridItem, Spinner, HeadingText, Button, Ic
                 documentId: entity.guid,
                 document: entities
             }).then(() => {
-                Toast.showToast("Update Saved.", { type: Toast.TYPE.NORMAL });
+                Toast.showToast({ title: "Update Saved.", type: Toast.TYPE.NORMAL });
             });
         });
     }
