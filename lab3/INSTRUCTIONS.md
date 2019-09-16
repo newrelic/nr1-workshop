@@ -26,13 +26,13 @@ The `<Grid>` UI component is a layout component that only accepts `GridItem` com
 
 1. Import the `<Grid>` and `<GridItem>` from the `nr1` library.
 
-Open the `lab3/nerdlets/my-nerdlet/index.js` and the import statment below.
+Open the `lab3/nerdlets/my-nerdlet/main.js` and the import statment below.
 
 ```javascript
 import {Grid, GridItem} from 'nr1';
 ```
 
-2. Replace the render method within `lab3/nerdlets/my-nerdlet/index.js`
+2. Replace the render method within `lab3/nerdlets/my-nerdlet/main.js`
 
 ```javascript
     render() {
@@ -53,7 +53,7 @@ import {Grid, GridItem} from 'nr1';
     }
 ```
 
-3. Save your `index.js` file and in Google Chrome, navigate to the following URL `https://one.newrelic.com?nerdpacks=local` and click my launcher.
+3. Save your `main.js` file and in Google Chrome, navigate to the following URL `https://one.newrelic.com?nerdpacks=local` and click my launcher.
 
 Your browsers should show a `Grid` with `GridItems` that looks something similar to below:
 
@@ -61,7 +61,7 @@ Your browsers should show a `Grid` with `GridItems` that looks something similar
 
 4. Changing the `<Grid>` to something more useful.
 
-Replace the render method within `lab3/nerdlets/my-nerdlet/index.js` file and take another look at the Nerdlet in your Chrome browser.
+Replace the render method within `lab3/nerdlets/my-nerdlet/main.js` file and take another look at the Nerdlet in your Chrome browser.
 
 ```javascript
     render() {
@@ -94,7 +94,7 @@ The `<Stack>` is another layout componnet in the New Relic One UI library. A `<S
 
 1. Importing the `<Stack>` and `<StackItem>`
 
-Inside the `lab3/nerdlets/my-nerdlet/index.js` update the import statement with the one below.
+Inside the `lab3/nerdlets/my-nerdlet/main.js` update the import statement with the one below.
 
 ```javascript
 import {Grid, GridItem, Stack, StackItem} from 'nr1';
@@ -102,7 +102,7 @@ import {Grid, GridItem, Stack, StackItem} from 'nr1';
 
 2. Creating a simple layout using the `<Stack>` and `<Stack>` components
 
-Replace the render method within `lab3/nerdlets/my-nerdlet/index.js` file and take another look at the Nerdlet in your Chrome browser.
+Replace the render method within `lab3/nerdlets/my-nerdlet/main.js` file and take another look at the Nerdlet in your Chrome browser.
 
 ```javascript
 render() {
@@ -143,7 +143,7 @@ render() {
 
 The power in using `<Stack>` and `<StackItem>` components is being able to use their props and easily create a layout that is best for your nerdpack. Let's update props of the code we added before and see what happens to our layout.
 
-Change the render method within your `lab3/nerdlets/my-nerdlet/index.js` with the code below and look at the difference in your browser.
+Change the render method within your `lab3/nerdlets/my-nerdlet/main.js` with the code below and look at the difference in your browser.
 
 ```javascript
 render() {
@@ -189,7 +189,7 @@ Update the import statement with your code people:
 import { Grid, GridItem, Stack, StackItem, ChartGroup, AreaChart, BarChart, LineChart, TableChart, PieChart, Button, TextField, Modal, Toast } from 'nr1';
 ```
 
-Using the Grid and Stack components you can easily create any layout you wish within your nerdpack. Replace the render method within your `lab3/nerdlets/my-nerdlet/index.js` with the code below:
+Using the Grid and Stack components you can easily create any layout you wish within your nerdpack. Replace the render method within your `lab3/nerdlets/my-nerdlet/main.js` with the code below:
 
 ```javascript
     render() {
@@ -238,7 +238,7 @@ Your Nerdlet should look similar to below:
 
 2. Adding Chart Components to you `<Grid>` and `<Stack>`
 
-Now that you have your layout done, let's add a some chart components. Replace the render method within your `lab3/nerdlets/my-nerdlet/index.js` with the code below:
+Now that you have your layout done, let's add a some chart components. Replace the render method within your `lab3/nerdlets/my-nerdlet/main.js` with the code below:
 
 ```javascript
     render() {
@@ -299,7 +299,7 @@ Now that you have your layout done, let's add a some chart components. Replace t
     }
 ```
 
-Add the following code to your `index.js` file. ABOVE the `render` method.
+Add the following code to your `main.js` file. ABOVE the `render` method.
 
 ```javascript
     constructor(props) {
@@ -309,7 +309,7 @@ Add the following code to your `index.js` file. ABOVE the `render` method.
     }
 ```
 
-Add the following code to your `index.js` file. IN the `render` method before the `return`
+Add the following code to your `main.js` file. IN the `render` method before the `return`
 
 ```javascript
     const { duration } = this.props.launcherUrlState.timeRange;
@@ -501,7 +501,7 @@ Enter the  FACET `appName` in the `<TextField>` and click the FACET button. And,
 
 2. Adding the `<Toast>` component for user notifications after UI has been updated.
 
-Add the code below to your `index.js` file between the `<React.Fragment>` and `<ChartGroup>` components
+Add the code below to your `main.js` file between the `<React.Fragment>` and `<ChartGroup>` components
 
 ```javascript
 { this.state.showToast &&
@@ -520,7 +520,7 @@ Refresh your browser and FACET your charts by `host`. Your browser should look s
 
 ## Summary
 
-In the end, your `index.js` should look like this.
+In the end, your `main.js` should look like this.
 
 ```javascript
 import React from 'react';
@@ -529,6 +529,7 @@ import { Grid, GridItem, Stack, StackItem, ChartGroup, AreaChart, BarChart, Line
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
+        launcherUrlState: PropTypes.object,
         width: PropTypes.number,
         height: PropTypes.number,
     };

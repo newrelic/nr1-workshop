@@ -72,24 +72,12 @@ code lab6/nerdlets/my-nerdlet/index.js
 
 _Note: There's a lot more code in this initial file. Take a few moments to review what's going on. If you trace the logic in the `render` method, it'll become obvious why we're getting the `Spinner` on the screen: we haven't loaded any accounts._
 
-2. We're going to add some libraries to to our project that we're going to need. So let's start with adding them to our package.json
-
-```bash
-npm install --save graphql graphql-tag
-```
-
-3. Next, let's add an import to the top of our `lab6/nerdlets/my-nerdlet/index.js` file.
-
-```javascript
-import gql from 'graphql-tag';
-```
-
-4. Now, we're going to issue a GraphQL request in the `componentDidMount` React lifecycle method using the query we built earlier and loading those results into the `state.accounts` object. Add the following method to the `lab6/nerdlets/my-nerdlet/index.js` file.
+2. Now, we're going to issue a GraphQL request in the `componentDidMount` React lifecycle method using the query we built earlier and loading those results into the `state.accounts` object. Add the following method to the `lab6/nerdlets/my-nerdlet/index.js` file.
 
 ```javascript
     componentDidMount() {
         //being verbose for demonstration purposes only
-        const q = NerdGraphQuery.query({ query: gql`{
+        const q = NerdGraphQuery.query({ query: `{
             actor {
               accounts {
                 id
@@ -135,25 +123,27 @@ import gql from 'graphql-tag';
             });
             const selectedOption = selectedAccount ? { label: selectedAccount.name, value: selectedAccount.id, account: selectedAccount } : null;
             console.log([accounts, selectedAccount, selectedOption, options]);
-            return <Stack
-                alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
-                directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                {selectedAccount &&
-                    <StackItem>
-                        <Dropdown title={selectedAccount.name} filterable label="Account"
-                            onChangeFilter={(event) => this.setState({filter: event.target.value})}>
-                        {accounts.map(a => {
-                            return <DropdownItem key={a.id} onClick={() => selectAccount(a)}>
-                            {a.name}
-                            </DropdownItem>
-                        })}
-                        </Dropdown>
-                    </StackItem>
-                }
-                {selectedAccount && ...
-                ...
-                ...
+            return <PlatformStateContext.Consumer>
+                {(platformUrlState) => {
+                    return <Stack
+                        horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+                        gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
+                        directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+                        {selectedAccount &&
+                            <StackItem>
+                                <Dropdown title={selectedAccount.name} filterable label="Account"
+                                    onChangeFilter={(event) => this.setState({filter: event.target.value})}>
+                                {accounts.map(a => {
+                                    return <DropdownItem key={a.id} onClick={() => selectAccount(a)}>
+                                    {a.name}
+                                    </DropdownItem>
+                                })}
+                                </Dropdown>
+                            </StackItem>
+                        }
+                        {selectedAccount && ...
+                        ...
+                        ...
 ```
 
 6. Our `Dropdown` component references a `selectAccount` in the `onClick` event, so we need to define that.
@@ -180,16 +170,9 @@ Note: At this point, your `lab6/nerdlets/my-nerdlet/index.js` file should look l
 
 ```javascript
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Dropdown, DropdownItem, Spinner, Stack, StackItem, BillboardChart, PieChart, NerdGraphQuery } from 'nr1';
-import gql from 'graphql-tag';
+import { Dropdown, DropdownItem, Spinner, Stack, StackItem, BillboardChart, PieChart, NerdGraphQuery, PlatformStateContext } from 'nr1';
 
 export default class MyNerdlet extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-        launcherUrlState: PropTypes.object
-    };
 
     constructor(props) {
         super(props)
@@ -205,8 +188,8 @@ export default class MyNerdlet extends React.Component {
     /**
      * Build the array of NRQL statements based on the duration from the Time Picker.
      */
-    nrqlChartData() {
-        const { duration } = this.props.launcherUrlState.timeRange;
+    nrqlChartData(platformUrlState) {
+        const { duration } = platformUrlState.timeRange;
         const durationInMinutes = duration/1000/60;
         return [
             {
@@ -229,9 +212,9 @@ export default class MyNerdlet extends React.Component {
         ];
     }
 
-        componentDidMount() {
+    componentDidMount() {
         //being verbose for demonstration purposes only
-        const q = NerdGraphQuery.query({ query: gql`{
+        const q = NerdGraphQuery.query({ query: `{
             actor {
               accounts {
                 id
@@ -272,44 +255,48 @@ export default class MyNerdlet extends React.Component {
         }
 
         if (accounts) {
-            return <Stack
-                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                    gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
-                    directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                {selectedAccount &&
-                    <StackItem>
-                        <Dropdown title={selectedAccount.name} filterable label="Account"
-                            onChangeFilter={(event) => this.setState({filter: event.target.value})}>
-                        {accounts.map(a => {
-                            return <DropdownItem key={a.id} onClick={() => selectAccount(a)}>
-                            {a.name}
-                            </DropdownItem>
-                        })}
-                        </Dropdown>
-                    </StackItem>
-                }
-                {selectedAccount &&
-                    <StackItem>
-                        <Stack
-                            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                            gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
-                            directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
-                            {this.nrqlChartData().map((d, i) => <StackItem key={i} shrink={true}>
-                                <h2>{d.title}</h2>
-                                {d.chartType == 'pie' ? <PieChart
-                                    accountId={selectedAccount.id}
-                                    query={d.nrql}
-                                    className="chart"
-                                /> : <BillboardChart
-                                    accountId={selectedAccount.id}
-                                    query={d.nrql}
-                                    className="chart"
-                                />}
-                            </StackItem>)}
-                        </Stack>
-                    </StackItem>
-                }
-            </Stack>
+            return <PlatformStateContext.Consumer>
+                {(platformUrlState) => {
+                    return <Stack
+                        horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+                        gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
+                        directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+                        {selectedAccount &&
+                            <StackItem>
+                                <Dropdown title={selectedAccount.name} filterable label="Account"
+                                    onChangeFilter={(event) => this.setState({filter: event.target.value})}>
+                                {accounts.map(a => {
+                                    return <DropdownItem key={a.id} onClick={() => selectAccount(a)}>
+                                    {a.name}
+                                    </DropdownItem>
+                                })}
+                                </Dropdown>
+                            </StackItem>
+                        }
+                        {selectedAccount &&
+                            <StackItem>
+                                <Stack
+                                    horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+                                    gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
+                                    directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
+                                    {this.nrqlChartData(platformUrlState).map((d, i) => <StackItem key={i} shrink={true}>
+                                        <h2>{d.title}</h2>
+                                        {d.chartType == 'pie' ? <PieChart
+                                            accountId={selectedAccount.id}
+                                            query={d.nrql}
+                                            className="chart"
+                                        /> : <BillboardChart
+                                            accountId={selectedAccount.id}
+                                            query={d.nrql}
+                                            className="chart"
+                                        />}
+                                    </StackItem>)}
+                                </Stack>
+                            </StackItem>
+                        }
+                    </Stack>
+                }}
+            </PlatformStateContext.Consumer>
         } else {
             return <Spinner/>
         }

@@ -3,12 +3,6 @@ import { Grid, GridItem, AutoSizer } from 'nr1';
 
 export default class MyNerdlet extends React.Component {
 
-
-    constructor(props) {
-        super(props);
-        console.debug(props); //eslint-disable-line
-    }
-
     render() {
         //we're going to replace these in the lab INSTRUCTIONS.md, so watch while you can.
         return <AutoSizer>

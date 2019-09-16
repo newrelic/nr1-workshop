@@ -33,10 +33,6 @@ _Note: we're going to cover how to **not** hardcode the accountIds for NRQL quer
 2. Open a browser and check out the `Lab 2 Nerdlet` by going to the homepage and clicking on `Lab 2 Launcher`. Click around and verify that it's working. You should see something like this:
 ![Lab2 Nerdlet Open for Business](../screenshots/lab2_screen01.png)
 
-2. Open the Devtools in your browser (Ctrl+Click > `Inspect` menu item > Opens the DevTools window, select `Console` tab > `Debug` in left hand nav), and look at the props from the Nerdlet that we wrote into the Nerdlet's `constructor`.
-![nr1 properties](../screenshots/lab2_screen02.png)
-
-3. Note the prop `launcherUrlState` that contains a `timeRange` object that itself contains three attributes: `begin_time`, `end_time`, and `duration`. This will be the basis of our next step.
 
 ## Step 2: Implementing the time picker
 
@@ -44,11 +40,21 @@ _Note: we're going to cover how to **not** hardcode the accountIds for NRQL quer
 
 Notice that the time windows and charts in the Nerdlet do not refresh and do not respond to changes in the time window. (_Hint: That's because we haven't told them to use the selected time range yet!_) Let's do something about that.
 
-2. Open the `lab2/nerdlets/my-nerdlet/index.js` file and find the `render` method. Somewhere near the top on the method, add the following code. We're going to read the properties of the NR1 `timeRange` from the `this.props.launcherUrlState`.
+2. Open the `lab2/nerdlets/my-nerdlet/index.js` file and find the `render` method. We're going to modify it. Find the `return` call and wrap the `ChartGroup` component in the following:
 
 ```javascript
-const { duration } = this.props.launcherUrlState.timeRange;
-const since = ` SINCE ${duration/1000/60} MINUTES AGO `;
+//code above here in the render method
+return <PlatformStateContext.Consumer>
+  {{(platformUrlState) => {
+      //console.debug here for learning purposes
+      console.debug(platformUrlState); //eslint-disable-line
+      const { duration } platformUrlState.timeRange;
+      return (<ChartGroup>
+        //the rest of the original return code here, and don't repeat the ChartGroup
+      </ChartGroup>); //
+  }}
+</PlatformStateContext.Consumer>
+
 ```
 
 1. Now, we're going to make `duration` part of each of the four query objects.
@@ -84,12 +90,10 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
 
 ```javascript
     openEntity() {
-        const { entityGuid, appName } = this.state;
-        navigation.openEntity({
-            guid: entityGuid,
-            type: 'APPLICATION',
-            domain: 'APM'
-        });
+        const { entityGuid } = this.state;
+        if (entityGuid) {
+            navigation.openEntity(entityGuid);
+        }
     }
 ```
 
@@ -109,12 +113,10 @@ _Note: Alternatively, you can call the `navigation.openStackedEntity` **thusly**
 
 ```javascript
     openEntity() {
-        const { entityGuid, appName } = this.state;
-        navigation.openStackedEntity({
-            guid: entityGuid,
-            type: 'APPLICATION',
-            domain: 'APM'
-        });
+        const { entityGuid } = this.state;
+        if (entityGuid) {
+            navigation.openStackedEntity(entityGuid);
+        }
     }
 ```
 
@@ -128,84 +130,25 @@ We have one remaining issue with the navigation flow of this example. After you 
     openEntity() {
         const { entityGuid, appName } = this.state;
         nerdlet.setUrlState({ entityGuid, appName });
-        navigation.openEntity({
-            guid: entityGuid,
-            type: 'APPLICATION',
-            domain: 'APM'
-        });
+        navigation.openEntity(entityGuid);
     }
 ```
 
-2. Add nerdletUrlState to the propTypes, and modify the component's ` constructor` to read from the Nerdlet state when instantiating by modifying the constructor thusly.
+2. We're going to wrap the last two `StackItem` components of the display (the `Button` and the bottom `StackItem` containing the lower charts) in a `NerdletStateContext` component to be able to read the `nerdletUrlState.entityGuid` and the `nerdletUrlState.appName`. That render method looks like this.
 
 ```javascript
-    constructor(props) {
-        super(props);
-        this.accountId = 1606862; //New Relic Demotron.
-        this.state = {
-            entityGuid: this.props.nerdletUrlState.entityGuid,
-            appName: this.props.nerdletUrlState.appName
-        };
-        console.debug("Nerdlet props", this.props); //eslint-disable-line
-        this.openEntity = this.openEntity.bind(this);
-    }
-```
-
-3. Save the file and reload. Click on an `Application` in the `Lab 2 Nerdlet` table, click the `Button` (navigating away), and click back. You should see your context maintained in `Lab 2 Nerdlet`
-
-## Summary
-
-In the end, your `index.js` should look like this.
-
-```javascript
-import React from 'react';
-import PropTypes from 'prop-types';
-import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Button, navigation, nerdlet } from 'nr1';
-
-export default class MyNerdlet extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-        launcherUrlState: PropTypes.object,
-        nerdletUrlState: PropTypes.object
-    };
-
-    constructor(props) {
-        super(props);
-        this.accountId = 1606862; //New Relic Demotron.
-        this.state = {
-            entityGuid: this.props.nerdletUrlState.entityGuid,
-            appName: this.props.nerdletUrlState.appName
-        };
-        console.debug("Nerdlet props", this.props); //eslint-disable-line
-        this.openEntity = this.openEntity.bind(this);
-    }
-
-    setApplication(entityGuid, appName) {
-        this.setState({ entityGuid, appName })
-    }
-
-    openEntity() {
-        const { entityGuid, appName } = this.state;
-        nerdlet.setUrlState({ appName, entityGuid }, { replaceHistory: true });
-        navigation.openEntity({
-            guid: entityGuid,
-            type: 'APPLICATION',
-            domain: 'APM'
-        });
-    }
-
     render(){
-        const { duration } = this.props.launcherUrlState.timeRange;
-        const since = ` SINCE ${duration/1000/60} MINUTES AGO `;
         const { entityGuid, appName } = this.state;
         const nrql = `SELECT count(*) as 'transactions', apdex(duration) as 'apdex', percentile(duration, 99, 90, 70) FROM Transaction facet appName, entityGuid limit 25`;
-        const tCountNrql = `SELECT count(*) FROM Transaction WHERE entityGuid = '${entityGuid}' TIMESERIES`;
-        const apdexNrql = `SELECT apdex(duration) FROM Transaction WHERE entityGuid = '${entityGuid}' TIMESERIES`;
         const trxOverTime = `SELECT count(*) as 'transactions' FROM Transaction facet appName, entityGuid limit 25 TIMESERIES`;
         //return the JSX we're rendering
-        return (
-            <ChartGroup>
+        return <PlatformStateContext.Consumer>
+          {(platformUrlState) => {
+              //console.debug here for learning purposes
+              console.debug(platformUrlState); //eslint-disable-line
+              const { duration } = platformUrlState.timeRange;
+              const since = ` SINCE ${duration/1000/60} MINUTES AGO `;
+              return (<ChartGroup>
                 <Stack
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
                     gapType={Stack.GAP_TYPE.TIGHT}>
@@ -238,26 +181,200 @@ export default class MyNerdlet extends React.Component {
                             </StackItem>
                         </Stack>
                     </StackItem>
-                    {entityGuid && <StackItem>
-                        <Button onClick={this.openEntity}>Open {appName}</Button>
-                    </StackItem>}
-                    {entityGuid && <StackItem>
+                    <NerdletStateContext.Consumer>
+                    {(nerdletUrlState) => {
+                        if (entityGuid) {
+                            const tCountNrql = `SELECT count(*) FROM Transaction WHERE entityGuid = '${entityGuid}' TIMESERIES`;
+                            const apdexNrql = `SELECT apdex(duration) FROM Transaction WHERE entityGuid = '${entityGuid}' TIMESERIES`;
+
+                            return <React.Fragment>
+                                <StackItem>
+                                    <Button onClick={this.openEntity}>Open {appName}</Button>
+                                </StackItem>
+                                <StackItem>
+                                    <Stack
+                                        directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
+                                        gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
+                                        <StackItem>
+                                            <h2>Transaction counts for {appName}</h2>
+                                            <LineChart accountId={this.accountId} query={tCountNrql+since} className="chart"/>
+                                        </StackItem>
+                                        <StackItem>
+                                            <h2>Apdex for {appName}</h2>
+                                            <ScatterChart accountId={this.accountId} query={apdexNrql+since} className="chart"/>
+                                        </StackItem>
+                                    </Stack>
+                                </StackItem>
+                            </React.Fragment>
+                        } else if (nerdletUrlState && nerdletUrlState.entityGuid) {
+                            const tCountNrql = `SELECT count(*) FROM Transaction WHERE entityGuid = '${nerdletUrlState.entityGuid}' TIMESERIES`;
+                            const apdexNrql = `SELECT apdex(duration) FROM Transaction WHERE entityGuid = '${nerdletUrlState.entityGuid}' TIMESERIES`;
+                            return <React.Fragment>
+                                <StackItem>
+                                    <Button onClick={() => {
+                                        this.openEntity(nerdletUrlState.entityGuid)
+                                    }}>Open {nerdletUrlState.appName}</Button>
+                                </StackItem>
+                                <StackItem>
+                                    <Stack
+                                        directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
+                                        gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
+                                        <StackItem>
+                                            <h2>Transaction counts for {nerdletUrlState.appName}</h2>
+                                            <LineChart accountId={this.accountId} query={tCountNrql+since} className="chart"/>
+                                        </StackItem>
+                                        <StackItem>
+                                            <h2>Apdex for {nerdletUrlState.appName}</h2>
+                                            <ScatterChart accountId={this.accountId} query={apdexNrql+since} className="chart"/>
+                                        </StackItem>
+                                    </Stack>
+                                </StackItem>
+                            </React.Fragment>
+                        }
+                        return null;
+                    }}
+                    </NerdletStateContext.Consumer>
+                </Stack>
+            </ChartGroup>); //
+          }}
+        </PlatformStateContext.Consumer>
+    }
+```
+
+3. Save the file and reload. Click on an `Application` in the `Lab 2 Nerdlet` table, click the `Button` (navigating away), and click back. You should see your context maintained in `Lab 2 Nerdlet`
+
+## Summary
+
+In the end, your `index.js` should look like this.
+
+```javascript
+import React from 'react';
+import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Button, navigation, nerdlet, PlatformStateContext, NerdletStateContext } from 'nr1';
+
+export default class MyNerdlet extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.accountId = 1; //New Relic Demotron.
+        this.state = {
+            entityGuid: null,
+            appName: null
+        };
+        console.debug("Nerdlet props", this.props); //eslint-disable-line
+        this.openEntity = this.openEntity.bind(this);
+    }
+
+    setApplication(entityGuid, appName) {
+        this.setState({ entityGuid, appName })
+    }
+
+    openEntity() {
+        const { entityGuid, appName } = this.state;
+        nerdlet.setUrlState({ appName, entityGuid }, { replaceHistory: true });
+        navigation.openEntity(entityGuid);
+    }
+
+    render(){
+        const { entityGuid, appName } = this.state;
+        const nrql = `SELECT count(*) as 'transactions', apdex(duration) as 'apdex', percentile(duration, 99, 90, 70) FROM Transaction facet appName, entityGuid limit 25`;
+        const trxOverTime = `SELECT count(*) as 'transactions' FROM Transaction facet appName, entityGuid limit 25 TIMESERIES`;
+        //return the JSX we're rendering
+        return <PlatformStateContext.Consumer>
+          {(platformUrlState) => {
+              //console.debug here for learning purposes
+              console.debug(platformUrlState); //eslint-disable-line
+              const { duration } = platformUrlState.timeRange;
+              const since = ` SINCE ${duration/1000/60} MINUTES AGO `;
+              return (<ChartGroup>
+                <Stack
+                    directionType={Stack.DIRECTION_TYPE.VERTICAL}
+                    gapType={Stack.GAP_TYPE.TIGHT}>
+                    <StackItem>
+                        <h1>Reviewing Transactions in account {this.accountId}</h1>
+                    </StackItem>
+                    <StackItem>
                         <Stack
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                            gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
+                            gapType={Stack.GAP_TYPE.TIGHT}>
                             <StackItem>
-                                <h2>Transaction counts for {appName}</h2>
-                                <LineChart accountId={this.accountId} query={tCountNrql+since} className="chart"/>
+                                <TableChart query={nrql+since} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+                                    //for learning purposes, we'll write to the console.
+                                    console.debug([dataEl, row, chart]) //eslint-disable-line
+                                    this.setApplication(row.entityGuid, row.appName)
+                                }}/>
                             </StackItem>
                             <StackItem>
-                                <h2>Apdex for {appName}</h2>
-                                <ScatterChart accountId={this.accountId} query={apdexNrql+since} className="chart"/>
+                                <LineChart
+                                    query={trxOverTime+since}
+                                    className="chart"
+                                    accountId={this.accountId}
+                                    onClickLine={(line) => {
+                                        //more console logging for learning purposes
+                                        console.debug(line); //eslint-disable=line
+                                        const params = line.metadata.label.split(",");
+                                        this.setApplication(params[1], params[0]);
+                                    }}
+                                />
                             </StackItem>
                         </Stack>
-                    </StackItem>}
+                    </StackItem>
+                    <NerdletStateContext.Consumer>
+                    {(nerdletUrlState) => {
+                        if (entityGuid) {
+                            const tCountNrql = `SELECT count(*) FROM Transaction WHERE entityGuid = '${entityGuid}' TIMESERIES`;
+                            const apdexNrql = `SELECT apdex(duration) FROM Transaction WHERE entityGuid = '${entityGuid}' TIMESERIES`;
+
+                            return <React.Fragment>
+                                <StackItem>
+                                    <Button onClick={this.openEntity}>Open {appName}</Button>
+                                </StackItem>
+                                <StackItem>
+                                    <Stack
+                                        directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
+                                        gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
+                                        <StackItem>
+                                            <h2>Transaction counts for {appName}</h2>
+                                            <LineChart accountId={this.accountId} query={tCountNrql+since} className="chart"/>
+                                        </StackItem>
+                                        <StackItem>
+                                            <h2>Apdex for {appName}</h2>
+                                            <ScatterChart accountId={this.accountId} query={apdexNrql+since} className="chart"/>
+                                        </StackItem>
+                                    </Stack>
+                                </StackItem>
+                            </React.Fragment>
+                        } else if (nerdletUrlState && nerdletUrlState.entityGuid) {
+                            const tCountNrql = `SELECT count(*) FROM Transaction WHERE entityGuid = '${nerdletUrlState.entityGuid}' TIMESERIES`;
+                            const apdexNrql = `SELECT apdex(duration) FROM Transaction WHERE entityGuid = '${nerdletUrlState.entityGuid}' TIMESERIES`;
+                            return <React.Fragment>
+                                <StackItem>
+                                    <Button onClick={() => {
+                                        this.openEntity(nerdletUrlState.entityGuid)
+                                    }}>Open {nerdletUrlState.appName}</Button>
+                                </StackItem>
+                                <StackItem>
+                                    <Stack
+                                        directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
+                                        gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
+                                        <StackItem>
+                                            <h2>Transaction counts for {nerdletUrlState.appName}</h2>
+                                            <LineChart accountId={this.accountId} query={tCountNrql+since} className="chart"/>
+                                        </StackItem>
+                                        <StackItem>
+                                            <h2>Apdex for {nerdletUrlState.appName}</h2>
+                                            <ScatterChart accountId={this.accountId} query={apdexNrql+since} className="chart"/>
+                                        </StackItem>
+                                    </Stack>
+                                </StackItem>
+                            </React.Fragment>
+                        }
+                        return null;
+                    }}
+                    </NerdletStateContext.Consumer>
                 </Stack>
-            </ChartGroup>
-        )
+            </ChartGroup>); //
+          }}
+        </PlatformStateContext.Consumer>
     }
 }
 ```

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dropdown, DropdownItem, Spinner, Stack, StackItem, BillboardChart, PieChart, NerdGraphQuery } from 'nr1';
+import { Dropdown, DropdownItem, Spinner, Stack, StackItem, BillboardChart, PieChart, NerdGraphQuery, PlatformStateContext } from 'nr1';
 
 export default class MyNerdlet extends React.Component {
     static propTypes = {
@@ -21,8 +21,8 @@ export default class MyNerdlet extends React.Component {
     /**
      * Build the array of NRQL statements based on the duration from the Time Picker.
      */
-    nrqlChartData() {
-        const { duration } = this.props.launcherUrlState.timeRange;
+    nrqlChartData(platformUrlState) {
+        const { duration } = platformUrlState.timeRange;
         const durationInMinutes = duration/1000/60;
         return [
             {
@@ -53,32 +53,36 @@ export default class MyNerdlet extends React.Component {
         //
 
         if (accounts) {
-            return <Stack directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                {selectedAccount &&
-                    <StackItem>
-                        <div>We're going to replace this with our <Dropdown></Dropdown> component</div>
-                    </StackItem>
-                }
-                {selectedAccount &&
-                    <StackItem>
-                        <Stack
-                            directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
-                            {this.nrqlChartData().map((d, i) => <StackItem key={i} shrink={true}>
-                                <h2>{d.title}</h2>
-                                {d.chartType == 'pie' ? <PieChart
-                                    accountId={selectedAccount.id}
-                                    query={d.nrql}
-                                    className="chart"
-                                /> : <BillboardChart
-                                    accountId={selectedAccount.id}
-                                    query={d.nrql}
-                                    className="chart"
-                                />}
-                            </StackItem>)}
-                        </Stack>
-                    </StackItem>
-                }
-            </Stack>
+            return <PlatformStateContext.Consumer>
+                {(platformUrlState) => {
+                    return <Stack
+                        horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+                        gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
+                        directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+                        {selectedAccount &&
+                            <StackItem>
+                                <Stack
+                                    horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+                                    gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
+                                    directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
+                                    {this.nrqlChartData(platformUrlState).map((d, i) => <StackItem key={i} shrink={true}>
+                                        <h2>{d.title}</h2>
+                                        {d.chartType == 'pie' ? <PieChart
+                                            accountId={selectedAccount.id}
+                                            query={d.nrql}
+                                            className="chart"
+                                        /> : <BillboardChart
+                                            accountId={selectedAccount.id}
+                                            query={d.nrql}
+                                            className="chart"
+                                        />}
+                                    </StackItem>)}
+                                </Stack>
+                            </StackItem>
+                        }
+                    </Stack>
+                }}
+            </PlatformStateContext.Consumer>
         } else {
             return <Spinner/>
         }

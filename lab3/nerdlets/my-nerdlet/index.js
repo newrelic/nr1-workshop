@@ -1,14 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Grid, GridItem, Stack, StackItem, ChartGroup, AreaChart, BarChart, LineChart, TableChart, PieChart, Button, HeadingText, TextField, Modal, Toast } from 'nr1';
+import MyNerdlet from './root';
+import { PlatformStateContext, NerdletStateContext, AutoSizer } from 'nr1';
 
-export default class MyNerdlet extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-    };
-
-    render() {
-        return <HeadingText>Lab 3 Hello World.</HeadingText>
-    }
+export default class Wrapper extends React.PureComponent {
+  render() {
+    return (
+      <PlatformStateContext.Consumer>
+        {platformUrlState => (
+          <NerdletStateContext.Consumer>
+            {nerdletUrlState => (
+              <AutoSizer>
+                {({ width, height }) => (
+                  <MyNerdlet
+                    launcherUrlState={platformUrlState}
+                    nerdletUrlState={nerdletUrlState}
+                    width={width}
+                    height={height}
+                  />
+                )}
+              </AutoSizer>
+            )}
+          </NerdletStateContext.Consumer>
+        )}
+      </PlatformStateContext.Consumer>
+    );
+  }
 }

@@ -50,106 +50,97 @@ You should come to screen that looks like the following:
 
 _Note: before you become concerned, cats and Star Trek have nothing to do with this exercise. Consider it a fun way to demonstrate what you can do with a `Grid` layout in NR1._
 
-## Step 2: Charting a timeseries of `PageView` events
+Our objective is going to be displaying a `LineChart` of `PageView` events that contrasts the current selected time window, the previous time window, and a made up set of **forecasted** data. In order to do that, we're going to need to do several things:
 
+1. Get access to the `platformUrlState.timeRange`
+2. Get access to the `nerdletUrlState.entityGuid`
+3. Retrieve the entity assigned to that `entityGuid` by means of `EntityByGuidQuery`
+4. Use the `accountId` associated with that entity to run a `NrqlQuery`
+5. then manipulate the results, adding in our forecasting data using the helper function we've provided in the `utils.js` file called `generateForecastData`
 
-1. Before we get going, take a moment to look at the `props` being printed out in the browser's `Console`. There's new content in the the `nerdletUrlState`, specifically an `entityGuid`. This is going to prove important in our `render` method.
+Let's start with our Contexts.
 
-![entities](../screenshots/lab7_screen01.png)
+## Step 2: Dealing with our Context
 
-_Note: the `entityGuid` is actually a Base64 encoded concatenation of the accountId, entity domain, entity type, and domain/type unique ID of that entity. We'll dissect that more below._
-
-2. Add the following imports near the top of your `lab7/nerdlets/my-nerdlet/index.js`
+1. Add the following import statements to the top of your `lab7/nerdlets/my-nerdlet/index.js`
 
 ```javascript
-import { NrqlQuery, Spinner, LineChart, DisplayText } from 'nr1';
-import { decodeGuid, loadEntity, generateForecastData } from './utils';
+import { NrqlQuery, Spinner, LineChart, BlockText, PlatformStateContext, NerdletStateContext, EntityByGuidQuery } from 'nr1';
+import { generateForecastData } from './utils';
 ```
+
+2. Next replace the render method with the following:
+
+```javascript
+    render() {
+        return <PlatformStateContext.Consumer>
+            {(platformUrlState) => (
+              <NerdletStateContext.Consumer>
+                {(nerdletUrlState) => (
+                    <EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
+                        {({data, loading, error}) => {
+                            console.debug("EntityByGuidQuery", [loading, data, error]); //eslint-disable-line
+                            if (loading) {
+                                return <Spinner fillContainer />;
+                            }
+                            if (error) {
+                                return <BlockText>{error.message}</BlockText>
+                            }
+                            const entity = data.entities[0];
+                            const { accountId } = entity;
+                            const { duration } = platformUrlState.timeRange;
+                            const durationInMinutes =  duration/1000/60;
+
+                            //we're going to replace this soon
+                            console.debug("We're ready for our NrqlQuery", [entity, accountId, duration, durationInMinutes]);
+                            return null;
+                        }}
+                    </EntityByGuidQuery>
+                )}
+              </NerdletStateContext.Consumer>
+            )}
+        </PlatformStateContext.Consumer>;
+    }
+```
+
+3. Save `lab7/nerdlets/my-nerdlet/index.js` and watch the reload. Open the browser's `Console` and read messages in the `Debug` tab. You should see something like the following:
+
+![Debugging](../screenshots/lab7_screen01.png)
+
+4. Take a few minutes to review the code you just added to the `render` method. Does it make sense to you? We're using the `PlatformStateContext` and `NerdletStateContext` to retrieve contexts we need in order to request the entity using the `EntityByGuidQuery`. If that doesn't all make sense, ask for some help.
+
+## Step 3: Charting a timeseries of `PageView` events
 
 We're going to use the `NrqlQuery` component to populate a `LineChart` using its `data` attribute.
 
 _If you're thinking, "based on what I've already learned, a `LineChart` doesn't need a custom data set. It can process a NRQL query on its own." You're correct. However, we're going to eventually add an additional series of data to the result we get back from our `NrqlQuery` **before** the data is passed to the `LineChart`, so keep tracking._
 
-3. Replace the `render` method content (bye bye _Captain_ and _#1_) with the following component definition:
+1. Replace the `return null;` statement in your `render` method with the following component definition:
 
 ```javascript
-    render() {
-        const { entity } = this.state;
-        if (entity) {
-            const accountId = this._getAccountId();
-            const { duration } = this.props.launcherUrlState.timeRange;
-            const durationInMinutes =  duration/1000/60;
-            return <NrqlQuery accountId={accountId} query={`SELECT uniqueCount(session) FROM PageView WHERE appName = '${entity.name.replace("'", "\\'")}' TIMESERIES SINCE ${durationInMinutes} MINUTES AGO COMPARE WITH ${durationInMinutes*2} MINUTES AGO`}>
-                {({ loading, data, error })  => {
-                    console.debug([loading, data, error]); //eslint-disable-line
-                    if (loading) {
-                        return <Spinner/>;
-                    }
-                    if (error) {
-                        return <DisplayText>{error}</DisplayText>;
-                    }
-                    return <LineChart data={data} className="chart"/>;
-                }}
-            </NrqlQuery>
-        } else {
-            return <Spinner/>
-        }
-    }
+    return <NrqlQuery accountId={accountId} query={`SELECT uniqueCount(session) FROM PageView WHERE appName = '${entity.name.replace("'", "\\'")}' TIMESERIES SINCE ${durationInMinutes} MINUTES AGO COMPARE WITH ${durationInMinutes*2} MINUTES AGO`}>
+        {({ loading, data, error })  => {
+            console.debug("NrqlQuery", [loading, data, error]); //eslint-disable-line
+            if (loading) {
+                return <Spinner fillContainer />;
+            }
+            if (error) {
+                return <BlockText>{error.message}</BlockText>;
+            }
+            return <LineChart data={data} className="chart"/>;
+        }}
+    </NrqlQuery>
 ```
 
 Study that code and ensure you've got a solid handle on what's going on there. If you don't, ask questions. Now... Seriously... Do it.
 
-4. Replace the `constructor` method with the following:
-
-```javascript
-constructor(props) {
-    super(props);
-    //logging for learning purposes only
-    console.debug(props); //eslint-disable-line
-    this.state = {
-        entity: null
-    };
-}
-```
-
-5. Open the `lab7/nerdlets/my-nerdlet/utils.js` and review each of the methods in that file. We're going to make use of three of them now.
-
-6. Add the following method to `lab7/nerdlets/my-nerdlet/index.js`. We're going to use this a shorthand way of getting the accountId from a decoded EntityGuid.
-
-```javascript
-    _getAccountId() {
-        return decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
-    }
-```
-
-_Note: the New Relic entityGuid is a GUID that is made up of four components: an accountId, an entity domain, an entity type, and a unique ID within that domain/type combo all base64 encoded. So when you have an entityGuid, you are a decode away from access to all of that information._
-
-7. Now, we need to load the Entity from New Relic so that we can get access to the Browser Applicaton name. To do that, we're going to make use of two React lifecycle methods and a utility method from our `utils` file. Add the following to `lab7/nerdlets/my-nerdlet/index.js`.
-
-```javascript
-    componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
-            this.setState({ entity});
-        });
-    }
-
-    componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
-            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
-                this.setState({ entity});
-            });
-        }
-        return true;
-    }
-```
-
-8. Save the file and reload. You should see something like the following:
+2. Save `lab7/nerdlets/my-nerdlet/index.js` and watch the reload. You should see a result like the folllowing:
 
 ![No Forecast. Sad Clown](../screenshots/lab7_screen02.png)
 
 You should see a current and yesterday, but no Forecast data. Let's make some.
 
-## Step 3: Adding a series of data to feed into a Chart
+## Step 4: Adding a series of data to feed into a Chart
 
 We're only one line of code away from our preferred outcome thanks to the `generateForecastData` function we imported earlier. If you haven't looked over the 20+ lines of code, please do so now. I'll give you an appropriate picture of what's needed to generate a chart data series.
 
@@ -169,68 +160,54 @@ The final code in `lab7/nerdlets/my-nerdlet/index.js` should look something like
 
 ```javascript
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Grid, GridItem } from 'nr1';
-import { NrqlQuery, Spinner, LineChart, DisplayText } from 'nr1';
-import { decodeEntityGuid, loadEntity, generateForecastData } from './utils';
+import { Grid, GridItem, AutoSizer } from 'nr1';
+import { NrqlQuery, Spinner, LineChart, BlockText, PlatformStateContext, NerdletStateContext, EntityByGuidQuery } from 'nr1';
+import { generateForecastData } from './utils';
 
 export default class MyNerdlet extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-        launcherUrlState: PropTypes.object
-    };
-
-    _getAccountId() {
-        return decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
-    }
 
     constructor(props) {
         super(props);
         console.debug(props); //eslint-disable-line
-        this.state = {
-            entity: null
-        }
-    }
-
-    componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
-            this.setState({ entity});
-        });
-    }
-
-    componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
-            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
-                this.setState({ entity});
-            });
-        }
-        return true;
     }
 
     render() {
-        const { entity } = this.state;
-        if (entity) {
-            const accountId = this._getAccountId();
-            const { duration } = this.props.launcherUrlState.timeRange;
-            const durationInMinutes =  duration/1000/60;
-            return <NrqlQuery accountId={accountId} query={`SELECT uniqueCount(session) FROM PageView WHERE appName = '${entity.name.replace("'", "\\'")}' TIMESERIES SINCE ${durationInMinutes} MINUTES AGO COMPARE WITH ${durationInMinutes*2} MINUTES AGO`}>
-                {({ loading, data, error })  => {
-                    console.debug([loading, data, error]); //eslint-disable-line
-                    if (loading) {
-                        return <Spinner/>;
-                    }
-                    if (error) {
-                        return <DisplayText>{error}</DisplayText>;
-                    }
-                    data.push(generateForecastData(data[0]));
-                    return <LineChart data={data} className="chart"/>;
-                }}
-            </NrqlQuery>
-
-        } else {
-            return <Spinner/>
-        }
+        return <PlatformStateContext.Consumer>
+            {(platformUrlState) => (
+              <NerdletStateContext.Consumer>
+                {(nerdletUrlState) => (
+                    <EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
+                        {({data, loading, error}) => {
+                            console.debug("EntityByGuidQuery", [loading, data, error]); //eslint-disable-line
+                            if (loading) {
+                                return <Spinner fillContainer />;
+                            }
+                            if (error) {
+                                return <BlockText>{error.message}</BlockText>
+                            }
+                            const entity = data.entities[0];
+                            const { accountId } = entity;
+                            const { duration } = platformUrlState.timeRange;
+                            const durationInMinutes =  duration/1000/60;
+                                return <NrqlQuery accountId={accountId} query={`SELECT uniqueCount(session) FROM PageView WHERE appName = '${entity.name.replace("'", "\\'")}' TIMESERIES SINCE ${durationInMinutes} MINUTES AGO COMPARE WITH ${durationInMinutes*2} MINUTES AGO`}>
+                                {({ loading, data, error })  => {
+                                    console.debug("NrqlQuery", [loading, data, error]); //eslint-disable-line
+                                    if (loading) {
+                                        return <Spinner fillContainer />;
+                                    }
+                                    if (error) {
+                                        return <BlockText>{error.message}</BlockText>;
+                                    }
+                                    data.push(generateForecastData(data[0]));
+                                    return <LineChart data={data} className="chart"/>;
+                                }}
+                            </NrqlQuery>
+                        }}
+                    </EntityByGuidQuery>
+                )}
+              </NerdletStateContext.Consumer>
+            )}
+        </PlatformStateContext.Consumer>;
     }
 }
 ```
