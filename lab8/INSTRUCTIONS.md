@@ -116,8 +116,9 @@ Now, we're ready to create the skeleton of our `render` method.
                             const { duration } = platformUrlState.timeRange;
                             const durationInMinutes =  duration/1000/60;
                             return (<Tabs>
-                                <TabsItem label={`Page Views`} id={1}>
+                                <TabsItem label={`Page Views`} value={1}>
                                     <Stack
+                                        fullWidth
                                         horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
                                         gapType={Stack.GAP_TYPE.TIGHT}>
@@ -219,8 +220,9 @@ export default class MyNerdlet extends React.Component {
                             const { duration } = platformUrlState.timeRange;
                             const durationInMinutes =  duration/1000/60;
                             return (<Tabs>
-                                <TabsItem label={`Page Views`} id={1}>
+                                <TabsItem label={`Page Views`} value={1}>
                                     <Stack
+                                        fullWidth
                                         horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
                                         gapType={Stack.GAP_TYPE.TIGHT}>
@@ -290,7 +292,7 @@ Now, we're going to make use of both the `NrqlQuery` and `CircleMarker` componen
                                 center={[pt[2].result, pt[3].result]}
                                 color={this._getColor(pt[1].average)}
                                 radius={Math.log(pt[0].count)*3}
-                                onClick={() => {this.openDetails(facet, accountId);}}>
+                                onClick={() => {this.openDetails(facet, entity);}}>
                             </CircleMarker>
                         })}
                     </Map>
@@ -310,14 +312,14 @@ Notice that we're referencing (within the `CircleMarker` component) two methods 
         return COLORS[value];
     }
 
-    openDetails(pt, accountId) {
+    openDetails(pt, entity) {
         navigation.openStackedNerdlet({
             id: 'details',
             urlState: {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
-                appName: this.state.entity.name,
-                accountId
+                appName: entity.name,
+                accountId: entity.accountId
             }
         });
     }
@@ -402,8 +404,9 @@ export default class MyNerdlet extends React.Component {
                             const { duration } = platformUrlState.timeRange;
                             const durationInMinutes =  duration/1000/60;
                             return (<Tabs>
-                                <TabsItem label={`Page Views`} id={1}>
+                                <TabsItem label={`Page Views`} value={1}>
                                     <Stack
+                                        fullWidth
                                         horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
                                         gapType={Stack.GAP_TYPE.TIGHT}>
@@ -439,7 +442,7 @@ export default class MyNerdlet extends React.Component {
                                                                     center={[pt[2].result, pt[3].result]}
                                                                     color={this._getColor(pt[1].average)}
                                                                     radius={Math.log(pt[0].count)*3}
-                                                                    onClick={() => {this.openDetails(facet, accountId);}}>
+                                                                    onClick={() => {this.openDetails(facet, entity);}}>
                                                                 </CircleMarker>
                                                             })}
                                                         </Map>
@@ -502,7 +505,7 @@ import PropTypes from 'prop-types';
 //import the needed summary stats
 import SummaryBar from '../../components/summary-bar';
 //import the appropriate NR1 components
-import { Grid, GridItem, TableChart, AutoSizer PlatformStateContext, NerdletStateContext, EntityByGuidQuery, BlockText } from 'nr1';
+import { Grid, GridItem, TableChart, AutoSizer, Spinner, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, BlockText } from 'nr1';
 
 export default class DetailsNerdlet extends React.Component {
 
@@ -646,8 +649,9 @@ export default class MyNerdlet extends React.Component {
                             const { duration } = platformUrlState.timeRange;
                             const durationInMinutes =  duration/1000/60;
                             return (<Tabs>
-                                <TabsItem label={`Page Views`} id={1}>
+                                <TabsItem label={`Page Views`} value={1}>
                                     <Stack
+                                        fullWidth
                                         horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                                         directionType={Stack.DIRECTION_TYPE.VERTICAL}
                                         gapType={Stack.GAP_TYPE.TIGHT}>
@@ -683,7 +687,7 @@ export default class MyNerdlet extends React.Component {
                                                                     center={[pt[2].result, pt[3].result]}
                                                                     color={this._getColor(pt[1].average)}
                                                                     radius={Math.log(pt[0].count)*3}
-                                                                    onClick={() => {this.openDetails(facet, accountId);}}>
+                                                                    onClick={() => {this.openDetails(facet, entity); }}>
                                                                 </CircleMarker>
                                                             })}
                                                         </Map>
@@ -693,8 +697,8 @@ export default class MyNerdlet extends React.Component {
                                         </StackItem>
                                     </Stack>
                                 </TabsItem>
-                                <TabsItem label={`JavaScript Errors`} id={2}>
-                                    <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
+                                <TabsItem label={`JavaScript Errors`} value={2}>
+                                    <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={platformUrlState} />
                                 </TabsItem>
                             </Tabs>);
                         }}
