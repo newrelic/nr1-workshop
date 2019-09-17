@@ -1,10 +1,6 @@
 import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
 
 export default class MyNerdlet extends React.Component {
-    static propTypes = {
-        nerdletUrlState: PropTypes.object.isRequired
-    };
 
     constructor(props){
         super(props);

@@ -107,11 +107,11 @@ Replace the render method within `lab3/nerdlets/my-nerdlet/main.js` file and tak
 ```javascript
 render() {
     return <Stack
-            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+            horizontalType={Stack.HORIZONTAL_TYPE.FILL}
             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <StackItem>
                 <Stack
-                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                    horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                     gapType={Stack.GAP_TYPE.NORMAL}>
                     <StackItem>
@@ -127,7 +127,7 @@ render() {
             </StackItem>
             <StackItem>
                 <Stack
-                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                    horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
                     <StackItem grow>
                         <div className="gry-div">Item 4: This field grows</div>
@@ -148,7 +148,7 @@ Change the render method within your `lab3/nerdlets/my-nerdlet/main.js` with the
 ```javascript
 render() {
     return <Stack
-        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+        horizontalType={Stack.HORIZONTAL_TYPE.FILL}
         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
         <StackItem>
             <Stack
