@@ -1,7 +1,7 @@
 import React from 'react';
 import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Button, navigation, nerdlet, PlatformStateContext, NerdletStateContext  } from 'nr1';
 
-export default class Lab1Nerdlet extends React.Component {
+export default class Lab2Nerdlet extends React.Component {
 
     constructor(props) {
         super(props);
