@@ -3,6 +3,5 @@
     "id": "lab1-launcher",
     "description": "Describe me",
     "displayName": "Lab 1 Launcher",
-    "icon": "interface_placeholders_icon-placeholder",
     "rootNerdletId": "lab1-nerdlet"
 }

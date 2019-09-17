@@ -112,6 +112,7 @@ import { TableChart, Stack, StackItem } from 'nr1';
         //return the JSX we're rendering
         return (
             <Stack
+                verticalType={Stack.VERTICAL_TYPE.FILL}
                 directionType={Stack.DIRECTION_TYPE.VERTICAL}
                 gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                 <StackItem>
@@ -154,6 +155,7 @@ That all results in the following block of code. Copy/reproduce the code below a
         return (
             <ChartGroup>
                 <Stack
+                    verticalType={Stack.VERTICAL_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
@@ -161,6 +163,7 @@ That all results in the following block of code. Copy/reproduce the code below a
                     </StackItem>
                     {appId && <StackItem>
                         <Stack
+                            horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
@@ -210,7 +213,6 @@ The onClickTable receives four parameters that each provide a different view of 
 
 ```javascript
 import React from 'react';
-import PropTypes from 'prop-types';
 import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart } from 'nr1';
 
 export default class Lab1Nerdlet extends React.Component {
@@ -238,6 +240,7 @@ export default class Lab1Nerdlet extends React.Component {
         return (
             <ChartGroup>
                 <Stack
+                    verticalType={Stack.VERTICAL_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
@@ -249,6 +252,7 @@ export default class Lab1Nerdlet extends React.Component {
                     </StackItem>
                     {appId && <StackItem>
                         <Stack
+                            horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
