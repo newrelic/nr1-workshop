@@ -1,13 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Dropdown, DropdownItem, Spinner, Stack, StackItem, BillboardChart, PieChart, NerdGraphQuery, PlatformStateContext } from 'nr1';
 
 export default class MyNerdlet extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-        launcherUrlState: PropTypes.object
-    };
 
     constructor(props) {
         super(props)
