@@ -81,7 +81,7 @@ export default class AddEntityModal extends Component {
   }
 
   onClick(entity) {
-    this.props.onSearchSelect(entity);
+    this.props.onSearchSelect(entity, this.props.entity);
   }
 
   render() {

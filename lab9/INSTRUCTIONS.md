@@ -100,7 +100,7 @@ import { LineChart, TableChart, Grid, GridItem, Spinner, HeadingText, Button, Ic
                 documentId: baseEntity.guid,
                 document: entities
             }).then(() => {
-                Toast.showToast("Update Saved.", { type: Toast.TYPE.NORMAL });
+                Toast.showToast({title: "Update Saved.", type: Toast.TYPE.NORMAL });
             });
         });
     }
@@ -127,7 +127,7 @@ Now, we're going to try to load the saved entity set for this `User` and `Entity
             return results.data.entities[0];
         }).catch(error => {
             console.error(error); //eslint-disable-line
-            Toast.showToast(error.message, { type: Toast.TYPE.CRITICAL });
+            Toast.showToast({ title: error.message, type: Toast.TYPE.CRITICAL });
         });
 
         const entities = await UserStorageQuery.query({
@@ -142,7 +142,7 @@ Now, we're going to try to load the saved entity set for this `User` and `Entity
                 }
             }).catch(error => {
                 console.error(error);
-                Toast.showToast(error.message, { type: Toast.TYPE.CRITICAL });
+                Toast.showToast({ title: error.message, type: Toast.TYPE.CRITICAL });
             });
         this.setState({ entity, entities });
     }
@@ -162,7 +162,7 @@ It would be nice if, either when there was an error loading the configurations o
     //leave the code above the same.
     }).catch(error => {
         console.error(error);
-        Toast.showToast(error.message, { type: Toast.TYPE.CRITICAL });
+        Toast.showToast({ title: error.message, type: Toast.TYPE.CRITICAL });
     });
     //leave the code below the same.
 ```
@@ -171,7 +171,7 @@ It would be nice if, either when there was an error loading the configurations o
 
 ```javascript
     .then(() => {
-        Toast.showToast("Update Saved.", { type: Toast.TYPE.NORMAL });
+        Toast.showToast({ title: "Update Saved.", type: Toast.TYPE.NORMAL });
     });
 ```
 
