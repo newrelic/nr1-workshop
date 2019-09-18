@@ -234,8 +234,8 @@ export default class MyNerdlet extends React.Component {
                 documentId: entityGuid
         }).then(({data}) => {
             console.debug(data);
-            if (Array.isArray(data)) {
-                this.setState({ entities: data });
+            if (data.entities) {
+                this.setState({ entities: data.entities });
             } else {
                 this.setState({ entities: []});
             }
@@ -261,7 +261,7 @@ export default class MyNerdlet extends React.Component {
                 actionType: UserStorageMutation.ACTION_TYPE.WRITE_DOCUMENT,
                 collection: 'lab9-entityList-v0',
                 documentId: entity.guid,
-                document: entities
+                document: { entities }
             }).then(() => {
                 Toast.showToast({title: "Update Saved.", type: Toast.TYPE.NORMAL });
             }).catch(error => {
