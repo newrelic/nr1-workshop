@@ -144,7 +144,7 @@ In steps 1-3 we were creating a `lab0` Nerdpack. Yet, there is a quicker way to 
 
 **`nr1 create` will do it for you!**
 
-From your root directory (or the directory your want your Nerdpacks located), run the following command in your terminal:
+From your root directory (or the directory you want your Nerdpacks located), run the following command in your terminal:
 
 ```bash
 # The CLI will create a new folder to contain the artifacts within your Nerdpack
