@@ -22,8 +22,8 @@ _Note: Each exercise exists as a folder in this repository. Following the materi
 ```bash
 # ex. change directory into setup
 cd workshop/setup
-
 npm install
+nr1 nerdpack:uuid -gf
 nr1 nerdpack:serve
 ```
 
