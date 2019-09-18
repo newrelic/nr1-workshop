@@ -16,7 +16,6 @@
   },
   "author": "New Relic Labs",
   "dependencies": {
-    "js-base64": "^2.5.1",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
     "prop-types": "^15.6.2",
