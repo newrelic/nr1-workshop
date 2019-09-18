@@ -53,9 +53,7 @@ export default class MyNerdlet extends React.Component {
                         }
                         const { entities, openModal } = this.state;
                         const entity = data.entities[0];
-                        if (entities.length == 0) {
-                            entities.push(entity);
-                        }
+                        entities.push(entity);
                         const { accountId } = entity;
                         const eventType = entity ? entity.domain == 'BROWSER' ? 'PageView' : 'Transaction' : null;
                         const label = entity.domain == 'BROWSER' ? 'Browser Apps' : 'APM Services';
@@ -82,6 +80,8 @@ export default class MyNerdlet extends React.Component {
                             </Grid>
                             {openModal && <AddEntityModal
                                 {...this.state}
+                                entity={entity}
+                                entityType={{ type: entity.type, domain: entity.domain }}
                                 onClose={() => {
                                     this.setState({ openModal: false });
                                 }}

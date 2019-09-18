@@ -64,7 +64,7 @@ export default class AddEntityModal extends Component {
       console.debug(rs);
       if (rs.data) {
         //filter the results to those that are NOT already in the entities prop AND those that are reporting some status or another (non-alert services won't show up in the charts and will therefore be confusing for the example)
-        const results = rs.data.actor.entitySearch.results.entities.filter((entity) => {
+        const results = rs.data.entities.filter((entity) => {
           if (!entities) {
             return true;
           }
