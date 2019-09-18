@@ -33,7 +33,7 @@ export default class MyNerdlet extends React.Component {
     onSearchSelect(inEntity) {
         const { entities } = this.state;
         entities.push(inEntity);
-        this.setState({ entities });
+        this.setState({ entities, openModal: false });
     }
 
     _buildNrql(base, entities) {
