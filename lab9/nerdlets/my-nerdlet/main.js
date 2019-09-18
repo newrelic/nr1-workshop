@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LineChart, TableChart, Grid, GridItem, HeadingText, Button, Icon } from 'nr1';
+import { LineChart, TableChart, Grid, GridItem, HeadingText, Button, Icon, UserStorageMutation, UserStorageQuery, Toast } from 'nr1';
 import { distanceOfTimeInWords } from './utils';
 import AddEntityModal from './add-entity-modal';
 
@@ -31,23 +31,23 @@ export default class MyNerdlet extends React.Component {
      * @param {Object} entity
      */
     onSearchSelect(inEntity) {
-        const { entity } = this.props;
-        let { entities } = this.state;
-        entities = entities.filter(e => e.guid != entity.guid);
+        const { entities } = this.state;
         entities.push(inEntity);
         this.setState({ entities, openModal: false });
     }
 
-    _buildNrql(base, entities) {
-        const appNames = entities ? entities.map((entity, i) => `'${entity.name}'`) : null;
+    _buildNrql(base) {
+        const { entities } = this.state;
+        const { entity } = this.props;
+        const elist = [...entities, entity];
+        const appNames = elist.map((entity, i) => `'${entity.name}'`);
         let nrql = `${base} FACET appName ${appNames ? `WHERE appName in (${appNames.join(",")}) ` : ''}`;
         return nrql;
     }
 
     render() {
-        const { entities, openModal } = this.state;
+        const { openModal } = this.state;
         const { entity, launcherUrlState: { timeRange: { duration }}, width, height } = this.props;
-        entities.push(entity);
         const { accountId } = entity;
         const eventType = entity ? entity.domain == 'BROWSER' ? 'PageView' :    'Transaction' : null;
         const label = entity.domain == 'BROWSER' ? 'Browser Apps' : 'APM Services';
@@ -59,14 +59,14 @@ export default class MyNerdlet extends React.Component {
                 <p style={{marginBottom: '10px'}}>{distanceOfTimeInWords(duration)}</p>
                 <LineChart
                     accountId={accountId}
-                    query={this._buildNrql(`SELECT average(duration) from ${eventType} TIMESERIES SINCE ${durationInMinutes} MINUTES AGO `, entities)}
+                    query={this._buildNrql(`SELECT average(duration) from ${eventType} TIMESERIES SINCE ${durationInMinutes} MINUTES AGO `)}
                     style={{height: `${height*.5}px`, width: width}}
                 />
                 </GridItem>
                 <GridItem columnStart={1} columnEnd={12}>
                     <TableChart
                         accountId={accountId}
-                        query={this._buildNrql(`SELECT count(*) as 'requests', percentile(duration, 99, 90, 50) FROM ${eventType} SINCE ${durationInMinutes} MINUTES AGO`, entities)}
+                        query={this._buildNrql(`SELECT count(*) as 'requests', percentile(duration, 99, 90, 50) FROM ${eventType} SINCE ${durationInMinutes} MINUTES AGO`)}
                         style={{height: `${height*.5}px`, width: width}}
                     />
                 </GridItem>

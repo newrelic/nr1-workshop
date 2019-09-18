@@ -90,17 +90,17 @@ import { LineChart, TableChart, Grid, GridItem, Spinner, HeadingText, Button, Ic
      * @param {Object} entity
      */
     onSearchSelect(inEntity) {
-        const { entities, entity } = this.state;
+        const { entities } = this.state;
+        const { entity } = this.props;
         entities.push(inEntity);
+        console.debug("saving entities array", entities);
         //after the state is saved (technically asynchronously), we're going to save the list of entities to NerdStorage
-        this.setState({ entities, openModel: false }, () => {
+        this.setState({ entities, openModal: false }, () => {
             UserStorageMutation.mutate({
                 actionType: UserStorageMutation.ACTION_TYPE.WRITE_DOCUMENT,
                 collection: 'lab9-entityList-v0',
                 documentId: entity.guid,
                 document: entities
-            }).then(() => {
-                Toast.showToast({title: "Update Saved.", type: Toast.TYPE.NORMAL });
             });
         });
     }
@@ -121,34 +121,47 @@ Now, we're going to try to load the saved entity set for this `User` and `Entity
      * Load the entity using the loadEntity utils function, then look up if there's a entityList-v0 collection for this entity and user.
      * @param {string} entityGuid
      */
-    async _loadState(entityGuid) {
-        const entity = await EntityByGuidQuery.query({ entityGuid }).then(results => {
-            console.debug(results);
-            return results.data.entities[0];
-        }).catch(error => {
-            console.error(error); //eslint-disable-line
-            Toast.showToast({ title: error.message, type: Toast.TYPE.CRITICAL });
-        });
-
-        const entities = await UserStorageQuery.query({
+    _loadState(entityGuid) {
+        UserStorageQuery.query({
                 collection: 'lab9-entityList-v0',
                 documentId: entityGuid
-            }).then(({data}) => {
-                console.debug(data);
-                if (data.actor.nerdStorage) {
-                    return data.actor.nerdStorage.document;
-                } else {
-                    return [ entity ];
-                }
-            }).catch(error => {
-                console.error(error);
-                Toast.showToast({ title: error.message, type: Toast.TYPE.CRITICAL });
-            });
-        this.setState({ entity, entities });
+        }).then(({data}) => {
+            console.debug(data);
+            if (Array.isArray(data)) {
+                this.setState({ entities: data });
+            } else {
+                this.setState({ entities: []});
+            }
+        }).catch(error => {
+            console.error(error);
+            this.setState({ entities: []});
+            Toast.showToast({ title: error.message, type: Toast.TYPE.CRITICAL });
+        });
     }
 ```
 
-2. Save the file and reload, we should see our associated entities loading in the UI.
+2. Now, we're going to leverage two of the React lifecycle methods to call `_loadState` when needed. Add the following methods to your code:
+
+```javascript
+    componentDidMount() {
+        if (this.props.nerdletUrlState && this.props.nerdletUrlState.entityGuid) {
+            console.debug("Calling loadState with props", this.props);
+            this._loadState(this.props.nerdletUrlState.entityGuid);
+        } else {
+            this.setState({ openModal: true });
+        }
+    }
+
+    componentWillUpdate(nextProps) {
+        if (this.props && nextProps.nerdletUrlState && nextProps.nerdletUrlState.entityGuid && nextProps.nerdletUrlState.entityGuid != this.props.nerdletUrlState.entityGuid) {
+            console.debug("Calling loadState with nextProps");
+            this._loadState(nextProps.nerdletUrlState.entityGuid);
+        }
+        return true;
+    }
+```
+
+3. Save the file and reload, we should see our associated entities loading in the UI.
 
 ![Boom](../screenshots/lab9_screen01.png)
 
@@ -156,43 +169,37 @@ Now, we're going to try to load the saved entity set for this `User` and `Entity
 
 It would be nice if, either when there was an error loading the configurations or when we save the state, we received a notification. That's what a `Toast` is for, so let's do that.
 
-1. Open the file `lab9/nerdlets/my-nerdlet/index.js` and add modify the `catch` statements in the `_loadEntity` method:
+1. At the end of the `UserStorageMutation.mutate` call in the `onSearchSelect` method, add the following `then` and `catch` statements:
 
 ```javascript
-    //leave the code above the same.
+    }).then(() => {
+        Toast.showToast({title: "Update Saved.", type: Toast.TYPE.NORMAL });
     }).catch(error => {
         console.error(error);
         Toast.showToast({ title: error.message, type: Toast.TYPE.CRITICAL });
     });
-    //leave the code below the same.
 ```
 
-2. At the end of the `UserStorageMutation.mutate` call in the `onSearchSelect` method, add the following `then` statement:
-
-```javascript
-    .then(() => {
-        Toast.showToast({ title: "Update Saved.", type: Toast.TYPE.NORMAL });
-    });
-```
-
-3. Save the file and watch the reload magic happen. Add entities to your comparison.
+2. Save the file and watch the reload magic happen. Add entities to your comparison.
 
 The final code in `lab9/nerdlets/my-nerdlet/index.js` should look something like this:
 
 ```javascript
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LineChart, TableChart, Grid, GridItem, Spinner, HeadingText, Button, Icon, EntityByGuidQuery, UserStorageQuery, UserStorageMutation, Toast } from 'nr1';
+import { LineChart, TableChart, Grid, GridItem, HeadingText, Button, Icon, UserStorageMutation, UserStorageQuery, Toast } from 'nr1';
 import { distanceOfTimeInWords } from './utils';
 import AddEntityModal from './add-entity-modal';
 
 export default class MyNerdlet extends React.Component {
+
     static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number.isRequired,
+        nerdletUrlState: PropTypes.object.isRequired,
         launcherUrlState: PropTypes.object.isRequired,
-        nerdletUrlState: PropTypes.object.isRequired
-    }
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired,
+        entity: PropTypes.object.isRequired
+    };
 
     constructor(props) {
         super(props);
@@ -200,7 +207,6 @@ export default class MyNerdlet extends React.Component {
         console.debug(props); //eslint-disable-line
         //initiate the state
         this.state = {
-            entity: null,
             entities: [],
             openModal: false
         }
@@ -209,7 +215,7 @@ export default class MyNerdlet extends React.Component {
 
     componentDidMount() {
         if (this.props.nerdletUrlState && this.props.nerdletUrlState.entityGuid) {
-            console.debug("Calling loadState with props");
+            console.debug("Calling loadState with props", this.props);
             this._loadState(this.props.nerdletUrlState.entityGuid);
         } else {
             this.setState({ openModal: true });
@@ -228,30 +234,22 @@ export default class MyNerdlet extends React.Component {
      * Load the entity using the loadEntity utils function, then look up if there's a entityList-v0 collection for this entity and user.
      * @param {string} entityGuid
      */
-    async _loadState(entityGuid) {
-        const entity = await EntityByGuidQuery.query({ entityGuid }).then(results => {
-            console.debug(results);
-            return results.data.entities[0];
-        }).catch(error => {
-            console.error(error); //eslint-disable-line
-            Toast.showToast(error.message, { type: Toast.TYPE.CRITICAL });
-        });
-
-        const entities = await UserStorageQuery.query({
+    _loadState(entityGuid) {
+        UserStorageQuery.query({
                 collection: 'lab9-entityList-v0',
                 documentId: entityGuid
-            }).then(({data}) => {
-                console.debug(data);
-                if (data.actor.nerdStorage) {
-                    return data.actor.nerdStorage.document;
-                } else {
-                    return [ entity ];
-                }
-            }).catch(error => {
-                console.error(error);
-                Toast.showToast(error.message, { type: Toast.TYPE.CRITICAL });
-            });
-        this.setState({ entity, entities });
+        }).then(({data}) => {
+            console.debug(data);
+            if (Array.isArray(data)) {
+                this.setState({ entities: data });
+            } else {
+                this.setState({ entities: []});
+            }
+        }).catch(error => {
+            console.error(error);
+            this.setState({ entities: []});
+            Toast.showToast({ title: error.message, type: Toast.TYPE.CRITICAL });
+        });
     }
 
     /**
@@ -259,75 +257,71 @@ export default class MyNerdlet extends React.Component {
      * @param {Object} entity
      */
     onSearchSelect(inEntity) {
-        let { entities, entity } = this.state;
-        if (!entity) {
-            entity = inEntity;
-        }
+        const { entities } = this.state;
+        const { entity } = this.props;
         entities.push(inEntity);
+        console.debug("saving entities array", entities);
         //after the state is saved (technically asynchronously), we're going to save the list of entities to NerdStorage
-        this.setState({ entity, entities }, () => {
+        this.setState({ entities, openModal: false }, () => {
             UserStorageMutation.mutate({
                 actionType: UserStorageMutation.ACTION_TYPE.WRITE_DOCUMENT,
                 collection: 'lab9-entityList-v0',
                 documentId: entity.guid,
                 document: entities
             }).then(() => {
-                Toast.showToast("Update Saved.", { type: Toast.TYPE.NORMAL });
+                Toast.showToast({title: "Update Saved.", type: Toast.TYPE.NORMAL });
+            }).catch(error => {
+                console.error(error);
+                Toast.showToast({ title: error.message, type: Toast.TYPE.CRITICAL });
             });
         });
     }
 
     _buildNrql(base) {
         const { entities } = this.state;
-        const appNames = entities ? entities.map((entity, i) => `'${entity.name}'`) : null;
+        const { entity } = this.props;
+        const elist = [...entities, entity];
+        const appNames = elist.map((entity, i) => `'${entity.name}'`);
         let nrql = `${base} FACET appName ${appNames ? `WHERE appName in (${appNames.join(",")}) ` : ''}`;
         return nrql;
     }
 
     render() {
-        const { height, launcherUrlState, nerdletUrlState } = this.props;
-        if (!nerdletUrlState || !nerdletUrlState.entityGuid) {
-            return <AddEntityModal
-                        onSearchSelect={this.onSearchSelect}
-                   />;
-        }
-        const { entities, entity, openModal } = this.state;
-        if (!entity) {
-            return <Spinner/>
-        }
+        const { openModal } = this.state;
+        const { entity, launcherUrlState: { timeRange: { duration }}, width, height } = this.props;
         const { accountId } = entity;
-        const eventType = entity ? entity.domain == 'BROWSER' ? 'PageView' : 'Transaction' : null;
-        const { timeRange : { duration }} = launcherUrlState;
-        const durationInMinutes = duration / 1000 / 60;
+        const eventType = entity ? entity.domain == 'BROWSER' ? 'PageView' :    'Transaction' : null;
         const label = entity.domain == 'BROWSER' ? 'Browser Apps' : 'APM Services';
-        return (<React.Fragment><Grid>
-            {entities && entities.length > 0 ? <React.Fragment><GridItem columnStart={1} columnEnd={12} style={{padding: '10px'}}>
-            <HeadingText>Performance over Time<Button sizeType={Button.SIZE_TYPE.SMALL} style={{marginLeft: '25px'}} onClick={() => { this.setState({ openModal: true }) }}><Icon type={Icon.TYPE.INTERFACE__SIGN__PLUS} /> {label}</Button></HeadingText>
-            <p style={{marginBottom: '10px'}}>{distanceOfTimeInWords(duration)}</p>
-            <LineChart
-                accountId={accountId}
-                query={this._buildNrql(`SELECT average(duration) from ${eventType} TIMESERIES SINCE ${durationInMinutes} MINUTES AGO `)}
-                style={{height: `${height*.5}px`}}
-            />
-            </GridItem>
-            <GridItem columnStart={1} columnEnd={12}>
-                <TableChart
+        const durationInMinutes =  duration/1000/60;
+        return (<React.Fragment>
+            <Grid style={{width:width}}>
+                <GridItem columnStart={1} columnEnd={12} style={{padding: '10px'}}>
+                <HeadingText>Performance over Time<Button sizeType={Button.SIZE_TYPE.SMALL} style={{marginLeft: '25px'}} onClick={() => { this.setState({ openModal: true }) }}><Icon type={Icon.TYPE.INTERFACE__SIGN__PLUS} /> {label}</Button></HeadingText>
+                <p style={{marginBottom: '10px'}}>{distanceOfTimeInWords(duration)}</p>
+                <LineChart
                     accountId={accountId}
-                    query={this._buildNrql(`SELECT count(*) as 'requests', percentile(duration, 99, 90, 50) FROM ${eventType} SINCE ${durationInMinutes} MINUTES AGO`)}
-                    style={{height: `${height*.5}px`}}
+                    query={this._buildNrql(`SELECT average(duration) from ${eventType} TIMESERIES SINCE ${durationInMinutes} MINUTES AGO `)}
+                    style={{height: `${height*.5}px`, width: width}}
                 />
-            </GridItem>
-            </React.Fragment> : <Spinner/>}
+                </GridItem>
+                <GridItem columnStart={1} columnEnd={12}>
+                    <TableChart
+                        accountId={accountId}
+                        query={this._buildNrql(`SELECT count(*) as 'requests', percentile(duration, 99, 90, 50) FROM ${eventType} SINCE ${durationInMinutes} MINUTES AGO`)}
+                        style={{height: `${height*.5}px`, width: width}}
+                    />
+                </GridItem>
             </Grid>
             {openModal && <AddEntityModal
                 {...this.state}
-                entities={entities}
+                entity={entity}
+                entityType={{ type: entity.type, domain: entity.domain }}
                 onClose={() => {
                     this.setState({ openModal: false });
                 }}
                 onSearchSelect={this.onSearchSelect}
             />}
-            </React.Fragment>);
+        </React.Fragment>);
     }
 }
 ```
