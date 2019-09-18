@@ -30,8 +30,7 @@ nr1 nerdpack:serve
 Your terminal output should look like the following:
 ![terminal](screenshots/setup_screen04.png)
 
-4. Open Google Chrome and go to [one.newrelic.com?nerdpacks=local](one.newrelic.com?nerdpacks=local) (this places locally served applications in New Relic One). Click on the launcher named `Setup exercise`. You should see the following:
+4. Open Google Chrome and go to [one.newrelic.com?nerdpacks=local](https://one.newrelic.com?nerdpacks=local) (this places locally served applications in New Relic One). Click on the launcher named `Setup exercise`. You should see the following:
 ![Congratulations](screenshots/setup_screen05.png)
 
 Great. [Now let's get started.](https://github.com/newrelic/nr1-workshop)
-
