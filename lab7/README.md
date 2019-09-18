@@ -6,7 +6,7 @@ This repo has been spun up locally only.
 
 1. Open a Terminal window.
 2. Type the following to confirm that you can run the NR1 CLI `nr1 --version`
-3. If you can't run that command, go to the **Build a New Relic One application** launcher in New Relic One, register for a developer API key and download the NR1 CLI. See the complete [Setup instructions](../SETUP.md) for more details
+3. If you can't run that command, go to the **Build your own application** launcher in New Relic One, register for a developer API key and download the NR1 CLI. See the complete [Setup instructions](../SETUP.md) for more details
 4. Open a Terminal window. From the command line you should the following:
 
 ```bash
