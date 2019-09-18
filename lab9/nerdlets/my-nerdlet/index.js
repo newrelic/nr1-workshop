@@ -53,7 +53,7 @@ export default class MyNerdlet extends React.Component {
                         }
                         const { entities, openModal } = this.state;
                         const entity = data.entities[0];
-                        if (entities.length > 0) {
+                        if (entities.length == 0) {
                             entities.push(entity);
                         }
                         const { accountId } = entity;
