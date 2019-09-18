@@ -31,7 +31,9 @@ export default class MyNerdlet extends React.Component {
      * @param {Object} entity
      */
     onSearchSelect(inEntity) {
-        const { entities } = this.state;
+        const { entity } = this.props;
+        let { entities } = this.state;
+        entities = entities.filter(e => e.guid != entity.guid);
         entities.push(inEntity);
         this.setState({ entities, openModal: false });
     }

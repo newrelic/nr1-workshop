@@ -89,15 +89,15 @@ import { LineChart, TableChart, Grid, GridItem, Spinner, HeadingText, Button, Ic
      * Receive an entity from the EntitySearch
      * @param {Object} entity
      */
-    onSearchSelect(inEntity, baseEntity) {
-        const { entities } = this.state;
+    onSearchSelect(inEntity) {
+        const { entities, entity } = this.state;
         entities.push(inEntity);
         //after the state is saved (technically asynchronously), we're going to save the list of entities to NerdStorage
-        this.setState({ entities }, () => {
+        this.setState({ entities, openModel: false }, () => {
             UserStorageMutation.mutate({
                 actionType: UserStorageMutation.ACTION_TYPE.WRITE_DOCUMENT,
                 collection: 'lab9-entityList-v0',
-                documentId: baseEntity.guid,
+                documentId: entity.guid,
                 document: entities
             }).then(() => {
                 Toast.showToast({title: "Update Saved.", type: Toast.TYPE.NORMAL });
