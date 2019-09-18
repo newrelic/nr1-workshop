@@ -34,7 +34,7 @@ So let's get started!
 
 For the purposes of expediency, this lab provides a functional application that we're going to use to practice data storage. Please take a moment to review the following files.
 
-1. Open the files `lab9/nerdlets/my-nerdlet/index.js`, `lab9/nerdlets/my-nerdlet/add-entity-modal.js`, and `lab9/nerdlets/my-nerdlet/utils.js`.In particular notice that between those three files, we're making use of **fourteen** different components from the `nr1` package.
+1. Open the files `lab9/nerdlets/my-nerdlet/main.js`, `lab9/nerdlets/my-nerdlet/add-entity-modal.js`, and `lab9/nerdlets/my-nerdlet/utils.js`.In particular notice that between those three files, we're making use of **fourteen** different components from the `nr1` package.
 
 Next, we're going to exercise the functionality of the `Perf. Comparison` nerdlet.
 
@@ -76,13 +76,7 @@ Let's make use of this service to address our "save the state" feature in this N
 ## Step 2: Save the set of entities for this Nerdlet using `UserStorageMutation`
 
 
-1. Open the file `lab9/nerdlets/my-nerdlet/index.js` and replace the `nr1` import statement with the following:
-
-```javascript
-import { LineChart, TableChart, Grid, GridItem, Spinner, HeadingText, Button, Icon, EntityByGuidQuery, UserStorageQuery, UserStorageMutation, Toast } from 'nr1';
-```
-
-2. In `lab9/nerdlets/my-nerdlet/index.js` and look at the `onSearchSelect` method. Beyond saving the `state`, we're going to save this data to `NerdStorage`. Replace `onSearchSelect` with the following:
+1. In `lab9/nerdlets/my-nerdlet/main.js` and look at the `onSearchSelect` method. Beyond saving the `state`, we're going to save this data to `NerdStorage`. Replace `onSearchSelect` with the following:
 
 ```javascript
     /**
@@ -106,7 +100,7 @@ import { LineChart, TableChart, Grid, GridItem, Spinner, HeadingText, Button, Ic
     }
 ```
 
-3. Save the file and watch the `Nerdlet` reload the browser. Now, open the `+` modal in the `Lab 9: Perf. Compare` nerdlet and add several services to the current service. You should see no behavioral change at this point.
+2. Save the file and watch the `Nerdlet` reload the browser. Now, open the `+` modal in the `Lab 9: Perf. Compare` nerdlet and add several services to the current service. You should see no behavioral change at this point.
 
 ![Business as usual](../screenshots/lab9_screen00.png)
 
@@ -114,7 +108,7 @@ import { LineChart, TableChart, Grid, GridItem, Spinner, HeadingText, Button, Ic
 
 Now, we're going to try to load the saved entity set for this `User` and `Entity` using `UserStorageQuery`.
 
-1. Open the file `lab9/nerdlets/my-nerdlet/index.js`, and replace the `_loadState` method with the following:
+1. Open the file `lab9/nerdlets/my-nerdlet/main.js`, and replace the `_loadState` method with the following:
 
 ```javascript
     /**
@@ -182,7 +176,7 @@ It would be nice if, either when there was an error loading the configurations o
 
 2. Save the file and watch the reload magic happen. Add entities to your comparison.
 
-The final code in `lab9/nerdlets/my-nerdlet/index.js` should look something like this:
+The final code in `lab9/nerdlets/my-nerdlet/main.js` should look something like this:
 
 ```javascript
 import React from 'react';
