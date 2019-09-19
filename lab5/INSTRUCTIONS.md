@@ -98,7 +98,7 @@ import { NerdGraphQuery, Stack, StackItem, Spinner, HeadingText, BlockText } fro
 
 ```javascript
     render() {
-        return (<Stack directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+        return (<Stack fullWidth directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <StackItem>
                 <div className="container">
                     <NerdGraphQuery query={`{actor {accounts {id name}}}`}>
@@ -295,7 +295,7 @@ export default class MyNerdlet extends React.Component {
     }
 
     render() {
-        return (<Stack directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+        return (<Stack fullWidth directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <StackItem className="container">
                 <NerdGraphQuery query={`{actor {accounts {id name}}}`}>
                     {({loading, error, data}) => {

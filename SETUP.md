@@ -8,6 +8,10 @@ To set up your environment to Build your own application:
 
 1. In Google Chrome, go to [one.newrelic.com](one.newrelic.com) and select [**build your own application**](https://one.newrelic.com/launcher/developer-center.launcher#pane=eyJuZXJkbGV0SWQiOiJkZXZlbG9wZXItY2VudGVyLmRldmVsb3Blci1jZW50ZXIifQ==). Follow the instructions.
 
+# Important
+
+Some customers have enterprise-wide agreements with New Relic, prohibiting employees from accepting the Terms and Conditions of the developer program. Those persons will be unable to download the CLI. If you're effected by this, please reach out to your legal department and/or contact your New Relic sales representative to explore alternatives for becoming familiar with this material while honoring your company's employee policies.
+
 2. To prepare to do the workshop, you need to clone the workshop repo:
 
 ```bash
@@ -21,7 +25,7 @@ _Note: Each exercise exists as a folder in this repository. Following the materi
 
 ```bash
 # ex. change directory into setup
-cd workshop/setup
+cd nr1-workshop/setup
 npm install
 nr1 nerdpack:uuid -gf
 nr1 nerdpack:serve

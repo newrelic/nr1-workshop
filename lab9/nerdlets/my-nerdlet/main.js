@@ -9,8 +9,6 @@ export default class MyNerdlet extends React.Component {
     static propTypes = {
         nerdletUrlState: PropTypes.object.isRequired,
         launcherUrlState: PropTypes.object.isRequired,
-        width: PropTypes.number.isRequired,
-        height: PropTypes.number.isRequired,
         entity: PropTypes.object.isRequired
     };
 
@@ -47,27 +45,27 @@ export default class MyNerdlet extends React.Component {
 
     render() {
         const { openModal } = this.state;
-        const { entity, launcherUrlState: { timeRange: { duration }}, width, height } = this.props;
+        const { entity, launcherUrlState: { timeRange: { duration }}} = this.props;
         const { accountId } = entity;
         const eventType = entity ? entity.domain == 'BROWSER' ? 'PageView' :    'Transaction' : null;
         const label = entity.domain == 'BROWSER' ? 'Browser Apps' : 'APM Services';
         const durationInMinutes =  duration/1000/60;
         return (<React.Fragment>
-            <Grid style={{width:width}}>
+            <Grid style={{width:'100%'}}>
                 <GridItem columnStart={1} columnEnd={12} style={{padding: '10px'}}>
                 <HeadingText>Performance over Time<Button sizeType={Button.SIZE_TYPE.SMALL} style={{marginLeft: '25px'}} onClick={() => { this.setState({ openModal: true }) }}><Icon type={Icon.TYPE.INTERFACE__SIGN__PLUS} /> {label}</Button></HeadingText>
                 <p style={{marginBottom: '10px'}}>{distanceOfTimeInWords(duration)}</p>
                 <LineChart
                     accountId={accountId}
                     query={this._buildNrql(`SELECT average(duration) from ${eventType} TIMESERIES SINCE ${durationInMinutes} MINUTES AGO `)}
-                    style={{height: `${height*.5}px`, width: width}}
+                    style={{height: `200px`, width: '100%'}}
                 />
                 </GridItem>
                 <GridItem columnStart={1} columnEnd={12}>
                     <TableChart
                         accountId={accountId}
                         query={this._buildNrql(`SELECT count(*) as 'requests', percentile(duration, 99, 90, 50) FROM ${eventType} SINCE ${durationInMinutes} MINUTES AGO`)}
-                        style={{height: `${height*.5}px`, width: width}}
+                        style={{height: '200px', width: '100%'}}
                     />
                 </GridItem>
             </Grid>

@@ -50,12 +50,14 @@ export default class MyNerdlet extends React.Component {
             return <PlatformStateContext.Consumer>
                 {(platformUrlState) => {
                     return <Stack
+                        fullWidth
                         horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                         gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         {selectedAccount &&
                             <StackItem>
                                 <Stack
+                                    fullWidth
                                     horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
                                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>

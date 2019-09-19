@@ -363,14 +363,14 @@ export default class MyNerdlet extends React.Component {
         return COLORS[value];
     }
 
-    openDetails(pt, accountId) {
+    openDetails(pt, entity) {
         navigation.openStackedNerdlet({
             id: 'details',
             urlState: {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
-                appName: this.state.entity.name,
-                accountId
+                appName: entity.name,
+                accountId: entity.accountId
             }
         });
     }
@@ -572,7 +572,7 @@ A tabbed interface that has only one tab is a waste, so let's resolve that.
 
 ```javascript
     <TabsItem label={`JavaScript Errors`} id={2}>
-        <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
+        <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={platformUrlState} />
     </TabsItem>
 ```
 

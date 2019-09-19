@@ -51,7 +51,7 @@ You'll notice that the CLI creates a `./launchers/lab0-launcher` directory: with
     "id": "lab0-launcher",
     "displayName": "Lab0Launcher",
     "description": "",
-    "rootNerdletId": "replace-me-with-nerdlet-id"
+    "rootNerdletId": "you-are-going-to-replace-me"
 }
 ```
 
@@ -122,7 +122,7 @@ code .
     "id": "lab0-launcher",
     "displayName": "Lab 0 Launcher",
     "description": "",
-    "rootNerdletId": "<your_package_id>.lab0-nerdlet"
+    "rootNerdletId": "lab0-nerdlet"
 }
 ```
 

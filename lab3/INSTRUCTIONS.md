@@ -107,10 +107,12 @@ Replace the render method within `lab3/nerdlets/my-nerdlet/main.js` file and tak
 ```javascript
 render() {
     return <Stack
+            fullWidth
             horizontalType={Stack.HORIZONTAL_TYPE.FILL}
             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <StackItem>
                 <Stack
+                    fullWidth
                     horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                     gapType={Stack.GAP_TYPE.NORMAL}>
@@ -127,6 +129,7 @@ render() {
             </StackItem>
             <StackItem>
                 <Stack
+                    fullWidth
                     horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
                     <StackItem grow>
@@ -148,10 +151,12 @@ Change the render method within your `lab3/nerdlets/my-nerdlet/main.js` with the
 ```javascript
 render() {
     return <Stack
+        fullWidth
         horizontalType={Stack.HORIZONTAL_TYPE.FILL}
         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
         <StackItem>
             <Stack
+                fullWidth
                 directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                 gapType={Stack.GAP_TYPE.NORMAL}>
                 <StackItem grow>
@@ -198,6 +203,7 @@ Using the Grid and Stack components you can easily create any layout you wish wi
                 <GridItem
                     columnSpan={8}>
                     <Stack
+                        fullWidth
                         directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
@@ -205,6 +211,7 @@ Using the Grid and Stack components you can easily create any layout you wish wi
                         </StackItem>
                     </Stack>
                     <Stack
+                        fullWidth
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <div className="gry-div">Chart 2</div>
@@ -217,6 +224,7 @@ Using the Grid and Stack components you can easily create any layout you wish wi
                 <GridItem
                     columnSpan={4}>
                     <Stack
+                        fullWidth
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
@@ -247,6 +255,7 @@ Now that you have your layout done, let's add a some chart components. Replace t
                 <GridItem
                     columnSpan={8}>
                     <Stack
+                        fullWidth
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem grow>
                             <LineChart
@@ -260,6 +269,7 @@ Now that you have your layout done, let's add a some chart components. Replace t
                         </StackItem>
                     </Stack>
                     <Stack
+                        fullWidth
                         directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
@@ -280,6 +290,7 @@ Now that you have your layout done, let's add a some chart components. Replace t
                 <GridItem
                     columnSpan={4}>
                     <Stack
+                        fullWidth
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
@@ -439,6 +450,7 @@ Update the render method with the code below:
                     </form>
 
                     <Stack
+                        fullWidth
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem grow>
                             <LineChart
@@ -452,6 +464,7 @@ Update the render method with the code below:
                         </StackItem>
                     </Stack>
                     <Stack
+                        fullWidth
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <AreaChart
@@ -471,6 +484,7 @@ Update the render method with the code below:
                 <GridItem
                     columnSpan={4}>
                     <Stack
+                        fullWidth
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
@@ -636,6 +650,7 @@ export default class MyNerdlet extends React.Component {
                             </Modal>
                         </form>
                         <Stack
+                            fullWidth
                             gapType={Stack.GAP_TYPE.LOOSE}>
                             <StackItem grow>
                                 <LineChart
@@ -649,6 +664,7 @@ export default class MyNerdlet extends React.Component {
                             </StackItem>
                         </Stack>
                         <Stack
+                            fullWidth
                             gapType={Stack.GAP_TYPE.LOOSE}>
                             <StackItem>
                                 <AreaChart
@@ -668,6 +684,7 @@ export default class MyNerdlet extends React.Component {
                     <GridItem
                         columnSpan={4}>
                         <Stack
+                            fullWidth
                             gapType={Stack.GAP_TYPE.TIGHT}
                             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                             <StackItem>

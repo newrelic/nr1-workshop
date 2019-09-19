@@ -94,7 +94,7 @@ Let's make use of this service to address our "save the state" feature in this N
                 actionType: UserStorageMutation.ACTION_TYPE.WRITE_DOCUMENT,
                 collection: 'lab9-entityList-v0',
                 documentId: entity.guid,
-                document: entities
+                document: { entities }
             });
         });
     }
@@ -121,11 +121,7 @@ Now, we're going to try to load the saved entity set for this `User` and `Entity
                 documentId: entityGuid
         }).then(({data}) => {
             console.debug(data);
-            if (Array.isArray(data)) {
-                this.setState({ entities: data });
-            } else {
-                this.setState({ entities: []});
-            }
+            this.setState({ entities: data.entities });
         }).catch(error => {
             console.error(error);
             this.setState({ entities: []});
@@ -190,8 +186,6 @@ export default class MyNerdlet extends React.Component {
     static propTypes = {
         nerdletUrlState: PropTypes.object.isRequired,
         launcherUrlState: PropTypes.object.isRequired,
-        width: PropTypes.number.isRequired,
-        height: PropTypes.number.isRequired,
         entity: PropTypes.object.isRequired
     };
 
@@ -282,7 +276,7 @@ export default class MyNerdlet extends React.Component {
 
     render() {
         const { openModal } = this.state;
-        const { entity, launcherUrlState: { timeRange: { duration }}, width, height } = this.props;
+        const { entity, launcherUrlState: { timeRange: { duration }}} = this.props;
         const { accountId } = entity;
         const eventType = entity ? entity.domain == 'BROWSER' ? 'PageView' :    'Transaction' : null;
         const label = entity.domain == 'BROWSER' ? 'Browser Apps' : 'APM Services';
@@ -295,14 +289,14 @@ export default class MyNerdlet extends React.Component {
                 <LineChart
                     accountId={accountId}
                     query={this._buildNrql(`SELECT average(duration) from ${eventType} TIMESERIES SINCE ${durationInMinutes} MINUTES AGO `)}
-                    style={{height: `${height*.5}px`, width: width}}
+                    style={{height: `200px`, width: '100%'}}
                 />
                 </GridItem>
                 <GridItem columnStart={1} columnEnd={12}>
                     <TableChart
                         accountId={accountId}
                         query={this._buildNrql(`SELECT count(*) as 'requests', percentile(duration, 99, 90, 50) FROM ${eventType} SINCE ${durationInMinutes} MINUTES AGO`)}
-                        style={{height: `${height*.5}px`, width: width}}
+                        style={{height: `200px`, width: '100%'}}
                     />
                 </GridItem>
             </Grid>

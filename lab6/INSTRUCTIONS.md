@@ -126,6 +126,7 @@ _Note: There's a lot more code in this initial file. Take a few moments to revie
             return <PlatformStateContext.Consumer>
                 {(platformUrlState) => {
                     return <Stack
+                        fullWidth
                         horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                         gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
@@ -258,6 +259,7 @@ export default class MyNerdlet extends React.Component {
             return <PlatformStateContext.Consumer>
                 {(platformUrlState) => {
                     return <Stack
+                        fullWidth
                         horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                         gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
@@ -276,6 +278,7 @@ export default class MyNerdlet extends React.Component {
                         {selectedAccount &&
                             <StackItem>
                                 <Stack
+                                    fullWidth
                                     horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
                                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>

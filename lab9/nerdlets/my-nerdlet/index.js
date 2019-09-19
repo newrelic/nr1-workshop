@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spinner, HeadingText,  EntityByGuidQuery, PlatformStateContext, NerdletStateContext, AutoSizer } from 'nr1';
+import { Spinner, HeadingText,  EntityByGuidQuery, PlatformStateContext, NerdletStateContext } from 'nr1';
 import MyNerdlet from './main';
 
 export default class Wrapper extends React.PureComponent {
@@ -12,8 +12,7 @@ export default class Wrapper extends React.PureComponent {
                 if (!nerdletUrlState || !nerdletUrlState.entityGuid) {
                     return <HeadingText>Go find a Service or Browser App to compare</HeadingText>
                 }
-                return <AutoSizer>
-                {({height, width}) => (<EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
+                return (<EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
                     {({data, loading, error}) => {
                         console.debug("EntityByGuidQuery", [loading, data, error]); //eslint-disable-line
                         if (loading) {
@@ -31,9 +30,7 @@ export default class Wrapper extends React.PureComponent {
                             entity={entity}
                           />
                     }}
-                    </EntityByGuidQuery>
-                )}
-                </AutoSizer>
+                </EntityByGuidQuery>)
           }}
           </NerdletStateContext.Consumer>
         )}
