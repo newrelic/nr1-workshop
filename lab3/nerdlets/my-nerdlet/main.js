@@ -10,7 +10,7 @@ export default class MyNerdlet extends React.Component {
 
     constructor(props) {
         super(props);
-        this.accountId =  1606862; //New Relic Demotron.
+        this.accountId =  1606862; //New Relic .
         this.state = {
             value: '',
             facet: '',

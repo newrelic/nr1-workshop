@@ -258,7 +258,7 @@ export default class Lab2Nerdlet extends React.Component {
 
     constructor(props) {
         super(props);
-        this.accountId = 1606862; //New Relic Demotron.
+        this.accountId = <REPLACE_WITH_YOUR_ACCOUNT_ID>;
         this.state = {
             entityGuid: null,
             appName: null

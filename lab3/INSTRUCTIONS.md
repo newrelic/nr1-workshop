@@ -315,7 +315,7 @@ Add the following code to your `main.js` file. ABOVE the `render` method.
 ```javascript
     constructor(props) {
         super(props);
-        this.accountId =  1606862; //New Relic Demotron.
+        this.accountId =  <REPLACE_WITH_YOUR_ACCOUNT_ID>;
         console.debug("Nerdlet props", this.props); //eslint-disable-line
     }
 ```
@@ -374,7 +374,7 @@ Update your constructor method with the code below. This will come in handy as w
 ```javascript
     constructor(props) {
         super(props);
-        this.accountId =  1606862; //New Relic Demotron.
+        this.accountId =  <REPLACE_WITH_YOUR_ACCOUNT_ID>;
         this.state = {
             value: '',
             facet: '',
@@ -550,7 +550,7 @@ export default class MyNerdlet extends React.Component {
 
     constructor(props) {
         super(props);
-        this.accountId =  1606862; //New Relic Demotron.
+        this.accountId =  <REPLACE_WITH_YOUR_ACCOUNT_ID>;
         this.state = {
             value: '',
             facet: '',

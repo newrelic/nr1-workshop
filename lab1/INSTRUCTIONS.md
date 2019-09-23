@@ -54,7 +54,7 @@ _Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the
 ```javascript
     constructor(props) {
         super(props);
-        this.accountId = 1606862; //New Relic Demotron.
+        this.accountId = <REPLACE_WITH_YOUR_ACCOUNT_ID>;
         this.state = {
             appId: null,
             appName: null
@@ -219,7 +219,7 @@ export default class Lab1Nerdlet extends React.Component {
 
     constructor(props) {
         super(props);
-        this.accountId = 1606862; //New Relic Demotron.
+        this.accountId = <REPLACE_WITH_YOUR_ACCOUNT_ID>;
         this.state = {
             appId: null,
             appName: null
