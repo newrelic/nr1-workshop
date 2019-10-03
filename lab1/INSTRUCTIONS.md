@@ -96,6 +96,11 @@ import { TableChart, Stack, StackItem } from 'nr1';
 2. Add the following code to the `lab1/nerdlets/lab1-nerdlet/styles.scss` file.
 
 ```scss
+.top-chart {
+    padding: 10px;
+    width: 100vw;
+    height: 45vh;
+}
 .chart {
     padding: 10px;
     width: 48vw;
@@ -159,7 +164,7 @@ That all results in the following block of code. Copy/reproduce the code below a
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
-                        <TableChart query={nrql} accountId={this.accountId} className="chart" />
+                        <TableChart query={nrql} accountId={this.accountId} className="top-chart" />
                     </StackItem>
                     {appId && <StackItem>
                         <Stack
