@@ -25,8 +25,6 @@ export default class Wrapper extends React.PureComponent {
                         return <MyNerdlet
                             launcherUrlState={platformUrlState}
                             nerdletUrlState={nerdletUrlState}
-                            height={height}
-                            width={width}
                             entity={entity}
                           />
                     }}
