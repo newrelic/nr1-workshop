@@ -16,6 +16,7 @@ Load the prerequisites and follow the setup instructions in [Setup](../SETUP.md)
 ```bash
 # from the nr1-workshop directory
 cd lab3
+nr1 nerdpack:uuid -gf
 npm install
 npm start
 ```
@@ -132,7 +133,7 @@ render() {
                     fullWidth
                     horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
-                    <StackItem grow>
+                    <StackItem grow={true}>
                         <div className="gry-div">Item 4: This field grows</div>
                     </StackItem>
                     <StackItem>
@@ -159,10 +160,10 @@ render() {
                 fullWidth
                 directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                 gapType={Stack.GAP_TYPE.NORMAL}>
-                <StackItem grow>
+                <StackItem grow={true}>
                     <div className="gry-div">Item 1: grows</div>
                 </StackItem>
-                <StackItem grow>
+                <StackItem grow={true}>
                     <div className="gry-div">Item 2: grows</div>
                 </StackItem>
                 <StackItem>
@@ -276,14 +277,14 @@ Now that you have your layout done, let's add a some chart components. Replace t
                             <AreaChart
                                 query={throughput+since}
                                 accountId={this.accountId}
-                                className="chart"
+                                className="two-col-chart"
                                 onClickLine={(line) => {
                                     console.debug(line); //eslint-disable-line
                                 }}
                             />
                         </StackItem>
                         <StackItem>
-                            <BarChart className="chart" query={errors+since} accountId={this.accountId} />
+                            <BarChart className="two-col-chart" query={errors+since} accountId={this.accountId} />
                         </StackItem>
                     </Stack>
                 </GridItem>
@@ -291,6 +292,7 @@ Now that you have your layout done, let's add a some chart components. Replace t
                     columnSpan={4}>
                     <Stack
                         fullWidth
+                        className="side-col"
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
@@ -470,14 +472,14 @@ Update the render method with the code below:
                             <AreaChart
                                     query={throughput+since+this.state.facet}
                                     accountId={this.accountId}
-                                    className="chart"
+                                    className="two-col-chart"
                                     onClickLine={(line) => {
                                         console.debug(line); //eslint-disable-line
                                 }}
                             />
                         </StackItem>
                         <StackItem>
-                            <BarChart className="chart" query={errors+since+this.state.facet} accountId={this.accountId} />
+                            <BarChart className="two-col-chart" query={errors+since+this.state.facet} accountId={this.accountId} />
                         </StackItem>
                     </Stack>
                 </GridItem>
@@ -485,6 +487,7 @@ Update the render method with the code below:
                     columnSpan={4}>
                     <Stack
                         fullWidth
+                        className="side-col"
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
@@ -670,14 +673,14 @@ export default class MyNerdlet extends React.Component {
                                 <AreaChart
                                         query={throughput+since+this.state.facet}
                                         accountId={this.accountId}
-                                        className="chart"
+                                        className="two-col-chart"
                                         onClickLine={(line) => {
                                             console.debug(line); //eslint-disable-line
                                     }}
                                 />
                             </StackItem>
                             <StackItem>
-                                <BarChart className="chart" query={errors+since+this.state.facet} accountId={this.accountId} />
+                                <BarChart className="two-col-chart" query={errors+since+this.state.facet} accountId={this.accountId} />
                             </StackItem>
                         </Stack>
                     </GridItem>
@@ -685,6 +688,7 @@ export default class MyNerdlet extends React.Component {
                         columnSpan={4}>
                         <Stack
                             fullWidth
+                            className="side-col"
                             gapType={Stack.GAP_TYPE.TIGHT}
                             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                             <StackItem>

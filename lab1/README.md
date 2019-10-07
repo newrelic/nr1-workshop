@@ -10,7 +10,7 @@ This repo has been spun up locally only.
 You should see similar output:
 
 ```bash
-@datanerd/nr1/0.8.0 darwin-x64 node-v10.16.3
+@datanerd/nr1/1.0.0 darwin-x64 node-v10.16.3
 ```
 
 3. If you can't run that command, go to the **Build your own application** launcher in New Relic One, register for a developer API key and download the NR1 CLI. See the complete [Setup instructions](../SETUP.md) for more details

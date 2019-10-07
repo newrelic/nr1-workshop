@@ -48,11 +48,12 @@ You'll notice that the CLI creates a `./launchers/lab0-launcher` directory: with
 ```json
 {
     "schemaType": "LAUNCHER",
-    "id": "lab0-launcher",
+    "id": "lab0-launcher-launcher",
+    "description": "Describe me",
     "displayName": "Lab0Launcher",
-    "description": "",
-    "rootNerdletId": "you-are-going-to-replace-me"
+    "rootNerdletId": "lab0-nerdlet"
 }
+
 ```
 
 3. Now, we're going to start our development server using the CLI.
@@ -149,7 +150,7 @@ From your root directory (or the directory you want your Nerdpacks located), run
 ```bash
 # The CLI will create a new folder to contain the artifacts within your Nerdpack
 nr1 create
-? What kind of component do you want to create? package
+? What kind of component do you want to create? nerdpack
 ? Name your component. lab0-nerdpack
 Component created successfully!
 ```
