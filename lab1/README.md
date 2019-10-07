@@ -19,7 +19,9 @@ You should see similar output:
 
 ```bash
 # if you haven't cloned the workshop repo already
-git clone git@github.com:newrelic/nr1-workshop.git
+git clone https://github.com/newrelic/nr1-workshop.git
+# or if you have SSH keys registered with your account
+# git clone git@github.com:newrelic/nr1-workshop.git
 
 # then change directory into lab1
 cd workshop/lab1
