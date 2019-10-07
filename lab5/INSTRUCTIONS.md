@@ -215,7 +215,7 @@ Your browser should show a small table that displays the name and domain of your
                 }
                 return <Fragment>
                     <HeadingText>Entity by Name</HeadingText>
-                    {this._renderTable(data.actor.entitySearch.results.entities)}
+                    {this._renderTable(data.entities)}
                 </Fragment>
             }}
         </EntitiesByNameQuery>
@@ -242,7 +242,7 @@ Your browser should show a small table that displays the name and domain of your
                 }
                 return <Fragment>
                     <HeadingText>Entity Count</HeadingText>
-                    {this._renderTable(data.actor.entitySearch.types)}
+                    {this._renderTable(data.types)}
                 </Fragment>
 
             }}

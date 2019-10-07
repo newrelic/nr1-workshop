@@ -19,6 +19,7 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 ```bash
 # from the nr1-workshop directory
 cd lab2
+nr1 nerdpack:uuid -gf
 npm install
 ```
 
@@ -213,9 +214,7 @@ We have one remaining issue with the navigation flow of this example. After you 
                                         const apdexNrql = `SELECT apdex(duration) FROM Transaction WHERE entityGuid = '${nerdletUrlState.entityGuid}' TIMESERIES`;
                                         return <React.Fragment>
                                             <StackItem>
-                                                <Button onClick={() => {
-                                                    this.openEntity(nerdletUrlState.entityGuid)
-                                                }}>Open {nerdletUrlState.appName}</Button>
+                                                <Button onClick={this.openEntity}>Open {nerdletUrlState.appName}</Button>
                                             </StackItem>
                                             <StackItem>
                                                 <Stack
@@ -351,9 +350,7 @@ export default class Lab2Nerdlet extends React.Component {
                                         const apdexNrql = `SELECT apdex(duration) FROM Transaction WHERE entityGuid = '${nerdletUrlState.entityGuid}' TIMESERIES`;
                                         return <React.Fragment>
                                             <StackItem>
-                                                <Button onClick={() => {
-                                                    this.openEntity(nerdletUrlState.entityGuid)
-                                                }}>Open {nerdletUrlState.appName}</Button>
+                                                <Button onClick={this.openEntity}>Open {nerdletUrlState.appName}</Button>
                                             </StackItem>
                                             <StackItem>
                                                 <Stack
