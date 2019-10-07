@@ -19,7 +19,6 @@ cd workshop/lab2
 
 nr1 nerdpack:uuid -gf
 npm install
-npm start
 ```
 
 5. In Google Chrome, navigate to the following URL `https://one.newrelic.com?nerdpacks=local`
