@@ -8,7 +8,7 @@
     "test": "exit 0"
   },
   "nr1": {
-    "uuid": "9ce43558-d53f-458b-bc20-14d4d2218273",
+    "uuid": "dd515278-5fa7-45f2-b9c0-d3685893c4e0",
     "sdkVersion": 2
   },
   "bugs": {
@@ -17,7 +17,6 @@
   "author": "New Relic Labs",
   "dependencies": {
     "colormap": "^2.3.1",
-    "js-base64": "^2.5.1",
     "leaflet": "^1.5.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",

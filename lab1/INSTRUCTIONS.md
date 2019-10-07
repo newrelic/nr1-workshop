@@ -54,7 +54,7 @@ _Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the
 ```javascript
     constructor(props) {
         super(props);
-        this.accountId = 1606862; //New Relic Demotron.
+        this.accountId = <REPLACE_WITH_YOUR_ACCOUNT_ID>;
         this.state = {
             appId: null,
             appName: null
@@ -63,7 +63,7 @@ _Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the
     }
 ```
 
-_Note: The value of the accountId just needs to be a New Relic account to which you have access. Replace `1606862` with any valid New Relic accountId to which you have access._
+_Note: The value of the accountId just needs to be a New Relic account to which you have access.
 
 6. Save `index.js` and watch the `Lab 1 Nerdlet` reload in your Browser.
 7. Ctrl+click (or right click) on the web browser screen displaying our Nerdlet and choose the menu item `Inspect`.
@@ -77,7 +77,7 @@ You may get a notification at the top of your debug window indicating that you d
 
 _Note: When the documentation for the NR1 SDK is available, we'll replace the link to the PDF with the specific, published docs. That will be part of the rev. 1 of this training._
 
-1. Open the [provided documentation](http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html) in this documentation.
+1. Open the [provided documentation](https://developer.newrelic.com/client-side-sdk/index.html#components/AutoSizer) in this documentation.
 2. Find the `TableChart` documentation and explore its Usage, Example, and Config content.
 3. Find the `ScatterChart` documentation and explore its Usage, Example, and Config content.
 4. Find the `LineChart` documentation and explore its Usage, Example, and Config content.
@@ -96,6 +96,11 @@ import { TableChart, Stack, StackItem } from 'nr1';
 2. Add the following code to the `lab1/nerdlets/lab1-nerdlet/styles.scss` file.
 
 ```scss
+.top-chart {
+    padding: 10px;
+    width: 100vw;
+    height: 45vh;
+}
 .chart {
     padding: 10px;
     width: 48vw;
@@ -112,6 +117,7 @@ import { TableChart, Stack, StackItem } from 'nr1';
         //return the JSX we're rendering
         return (
             <Stack
+                verticalType={Stack.VERTICAL_TYPE.FILL}
                 directionType={Stack.DIRECTION_TYPE.VERTICAL}
                 gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                 <StackItem>
@@ -154,13 +160,15 @@ That all results in the following block of code. Copy/reproduce the code below a
         return (
             <ChartGroup>
                 <Stack
+                    verticalType={Stack.VERTICAL_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
-                        <TableChart query={nrql} accountId={this.accountId} className="chart" />
+                        <TableChart query={nrql} accountId={this.accountId} className="top-chart" />
                     </StackItem>
                     {appId && <StackItem>
                         <Stack
+                            horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>
@@ -210,14 +218,13 @@ The onClickTable receives four parameters that each provide a different view of 
 
 ```javascript
 import React from 'react';
-import PropTypes from 'prop-types';
 import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart } from 'nr1';
 
 export default class Lab1Nerdlet extends React.Component {
 
     constructor(props) {
         super(props);
-        this.accountId = 1606862; //New Relic Demotron.
+        this.accountId = <REPLACE_WITH_YOUR_ACCOUNT_ID>;
         this.state = {
             appId: null,
             appName: null
@@ -238,6 +245,7 @@ export default class Lab1Nerdlet extends React.Component {
         return (
             <ChartGroup>
                 <Stack
+                    verticalType={Stack.VERTICAL_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
@@ -249,6 +257,7 @@ export default class Lab1Nerdlet extends React.Component {
                     </StackItem>
                     {appId && <StackItem>
                         <Stack
+                            horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                             directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                             gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                             <StackItem>

@@ -3,6 +3,5 @@
     "id": "my-launcher",
     "description": "Describe me",
     "displayName": "Lab 5 Launcher",
-    "icon": "interface_placeholders_icon-placeholder",
     "rootNerdletId": "lab5-nerdlet"
 }

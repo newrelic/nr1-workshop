@@ -126,6 +126,7 @@ _Note: There's a lot more code in this initial file. Take a few moments to revie
             return <PlatformStateContext.Consumer>
                 {(platformUrlState) => {
                     return <Stack
+                        fullWidth
                         horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                         gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
@@ -134,7 +135,7 @@ _Note: There's a lot more code in this initial file. Take a few moments to revie
                                 <Dropdown title={selectedAccount.name} filterable label="Account"
                                     onChangeFilter={(event) => this.setState({filter: event.target.value})}>
                                 {accounts.map(a => {
-                                    return <DropdownItem key={a.id} onClick={() => selectAccount(a)}>
+                                    return <DropdownItem key={a.id} onClick={() => this.selectAccount(a)}>
                                     {a.name}
                                     </DropdownItem>
                                 })}
@@ -156,7 +157,7 @@ Add the following method to the `lab6/nerdlets/my-nerdlet/index.js` file:
      * @param {Object} option
      */
     selectAccount(option) {
-        this.setState({ selectedAccount: option.account });
+        this.setState({ selectedAccount: option });
     }
 ```
 
@@ -238,7 +239,7 @@ export default class MyNerdlet extends React.Component {
      * @param {Object} option
      */
     selectAccount(option) {
-        this.setState({ selectedAccount: option.account });
+        this.setState({ selectedAccount: option });
     }
 
     render() {
@@ -258,6 +259,7 @@ export default class MyNerdlet extends React.Component {
             return <PlatformStateContext.Consumer>
                 {(platformUrlState) => {
                     return <Stack
+                        fullWidth
                         horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                         gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
@@ -266,7 +268,7 @@ export default class MyNerdlet extends React.Component {
                                 <Dropdown title={selectedAccount.name} filterable label="Account"
                                     onChangeFilter={(event) => this.setState({filter: event.target.value})}>
                                 {accounts.map(a => {
-                                    return <DropdownItem key={a.id} onClick={() => selectAccount(a)}>
+                                    return <DropdownItem key={a.id} onClick={() => this.selectAccount(a)}>
                                     {a.name}
                                     </DropdownItem>
                                 })}
@@ -276,6 +278,7 @@ export default class MyNerdlet extends React.Component {
                         {selectedAccount &&
                             <StackItem>
                                 <Stack
+                                    fullWidth
                                     horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
                                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>

@@ -1,24 +1,24 @@
 {
-    "private": true,
-    "name": "lab0",
-    "description": "NR1 UI Package lab0",
-    "version": "0.1.0",
-    "scripts": {
-        "start": "nr1 nerdpack:serve",
-        "test": "exit 0"
-    },
-    "nr1": {
-        "uuid": "4c9c902e-5ebb-4ac7-be85-1e7fe75cd04e",
-        "sdkVersion": 2
-    },
-    "dependencies": {
-        "prop-types": "^15.6.2",
-        "react": "^16.6.3",
-        "react-dom": "^16.6.3"
-    },
-    "browserslist": [
-        "last 2 versions",
-        "not ie < 11",
-        "not dead"
-    ]
+  "private": true,
+  "name": "lab0",
+  "description": "NR1 UI Package lab0",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "nr1 nerdpack:serve",
+    "test": "exit 0"
+  },
+  "nr1": {
+    "uuid": "61ab8ae4-6a51-451e-9453-50c02bd6aadd",
+    "sdkVersion": 2
+  },
+  "dependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not ie < 11",
+    "not dead"
+  ]
 }

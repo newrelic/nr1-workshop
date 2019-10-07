@@ -1,13 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Dropdown, DropdownItem, Spinner, Stack, StackItem, BillboardChart, PieChart, NerdGraphQuery, PlatformStateContext } from 'nr1';
 
 export default class MyNerdlet extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-        launcherUrlState: PropTypes.object
-    };
 
     constructor(props) {
         super(props)
@@ -56,12 +50,14 @@ export default class MyNerdlet extends React.Component {
             return <PlatformStateContext.Consumer>
                 {(platformUrlState) => {
                     return <Stack
+                        fullWidth
                         horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                         gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         {selectedAccount &&
                             <StackItem>
                                 <Stack
+                                    fullWidth
                                     horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}
                                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>

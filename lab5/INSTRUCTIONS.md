@@ -30,7 +30,7 @@ Open https://one.newrelic.com?nerdpacks=local and click on the `Lab 5 Launcher`.
 1. We need to import the appropriate libraries into our Nerdlet. Open `lab5/nerdlets/lab5-nerdlet/index.js` and add the following near the top of the file.
 
 ```javascript
-import { NerdGraphQuery, Stack, StackItem, HeadingText, Spinner } from 'nr1'
+import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText, BlockText, NerdletStateContext } from 'nr1';
 ```
 
 2. The `NerdGraphQuery` component is going to allow us to access the New Relic NerdGraph API and have access to the power of GraphQL inside of your Nerdlet.
@@ -98,7 +98,7 @@ import { NerdGraphQuery, Stack, StackItem, Spinner, HeadingText, BlockText } fro
 
 ```javascript
     render() {
-        return (<Stack directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+        return (<Stack fullWidth directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <StackItem>
                 <div className="container">
                     <NerdGraphQuery query={`{actor {accounts {id name}}}`}>
@@ -131,17 +131,13 @@ import { NerdGraphQuery, Stack, StackItem, Spinner, HeadingText, BlockText } fro
 
 Using the `NerdGraphQuery` allows you to access data from using any type of query to `NerdGraph`, but for convenience, additional components are provided, with pre-defined Entity Queries
 
-1. We need to import the pre-defined entity queries from the nr1 library. Update the import statement in your `index.js` file with the code below:
-
-```javascript
-import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText } from 'nr1';
-```
-
-2. To query data about the `entity` that we have currently selected we will use the `EntityByGuidQuery`. Add a second `StackItem` just below the first in the `render` method:
+1. To query data about the `entity` that we have currently selected we will use the `EntityByGuidQuery`. Add a second `StackItem` just below the first in the `render` method:
 
 ```javascript
     <StackItem className="container">
-        <EntityByGuidQuery entityGuid={this.props.nerdletUrlState.entityGuid}>
+        <NerdletStateContext.Consumer>
+        {(nerdletUrlState) => {
+            return <EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
             {({loading, error, data}) => {
                 console.debug([loading, data, error]); //eslint-disable-line
                 if (loading) {
@@ -156,6 +152,9 @@ import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomai
                 </Fragment>
             }}
         </EntityByGuidQuery>
+
+        }}
+        </NerdletStateContext.Consumer>
     </StackItem>
 ```
 
@@ -171,7 +170,7 @@ And you should see the following.
 
 Your browser should show a small table that displays the name and domain of your current `entity` as a part of the data object that is returned from the `EntityByGuidQuery`.
 
-1. To quickly search through your account entities by domain and type we will use the `EntitiesByDomainTypeQuery`, add the code below to your `render` method under the last `StackItem`:
+2. To quickly search through your account entities by domain and type we will use the `EntitiesByDomainTypeQuery`, add the code below to your `render` method under the last `StackItem`:
 
 ```javascript
     <StackItem className="container">
@@ -186,21 +185,22 @@ Your browser should show a small table that displays the name and domain of your
             }
             return <Fragment>
                 <HeadingText>Entity by Domain Type</HeadingText>
-                {this._renderTable(data.actor.entitySearch.results.entities)}
+                {this._renderTable(data.entities)}
             </Fragment>
         }}
         </EntitiesByDomainTypeQuery>
     </StackItem>
 ```
 
- 4. Save and go back to the browser window and reload the current page, you should another table that displays the name, domain, and type of the entities we've queried by domain
+ 3. Save and go back to the browser window and reload the current page, you should another table that displays the name, domain, and type of the entities we've queried by domain
 
  Your screen will look like the following:
 
 ![Entity By domain Query](../screenshots/lab5_screen04.png)
 
-5. For a quick way to search for `entities` by name we will use the `EntitiesByNameQuery` and pass the `name` prop equal to "portal'. Add the code below to your `index.js` file in the `render` method under the last `StackItem` component.
+4. For a quick way to search for `entities` by name we will use the `EntitiesByNameQuery` and pass the `name` prop equal to "portal'. Add the code below to your `index.js` file in the `render` method under the last `StackItem` component.
 
+*Note: the `state.entityName` defined in the `constructor` is hardcoded to "Portal". You'll need to change that value to something relevant to your environment.*
 
 ```javascript
     <StackItem className="container">
@@ -215,19 +215,19 @@ Your browser should show a small table that displays the name and domain of your
                 }
                 return <Fragment>
                     <HeadingText>Entity by Name</HeadingText>
-                    {this._renderTable(data.actor.entitySearch.results.entities)}
+                    {this._renderTable(data.entities)}
                 </Fragment>
             }}
         </EntitiesByNameQuery>
     </StackItem>
 ```
 
-6. Save and go back to the browser window and reload the current page, you should see another table with all of the entities that match name you queried. You should be looking at a screen like the following:
+5. Save and go back to the browser window and reload the current page, you should see another table with all of the entities that match name you queried. You should be looking at a screen like the following:
 
 ![Entity By name Query](../screenshots/lab5_screen05.png)
 
 
-7. Finally, using the `EntityCountQuey` you can quickly query the number of entities available for each entityDomain and entityType. Update your `index.js` file, adding the code below to your `render` method under the last `StackItem`.
+6. Finally, using the `EntityCountQuey` you can quickly query the number of entities available for each entityDomain and entityType. Update your `index.js` file, adding the code below to your `render` method under the last `StackItem`.
 
 ```javascript
     <StackItem className="container">
@@ -242,7 +242,7 @@ Your browser should show a small table that displays the name and domain of your
                 }
                 return <Fragment>
                     <HeadingText>Entity Count</HeadingText>
-                    {this._renderTable(data.actor.entitySearch.types)}
+                    {this._renderTable(data.types)}
                 </Fragment>
 
             }}
@@ -250,7 +250,7 @@ Your browser should show a small table that displays the name and domain of your
     </StackItem>
 ```
 
-8. Save and go back to the browser window and reload the current page, under the table for `EntityByNameQuery` you will see one more table. This new table should be displaying the data object from the `EntityCountQuery` showing the number of entities available for each entityDomain and entityType.
+7. Save and go back to the browser window and reload the current page, under the table for `EntityByNameQuery` you will see one more table. This new table should be displaying the data object from the `EntityCountQuery` showing the number of entities available for each entityDomain and entityType.
 
 You should be looking at a screen like the following:
 
@@ -262,13 +262,9 @@ In the end, your `index.js` should look like this.
 
 ```javascript
 import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
-import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText, BlockText } from 'nr1';
+import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText, BlockText, NerdletStateContext } from 'nr1';
 
 export default class MyNerdlet extends React.Component {
-    static propTypes = {
-        nerdletUrlState: PropTypes.object.isRequired
-    };
 
     constructor(props){
         super(props);
@@ -299,7 +295,7 @@ export default class MyNerdlet extends React.Component {
     }
 
     render() {
-        return (<Stack directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+        return (<Stack fullWidth directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <StackItem className="container">
                 <NerdGraphQuery query={`{actor {accounts {id name}}}`}>
                     {({loading, error, data}) => {
@@ -308,7 +304,7 @@ export default class MyNerdlet extends React.Component {
                             return <Spinner/>;
                         }
                         if (error) {
-                            return <BlockText>{JSON.stringify(error)}</BlockText>;
+                            return <BlockText>{error.message}</BlockText>;
                         }
 
                         return <Fragment>
@@ -319,21 +315,26 @@ export default class MyNerdlet extends React.Component {
                 </NerdGraphQuery>
             </StackItem>
             <StackItem className="container">
-                <EntityByGuidQuery entityGuid={this.props.nerdletUrlState.entityGuid}>
+                <NerdletStateContext.Consumer>
+                {(nerdletUrlState) => {
+                    return <EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
                     {({loading, error, data}) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
                             return <Spinner/>;
                         }
                         if (error) {
-                            return <BlockText>{JSON.stringify(error)}</BlockText>;
+                            return <HeadingText>{error.message}</HeadingText>;
                         }
-                        return <Fragment>
+                        return <Fragment className="fragment">
                                 <HeadingText>Entity by ID</HeadingText>
                                 {this._renderTable(data.entities)}
                         </Fragment>
                     }}
                 </EntityByGuidQuery>
+
+                }}
+                </NerdletStateContext.Consumer>
             </StackItem>
             <StackItem className="container">
                 <EntitiesByDomainTypeQuery entityDomain="BROWSER" entityType="APPLICATION">
@@ -347,7 +348,7 @@ export default class MyNerdlet extends React.Component {
                     }
                     return <Fragment>
                         <HeadingText>Entity by Domain Type</HeadingText>
-                        {this._renderTable(data.actor.entitySearch.results.entities)}
+                        {this._renderTable(data.entities)}
                     </Fragment>
                 }}
                 </EntitiesByDomainTypeQuery>
@@ -364,7 +365,7 @@ export default class MyNerdlet extends React.Component {
                         }
                         return <Fragment>
                             <HeadingText>Entity by Name</HeadingText>
-                            {this._renderTable(data.actor.entitySearch.results.entities)}
+                            {this._renderTable(data.entities)}
                         </Fragment>
                     }}
                 </EntitiesByNameQuery>
@@ -381,7 +382,7 @@ export default class MyNerdlet extends React.Component {
                         }
                         return <Fragment>
                             <HeadingText>Entity Count</HeadingText>
-                            {this._renderTable(data.actor.entitySearch.types)}
+                            {this._renderTable(data.types)}
                         </Fragment>
 
                     }}

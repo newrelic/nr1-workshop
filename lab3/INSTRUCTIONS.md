@@ -16,6 +16,7 @@ Load the prerequisites and follow the setup instructions in [Setup](../SETUP.md)
 ```bash
 # from the nr1-workshop directory
 cd lab3
+nr1 nerdpack:uuid -gf
 npm install
 npm start
 ```
@@ -107,11 +108,13 @@ Replace the render method within `lab3/nerdlets/my-nerdlet/main.js` file and tak
 ```javascript
 render() {
     return <Stack
-            alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+            fullWidth
+            horizontalType={Stack.HORIZONTAL_TYPE.FILL}
             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
             <StackItem>
                 <Stack
-                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                    fullWidth
+                    horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                     gapType={Stack.GAP_TYPE.NORMAL}>
                     <StackItem>
@@ -127,9 +130,10 @@ render() {
             </StackItem>
             <StackItem>
                 <Stack
-                    alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+                    fullWidth
+                    horizontalType={Stack.HORIZONTAL_TYPE.FILL}
                     directionType={Stack.DIRECTION_TYPE.HORIZONTAL}>
-                    <StackItem grow>
+                    <StackItem grow={true}>
                         <div className="gry-div">Item 4: This field grows</div>
                     </StackItem>
                     <StackItem>
@@ -148,16 +152,18 @@ Change the render method within your `lab3/nerdlets/my-nerdlet/main.js` with the
 ```javascript
 render() {
     return <Stack
-        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+        fullWidth
+        horizontalType={Stack.HORIZONTAL_TYPE.FILL}
         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
         <StackItem>
             <Stack
+                fullWidth
                 directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                 gapType={Stack.GAP_TYPE.NORMAL}>
-                <StackItem grow>
+                <StackItem grow={true}>
                     <div className="gry-div">Item 1: grows</div>
                 </StackItem>
-                <StackItem grow>
+                <StackItem grow={true}>
                     <div className="gry-div">Item 2: grows</div>
                 </StackItem>
                 <StackItem>
@@ -198,6 +204,7 @@ Using the Grid and Stack components you can easily create any layout you wish wi
                 <GridItem
                     columnSpan={8}>
                     <Stack
+                        fullWidth
                         directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
@@ -205,6 +212,7 @@ Using the Grid and Stack components you can easily create any layout you wish wi
                         </StackItem>
                     </Stack>
                     <Stack
+                        fullWidth
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <div className="gry-div">Chart 2</div>
@@ -217,6 +225,7 @@ Using the Grid and Stack components you can easily create any layout you wish wi
                 <GridItem
                     columnSpan={4}>
                     <Stack
+                        fullWidth
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
@@ -247,6 +256,7 @@ Now that you have your layout done, let's add a some chart components. Replace t
                 <GridItem
                     columnSpan={8}>
                     <Stack
+                        fullWidth
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem grow>
                             <LineChart
@@ -260,26 +270,29 @@ Now that you have your layout done, let's add a some chart components. Replace t
                         </StackItem>
                     </Stack>
                     <Stack
+                        fullWidth
                         directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <AreaChart
                                 query={throughput+since}
                                 accountId={this.accountId}
-                                className="chart"
+                                className="two-col-chart"
                                 onClickLine={(line) => {
                                     console.debug(line); //eslint-disable-line
                                 }}
                             />
                         </StackItem>
                         <StackItem>
-                            <BarChart className="chart" query={errors+since} accountId={this.accountId} />
+                            <BarChart className="two-col-chart" query={errors+since} accountId={this.accountId} />
                         </StackItem>
                     </Stack>
                 </GridItem>
                 <GridItem
                     columnSpan={4}>
                     <Stack
+                        fullWidth
+                        className="side-col"
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
@@ -304,7 +317,7 @@ Add the following code to your `main.js` file. ABOVE the `render` method.
 ```javascript
     constructor(props) {
         super(props);
-        this.accountId =  1606862; //New Relic Demotron.
+        this.accountId =  <REPLACE_WITH_YOUR_ACCOUNT_ID>;
         console.debug("Nerdlet props", this.props); //eslint-disable-line
     }
 ```
@@ -363,7 +376,7 @@ Update your constructor method with the code below. This will come in handy as w
 ```javascript
     constructor(props) {
         super(props);
-        this.accountId =  1606862; //New Relic Demotron.
+        this.accountId =  <REPLACE_WITH_YOUR_ACCOUNT_ID>;
         this.state = {
             value: '',
             facet: '',
@@ -439,6 +452,7 @@ Update the render method with the code below:
                     </form>
 
                     <Stack
+                        fullWidth
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem grow>
                             <LineChart
@@ -452,25 +466,28 @@ Update the render method with the code below:
                         </StackItem>
                     </Stack>
                     <Stack
+                        fullWidth
                         gapType={Stack.GAP_TYPE.LOOSE}>
                         <StackItem>
                             <AreaChart
                                     query={throughput+since+this.state.facet}
                                     accountId={this.accountId}
-                                    className="chart"
+                                    className="two-col-chart"
                                     onClickLine={(line) => {
                                         console.debug(line); //eslint-disable-line
                                 }}
                             />
                         </StackItem>
                         <StackItem>
-                            <BarChart className="chart" query={errors+since+this.state.facet} accountId={this.accountId} />
+                            <BarChart className="two-col-chart" query={errors+since+this.state.facet} accountId={this.accountId} />
                         </StackItem>
                     </Stack>
                 </GridItem>
                 <GridItem
                     columnSpan={4}>
                     <Stack
+                        fullWidth
+                        className="side-col"
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                         <StackItem>
@@ -536,7 +553,7 @@ export default class MyNerdlet extends React.Component {
 
     constructor(props) {
         super(props);
-        this.accountId =  1606862; //New Relic Demotron.
+        this.accountId =  <REPLACE_WITH_YOUR_ACCOUNT_ID>;
         this.state = {
             value: '',
             facet: '',
@@ -636,6 +653,7 @@ export default class MyNerdlet extends React.Component {
                             </Modal>
                         </form>
                         <Stack
+                            fullWidth
                             gapType={Stack.GAP_TYPE.LOOSE}>
                             <StackItem grow>
                                 <LineChart
@@ -649,25 +667,28 @@ export default class MyNerdlet extends React.Component {
                             </StackItem>
                         </Stack>
                         <Stack
+                            fullWidth
                             gapType={Stack.GAP_TYPE.LOOSE}>
                             <StackItem>
                                 <AreaChart
                                         query={throughput+since+this.state.facet}
                                         accountId={this.accountId}
-                                        className="chart"
+                                        className="two-col-chart"
                                         onClickLine={(line) => {
                                             console.debug(line); //eslint-disable-line
                                     }}
                                 />
                             </StackItem>
                             <StackItem>
-                                <BarChart className="chart" query={errors+since+this.state.facet} accountId={this.accountId} />
+                                <BarChart className="two-col-chart" query={errors+since+this.state.facet} accountId={this.accountId} />
                             </StackItem>
                         </Stack>
                     </GridItem>
                     <GridItem
                         columnSpan={4}>
                         <Stack
+                            fullWidth
+                            className="side-col"
                             gapType={Stack.GAP_TYPE.TIGHT}
                             directionType={Stack.DIRECTION_TYPE.VERTICAL}>
                             <StackItem>

@@ -23,7 +23,8 @@ export default class SummaryBar extends Component {
     return (
       <ChartGroup>
       <Stack
-          alignmentType={Stack.ALIGNMENT_TYPE.FILL}
+          fullWidth
+          horizontalType={Stack.HORIZONTAL_TYPE.FILL}
           directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
           gapType={Stack.GAP_TYPE.BASE}>
           <StackItem style={{width: '120px', paddingTop: '10px'}}>

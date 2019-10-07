@@ -3,7 +3,6 @@ Lab 8: 3rd Party libraries and custom visualizations
 
 ### (i.e. the Leaflet mapping exercise)
 
-
 The purpose of this lab is build a more full-featured experience that incorporates 3rd party libraries (explicitly the `Leaflet.js` library) into an NR1 package.
 
 After completing this lab you should have a basic understanding of:
@@ -22,6 +21,7 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 # from the nr1-workshop directory
 cd lab8
 npm install
+nr1 nerdpack:uuid -gf
 ```
 
 Because a picture is worth 1000 words (or more), this is what we're going to produce in this exercise.
@@ -82,64 +82,61 @@ You should come to screen that looks like the following:
 
 ```javascript
 //import the appropriate NR1 components
-import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from 'nr1';
+import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, AutoSizer } from 'nr1';
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
-import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 ```
 
-
-2. Next, let's add the necessary React lifecycle methods that are going to give us access to the `entity` in our `state`. Add the following methods in the `MyNerdlet` class of the file `lab8/nerdlets/my-nerdlet/index.js`:
-
-```javascript
-    componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
-            this.setState({ entity});
-        });
-    }
-
-    componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
-            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
-                this.setState({ entity });
-            });
-        }
-        return true;
-    }
-```
-
 Now, we're ready to create the skeleton of our `render` method.
 
-3. Replace the `render` method with the following, taking note of the use of `Tabs`, `TabsItem`, `Spinner` and `SummaryBar` components we just imported:
+2. Replace the `render` method with the following, taking note of the use of `Tabs`, `TabsItem`, `Spinner` and `SummaryBar` components we just imported:
 
 ```javascript
     render() {
-        const { entity, zoom, center } = this.state;
-        const accountId = decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
-        const { duration } = this.props.launcherUrlState.timeRange;
-        const durationInMinutes = duration/1000/60;
-        const { height } = this.props;
-        if (!entity) {
-            return <Spinner/>
-        } else {
-            return <Tabs>
-                <TabsItem label={`Page Views`} id={1}>
-                    <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        gapType={Stack.GAP_TYPE.TIGHT}>
-                        <StackItem>
-                            <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
-                        </StackItem>
-                        <StackItem>
-                        </StackItem>
-                    </Stack>
-                </TabsItem>
-            </Tabs>;
-        }
+        const { zoom, center } = this.state;
+        return <PlatformStateContext.Consumer>
+            {(platformUrlState) => (
+              <NerdletStateContext.Consumer>
+                {(nerdletUrlState) => (
+                    <AutoSizer>
+                    {({height, width}) => (<EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
+                        {({data, loading, error}) => {
+                            console.debug("EntityByGuidQuery", [loading, data, error]); //eslint-disable-line
+                            if (loading) {
+                                return <Spinner fillContainer />;
+                            }
+                            if (error) {
+                                return <BlockText>{error.message}</BlockText>
+                            }
+                            const entity = data.entities[0];
+                            const { accountId } = entity;
+                            const { duration } = platformUrlState.timeRange;
+                            const durationInMinutes =  duration/1000/60;
+                            return (<Tabs>
+                                <TabsItem label={`Page Views`} value={1}>
+                                    <Stack
+                                        fullWidth
+                                        horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+                                        directionType={Stack.DIRECTION_TYPE.VERTICAL}
+                                        gapType={Stack.GAP_TYPE.TIGHT}>
+                                        <StackItem>
+                                            <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={platformUrlState} />
+                                        </StackItem>
+                                        <StackItem>
+                                        </StackItem>
+                                    </Stack>
+                                </TabsItem>
+                            </Tabs>);
+                        }}
+                    </EntityByGuidQuery>)}
+                    </AutoSizer>
+                )}
+              </NerdletStateContext.Consumer>
+            )}
+        </PlatformStateContext.Consumer>;
     }
 ```
 
@@ -176,13 +173,11 @@ At this point, the file `lab8/nerdlets/my-nerdlet/index.js` should look like the
 
 ```javascript
 import React from 'react';
-import PropTypes from 'prop-types';
 //import the appropriate NR1 components
-import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from 'nr1';
+import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, AutoSizer } from 'nr1';
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
-import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 
@@ -195,73 +190,69 @@ const COLORS = [
 ];
 
 export default class MyNerdlet extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-        launcherUrlState: PropTypes.object,
-        nerdletUrlState: PropTypes.object
-    };
 
     constructor(props) {
         super(props);
         this.state = {
-            entity: null,
             center: [10.5731, -7.5898],
             zoom: 2
         }
     }
 
-    componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
-            this.setState({ entity});
-        });
-    }
-
-    componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
-            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
-                this.setState({ entity });
-            });
-        }
-        return true;
-    }
-
     render() {
-        const { entity, zoom, center } = this.state;
-        const accountId = decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
-        const { duration } = this.props.launcherUrlState.timeRange;
-        const durationInMinutes = duration/1000/60;
-        const { height } = this.props;
-        if (!entity) {
-            return <Spinner/>
-        } else {
-            return <Tabs>
-                <TabsItem label={`Page Views`} id={1}>
-                    <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        gapType={Stack.GAP_TYPE.TIGHT}>
-                        <StackItem>
-                            <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
-                        </StackItem>
-                        <StackItem>
-                            <Map
-                            className="containerMap"
-                            style={{height: `${height-125}px`}}
-                            center={center}
-                            zoom={zoom}
-                            zoomControl={true}
-                            ref={(ref) => { this.mapRef = ref }}>
-                                <TileLayer
-                                attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                />
-                            </Map>
-                        </StackItem>
-                    </Stack>
-                </TabsItem>
-            </Tabs>;
-        }
+        const { zoom, center } = this.state;
+        return <PlatformStateContext.Consumer>
+            {(platformUrlState) => (
+              <NerdletStateContext.Consumer>
+                {(nerdletUrlState) => (
+                    <AutoSizer>
+                    {({height, width}) => (<EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
+                        {({data, loading, error}) => {
+                            console.debug("EntityByGuidQuery", [loading, data, error]); //eslint-disable-line
+                            if (loading) {
+                                return <Spinner fillContainer />;
+                            }
+                            if (error) {
+                                return <BlockText>{error.message}</BlockText>
+                            }
+                            const entity = data.entities[0];
+                            const { accountId } = entity;
+                            const { duration } = platformUrlState.timeRange;
+                            const durationInMinutes =  duration/1000/60;
+                            return (<Tabs>
+                                <TabsItem label={`Page Views`} value={1}>
+                                    <Stack
+                                        fullWidth
+                                        horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+                                        directionType={Stack.DIRECTION_TYPE.VERTICAL}
+                                        gapType={Stack.GAP_TYPE.TIGHT}>
+                                        <StackItem>
+                                            <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={platformUrlState} />
+                                        </StackItem>
+                                        <StackItem>
+                                            <Map
+                                            className="containerMap"
+                                            style={{height: `${height-125}px`}}
+                                            center={center}
+                                            zoom={zoom}
+                                            zoomControl={true}
+                                            ref={(ref) => { this.mapRef = ref }}>
+                                                <TileLayer
+                                                attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                />
+                                            </Map>
+                                        </StackItem>
+                                    </Stack>
+                                </TabsItem>
+                            </Tabs>);
+                        }}
+                    </EntityByGuidQuery>)}
+                    </AutoSizer>
+                )}
+              </NerdletStateContext.Consumer>
+            )}
+        </PlatformStateContext.Consumer>;
     }
 }
 ```
@@ -301,7 +292,7 @@ Now, we're going to make use of both the `NrqlQuery` and `CircleMarker` componen
                                 center={[pt[2].result, pt[3].result]}
                                 color={this._getColor(pt[1].average)}
                                 radius={Math.log(pt[0].count)*3}
-                                onClick={() => {this.openDetails(facet);}}>
+                                onClick={() => {this.openDetails(facet, entity);}}>
                             </CircleMarker>
                         })}
                     </Map>
@@ -321,22 +312,20 @@ Notice that we're referencing (within the `CircleMarker` component) two methods 
         return COLORS[value];
     }
 
-    openDetails(pt) {
+    openDetails(pt, entity) {
         navigation.openStackedNerdlet({
-            id: '09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details',
+            id: 'details',
             urlState: {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
-                appName: this.state.entity.name,
-                accountId: decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0]
+                appName: entity.name,
+                accountId: entity.accountId
             }
         });
     }
 ```
 
-_Notice that the `openDetails` method leverages the `navigation` object in NR1 to open a card with a new Nerdlet id'd as `09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details`. We'll get to that._
-
-3. Finally, add the following line to the `constructor` method of the Nerdlet:
+3. Finally, add the following line as a `constructor` method of the Nerdlet:
 
 ```javascript
     this.openDetails = this.openDetails.bind(this);
@@ -352,11 +341,9 @@ At this point, the file `lab8/nerdlets/my-nerdlet/index.js` should look like the
 import React from 'react';
 import PropTypes from 'prop-types';
 //import the appropriate NR1 components
-import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from 'nr1';
+import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, AutoSizer } from 'nr1';
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
-//import utilities we're going to need
-import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 
@@ -369,22 +356,6 @@ const COLORS = [
 ];
 
 export default class MyNerdlet extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-        launcherUrlState: PropTypes.object,
-        nerdletUrlState: PropTypes.object
-    };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            entity: null,
-            center: [10.5731, -7.5898],
-            zoom: 2
-        }
-        this.openDetails = this.openDetails.bind(this);
-    }
 
     _getColor(value) {
         value = Math.round(value/3);
@@ -392,92 +363,103 @@ export default class MyNerdlet extends React.Component {
         return COLORS[value];
     }
 
-    openDetails(pt) {
+    openDetails(pt, entity) {
         navigation.openStackedNerdlet({
-            id: '09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details',
+            id: 'details',
             urlState: {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
-                appName: this.state.entity.name,
-                accountId: decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0]
+                appName: entity.name,
+                accountId: entity.accountId
             }
         });
     }
 
-    componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
-            this.setState({ entity});
-        });
-    }
-
-    componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
-            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
-                this.setState({ entity });
-            });
+    constructor(props) {
+        super(props);
+        this.state = {
+            center: [10.5731, -7.5898],
+            zoom: 2
         }
-        return true;
     }
 
     render() {
-        const { entity, zoom, center } = this.state;
-        const accountId = decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
-        const { duration } = this.props.launcherUrlState.timeRange;
-        const durationInMinutes = duration/1000/60;
-        const { height } = this.props;
-        if (!entity) {
-            return <Spinner/>
-        } else {
-            return <Tabs>
-                <TabsItem label={`Page Views`} id={1}>
-                    <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        gapType={Stack.GAP_TYPE.TIGHT}>
-                        <StackItem>
-                            <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
-                        </StackItem>
-                        <StackItem>
-                        <NrqlQuery
-                                formatType={NrqlQuery.FORMAT_TYPE.RAW}
-                                accountId={accountId}
-                                query={`SELECT count(*) as x, average(duration) as y, sum(asnLatitude)/count(*) as lat, sum(asnLongitude)/count(*) as lng FROM PageView WHERE appName = '${entity.name}' facet regionCode, countryCode SINCE ${durationInMinutes} MINUTES AGO limit 2000`}>
-                                {results => {
-                                    console.debug(results);
-                                    if (results.loading) {
-                                       return <Spinner/>
-                                    } else {
-                                        console.debug(results.data.facets);
-                                        return <Map
-                                        className="containerMap"
-                                        style={{height: `${height-125}px`}}
-                                        center={center}
-                                        zoom={zoom}
-                                        zoomControl={true}
-                                        ref={(ref) => { this.mapRef = ref }}>
-                                            <TileLayer
-                                            attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                            />
-                                            {results.data.facets.map((facet, i) => {
-                                                const pt = facet.results;
-                                                return <CircleMarker
-                                                    key={`circle-${i}`}
-                                                    center={[pt[2].result, pt[3].result]}
-                                                    color={this._getColor(pt[1].average)}
-                                                    radius={Math.log(pt[0].count)*3}
-                                                    onClick={() => {this.openDetails(facet);}}>
-                                                </CircleMarker>
-                                            })}
-                                        </Map>
-                                        }
-                                    }}
-                            </NrqlQuery>
-                        </StackItem>
-                    </Stack>
-                </TabsItem>
-            </Tabs>;
-        }
+        const { zoom, center } = this.state;
+        return <PlatformStateContext.Consumer>
+            {(platformUrlState) => (
+              <NerdletStateContext.Consumer>
+                {(nerdletUrlState) => (
+                    <AutoSizer>
+                    {({height, width}) => (<EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
+                        {({data, loading, error}) => {
+                            console.debug("EntityByGuidQuery", [loading, data, error]); //eslint-disable-line
+                            if (loading) {
+                                return <Spinner fillContainer />;
+                            }
+                            if (error) {
+                                return <BlockText>{error.message}</BlockText>
+                            }
+                            const entity = data.entities[0];
+                            const { accountId } = entity;
+                            const { duration } = platformUrlState.timeRange;
+                            const durationInMinutes =  duration/1000/60;
+                            return (<Tabs>
+                                <TabsItem label={`Page Views`} value={1}>
+                                    <Stack
+                                        fullWidth
+                                        horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+                                        directionType={Stack.DIRECTION_TYPE.VERTICAL}
+                                        gapType={Stack.GAP_TYPE.TIGHT}>
+                                        <StackItem>
+                                            <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={platformUrlState} />
+                                        </StackItem>
+                                        <StackItem>
+                                            <NrqlQuery
+                                                formatType={NrqlQuery.FORMAT_TYPE.RAW}
+                                                accountId={accountId}
+                                                query={`SELECT count(*) as x, average(duration) as y, sum(asnLatitude)/count(*) as lat, sum(asnLongitude)/count(*) as lng FROM PageView WHERE appName = '${entity.name}' facet regionCode, countryCode SINCE ${durationInMinutes} MINUTES AGO limit 2000`}>
+                                                {results => {
+                                                    console.debug(results);
+                                                    if (results.loading) {
+                                                       return <Spinner/>
+                                                    } else {
+                                                        console.debug(results.data.facets);
+                                                        return <Map
+                                                        className="containerMap"
+                                                        style={{height: `${height-125}px`}}
+                                                        center={center}
+                                                        zoom={zoom}
+                                                        zoomControl={true}
+                                                        ref={(ref) => { this.mapRef = ref }}>
+                                                            <TileLayer
+                                                            attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                                                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                            />
+                                                            {results.data.facets.map((facet, i) => {
+                                                                const pt = facet.results;
+                                                                return <CircleMarker
+                                                                    key={`circle-${i}`}
+                                                                    center={[pt[2].result, pt[3].result]}
+                                                                    color={this._getColor(pt[1].average)}
+                                                                    radius={Math.log(pt[0].count)*3}
+                                                                    onClick={() => {this.openDetails(facet, entity);}}>
+                                                                </CircleMarker>
+                                                            })}
+                                                        </Map>
+                                                        }
+                                                }}
+                                            </NrqlQuery>
+                                        </StackItem>
+                                    </Stack>
+                                </TabsItem>
+                            </Tabs>);
+                        }}
+                    </EntityByGuidQuery>)}
+                    </AutoSizer>
+                )}
+              </NerdletStateContext.Consumer>
+            )}
+        </PlatformStateContext.Consumer>;
     }
 }
 ```
@@ -523,38 +505,51 @@ import PropTypes from 'prop-types';
 //import the needed summary stats
 import SummaryBar from '../../components/summary-bar';
 //import the appropriate NR1 components
-import { Grid, GridItem, TableChart } from 'nr1';
+import { Grid, GridItem, TableChart, AutoSizer, Spinner, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, BlockText } from 'nr1';
 
 export default class DetailsNerdlet extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number.isRequired,
-        launcherUrlState: PropTypes.object.isRequired,
-        nerdletUrlState: PropTypes.object.isRequired
-    }
 
     render() {
-        //get props, including nested props
-        const { height, launcherUrlState: { timeRange : { duration }} } = this.props;
-        //grab the necessary values from the navigation state
-        const { accountId, regionCode, countryCode, appName } =  this.props.nerdletUrlState;
-        //compute the duration in minutes
-        const durationInMinutes = duration/1000/60;
-        //generate the appropriate NRQL where fragment for countryCode and regionCode
-        const nrqlWhere = countryCode ? ` WHERE countryCode  = '${countryCode}' ${regionCode ? ` AND regionCode = '${regionCode}' ` : '' }` : '';
-        //use the Grid layout to make this easy, and calculate the height of the detail Table
-        return <Grid>
-            <GridItem columnStart={1} columnEnd={12}>
-                <SummaryBar {...this.props} {...this.props.nerdletUrlState} />
-            </GridItem>
-            <GridItem columnStart={1} columnEnd={12}>
-                <TableChart
-                    style={{height: height-75, width: '100%'}}
-                    accountId={accountId}
-                    query={`SELECT * from PageView WHERE appName = '${appName}' ${nrqlWhere} SINCE ${durationInMinutes} MINUTES AGO LIMIT 2000 `}
-                />
-            </GridItem>
-        </Grid>
+        return <PlatformStateContext.Consumer>
+            {(platformUrlState) => (
+              <NerdletStateContext.Consumer>
+                {(nerdletUrlState) => (
+                    <AutoSizer>
+                    {({height, width}) => (<EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
+                        {({data, loading, error}) => {
+                            console.debug("EntityByGuidQuery", [loading, data, error]); //eslint-disable-line
+                            if (loading) {
+                                return <Spinner fillContainer />;
+                            }
+                            if (error) {
+                                return <BlockText>{error.message}</BlockText>
+                            }
+                            const { regionCode, countryCode, appName } =  nerdletUrlState;
+
+                            const entity = data.entities[0];
+                            const { accountId } = entity;
+                            const { duration } = platformUrlState.timeRange;
+                            const durationInMinutes =  duration/1000/60;
+                            const nrqlWhere = countryCode ? ` WHERE countryCode  = '${countryCode}' ${regionCode ? ` AND regionCode = '${regionCode}' ` : '' }` : '';
+                            return (<Grid>
+                                <GridItem columnStart={1} columnEnd={12}>
+                                    <SummaryBar {...nerdletUrlState} launcherUrlState={platformUrlState} />
+                                </GridItem>
+                                <GridItem columnStart={1} columnEnd={12}>
+                                    <TableChart
+                                        style={{height: height-75, width: '100%'}}
+                                        accountId={accountId}
+                                        query={`SELECT * from PageView WHERE appName = '${appName}' ${nrqlWhere} SINCE ${durationInMinutes} MINUTES AGO LIMIT 2000 `}
+                                    />
+                                </GridItem>
+                            </Grid>);
+                        }}
+                    </EntityByGuidQuery>)}
+                    </AutoSizer>
+                )}
+              </NerdletStateContext.Consumer>
+            )}
+        </PlatformStateContext.Consumer>;
     }
 }
 ```
@@ -577,7 +572,7 @@ A tabbed interface that has only one tab is a waste, so let's resolve that.
 
 ```javascript
     <TabsItem label={`JavaScript Errors`} id={2}>
-        <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
+        <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={platformUrlState} />
     </TabsItem>
 ```
 
@@ -591,11 +586,9 @@ The final code in `lab8/nerdlets/my-nerdlet/index.js` should look something like
 import React from 'react';
 import PropTypes from 'prop-types';
 //import the appropriate NR1 components
-import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation } from 'nr1';
+import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, AutoSizer, PlatformStateContext, NerdletStateContext, EntityByGuidQuery } from 'nr1';
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
-//import utilities we're going to need
-import { loadEntity, decodeEntityGuid } from './utils';
 import SummaryBar from '../../components/summary-bar';
 import JavaScriptErrorSummary from './javascript-error-summary';
 
@@ -608,36 +601,13 @@ const COLORS = [
 ];
 
 export default class MyNerdlet extends React.Component {
-    static propTypes = {
-        width: PropTypes.number,
-        height: PropTypes.number,
-        launcherUrlState: PropTypes.object,
-        nerdletUrlState: PropTypes.object
-    };
-
     constructor(props) {
         super(props);
         this.state = {
-            entity: null,
             center: [10.5731, -7.5898],
             zoom: 2
         }
         this.openDetails = this.openDetails.bind(this);
-    }
-
-    componentDidMount() {
-        loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
-            this.setState({ entity});
-        });
-    }
-
-    componentWillUpdate(nextProps) {
-        if (this.props && this.props.nerdletUrlState.entityGuid != nextProps.nerdletUrlState.entityGuid) {
-            loadEntity(this.props.nerdletUrlState.entityGuid).then(entity => {
-                this.setState({ entity });
-            });
-        }
-        return true;
     }
 
     _getColor(value) {
@@ -646,80 +616,98 @@ export default class MyNerdlet extends React.Component {
         return COLORS[value];
     }
 
-    openDetails(pt) {
-        navigation.op({
-            id: '09a810c9-d4ee-48ce-92d8-7e9c9b9f6353.details',
+    openDetails(pt, accountId) {
+        navigation.openStackedNerdlet({
+            id: 'details',
             urlState: {
                 regionCode: pt.name[0],
                 countryCode: pt.name[1],
                 appName: this.state.entity.name,
-                accountId: decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0]
+                accountId
             }
         });
     }
 
     render() {
-        const { entity, zoom, center } = this.state;
-        const accountId = decodeEntityGuid(this.props.nerdletUrlState.entityGuid)[0];
-        const { duration } = this.props.launcherUrlState.timeRange;
-        const durationInMinutes = duration/1000/60;
-        const { height } = this.props;
-        if (!entity) {
-            return <Spinner/>
-        } else {
-            return <Tabs>
-                <TabsItem label={`Page Views`} value={1}>
-                    <Stack
-                        alignmentType={Stack.ALIGNMENT_TYPE.FILL}
-                        directionType={Stack.DIRECTION_TYPE.VERTICAL}
-                        gapType={Stack.GAP_TYPE.TIGHT}>
-                        <StackItem>
-                            <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
-                        </StackItem>
-                        <StackItem>
-                            <NrqlQuery
-                                formatType={NrqlQuery.FORMAT_TYPE.RAW}
-                                accountId={accountId}
-                                query={`SELECT count(*) as x, average(duration) as y, sum(asnLatitude)/count(*) as lat, sum(asnLongitude)/count(*) as lng FROM PageView WHERE appName = '${entity.name}' facet regionCode, countryCode SINCE ${durationInMinutes} MINUTES AGO limit 2000`}>
-                                {results => {
-                                    console.debug(results);
-                                    if (results.loading) {
-                                       return <Spinner/>
-                                    } else {
-                                        console.debug(results.data.facets);
-                                        return <Map
-                                        className="containerMap"
-                                        style={{height: `${height-125}px`}}
-                                        center={center}
-                                        zoom={zoom}
-                                        zoomControl={true}
-                                        ref={(ref) => { this.mapRef = ref }}>
-                                            <TileLayer
-                                            attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                            />
-                                            {results.data.facets.map((facet, i) => {
-                                                const pt = facet.results;
-                                                return <CircleMarker
-                                                    key={`circle-${i}`}
-                                                    center={[pt[2].result, pt[3].result]}
-                                                    color={this._getColor(pt[1].average)}
-                                                    radius={Math.log(pt[0].count)*3}
-                                                    onClick={() => {this.openDetails(facet);}}>
-                                                </CircleMarker>
-                                            })}
-                                        </Map>
-                                        }
-                                    }}
-                            </NrqlQuery>
-                        </StackItem>
-                    </Stack>
-                </TabsItem>
-                <TabsItem label={`JavaScript Errors`} value={2}>
-                    <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={this.props.launcherUrlState} />
-                </TabsItem>
-            </Tabs>;
-        }
+        const { zoom, center } = this.state;
+        return <PlatformStateContext.Consumer>
+            {(platformUrlState) => (
+              <NerdletStateContext.Consumer>
+                {(nerdletUrlState) => (
+                    <AutoSizer>
+                    {({height, width}) => (<EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
+                        {({data, loading, error}) => {
+                            console.debug("EntityByGuidQuery", [loading, data, error]); //eslint-disable-line
+                            if (loading) {
+                                return <Spinner fillContainer />;
+                            }
+                            if (error) {
+                                return <BlockText>{error.message}</BlockText>
+                            }
+                            const entity = data.entities[0];
+                            const { accountId } = entity;
+                            const { duration } = platformUrlState.timeRange;
+                            const durationInMinutes =  duration/1000/60;
+                            return (<Tabs>
+                                <TabsItem label={`Page Views`} value={1}>
+                                    <Stack
+                                        fullWidth
+                                        horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+                                        directionType={Stack.DIRECTION_TYPE.VERTICAL}
+                                        gapType={Stack.GAP_TYPE.TIGHT}>
+                                        <StackItem>
+                                            <SummaryBar appName={entity.name} accountId={accountId} launcherUrlState={platformUrlState} />
+                                        </StackItem>
+                                        <StackItem>
+                                            <NrqlQuery
+                                                formatType={NrqlQuery.FORMAT_TYPE.RAW}
+                                                accountId={accountId}
+                                                query={`SELECT count(*) as x, average(duration) as y, sum(asnLatitude)/count(*) as lat, sum(asnLongitude)/count(*) as lng FROM PageView WHERE appName = '${entity.name}' facet regionCode, countryCode SINCE ${durationInMinutes} MINUTES AGO limit 2000`}>
+                                                {results => {
+                                                    console.debug(results);
+                                                    if (results.loading) {
+                                                       return <Spinner/>
+                                                    } else {
+                                                        console.debug(results.data.facets);
+                                                        return <Map
+                                                        className="containerMap"
+                                                        style={{height: `${height-125}px`}}
+                                                        center={center}
+                                                        zoom={zoom}
+                                                        zoomControl={true}
+                                                        ref={(ref) => { this.mapRef = ref }}>
+                                                            <TileLayer
+                                                            attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                                                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                            />
+                                                            {results.data.facets.map((facet, i) => {
+                                                                const pt = facet.results;
+                                                                return <CircleMarker
+                                                                    key={`circle-${i}`}
+                                                                    center={[pt[2].result, pt[3].result]}
+                                                                    color={this._getColor(pt[1].average)}
+                                                                    radius={Math.log(pt[0].count)*3}
+                                                                    onClick={() => {this.openDetails(facet, entity); }}>
+                                                                </CircleMarker>
+                                                            })}
+                                                        </Map>
+                                                        }
+                                                }}
+                                            </NrqlQuery>
+                                        </StackItem>
+                                    </Stack>
+                                </TabsItem>
+                                <TabsItem label={`JavaScript Errors`} value={2}>
+                                    <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={platformUrlState} />
+                                </TabsItem>
+                            </Tabs>);
+                        }}
+                    </EntityByGuidQuery>)}
+                    </AutoSizer>
+                )}
+              </NerdletStateContext.Consumer>
+            )}
+        </PlatformStateContext.Consumer>;
     }
 }
 ```

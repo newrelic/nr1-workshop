@@ -160,7 +160,7 @@ The final code in `lab7/nerdlets/my-nerdlet/index.js` should look something like
 
 ```javascript
 import React from 'react';
-import { Grid, GridItem, AutoSizer } from 'nr1';
+import { Grid, GridItem } from 'nr1';
 import { NrqlQuery, Spinner, LineChart, BlockText, PlatformStateContext, NerdletStateContext, EntityByGuidQuery } from 'nr1';
 import { generateForecastData } from './utils';
 
