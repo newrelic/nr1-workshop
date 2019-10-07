@@ -95,6 +95,8 @@ Let's make use of this service to address our "save the state" feature in this N
                 collection: 'lab9-entityList-v0',
                 documentId: entity.guid,
                 document: { entities }
+            }).then(() => {
+                Toast.showToast({ title: "Update Saved.", type: Toast.TYPE.NORMAL });
             });
         });
     }
