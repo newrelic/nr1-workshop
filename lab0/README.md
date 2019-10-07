@@ -11,7 +11,7 @@ This repo has been spun up locally only
 
 ```bash
 # if you haven't cloned the workshop repo already
-git clone git@github.com:newrelic/nr1-workshop.git
+git clone https://github.com/newrelic/nr1-workshop.git
 
 # then change directory into lab0
 cd nr1-workshop/lab0
