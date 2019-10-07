@@ -63,7 +63,7 @@ _Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the
     }
 ```
 
-_Note: The value of the accountId just needs to be a New Relic account to which you have access. Replace `1606862` with any valid New Relic accountId to which you have access._
+_Note: The value of the accountId just needs to be a New Relic account to which you have access.
 
 6. Save `index.js` and watch the `Lab 1 Nerdlet` reload in your Browser.
 7. Ctrl+click (or right click) on the web browser screen displaying our Nerdlet and choose the menu item `Inspect`.
@@ -77,7 +77,7 @@ You may get a notification at the top of your debug window indicating that you d
 
 _Note: When the documentation for the NR1 SDK is available, we'll replace the link to the PDF with the specific, published docs. That will be part of the rev. 1 of this training._
 
-1. Open the [provided documentation](http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html) in this documentation.
+1. Open the [provided documentation](https://developer.newrelic.com/client-side-sdk/index.html#components/AutoSizer) in this documentation.
 2. Find the `TableChart` documentation and explore its Usage, Example, and Config content.
 3. Find the `ScatterChart` documentation and explore its Usage, Example, and Config content.
 4. Find the `LineChart` documentation and explore its Usage, Example, and Config content.
