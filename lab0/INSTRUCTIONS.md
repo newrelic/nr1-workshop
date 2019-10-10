@@ -51,7 +51,7 @@ You'll notice that the CLI creates a `./launchers/lab0-launcher` directory: with
     "id": "lab0-launcher-launcher",
     "description": "Describe me",
     "displayName": "Lab0Launcher",
-    "rootNerdletId": "lab0-nerdlet"
+    "rootNerdletId": "replace-me-with-nerdlet-id"
 }
 
 ```
@@ -127,7 +127,7 @@ code .
 }
 ```
 
-3. To draw the association precisesly, open the file `lab0/package.json` and find the value of the attribute `nr1.uuid`. That uuid is the identifier of your package.
+3. To draw the association precisely, open the file `lab0/package.json` and find the value of the attribute `nr1.uuid`. That uuid is the identifier of your package.
 
 4. Save the `nr1.json`, then navigate back https://one.newrelic.com/?nerdpacks=local and click on the `Lab0Launcher`. Your browser window should look similar to below with the `lab0-nerdlet` launched.
 

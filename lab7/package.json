@@ -8,8 +8,7 @@
     "test": "exit 0"
   },
   "nr1": {
-    "uuid": "b277e752-8744-4454-ba41-eb5787b5997a",
-    "sdkVersion": 2
+    "uuid": "b277e752-8744-4454-ba41-eb5787b5997a"
   },
   "bugs": {
     "email": "labs@newrelic.com"
