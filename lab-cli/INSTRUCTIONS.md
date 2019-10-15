@@ -19,7 +19,9 @@ Previously, when you setup the NR1 CLI in the [**Build your own application** la
 
 ![**Build your own application** launcher](../screenshots/lab10_screen01.png)
 
-The credentials for a given user/CLI are stored in a JSON file. On Mac, it's `~/.newrelic/credentials.json`.
+The credentials for a given user/CLI are stored in a JSON file.
+On Mac, it's `~/.newrelic/credentials.json`.
+On Windows, it's `%USERPROFILE%\.newrelic\credentials.json`.
 
 1. Run the following command and if you have multiple APIkeys installed you'll see something like this.
 
