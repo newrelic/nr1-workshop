@@ -31,7 +31,13 @@ npm install
 
 _Note: we're going to cover how to **not** hardcode the accountIds for NRQL queries later._
 
-2. Open a browser and check out the `Lab 2 Nerdlet` by going to the homepage and clicking on `Lab 2 Launcher`. Click around and verify that it's working. You should see something like this:
+2.
+```bash
+#And if it's not already running, execute the following
+nr1 nerdpack:serve
+```
+
+3. Open a browser and check out the `Lab 2 Nerdlet` by going to the homepage and clicking on `Lab 2 Launcher`. Click around and verify that it's working. You should see something like this:
 ![Lab2 Nerdlet Open for Business](../screenshots/lab2_screen01.png)
 
 
