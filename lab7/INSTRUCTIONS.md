@@ -37,7 +37,7 @@ You'll notice that this `Nerdlet` doesn't have a corresponding `Launcher`, so we
 }
 ```
 
-2. Open a web browser to `https://one.newrelic.com?nerdpacks=local` c
+2. Open a web browser to `https://one.newrelic.com?nerdpacks=local`
 3. Click on the `Entity Explorer`
 4. Click on `Browswer Applications` category in the left-hand navigation
 5. Click on any browser application from the list

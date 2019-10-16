@@ -23,7 +23,7 @@ npm start
 
 ## Step 1: Using the Grid and Grid Items Components
 
-The `<Grid>` UI component is a layout component that only accepts `GridItem` components and works as standard 12-column grid system. Each `<GridItem>` within a `<Grid>` can have a column span of 1-12 that determines it's width and a can not exceed 12 columns without wrapping.
+The `<Grid>` UI component is a layout component that only accepts `GridItem` components and works as standard 12-column grid system. Each `<GridItem>` within a `<Grid>` can have a column span of 1-12 that determines its width and a cannot exceed 12 columns without wrapping.
 
 1. Import the `<Grid>` and `<GridItem>` from the `nr1` library.
 
@@ -91,7 +91,7 @@ _Note: For more documentation on the `Grid` and `GridItem`and their props view t
 
 ## Step 2: Using Stack and StackItems Components
 
-The `<Stack>` is another layout componnet in the New Relic One UI library. A `<Stack>` only accepts `<StackItem>` components and is a simplified verison of flexbox. The `<Stack>` and `<StackItem>` are very powerful, enables the majority of layouts.
+The `<Stack>` is another layout component in the New Relic One UI library. A `<Stack>` only accepts `<StackItem>` components and is a simplified verison of flexbox. The `<Stack>` and `<StackItem>` are very powerful, enables the majority of layouts.
 
 1. Importing the `<Stack>` and `<StackItem>`
 

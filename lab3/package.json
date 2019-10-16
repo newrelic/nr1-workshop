@@ -8,8 +8,7 @@
     "test": "exit 0"
   },
   "nr1": {
-    "uuid": "7d149c13-3992-4775-a73c-3e74fe2abdbd",
-    "sdkVersion": 2
+    "uuid": "7d149c13-3992-4775-a73c-3e74fe2abdbd"
   },
   "dependencies": {
     "prop-types": "^15.6.2",
