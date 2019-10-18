@@ -1,8 +1,8 @@
 
 # Your First Query
-In this exercise, we'll make sure you can use the [GraphiQL](https://api.newrelic.com/graphiql) tool that to start getting information from New Relilc. Note, if you are not signed in, you will be prompted to login to New Relic. 
+In this exercise, we'll make sure you can use the [GraphiQL](https://api.newrelic.com/graphiql) tool that to start getting information from New Relic. Note, if you are not signed in, you will be prompted to login to New Relic.
 
->Make sure to generate an API key that you can use with GraphiQL! See [Instructions](INSTRUCTIONS.md) for more information. 
+>Make sure to generate an API key that you can use with GraphiQL! See [Instructions](INSTRUCTIONS.md) for more information.
 
 # Basic Query
 When you first open up GraphiQL, you are presented with a simple query to help you get started. Go ahead and click the `Play` button to execute the query. You should see something like the following:
@@ -14,11 +14,11 @@ In the introduction, we noted that GraphQL empowers the client to determine what
 Press the `Play` button after you add the email. Your final result should look similar to the screen shot below:
 ![User Name and Email](../screenshots/graphql-ex0-screen03.png)
 
-That's it! You've successfully used GraphQL to query information from New Relic. 
+That's it! You've successfully used GraphQL to query information from New Relic.
 
 
 # For Consideration / Discussion
-What other information are you able to retrieve about a user? What other information is available through GraphQL? 
+What other information are you able to retrieve about a user? What other information is available through GraphQL?
 
 ## Full Query
 ```graphql
@@ -27,7 +27,7 @@ What other information are you able to retrieve about a user? What other informa
     user {
       name
       email
-  	}
+    }
   }
 }
 ```
