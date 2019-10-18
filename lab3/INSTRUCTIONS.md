@@ -87,7 +87,7 @@ Your browser should show a `Grid` with `GridItems` that looks something similar 
 
 ![Lab3 Nerdlet with 2 Column Grid](../screenshots/lab3_screen02.png)
 
-_Note: For more documentation on the `Grid` and `GridItem`and their props view the `nr1` [object documentation](http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html#components/Grid)
+_Note: For more documentation on the `Grid` and `GridItem`and their props view the `nr1` [object documentation](http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html#components/Grid)_
 
 ## Step 2: Using Stack and StackItems Components
 
@@ -182,12 +182,12 @@ Your browser should now look similar to the snapshot below:
 
 ![Lab3 Nerdlet with updated Stack layout](../screenshots/lab3_screen04.png)
 
-_Note: For more documentation on the `Stack` and `StackItem` and their props view the `nr1` object documentation at: http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html
+_Note: For more documentation on the `Stack` and `StackItem` and their props view the `nr1` object documentation at: http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html_
 
 
 ## Step 3: Building an Nerdpack with UI Components
 
-1. Creating your layout using `<Grid>`, `<GridItem>`, `<Stack>`, and `<StackItem>` compnents
+1. Creating your layout using `<Grid>`, `<GridItem>`, `<Stack>`, and `<StackItem>` components
 
 Update the import statement with your code people:
 
