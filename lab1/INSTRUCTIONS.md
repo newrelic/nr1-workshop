@@ -20,7 +20,6 @@ npm install
 ```
 
 ## Step 1: Creating a new Nerdlet
-
 The Nerdlet code that you create in this exercise will be accessed through a prebuilt launcher that is delivered as part of Lab 1. We will cover the details of launchers in a future exercise.
 
 1. Run the `nr1 create` command and choose the option `nerdlet` as well as provide a name of `lab1-nerdlet`. See the following:
@@ -63,15 +62,15 @@ _Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the
     }
 ```
 
-_Note: The value of the accountId just needs to be a New Relic account to which you have access. Information on locating your account ID can be found in these [docs](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/account-id). If you've set up a New Relic account with your New Relic email address and have Admin access, you can likely use the account number `1`._
+_Note: The value of the accountId just needs to be a New Relic account to which you have access. Information on locating your account ID can be found in these [docs](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/account-id)._
 
 6. Save `index.js` and watch the `Lab 1 Nerdlet` reload in your Browser.
 7. Ctrl+click (or right click) on the web browser screen displaying our Nerdlet and choose the menu item `Inspect`.
 8. In the DevTools window now open, click on the `Console` tab at the top.
 9. In the `Console` tab, choose the `verbose` option on the left hand side. (It's in the drop-down next to the 'Filter' bar.)
 10. Go back to the browser window and reload the current page, and then go back to the DevTools window. You should be looking at a screen like the following:
-    ![Dev Tools > Console > verbose](../screenshots/lab1_screen02.png)
-    You may get a notification at the top of your debug window indicating that you do not have the 'React DevTools' loaded. If you would like to load the [React DevTools extension](https://github.com/facebook/react-devtools), you can click on this link and load the [chrome extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) (or [firefox exetension](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)). You should become familiar with using the developer tools as a way to explore the values of your objects on the client. Take a moment now to explore the objects returned to the console.
+![Dev Tools > Console > verbose](../screenshots/lab1_screen02.png)
+You may get a notification at the top of your debug window indicating that you do not have the 'React DevTools' loaded. If you would like to load the [React DevTools extension](https://github.com/facebook/react-devtools), you can click on this link and load the [chrome extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) (or [firefox exetension](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)). You should become familiar with using the developer tools as a way to explore the values of your objects on the client. Take a moment now to explore the objects returned to the console.
 
 ## Step 2: Exploring the Chart components
 
@@ -97,14 +96,14 @@ import { TableChart, Stack, StackItem } from 'nr1';
 
 ```scss
 .top-chart {
-  padding: 10px;
-  width: 100vw;
-  height: 45vh;
+    padding: 10px;
+    width: 100vw;
+    height: 45vh;
 }
 .chart {
-  padding: 10px;
-  width: 48vw;
-  height: 45vh;
+    padding: 10px;
+    width: 48vw;
+    height: 45vh;
 }
 ```
 
@@ -139,14 +138,7 @@ In this step, we're going to add two detail charts and wrap them in a `ChartGrou
 1. Modify the `nr1` import statement at the top of `lab1/nerdlets/lab1-nerdlet/index.js` to the following.
 
 ```javascript
-import {
-  TableChart,
-  Stack,
-  StackItem,
-  ChartGroup,
-  LineChart,
-  ScatterChart,
-} from 'nr1';
+import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart } from 'nr1';
 ```
 
 2. We're going to add several components (spelled out in the block of code further below) to the `render` method:
@@ -215,16 +207,11 @@ The onClickTable receives four parameters that each provide a different view of 
 - chart: the entire JS object used to generate the chart, both headings and data rows
 
 ```javascript
-<TableChart
-  query={nrql}
-  accountId={this.accountId}
-  className="chart"
-  onClickTable={(dataEl, row, chart) => {
+<TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
     //for learning purposes, we'll write to the console.
     console.debug([dataEl, row, chart]); //eslint-disable-line
     this.setApplication(row.appId, row.appName);
-  }}
-/>
+}}/>
 ```
 
 1. The resulting `index.js` should look like the following:
@@ -307,15 +294,15 @@ _Note: We're going to add a `LineChart` next to our `TableChart`, which will req
 
 ```javascript
 <LineChart
-  query={`SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`}
-  className="chart"
-  accountId={this.accountId}
-  onClickLine={(line) => {
-    //more console logging for learning purposes
-    console.debug(line); //eslint-disable-line
-    const params = line.metadata.label.split(',');
-    this.setApplication(params[1], params[0]);
-  }}
+    query={`SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`}
+    className="chart"
+    accountId={this.accountId}
+    onClickLine={(line) => {
+        //more console logging for learning purposes
+        console.debug(line); //eslint-disable-line
+        const params = line.metadata.label.split(',');
+        this.setApplication(params[1], params[0]);
+    }}
 />
 ```
 
