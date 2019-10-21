@@ -1,15 +1,15 @@
 Lab 9: Leveraging NerdStorage to manage configuration data
 ===========================================================
 
-*Note: There are a number of redacted screenshots in this lab due to the fact that I was exploring non-demo data. You screens will look different based on your data.*
+*Note: There are a number of redacted screenshots in this lab due to the fact that I was exploring non-demo data. Your screens will look different based on your data.*
 
 The purpose of this lab is demonstrate the use of NerdStorage as a storage mechanism.
 
 After completing this lab you should know:
 
 - What `NerdStorage` is and isn't
-How to save data in `NerdStorage` using the `UserStorageQuery`, `EntityStorageQuery`, and `AccountStorageQuery`
-How to retrieve data from `NerdStorage` using the `UserStorageQuery`, `EntityStorageQuery`, and `AccountStorageQuery`
+- How to save data in `NerdStorage` using the `UserStorageQuery`, `EntityStorageQuery`, and `AccountStorageQuery`
+- How to retrieve data from `NerdStorage` using the `UserStorageQuery`, `EntityStorageQuery`, and `AccountStorageQuery`
 
 ## Step 0: Setup and Prerequisites
 
@@ -24,7 +24,7 @@ nr1 nerdpack:uuid -gf
 npm install
 ```
 
-Navigate to in your browser to `https://one.newrelic.com?nerdpacks=local`, choose `Entity Explorer` > `Browser applications` > choose an app > click on `Lab 9: Perf. Compare` > Click on the button `+ Browser Apps`.
+Navigate to in your browser to [`https://one.newrelic.com?nerdpacks=local`](https://one.newrelic.com?nerdpacks=local), choose `Entity Explorer` > `Browser applications` > choose an app > click on `Lab 9: Perf. Compare` > Click on the button `+ Browser Apps`. Then search for applications to add to the compare list.
 
 ![Add an entity to your comparison](../screenshots/lab9_screen00.png)
 
@@ -110,18 +110,22 @@ Let's make use of this service to address our "save the state" feature in this N
 
 Now, we're going to try to load the saved entity set for this `User` and `Entity` using `UserStorageQuery`.
 
-1. Open the file `lab9/nerdlets/my-nerdlet/main.js`, and replace the `_loadState` method with the following:
+1. Open the file `lab9/nerdlets/my-nerdlet/main.js`, and add the following `_loadState` method.
 
 ```javascript
     /**
-     * Load the entity using the loadEntity utils function, then look up if there's a entityList-v0 collection for this entity and user.
+     * Load the entity using the loadEntity utils function, then look up if there's * a entityList-v0 collection for this entity and user.
      * @param {string} entityGuid
      */
     _loadState(entityGuid) {
         UserStorageQuery.query({
-                collection: 'lab9-entityList-v0',
-                documentId: entityGuid
+            collection: 'lab9-entityList-v0',
+            documentId: entityGuid
         }).then(({data}) => {
+            if (!data) {
+                console.log('Cannot update state. No new entities returned from UserStorageQuery. Did you search and add new entities to compare?');
+            }
+
             console.debug(data);
             this.setState({ entities: data.entities });
         }).catch(error => {
