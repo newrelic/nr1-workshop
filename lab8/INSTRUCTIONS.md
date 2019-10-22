@@ -381,6 +381,7 @@ export default class MyNerdlet extends React.Component {
             center: [10.5731, -7.5898],
             zoom: 2
         }
+        this.openDetails = this.openDetails.bind(this);
     }
 
     render() {
@@ -571,7 +572,7 @@ A tabbed interface that has only one tab is a waste, so let's resolve that.
 1. In the file `lab8/nerdlets/my-nerdlet/index.js`, add the following code below the `TabsItem` that contains the `Map`:
 
 ```javascript
-    <TabsItem label={`JavaScript Errors`} id={2}>
+    <TabsItem label={`JavaScript Errors`} value={2}>
         <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={platformUrlState} />
     </TabsItem>
 ```
