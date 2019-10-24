@@ -8,7 +8,14 @@ After completing this lab you should understand:
 
 ## Step 0: Setup and Prerequisites
 
-Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
+Load the prequisites and follow the setup instructions in [Setup](../SETUP.md). Be sure that you've set the appropriate `nr1 profile` for the account data you'll be accessing. If you don't know which profile is your default profile, run the following command:
+
+```bash
+nr1 profiles:default
+# select a default profile
+```
+
+You can also, always override the default by appending the command `--profile=<profile>` to the end of an `nr1` command.
 
 **Reminder**: Make sure that you're ready to go with your `lab1` by ensuring you've run the following commands:
 
