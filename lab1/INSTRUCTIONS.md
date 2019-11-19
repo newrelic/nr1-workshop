@@ -195,7 +195,7 @@ _Note that the line containing `{appId && <Stack...` ensures that the lower sect
 
 3. Save the file and reload the page in the web browser.
 
-Note that the second row of additional charts is never drawm because the `state.appId` is always NULL. There's presently no way to set its value. Let's fix that.
+Note that the second row of additional charts is never drawn because the `state.appId` is always NULL. There's presently no way to set its value. Let's fix that.
 
 4. Add the following method to your Nerdlet React component, e.g. after the `contructor(props)` we added above:
 
