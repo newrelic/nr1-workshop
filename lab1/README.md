@@ -24,7 +24,7 @@ git clone https://github.com/newrelic/nr1-workshop.git
 # git clone git@github.com:newrelic/nr1-workshop.git
 
 # then change directory into lab1
-cd workshop/lab1
+cd nr1-workshop/lab1
 
 nr1 nerdpack:uuid -gf
 npm install
