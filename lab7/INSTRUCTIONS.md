@@ -37,7 +37,7 @@ You'll notice that this `Nerdlet` doesn't have a corresponding `Launcher`, so we
 }
 ```
 
-2. Open a web browser to `https://one.newrelic.com?nerdpacks=local` c
+2. Open a web browser to [`https://one.newrelic.com?nerdpacks=local`](https://one.newrelic.com?nerdpacks=local)
 3. Click on the `Entity Explorer`
 4. Click on `Browswer Applications` category in the left-hand navigation
 5. Click on any browser application from the list
@@ -142,7 +142,7 @@ You should see a current and yesterday, but no Forecast data. Let's make some.
 
 ## Step 4: Adding a series of data to feed into a Chart
 
-We're only one line of code away from our preferred outcome thanks to the `generateForecastData` function we imported earlier. If you haven't looked over the 20+ lines of code, please do so now. I'll give you an appropriate picture of what's needed to generate a chart data series.
+We're only one line of code away from our preferred outcome thanks to the `generateForecastData` function we imported earlier. If you haven't looked over the 20+ lines of code, please do so now. It'll give you an appropriate picture of what's needed to generate a chart data series.
 
 1. Add the following line to the `render` method of the `lab7/nerdlets/my-nerdlet/index.js`, just above the `return <LineChart...` line.
 

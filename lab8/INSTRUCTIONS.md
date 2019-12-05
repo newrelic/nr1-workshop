@@ -65,7 +65,7 @@ _Note: Take the time to review each of these files throughout the exercise to en
 
 ## Step 2: Accessing the Nerdlet
 
-1. Open a web browser to `https://one.newrelic.com?nerdpacks=local` c
+1. Open a web browser to `https://one.newrelic.com?nerdpacks=local`
 2. Click on the `Entity Explorer`
 3. Click on `Browswer Applications` category in the left-hand navigation
 4. Click on any browser application from the list
@@ -381,6 +381,7 @@ export default class MyNerdlet extends React.Component {
             center: [10.5731, -7.5898],
             zoom: 2
         }
+        this.openDetails = this.openDetails.bind(this);
     }
 
     render() {
@@ -560,7 +561,7 @@ _Notice that we're making use of both `Grid`, `GridItem`, our custom `SummaryBar
 
 _Note: you may need to do a `Ctrl+C` and then rerun `npm start` within the `lab8` directory in your terminal window for the local server to recognize the `details` Nerdlet._
 
-6. Now click on a `CircleMarker` in the `Map`. You should see a card slide out that looks like the following:
+6. Now click on a `CircleMarker` in the `Map`. You should see a stacked nerdlet slide out that looks like the following:
 
 ![Details](../screenshots/lab8_screen07.png)
 
@@ -571,7 +572,7 @@ A tabbed interface that has only one tab is a waste, so let's resolve that.
 1. In the file `lab8/nerdlets/my-nerdlet/index.js`, add the following code below the `TabsItem` that contains the `Map`:
 
 ```javascript
-    <TabsItem label={`JavaScript Errors`} id={2}>
+    <TabsItem label={`JavaScript Errors`} value={2}>
         <JavaScriptErrorSummary height={height} entity={entity} accountId={accountId} launcherUrlState={platformUrlState} />
     </TabsItem>
 ```

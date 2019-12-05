@@ -51,7 +51,7 @@ You'll notice that the CLI creates a `./launchers/lab0-launcher` directory: with
     "id": "lab0-launcher-launcher",
     "description": "Describe me",
     "displayName": "Lab0Launcher",
-    "rootNerdletId": "lab0-nerdlet"
+    "rootNerdletId": "replace-me-with-nerdlet-id"
 }
 
 ```
@@ -64,9 +64,9 @@ nr1 nerdpack:serve
 # Note: Once you start the local server, it will automatically listen for changes in the file system. To issue commands while the local server is running, simply open a new terminal and change to the lab0 directory.
 ```
 
-4. Navigate in Google Chrome to `https://one.newrelic.com/?nerdpacks=local` and click on the `Lab0Launcher`.
+4. Navigate in Google Chrome to [`https://one.newrelic.com/?nerdpacks=local`](https://one.newrelic.com/?nerdpacks=local) and click on the `Lab0Launcher`.
 
-![lab0-launcher](../screenshots/lab0_screen01.png)
+![lab0-launcher](../screenshots/lab0_screen01.png) <sup>Note: The icon might be a little different from the screenshot.</sup>
 
 5. Your browser should look _something_ like the screenshot below showing a 404 error message. Why? Remember that a Launcher is the entry point on the Home page to a specific Nerdlet. Currently, the Lab 0 Launcher is not connected to a Nerdlet, which causes an error to be displayed. Let's fix that by creating a Nerdlet and connecting it to the Lab 0 Launcher.
 
@@ -127,7 +127,7 @@ code .
 }
 ```
 
-3. To draw the association precisesly, open the file `lab0/package.json` and find the value of the attribute `nr1.uuid`. That uuid is the identifier of your package.
+3. To draw the association precisely, open the file `lab0/package.json` and find the value of the attribute `nr1.uuid`. That uuid is the identifier of your package.
 
 4. Save the `nr1.json`, then navigate back https://one.newrelic.com/?nerdpacks=local and click on the `Lab0Launcher`. Your browser window should look similar to below with the `lab0-nerdlet` launched.
 

@@ -31,7 +31,13 @@ npm install
 
 _Note: we're going to cover how to **not** hardcode the accountIds for NRQL queries later._
 
-2. Open a browser and check out the `Lab 2 Nerdlet` by going to the homepage and clicking on `Lab 2 Launcher`. Click around and verify that it's working. You should see something like this:
+2.
+```bash
+#And if it's not already running, execute the following
+nr1 nerdpack:serve
+```
+
+3. Open a browser and check out the `Lab 2 Nerdlet` by going to the homepage and clicking on `Lab 2 Launcher`. Click around and verify that it's working. You should see something like this:
 ![Lab2 Nerdlet Open for Business](../screenshots/lab2_screen01.png)
 
 
@@ -109,10 +115,10 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
 5. Save the file and reload. Click on an `App Name` in the first table. You should see something like the following:
 ![Buttons](../screenshots/lab2_screen04.png)
 
-6. Click on the button titled `Open <<App Name>>`. You should see a card open containing the APM Overview screen.
+6. Click on the button titled `Open <<App Name>>`. You should see a stacked nerdlet open containing the APM Overview screen.
 ![APM Overview](../screenshots/lab2_screen05.png)
 
-_Note: Alternatively, you can call the `navigation.openStackedEntity` **thusly**, which will open a card UI vs. replace the entire Nerdlet context:_
+_Note: Alternatively, you can call the `navigation.openStackedEntity` **thusly**, which will open a stacked nerdlet UI vs. replace the entire Nerdlet context:_
 
 ```javascript
     openEntity() {

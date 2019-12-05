@@ -1,7 +1,7 @@
 Lab 5: Using  NR1 NerdGraph components
 ==============================================================================================
 
-The purpose of this lab is to build on the concepts we've already explored, using `NerdGraph` and exploring the `NerdGrpah` components to access New Relic's `NerdGraph` API within your Nerdlets.
+The purpose of this lab is to build on the concepts we've already explored, using `NerdGraph` and exploring the `NerdGraph` components to access New Relic's `NerdGraph` API within your Nerdlets.
 
 After completing this lab you should:
 
@@ -17,7 +17,7 @@ Load the prequisites and follow the setup instructions in [Setup and Prequisites
 
 ```bash
 # if we're not in the lab5 directory get there
-cd ../lab5
+cd lab5
 npm install
 nr1 nerdpack:uuid -gf
 npm start

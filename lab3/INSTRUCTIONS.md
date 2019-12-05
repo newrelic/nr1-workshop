@@ -23,7 +23,7 @@ npm start
 
 ## Step 1: Using the Grid and Grid Items Components
 
-The `<Grid>` UI component is a layout component that only accepts `GridItem` components and works as standard 12-column grid system. Each `<GridItem>` within a `<Grid>` can have a column span of 1-12 that determines it's width and a can not exceed 12 columns without wrapping.
+The `<Grid>` UI component is a layout component that only accepts `GridItem` components and works as standard 12-column grid system. Each `<GridItem>` within a `<Grid>` can have a column span of 1-12 that determines its width and a cannot exceed 12 columns without wrapping.
 
 1. Import the `<Grid>` and `<GridItem>` from the `nr1` library.
 
@@ -87,11 +87,11 @@ Your browser should show a `Grid` with `GridItems` that looks something similar 
 
 ![Lab3 Nerdlet with 2 Column Grid](../screenshots/lab3_screen02.png)
 
-_Note: For more documentation on the `Grid` and `GridItem`and their props view the `nr1` [object documentation](http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html#components/Grid)
+_Note: For more documentation on the `Grid` and `GridItem`and their props view the `nr1` [object documentation](http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html#components/Grid)_
 
 ## Step 2: Using Stack and StackItems Components
 
-The `<Stack>` is another layout componnet in the New Relic One UI library. A `<Stack>` only accepts `<StackItem>` components and is a simplified verison of flexbox. The `<Stack>` and `<StackItem>` are very powerful, enables the majority of layouts.
+The `<Stack>` is another layout component in the New Relic One UI library. A `<Stack>` only accepts `<StackItem>` components and is a simplified verison of flexbox. The `<Stack>` and `<StackItem>` are very powerful, enables the majority of layouts.
 
 1. Importing the `<Stack>` and `<StackItem>`
 
@@ -182,12 +182,12 @@ Your browser should now look similar to the snapshot below:
 
 ![Lab3 Nerdlet with updated Stack layout](../screenshots/lab3_screen04.png)
 
-_Note: For more documentation on the `Stack` and `StackItem` and their props view the `nr1` object documentation at: http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html
+_Note: For more documentation on the `Stack` and `StackItem` and their props view the `nr1` object documentation at: http://nr3.nr-assets.net.s3.amazonaws.com/docs/index.html_
 
 
 ## Step 3: Building an Nerdpack with UI Components
 
-1. Creating your layout using `<Grid>`, `<GridItem>`, `<Stack>`, and `<StackItem>` compnents
+1. Creating your layout using `<Grid>`, `<GridItem>`, `<Stack>`, and `<StackItem>` components
 
 Update the import statement with your code people:
 

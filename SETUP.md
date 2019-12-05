@@ -16,7 +16,7 @@ Some customers have enterprise-wide agreements with New Relic, prohibiting emplo
 
 ```bash
 # if you haven't cloned the workshop repo already
-git clone git@github.com:newrelic/nr1-workshop.git
+git clone https://github.com/newrelic/nr1-workshop.git
 ```
 
 _Note: Each exercise exists as a folder in this repository. Following the material will involve going into that directory, running `npm install`, standing up the local development server by running `nr1 nerdpack:serve`, and following the INSTRUCTIONS.md in the given folder._

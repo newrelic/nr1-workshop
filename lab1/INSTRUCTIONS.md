@@ -1,15 +1,21 @@
-Lab 1: Working with Chart components
-===========================================================
+# Lab 1: Working with Chart components
 
 The NR1 Chart components allow you to easily add data visualizations to your New Relic One nerdpack. The components take care of everything: from plotting to fetching data, but they can also receive data externally to support custom data sets. The purpose of this lab is to create a Nerdlet that displays data from a custom NRQL query using the Chart components.
 
 After completing this lab you should understand:
 
-* The basics for interacting with the Chart components in a custom Nerdlet
+- The basics for interacting with the Chart components in a custom Nerdlet
 
 ## Step 0: Setup and Prerequisites
 
-Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
+Load the prequisites and follow the setup instructions in [Setup](../SETUP.md). Be sure that you've set the appropriate `nr1 profile` for the account data you'll be accessing. If you don't know which profile is your default profile, run the following command:
+
+```bash
+nr1 profiles:default
+# select a default profile
+```
+
+You can also, always override the default by appending the command `--profile=<profile>` to the end of an `nr1` command.
 
 **Reminder**: Make sure that you're ready to go with your `lab1` by ensuring you've run the following commands:
 
@@ -63,7 +69,7 @@ _Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the
     }
 ```
 
-_Note: The value of the accountId just needs to be a New Relic account to which you have access.
+_Note: The value of the accountId just needs to be a New Relic account to which you have access. Information on locating your account ID can be found in these [docs](https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/account-id)._
 
 6. Save `index.js` and watch the `Lab 1 Nerdlet` reload in your Browser.
 7. Ctrl+click (or right click) on the web browser screen displaying our Nerdlet and choose the menu item `Inspect`.
@@ -143,10 +149,10 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart } fro
 ```
 
 2. We're going to add several components (spelled out in the block of code further below) to the `render` method:
-    - a `ChartGroup`
-    - within the `ChartGroup` a `LineChart` to chart the timeseries number of transactions using the NRQL query `SELECT count(*) FROM Transaction WHERE appId = ${appId} TIMESERIES` as the source of its data.
-    - within `ChartGroup` a `ScatterChart` to plot the duration of requests over time using the NRQL query `SELECT apdex(duration) FROM Transaction WHERE appId = ${appId} TIMESERIES` as the source of its data.
-    - We're also going to make use of additional `Stack` and `StackItem` components. _For now, just use the code. We'll explain more about their purpose in a future exercise._
+   - a `ChartGroup`
+   - within the `ChartGroup` a `LineChart` to chart the timeseries number of transactions using the NRQL query `SELECT count(*) FROM Transaction WHERE appId = ${appId} TIMESERIES` as the source of its data.
+   - within `ChartGroup` a `ScatterChart` to plot the duration of requests over time using the NRQL query `SELECT apdex(duration) FROM Transaction WHERE appId = ${appId} TIMESERIES` as the source of its data.
+   - We're also going to make use of additional `Stack` and `StackItem` components. _For now, just use the code. We'll explain more about their purpose in a future exercise._
 
 That all results in the following block of code. Copy/reproduce the code below as the replacement for the `render` method of the `index.js` file:
 
@@ -202,16 +208,17 @@ Note that the second row of additional charts is never drawm because the `state.
 1. Add a new attribute named `onClickTable` to the existing `TableChart` as a way to configure a `click` event on the table rows.
 
 The onClickTable receives four parameters that each provide a different view of the overall data.
+
 - dataEl: The inner contents of the specific Table element on which the user clicked.
 - row: a JS object of the data that makes up the entire row of that table
 - chart: the entire JS object used to generate the chart, both headings and data rows
 
 ```javascript
-    <TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
-            //for learning purposes, we'll write to the console.
-            console.debug([dataEl, row, chart]) //eslint-disable-line
-            this.setApplication(row.appId, row.appName)
-    }}/>
+<TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+    //for learning purposes, we'll write to the console.
+    console.debug([dataEl, row, chart]); //eslint-disable-line
+    this.setApplication(row.appId, row.appName);
+}}/>
 ```
 
 1. The resulting `index.js` should look like the following:
@@ -285,7 +292,7 @@ Based on what you've executed above, apply that learning in the following:
 
 1. **Replicate** the `Stack` and `StackItem` code from the lower part of the display (i.e. the portion containing the `ScatterChart` and `LineChart`) into the upper half of the display that currently only contains a `TableChart`.
 
-*Note: We're going to add a `LineChart` next to our `TableChart`, which will require a `Stack` with in the very first `StackItem` that itself contains another `Stack` with two `StackItem` elements.*
+_Note: We're going to add a `LineChart` next to our `TableChart`, which will require a `Stack` with in the very first `StackItem` that itself contains another `Stack` with two `StackItem` elements._
 
 2. Within the first, **new** `StackItem` element, place the existing `TableChart`.
 3. Next to the `TableChart` in the second `StackItem`, add a `LineChart` using the following NRQL query: `SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`.
@@ -293,17 +300,78 @@ Based on what you've executed above, apply that learning in the following:
 4. Add a `onClickLine` attribute to your `LineChart` that processes `onClick` events in the same way that the `TableChart` `onTableClick` operates (i.e. calling the `this.setApplication` method). See the following:
 
 ```javascript
-    <LineChart
-        query={`SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`}
-        className="chart"
-        accountId={this.accountId}
-        onClickLine={(line) => {
-            //more console logging for learning purposes
-            console.debug(line); //eslint-disable=line
-            const params = line.metadata.label.split(",");
-            this.setApplication(params[1], params[0]);
-        }}
-    />
+<LineChart
+    query={`SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`}
+    className="chart"
+    accountId={this.accountId}
+    onClickLine={(line) => {
+        //more console logging for learning purposes
+        console.debug(line); //eslint-disable-line
+        const params = line.metadata.label.split(',');
+        this.setApplication(params[1], params[0]);
+    }}
+/>
+```
+
+5. The resulting `index.js` should look like the following:
+
+```javascript
+    render(){
+        const { appId, appName } = this.state;
+        const nrql = `SELECT count(*) as 'transactions', apdex(duration) as 'apdex', percentile(duration, 99, 90, 70) FROM Transaction facet appName, appId limit 25`;
+        const tCountNrql = `SELECT count(*) FROM Transaction WHERE appId = ${appId} TIMESERIES`;
+        const apdexNrql = `SELECT apdex(duration) FROM Transaction WHERE appId = ${appId} TIMESERIES`
+        //return the JSX we're rendering
+        return (
+            <ChartGroup>
+                <Stack
+                    verticalType={Stack.VERTICAL_TYPE.FILL}
+                    directionType={Stack.DIRECTION_TYPE.VERTICAL}
+                    gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
+                    <StackItem>
+                        <Stack
+                            horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+                            directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
+                            gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
+							<StackItem>
+								<TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+										//for learning purposes, we'll write to the console.
+										console.debug([dataEl, row, chart]) //eslint-disable-line
+										this.setApplication(row.appId, row.appName)
+								}}/>
+							</StackItem>
+							<StackItem>
+								<LineChart
+									query={`SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`}
+									className="chart"
+									accountId={this.accountId}
+									onClickLine={(line) => {
+										//more console logging for learning purposes
+										console.debug(line); //eslint-disable=line
+										const params = line.metadata.label.split(",");
+										this.setApplication(params[1], params[0]);
+									}}
+								/>
+							</StackItem>
+						</Stack>
+					</StackItem>
+                    {appId && <StackItem>
+                        <Stack
+                            horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+                            directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
+                            gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
+                            <StackItem>
+                                <LineChart accountId={this.accountId} query={tCountNrql} className="chart"/>
+                            </StackItem>
+                            <StackItem>
+                                <ScatterChart accountId={this.accountId} query={apdexNrql} className="chart"/>
+                            </StackItem>
+                        </Stack>
+                    </StackItem>}
+                </Stack>
+            </ChartGroup>
+        )
+    }
 ```
 
 ![Something like this](../screenshots/lab1_screen05.png)
