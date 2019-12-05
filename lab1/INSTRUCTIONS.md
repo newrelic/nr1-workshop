@@ -81,8 +81,6 @@ You may get a notification at the top of your debug window indicating that you d
 
 ## Step 2: Exploring the Chart components
 
-_Note: When the documentation for the NR1 SDK is available, we'll replace the link to the PDF with the specific, published docs. That will be part of the rev. 1 of this training._
-
 1. Open the [provided documentation](https://developer.newrelic.com/client-side-sdk/index.html#components/AutoSizer) in this documentation.
 2. Find the `TableChart` documentation and explore its Usage, Example, and Config content.
 3. Find the `ScatterChart` documentation and explore its Usage, Example, and Config content.
