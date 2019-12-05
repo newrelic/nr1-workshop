@@ -6,7 +6,7 @@ It's quick and easy to set up your environment to build [New Relic One applicati
 
 To set up your environment to Build your own application:
 
-1. In Google Chrome, go to [one.newrelic.com](one.newrelic.com) and select [**build your own application**](https://one.newrelic.com/launcher/developer-center.launcher#pane=eyJuZXJkbGV0SWQiOiJkZXZlbG9wZXItY2VudGVyLmRldmVsb3Blci1jZW50ZXIifQ==). Follow the instructions.
+1. In Google Chrome, go to [one.newrelic.com](https://one.newrelic.com/) and select [**build your own application**](https://one.newrelic.com/launcher/developer-center.launcher#pane=eyJuZXJkbGV0SWQiOiJkZXZlbG9wZXItY2VudGVyLmRldmVsb3Blci1jZW50ZXIifQ==). Follow the instructions.
 
 # Important
 
