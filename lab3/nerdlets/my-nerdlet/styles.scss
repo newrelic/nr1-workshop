@@ -16,12 +16,20 @@
     height: 300px;
 }
 .side-col{
-    padding-top: 30px;
+    padding-top: 32px;
+}
+.row-spacing{
+    margin-bottom: 10px;
 }
 .gry, .gry-div {
+    background-color: #ccc;
+    height: 100px;
+    width: 100%;
+}
+.gry-div-h {
     background: #ccc;
     height: 100px;
-    width: 25vw;
+    width: 32vw;
 }
 .dialog-headline{
     margin-bottom: 20px;
