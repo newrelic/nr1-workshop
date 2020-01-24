@@ -203,7 +203,7 @@ Note that the second row of additional charts is never drawn because the `state.
     }
 ```
 
-1. Add a new attribute named `onClickTable` to the existing `TableChart` as a way to configure a `click` event on the table rows.
+5. Add a new attribute named `onClickTable` to the existing `TableChart` as a way to configure a `click` event on the table rows.
 
 The onClickTable receives four parameters that each provide a different view of the overall data.
 
@@ -219,7 +219,7 @@ The onClickTable receives four parameters that each provide a different view of 
 }}/>
 ```
 
-1. The resulting `index.js` should look like the following:
+6. The resulting `index.js` should look like the following:
 
 ```javascript
 import React from 'react';
@@ -280,7 +280,7 @@ export default class Lab1Nerdlet extends React.Component {
 }
 ```
 
-1. Save the file and reload the page. You should be able to click on an application and see the resulting second row of charts. :sparkles:
+7. Save the file and reload the page. You should be able to click on an application and see the resulting second row of charts. :sparkles:
 
 ![Full example](../screenshots/lab1_screen04.png)
 

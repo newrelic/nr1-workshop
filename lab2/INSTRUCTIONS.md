@@ -66,13 +66,13 @@ return <PlatformStateContext.Consumer>
 
 ```
 
-1. Now, we're going to make `duration` part of each of the four query objects.
+3. Now, we're going to make `duration` part of each of the four query objects.
 * `TableComponent`: `query={nrql+since}`
 * upper `LineChart`: `query={trxOverT+since}`
 * lower `LineChart`: `query={tCountNrql+since}`
 * `ScatterChart`: `query={apdexNrql+since}`
 
-3. Save the file and reload. Now try to change the time window again. You should see your charts reading and re-rendering based on the `timeRange`.
+4. Save the file and reload. Now try to change the time window again. You should see your charts reading and re-rendering based on the `timeRange`.
 
 ## Step 3: Load and display an Entity
 
@@ -106,7 +106,7 @@ import { TableChart, Stack, StackItem, ChartGroup, LineChart, ScatterChart, Butt
     }
 ```
 
-1. Add the following line to the nerdlet's `constructor` method.
+4. Add the following line to the nerdlet's `constructor` method.
 
 ```javascript
     this.openEntity = this.openEntity.bind(this);
