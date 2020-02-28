@@ -57,7 +57,7 @@ The resulting GraphQL statement should look like the following:
 }
 ```
 
-4. Click the Play button at the top of the screen and review the results in the right-hand panel. That GraphQL query
+4. Click the Play button at the top of the screen and review the results in the right-hand panel.
 
 
 ## Step 2: Adding a GraphQL request to a Nerdlet
