@@ -55,7 +55,7 @@ You'll notice that the CLI creates three files in the `nerdlets/lab1-nerdlet` di
 
 _Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the Terminal and then running `nr1 nerdpack:serve`._
 
-5. Next, we're going to prep the Nerdlet to be able to generate some charts. Add the following code to your `Lab1Nerdlet` class in `nerdlets/lab1-nerdlet/index.js`.
+5. Next, we're going to prep the Nerdlet to be able to generate some charts. Add the following code to your `Lab1Nerdlet` __*class just above*__ the `render` method in `nerdlets/lab1-nerdlet/index.js`.
 
 ```javascript
     constructor(props) {
