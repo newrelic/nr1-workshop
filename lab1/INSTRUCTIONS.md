@@ -212,7 +212,7 @@ The onClickTable receives four parameters that each provide a different view of 
 - chart: the entire JS object used to generate the chart, both headings and data rows
 
 ```javascript
-<TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+<TableChart query={nrql} accountId={this.accountId} className="top-chart" onClickTable={(dataEl, row, chart) => {
     //for learning purposes, we'll write to the console.
     console.debug([dataEl, row, chart]); //eslint-disable-line
     this.setApplication(row.appId, row.appName);
@@ -254,7 +254,7 @@ export default class Lab1Nerdlet extends React.Component {
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
-                            <TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+                            <TableChart query={nrql} accountId={this.accountId} className="top-chart" onClickTable={(dataEl, row, chart) => {
                                 //for learning purposes, we'll write to the console.
                                 console.debug([dataEl, row, chart]) //eslint-disable-line
                                 this.setApplication(row.appId, row.appName)
@@ -293,9 +293,12 @@ Based on what you've executed above, apply that learning in the following:
 _Note: We're going to add a `LineChart` next to our `TableChart`, which will require a `Stack` with in the very first `StackItem` that itself contains another `Stack` with two `StackItem` elements._
 
 2. Within the first, **new** `StackItem` element, place the existing `TableChart`.
-3. Next to the `TableChart` in the second `StackItem`, add a `LineChart` using the following NRQL query: `SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`.
 
-4. Add a `onClickLine` attribute to your `LineChart` that processes `onClick` events in the same way that the `TableChart` `onTableClick` operates (i.e. calling the `this.setApplication` method). See the following:
+3. Update the `className` on the `TableChart` to `className="chart"`.
+
+4. Next to the `TableChart` in the second `StackItem`, add a `LineChart` using the following NRQL query: `SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`.
+
+5. Add a `onClickLine` attribute to your `LineChart` that processes `onClick` events in the same way that the `TableChart` `onTableClick` operates (i.e. calling the `this.setApplication` method). See the following:
 
 ```javascript
 <LineChart
