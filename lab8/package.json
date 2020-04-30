@@ -7,20 +7,17 @@
     "start": "nr1 nerdpack:serve",
     "test": "exit 0"
   },
-  "nr1": {
-    "uuid": "dd515278-5fa7-45f2-b9c0-d3685893c4e0"
-  },
   "bugs": {
     "email": "labs@newrelic.com"
   },
   "author": "New Relic Labs",
   "dependencies": {
     "colormap": "^2.3.1",
-    "leaflet": "^1.5.1",
+    "leaflet": "^1.6.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-leaflet": "^2.4.0"
+    "react-leaflet": "^2.6.3"
   },
   "browserslist": [
     "last 2 versions",
@@ -28,6 +25,6 @@
     "not dead"
   ],
   "devDependencies": {
-    "file-loader": "^4.1.0"
+    "file-loader": "^4.3.0"
   }
 }
