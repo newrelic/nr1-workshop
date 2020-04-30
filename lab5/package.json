@@ -7,9 +7,6 @@
     "start": "nr1 nerdpack:serve",
     "test": "exit 0"
   },
-  "nr1": {
-    "uuid": "bf5b068d-2b23-4d37-9a51-108627505b84"
-  },
   "dependencies": {
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
@@ -21,6 +18,6 @@
     "not dead"
   ],
   "devDependencies": {
-    "file-loader": "^4.1.0"
+    "file-loader": "^4.3.0"
   }
 }
