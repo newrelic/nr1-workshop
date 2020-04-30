@@ -140,7 +140,7 @@ Now, we're ready to create the skeleton of our `render` method.
     }
 ```
 
-4. Save the file and watch the reload in your browser. You should see a result that looks like the following:
+3. Save the file and watch the reload in your browser. You should see a result that looks like the following:
 
 ![No map, but we have a SummaryBar](../screenshots/lab8_screen03.png)
 

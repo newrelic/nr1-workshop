@@ -1,3 +1,5 @@
+[![Example Code header](https://github.com/newrelic/open-source-office/raw/master/examples/categories/images/Example_Code.png)](https://github.com/newrelic/open-source-office/blob/master/examples/categories/index.md#example-code)
+
 # Overview
 
 The repo for NR1 enablement training experience. In this repository, we'll store (or link to) a complete curriculum, including labs and workshop-specific documentation, built to support a self-paced training event focused on the New Relic One platform and developer experience.

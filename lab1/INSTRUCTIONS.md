@@ -55,7 +55,7 @@ You'll notice that the CLI creates three files in the `nerdlets/lab1-nerdlet` di
 
 _Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the Terminal and then running `nr1 nerdpack:serve`._
 
-5. Next, we're going to prep the Nerdlet to be able to generate some charts. Add the following code to your `Lab1Nerdlet` class in `nerdlets/lab1-nerdlet/index.js`.
+5. Next, we're going to prep the Nerdlet to be able to generate some charts. Add the following code to your `Lab1Nerdlet` __*class just above*__ the `render` method in `nerdlets/lab1-nerdlet/index.js`.
 
 ```javascript
     constructor(props) {
@@ -80,8 +80,6 @@ _Note: The value of the accountId just needs to be a New Relic account to which 
 You may get a notification at the top of your debug window indicating that you do not have the 'React DevTools' loaded. If you would like to load the [React DevTools extension](https://github.com/facebook/react-devtools), you can click on this link and load the [chrome extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) (or [firefox exetension](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)). You should become familiar with using the developer tools as a way to explore the values of your objects on the client. Take a moment now to explore the objects returned to the console.
 
 ## Step 2: Exploring the Chart components
-
-_Note: When the documentation for the NR1 SDK is available, we'll replace the link to the PDF with the specific, published docs. That will be part of the rev. 1 of this training._
 
 1. Open the [provided documentation](https://developer.newrelic.com/client-side-sdk/index.html#components/AutoSizer) in this documentation.
 2. Find the `TableChart` documentation and explore its Usage, Example, and Config content.
@@ -195,7 +193,7 @@ _Note that the line containing `{appId && <Stack...` ensures that the lower sect
 
 3. Save the file and reload the page in the web browser.
 
-Note that the second row of additional charts is never drawm because the `state.appId` is always NULL. There's presently no way to set its value. Let's fix that.
+Note that the second row of additional charts is never drawn because the `state.appId` is always NULL. There's presently no way to set its value. Let's fix that.
 
 4. Add the following method to your Nerdlet React component, e.g. after the `contructor(props)` we added above:
 
@@ -205,7 +203,7 @@ Note that the second row of additional charts is never drawm because the `state.
     }
 ```
 
-1. Add a new attribute named `onClickTable` to the existing `TableChart` as a way to configure a `click` event on the table rows.
+5. Add a new attribute named `onClickTable` to the existing `TableChart` as a way to configure a `click` event on the table rows.
 
 The onClickTable receives four parameters that each provide a different view of the overall data.
 
@@ -214,14 +212,14 @@ The onClickTable receives four parameters that each provide a different view of 
 - chart: the entire JS object used to generate the chart, both headings and data rows
 
 ```javascript
-<TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+<TableChart query={nrql} accountId={this.accountId} className="top-chart" onClickTable={(dataEl, row, chart) => {
     //for learning purposes, we'll write to the console.
     console.debug([dataEl, row, chart]); //eslint-disable-line
     this.setApplication(row.appId, row.appName);
 }}/>
 ```
 
-1. The resulting `index.js` should look like the following:
+6. The resulting `index.js` should look like the following:
 
 ```javascript
 import React from 'react';
@@ -256,7 +254,7 @@ export default class Lab1Nerdlet extends React.Component {
                     directionType={Stack.DIRECTION_TYPE.VERTICAL}
                     gapType={Stack.GAP_TYPE.EXTRA_LOOSE}>
                     <StackItem>
-                            <TableChart query={nrql} accountId={this.accountId} className="chart" onClickTable={(dataEl, row, chart) => {
+                            <TableChart query={nrql} accountId={this.accountId} className="top-chart" onClickTable={(dataEl, row, chart) => {
                                 //for learning purposes, we'll write to the console.
                                 console.debug([dataEl, row, chart]) //eslint-disable-line
                                 this.setApplication(row.appId, row.appName)
@@ -282,7 +280,7 @@ export default class Lab1Nerdlet extends React.Component {
 }
 ```
 
-1. Save the file and reload the page. You should be able to click on an application and see the resulting second row of charts. :sparkles:
+7. Save the file and reload the page. You should be able to click on an application and see the resulting second row of charts. :sparkles:
 
 ![Full example](../screenshots/lab1_screen04.png)
 
@@ -295,9 +293,12 @@ Based on what you've executed above, apply that learning in the following:
 _Note: We're going to add a `LineChart` next to our `TableChart`, which will require a `Stack` with in the very first `StackItem` that itself contains another `Stack` with two `StackItem` elements._
 
 2. Within the first, **new** `StackItem` element, place the existing `TableChart`.
-3. Next to the `TableChart` in the second `StackItem`, add a `LineChart` using the following NRQL query: `SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`.
 
-4. Add a `onClickLine` attribute to your `LineChart` that processes `onClick` events in the same way that the `TableChart` `onTableClick` operates (i.e. calling the `this.setApplication` method). See the following:
+3. Update the `className` on the `TableChart` to `className="chart"`.
+
+4. Next to the `TableChart` in the second `StackItem`, add a `LineChart` using the following NRQL query: `SELECT count(*) as 'transactions' FROM Transaction facet appName, appId limit 25 TIMESERIES`.
+
+5. Add a `onClickLine` attribute to your `LineChart` that processes `onClick` events in the same way that the `TableChart` `onTableClick` operates (i.e. calling the `this.setApplication` method). See the following:
 
 ```javascript
 <LineChart

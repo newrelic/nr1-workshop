@@ -38,7 +38,7 @@ For the purposes of expediency, this lab provides a functional application that 
 
 Next, we're going to exercise the functionality of the `Perf. Comparison` nerdlet.
 
-2. If it's not already open, navigate to the `Lab 9: Perf. Compare` nerdlet (_which is accessible, the `lab9/nerdlet/my-nerdlet/nr1.json` demonstrates, to both `BROWSER` and `APM` entities_) and click on the `+ <Entity Label>` button.
+2. If it's not already open, navigate to the `Lab 9: Perf. Compare` nerdlet (_which is accessible, the `lab9/nerdlets/my-nerdlet/nr1.json` demonstrates, to both `BROWSER` and `APM` entities_) and click on the `+ <Entity Label>` button.
 
 3. Search for and add several entities to the `Perf. Comparison` UI. Your screen will look similar to the following:
 

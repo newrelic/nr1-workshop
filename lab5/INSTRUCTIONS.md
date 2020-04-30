@@ -67,7 +67,7 @@ The `NerdGraphQuery` component returns set of data when making a query. The `loa
 1. Update your import statement in the `index.js` files with the code below to add the `Spinner` and `BlockText` from the `nr1` library:
 
 ```javascript
-import { NerdGraphQuery, Stack, StackItem, Spinner, HeadingText, BlockText } from 'nr1';
+import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText, BlockText, NerdletStateContext } from 'nr1';
 ```
 
 2. Above your render method, add the render helper fuctions from the code below:

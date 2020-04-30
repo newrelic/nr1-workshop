@@ -1,4 +1,4 @@
-# NRLQ While You WorkQL
+# NRQL While You WorkQL
 This next exercise will incorporate a NRQL query into GraphQL and also show you a technique for adding an alias to your request. Aliases are particularly useful when you have several of the same kinds of requests contained within a query, e.g. NRQL commands. Let's dig in!
 > Remember: Make sure to generate an API key that you can use with GraphiQL! See [Instructions](INSTRUCTIONS.md) for more information. 
 

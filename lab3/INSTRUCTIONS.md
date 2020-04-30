@@ -151,30 +151,30 @@ Change the render method within your `lab3/nerdlets/my-nerdlet/main.js` with the
 
 ```javascript
 render() {
-    return <Stack
-        fullWidth
-        horizontalType={Stack.HORIZONTAL_TYPE.FILL}
-        directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-        <StackItem>
-            <Stack
-                fullWidth
-                directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
-                gapType={Stack.GAP_TYPE.NORMAL}>
-                <StackItem grow={true}>
-                    <div className="gry-div">Item 1: grows</div>
-                </StackItem>
-                <StackItem grow={true}>
-                    <div className="gry-div">Item 2: grows</div>
-                </StackItem>
-                <StackItem>
-                    <div className="gry-div">Item 3: Now this one doesn't grow</div>
-                </StackItem>
-            </Stack>
-        </StackItem>
-        <StackItem style={{backgroundColor: 'blue'}}>
-            <div className="gry">Item 4: here too</div>
-        </StackItem>
-    </Stack>
+        return <Stack
+            fullWidth
+            horizontalType={Stack.HORIZONTAL_TYPE.FILL}
+            directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+            <StackItem>
+                <Stack
+                    fullWidth
+                    directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
+                    gapType={Stack.GAP_TYPE.NORMAL}>
+                    <StackItem grow={true}>
+                        <div className="gry-div">Item 1: grows</div>
+                    </StackItem>
+                    <StackItem grow={true}>
+                        <div className="gry-div">Item 2: grows</div>
+                    </StackItem>
+                    <StackItem>
+                        <div className="gry-div">Item 3: Now this one doesn't grow</div>
+                    </StackItem>
+                </Stack>
+            </StackItem>
+            <StackItem >
+                <div className="gry" style={{backgroundColor: 'blue'}}>Item 4: here too</div>
+            </StackItem>
+        </Stack>
     }
 ```
 
@@ -207,17 +207,19 @@ Using the Grid and Stack components you can easily create any layout you wish wi
                         fullWidth
                         directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                         gapType={Stack.GAP_TYPE.LOOSE}>
-                        <StackItem>
+                        <StackItem
+                        grow={true}
+                        className="row-spacing">
                             <div className="gry-div">Chart 1</div>
                         </StackItem>
                     </Stack>
                     <Stack
                         fullWidth
                         gapType={Stack.GAP_TYPE.LOOSE}>
-                        <StackItem>
+                        <StackItem grow={true}>
                             <div className="gry-div">Chart 2</div>
                         </StackItem>
-                        <StackItem>
+                        <StackItem grow={true}>
                             <div className="gry-div">Chart 3</div>
                         </StackItem>
                     </Stack>
@@ -228,11 +230,11 @@ Using the Grid and Stack components you can easily create any layout you wish wi
                         fullWidth
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                        <StackItem>
-                            <div className="gry-div">Chart 4</div>
+                        <StackItem grow={true}>
+                            <div className="gry-div-h">Chart 4</div>
                         </StackItem>
-                        <StackItem>
-                            <div className="gry-div">Chart 5</div>
+                        <StackItem grow={true}>
+                            <div className="gry-div-h">Chart 5</div>
                         </StackItem>
                     </Stack>
                 </GridItem>
@@ -252,13 +254,16 @@ Now that you have your layout done, let's add a some chart components. Replace t
 ```javascript
     render() {
         return <ChartGroup>
-            <Grid className="grid">
+            <Grid>
                 <GridItem
                     columnSpan={8}>
                     <Stack
                         fullWidth
+                        directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                         gapType={Stack.GAP_TYPE.LOOSE}>
-                        <StackItem grow>
+                        <StackItem
+                        grow={true}
+                        className="row-spacing">
                             <LineChart
                                 query={throughput+since}
                                 accountId={this.accountId}
@@ -271,9 +276,8 @@ Now that you have your layout done, let's add a some chart components. Replace t
                     </Stack>
                     <Stack
                         fullWidth
-                        directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                         gapType={Stack.GAP_TYPE.LOOSE}>
-                        <StackItem>
+                        <StackItem grow={true}>
                             <AreaChart
                                 query={throughput+since}
                                 accountId={this.accountId}
@@ -283,7 +287,7 @@ Now that you have your layout done, let's add a some chart components. Replace t
                                 }}
                             />
                         </StackItem>
-                        <StackItem>
+                        <StackItem grow={true}>
                             <BarChart className="two-col-chart" query={errors+since} accountId={this.accountId} />
                         </StackItem>
                     </Stack>
@@ -292,23 +296,22 @@ Now that you have your layout done, let's add a some chart components. Replace t
                     columnSpan={4}>
                     <Stack
                         fullWidth
-                        className="side-col"
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                        <StackItem>
+                        <StackItem grow={true}>
                             <PieChart
                                 className="chart"
                                 query={transaction_apdex_by_appname+since}
                                 accountId={this.accountId}
                             />
                         </StackItem>
-                        <StackItem>
+                        <StackItem grow={true}>
                             <TableChart className="chart" query={transaction_apdex_by_appname+since} accountId={this.accountId}/>
                         </StackItem>
                     </Stack>
                 </GridItem>
             </Grid>
-        </ChartGroup>
+        </ChartGroup>;
     }
 ```
 
@@ -409,13 +412,14 @@ Update the render method with the code below:
         const errors = `SELECT count(error) FROM Transaction TIMESERIES`;
         const throughput = `SELECT count(*) as 'throughput' FROM Transaction TIMESERIES`;
         const transaction_apdex_by_appname = `SELECT count(*) as 'transaction', apdex(duration) as 'apdex' FROM Transaction limit 25`;
+
         return <React.Fragment>
-            <ChartGroup>
-            <Grid className="grid">
+        <ChartGroup>
+            <Grid>
                 <GridItem
                     columnSpan={8}>
                     <form onSubmit={this.onSubmit}>
-                        <Stack>
+                        <Stack fullWidth>
                             <StackItem grow={true}>
                                 <TextField
                                     value={this.state.value}
@@ -450,17 +454,19 @@ Update the render method with the code below:
                             </Stack>
                         </Modal>
                     </form>
-
                     <Stack
                         fullWidth
+                        directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
                         gapType={Stack.GAP_TYPE.LOOSE}>
-                        <StackItem grow>
+                        <StackItem
+                        grow={true}
+                        className="row-spacing">
                             <LineChart
-                                    query={throughput+since+this.state.facet}
-                                    accountId={this.accountId}
-                                    className="chart"
-                                    onClickLine={(line) => {
-                                        console.debug(line); //eslint-disable-line
+                                query={throughput+since+this.state.facet}
+                                accountId={this.accountId}
+                                className="chart"
+                                onClickLine={(line) => {
+                                    console.debug(line); //eslint-disable-line
                                 }}
                             />
                         </StackItem>
@@ -468,17 +474,17 @@ Update the render method with the code below:
                     <Stack
                         fullWidth
                         gapType={Stack.GAP_TYPE.LOOSE}>
-                        <StackItem>
+                        <StackItem grow={true}>
                             <AreaChart
-                                    query={throughput+since+this.state.facet}
-                                    accountId={this.accountId}
-                                    className="two-col-chart"
-                                    onClickLine={(line) => {
-                                        console.debug(line); //eslint-disable-line
+                                query={throughput+since+this.state.facet}
+                                accountId={this.accountId}
+                                className="two-col-chart"
+                                onClickLine={(line) => {
+                                    console.debug(line); //eslint-disable-line
                                 }}
                             />
                         </StackItem>
-                        <StackItem>
+                        <StackItem grow={true}>
                             <BarChart className="two-col-chart" query={errors+since+this.state.facet} accountId={this.accountId} />
                         </StackItem>
                     </Stack>
@@ -486,25 +492,25 @@ Update the render method with the code below:
                 <GridItem
                     columnSpan={4}>
                     <Stack
-                        fullWidth
                         className="side-col"
+                        fullWidth
                         gapType={Stack.GAP_TYPE.TIGHT}
                         directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                        <StackItem>
+                        <StackItem grow={true}>
                             <PieChart
                                 className="chart"
                                 query={transaction_apdex_by_appname+since+this.state.facet}
                                 accountId={this.accountId}
                             />
                         </StackItem>
-                        <StackItem>
-                            <TableChart className="chart" query={transaction_apdex_by_appname+since+this.state.facet} accountId={this.accountId} />
+                        <StackItem grow={true}>
+                            <TableChart className="chart" query={transaction_apdex_by_appname+since+this.state.facet} accountId={this.accountId}/>
                         </StackItem>
                     </Stack>
                 </GridItem>
             </Grid>
         </ChartGroup>
-    </React.Fragment>
+    </React.Fragment>;
     }
 ```
 
@@ -599,113 +605,117 @@ export default class MyNerdlet extends React.Component {
 
     render() {
         const { duration } = this.props.launcherUrlState.timeRange;
-        const since = ` SINCE ${duration/1000/60} SECONDS AGO `;
+        const since = ` SINCE ${duration/1000/60} MINUTES AGO `;
         const errors = `SELECT count(error) FROM Transaction TIMESERIES`;
         const throughput = `SELECT count(*) as 'throughput' FROM Transaction TIMESERIES`;
         const transaction_apdex_by_appname = `SELECT count(*) as 'transaction', apdex(duration) as 'apdex' FROM Transaction limit 25`;
+
         return <React.Fragment>
-            { this.state.showToast &&
-                <Toast
-                type={this.state.toastType}
-                title={this.state.toastTitle}
-                description={this.state.toastDisplay}
-                onHideEnd={()=>{this.setState({showToast: false})}}
-                />
-            }
-            <ChartGroup>
-                <Grid className="grid">
-                    <GridItem
-                        columnSpan={8}>
-                        <form onSubmit={this.onSubmit}>
+        { this.state.showToast &&
+            <Toast
+            type={this.state.toastType}
+            title={this.state.toastTitle}
+            description={this.state.toastDisplay}
+            onHideEnd={()=>{this.setState({showToast: false})}}
+            />
+        }
+        <ChartGroup>
+            <Grid>
+                <GridItem
+                    columnSpan={8}>
+                    <form onSubmit={this.onSubmit}>
+                        <Stack fullWidth>
+                            <StackItem grow={true}>
+                                <TextField
+                                    value={this.state.value}
+                                    onChange={this.handleChange}
+                                />
+                            </StackItem>
+                            <StackItem>
+                                <Button type={Button.TYPE.PRIMARY}>Facet</Button>
+                            </StackItem>
+                        </Stack>
+                        <Modal
+                            hidden={this.state.hideModal}
+                            onClose={() => {this.setState({facet: '', value: '', hideModal: true})}}
+                        >
                             <Stack>
-                                <StackItem grow={true}>
-                                    <TextField
-                                        value={this.state.value}
-                                        onChange={this.handleChange}
-                                    />
-                                </StackItem>
                                 <StackItem>
-                                    <Button type={Button.TYPE.PRIMARY}>Facet</Button>
+                                    <h1 className="Modal-headline">Are you sure you want to apply this facet?</h1>
+                                    <p className="facet-value">Facet by: <strong>{this.state.value}</strong></p>
+                                    <Stack>
+                                        <StackItem>
+                                            <Button
+                                                onClick={this.rejectFacet}
+                                            >No</Button>
+                                        </StackItem>
+                                        <StackItem>
+                                            <Button
+                                                onClick={this.confirmFacet}
+                                            >Yes</Button>
+                                        </StackItem>
+                                    </Stack>
                                 </StackItem>
                             </Stack>
-                            <Modal
-                                hidden={this.state.hideModal}
-                                onClose={() => {this.setState({facet: '', value: '', hideModal: true})}}
-                            >
-                                <Stack>
-                                    <StackItem>
-                                        <h1 className="Modal-headline">Are you sure you want to apply this facet?</h1>
-                                        <p className="facet-value">Facet by: <strong>{this.state.value}</strong></p>
-                                        <Stack>
-                                            <StackItem>
-                                                <Button
-                                                    onClick={this.rejectFacet}
-                                                >No</Button>
-                                            </StackItem>
-                                            <StackItem>
-                                                <Button
-                                                    onClick={this.confirmFacet}
-                                                >Yes</Button>
-                                            </StackItem>
-                                        </Stack>
-                                    </StackItem>
-                                </Stack>
-                            </Modal>
-                        </form>
-                        <Stack
-                            fullWidth
-                            gapType={Stack.GAP_TYPE.LOOSE}>
-                            <StackItem grow>
-                                <LineChart
-                                        query={throughput+since+this.state.facet}
-                                        accountId={this.accountId}
-                                        className="chart"
-                                        onClickLine={(line) => {
-                                            console.debug(line); //eslint-disable-line
-                                    }}
-                                />
-                            </StackItem>
-                        </Stack>
-                        <Stack
-                            fullWidth
-                            gapType={Stack.GAP_TYPE.LOOSE}>
-                            <StackItem>
-                                <AreaChart
-                                        query={throughput+since+this.state.facet}
-                                        accountId={this.accountId}
-                                        className="two-col-chart"
-                                        onClickLine={(line) => {
-                                            console.debug(line); //eslint-disable-line
-                                    }}
-                                />
-                            </StackItem>
-                            <StackItem>
-                                <BarChart className="two-col-chart" query={errors+since+this.state.facet} accountId={this.accountId} />
-                            </StackItem>
-                        </Stack>
-                    </GridItem>
-                    <GridItem
-                        columnSpan={4}>
-                        <Stack
-                            fullWidth
-                            className="side-col"
-                            gapType={Stack.GAP_TYPE.TIGHT}
-                            directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-                            <StackItem>
-                                <PieChart
-                                    className="chart"
-                                    query={transaction_apdex_by_appname+since+this.state.facet}
-                                    accountId={this.accountId}
-                                />
-                            </StackItem>
-                            <StackItem>
-                                <TableChart className="chart" query={transaction_apdex_by_appname+since+this.state.facet} accountId={this.accountId} />
-                            </StackItem>
-                        </Stack>
-                    </GridItem>
-                </Grid>
+                        </Modal>
+                    </form>
+                    <Stack
+                        fullWidth
+                        directionType={Stack.DIRECTION_TYPE.HORIZONTAL}
+                        gapType={Stack.GAP_TYPE.LOOSE}>
+                        <StackItem
+                        grow={true}
+                        className="row-spacing">
+                            <LineChart
+                                query={throughput+since+this.state.facet}
+                                accountId={this.accountId}
+                                className="chart"
+                                onClickLine={(line) => {
+                                    console.debug(line); //eslint-disable-line
+                                }}
+                            />
+                        </StackItem>
+                    </Stack>
+                    <Stack
+                        fullWidth
+                        gapType={Stack.GAP_TYPE.LOOSE}>
+                        <StackItem grow={true}>
+                            <AreaChart
+                                query={throughput+since+this.state.facet}
+                                accountId={this.accountId}
+                                className="two-col-chart"
+                                onClickLine={(line) => {
+                                    console.debug(line); //eslint-disable-line
+                                }}
+                            />
+                        </StackItem>
+                        <StackItem grow={true}>
+                            <BarChart className="two-col-chart" query={errors+since+this.state.facet} accountId={this.accountId} />
+                        </StackItem>
+                    </Stack>
+                </GridItem>
+                <GridItem
+                    columnSpan={4}>
+                    <Stack
+                        className="side-col"
+                        fullWidth
+                        gapType={Stack.GAP_TYPE.TIGHT}
+                        directionType={Stack.DIRECTION_TYPE.VERTICAL}>
+                        <StackItem grow={true}>
+                            <PieChart
+                                className="chart"
+                                query={transaction_apdex_by_appname+since+this.state.facet}
+                                accountId={this.accountId}
+                            />
+                        </StackItem>
+                        <StackItem grow={true}>
+                            <TableChart className="chart" query={transaction_apdex_by_appname+since+this.state.facet} accountId={this.accountId}/>
+                        </StackItem>
+                    </Stack>
+                </GridItem>
+            </Grid>
         </ChartGroup>
-    </React.Fragment>
+    </React.Fragment>;
     }
 }
 ```

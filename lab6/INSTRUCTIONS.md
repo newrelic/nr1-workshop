@@ -57,7 +57,7 @@ The resulting GraphQL statement should look like the following:
 }
 ```
 
-4. Click the Play button at the top of the screen and review the results in the right-hand panel. That GraphQL query
+4. Click the Play button at the top of the screen and review the results in the right-hand panel.
 
 
 ## Step 2: Adding a GraphQL request to a Nerdlet
@@ -97,7 +97,7 @@ _Note: There's a lot more code in this initial file. Take a few moments to revie
     }
 ```
 
-5. Add the following filter logic and `Dropdown` and `DropdownItem` components to the `render` method to make use of our new `state` data.
+3. Add the following filter logic and `Dropdown` and `DropdownItem` components to the `render` method to make use of our new `state` data.
 
 ```javascript
     render() {
@@ -147,7 +147,7 @@ _Note: There's a lot more code in this initial file. Take a few moments to revie
                         ...
 ```
 
-6. Our `Dropdown` component references a `selectAccount` in the `onClick` event, so we need to define that.
+4. Our `Dropdown` component references a `selectAccount` in the `onClick` event, so we need to define that.
 
 Add the following method to the `lab6/nerdlets/my-nerdlet/index.js` file:
 
@@ -307,11 +307,11 @@ export default class MyNerdlet extends React.Component {
 }
 ```
 
-7. Save `lab6/nerdlets/my-nerdlet/index.js` and reload. When the Nerdlet reloads, you should see a `Select` box with a list of the accounts to which you have access.
+5. Save `lab6/nerdlets/my-nerdlet/index.js` and reload. When the Nerdlet reloads, you should see a `Select` box with a list of the accounts to which you have access.
 
 ![Select](../screenshots/lab6_screen02.png)
 
-8. Choose one. You should see a screen that looks like the following.
+6. Choose one. You should see a screen that looks like the following.
 ![Services](../screenshots/lab6_screen03.png)
 
 # For Consideration / Discussion

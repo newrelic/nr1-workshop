@@ -7,10 +7,6 @@
     "start": "nr1 nerdpack:serve",
     "test": "exit 0"
   },
-  "nr1": {
-    "uuid": "75ce3f91-5773-456a-9756-a1e3d53bca22",
-    "sdkVersion": 2
-  },
   "bugs": {
     "email": "labs@newrelic.com"
   },
