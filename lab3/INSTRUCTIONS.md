@@ -427,7 +427,11 @@ Update the render method with the code below:
                                 />
                             </StackItem>
                             <StackItem>
-                                <Button type={Button.TYPE.PRIMARY}>Facet</Button>
+                                <Button 
+                                    type={Button.TYPE.PRIMARY}
+                                    onClick={this.onSubmit}>
+                                    Facet
+                                </Button>
                             </StackItem>
                         </Stack>
                         <Modal
@@ -632,7 +636,11 @@ export default class MyNerdlet extends React.Component {
                                 />
                             </StackItem>
                             <StackItem>
-                                <Button type={Button.TYPE.PRIMARY}>Facet</Button>
+                                <Button 
+                                    type={Button.TYPE.PRIMARY}
+                                    onClick={this.onSubmit}>
+                                    Facet
+                                </Button>
                             </StackItem>
                         </Stack>
                         <Modal
