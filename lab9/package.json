@@ -19,7 +19,7 @@
     "moment-duration-format": "^2.3.2",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.14.0"
   },
   "browserslist": [
     "last 2 versions",
