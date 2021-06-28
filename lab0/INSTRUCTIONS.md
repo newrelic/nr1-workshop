@@ -2,7 +2,7 @@ Lab 0: Building your first Nerdpack
 ===================================
 
 The purpose of this lab is to provide hands on experience building on top of the New Relic One platform. Following the instructions in this lab, you will be up and running quickly. First, let's make sure you understand a few key concepts that you'll be working with.
-* **Launcher**: An entry point into the New Relic One platform that is loaded on the "Home" page.
+* **Launcher**: An entry point into the New Relic One platform that is loaded on the "Apps" page.
 * **Nerdlet**: A visual component that renders inside the New Relic One platform at a well defined extension point. For example, a Launcher can invoke a Nerdlet (as you will see shortly). At their core, Nerdlets are React.js components.
 * **Nerdpack** (aka Package): A collection of artifacts, e.g. Nerdlets, that are "packaged" up and published into the New Relic One platform.
 
@@ -27,7 +27,7 @@ nr1 nerdpack:uuid -gf
 
 # Step 1: Create a Launcher
 
-Launchers are a type of artifact within a Nerdpack that is selectable from the New Relic One homepage, and serves as an entry to a Nerdlet.
+Launchers are a type of artifact within a Nerdpack that is selectable from the New Relic One "Apps" page, and serves as an entry to a Nerdlet.
 
 1. Use the NR1 CLI to create a new Launcher
 
@@ -68,7 +68,7 @@ nr1 nerdpack:serve
 
 ![lab0-launcher](../screenshots/lab0_screen01.png) <sup>Note: The icon might be a little different from the screenshot.</sup>
 
-5. Your browser should look _something_ like the screenshot below showing a 404 error message. Why? Remember that a Launcher is the entry point on the Home page to a specific Nerdlet. Currently, the Lab 0 Launcher is not connected to a Nerdlet, which causes an error to be displayed. Let's fix that by creating a Nerdlet and connecting it to the Lab 0 Launcher.
+5. Your browser should look _something_ like the screenshot below showing a 404 error message. Why? Remember that a Launcher is the entry point on the "Apps" page to a specific Nerdlet. Currently, the Lab 0 Launcher is not connected to a Nerdlet, which causes an error to be displayed. Let's fix that by creating a Nerdlet and connecting it to the Lab 0 Launcher.
 
 ![lab0-launcher-clicked](../screenshots/lab0_screen02.png)
 
