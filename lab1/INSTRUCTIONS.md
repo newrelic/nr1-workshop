@@ -47,13 +47,11 @@ You'll notice that the CLI creates three files in the `nerdlets/lab1-nerdlet` di
 
 2. Assuming the the developer server is still running (via `nr1 nerdpack:serve`), validate (in a web browser) that you can click on and see the `Lab 1 Launcher` launcher by navigating in Google Chrome to https://one.newrelic.com?nerdpacks=local and click on the `Lab 1 Launcher`.
 
-3. Change the `displayName` property of the Nerdlet in `nerdlets/lab1-nerdlet/nr1.json` to `Lab 1 Nerdlet` and save that file.
+3. Change the `displayName` property of the Nerdlet in `nerdlets/lab1-nerdlet/nr1.json` to `Lab 1 Nerdlet` and save that file. Restart your local server with `CTRL+C` and `nr1 nerdpack:serve`.
 
 4. Check Google Chrome. You should see the following:
 
 ![lab1-nerdlet](../screenshots/lab1_screen01.png)
-
-_Note: if not, restart your local developer server by typing a `Ctrl`+`c` in the Terminal and then running `nr1 nerdpack:serve`._
 
 5. Next, we're going to prep the Nerdlet to be able to generate some charts. Add the following code to your `Lab1Nerdlet` __*class just above*__ the `render` method in `nerdlets/lab1-nerdlet/index.js`.
 
