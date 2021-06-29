@@ -557,10 +557,7 @@ export default class DetailsNerdlet extends React.Component {
 
 _Notice that we're making use of both `Grid`, `GridItem`, our custom `SummaryBar`, and the `TableChart`._
 
-5. Save the file `lab8/nerdlets/details/index.js` and reload the browser window.
-
-_Note: you may need to do a `Ctrl+C` and then rerun `npm start` within the `lab8` directory in your terminal window for the local server to recognize the `details` Nerdlet._
-
+5. Save the file `lab8/nerdlets/details/index.js`, stop your server with `CTRL+C`, start your server with `nr1 nerdpack:serve`, and reload the browser window.
 6. Now click on a `CircleMarker` in the `Map`. You should see a stacked nerdlet slide out that looks like the following:
 
 ![Details](../screenshots/lab8_screen07.png)
