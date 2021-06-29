@@ -4,6 +4,10 @@
 
 The repo for New Relic One enablement training experience. In this repository, we'll store (or link to) a complete curriculum, including labs and workshop-specific documentation, built to support a self-paced training event focused on the New Relic One platform and developer experience.
 
+> **Important:** This project is no longer maintained. To learn about building custom apps and visualizations in New Relic One, see our courses:
+> - [Build an A/B test application](https://developer.newrelic.com/ab-test/)
+> - [Display your data in different ways with a custom visualization](https://developer.newrelic.com/build-apps/custom-visualizations-and-the-new-relic-one-sdk/)
+
 ## Prerequisites
 
 See the [Setup](SETUP.md) documentation.
