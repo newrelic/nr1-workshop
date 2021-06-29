@@ -55,13 +55,13 @@ Next, we're going to exercise the functionality of the `Perf. Comparison` nerdle
 
 ### Introducing NerdStorage
 
-NerdStorage exists to address these problems.
-- It's a simple document database provided by the New Relic One interface.
-- It's capable of storing data for an `Entity`, `Account`, or `User`.
-- A single document must be less than 64k
-- The document identifier/name must be less than 128 characters
-Retrieval of documents is available through both `NerdGraph` and through the prebuilt components in `nr1` of `UserStorageQuery`, `UserStorageMutation`,  `EntityStorageQuery`, `EntityStorageMutation` `AccountStorageQuery`, and `AccountStorageMutation`.
-- Each of the predefined components follows the standard patterns that the [`Apollo GraphQL`](https://apollographql.com) library uses as well as offers a static method (either `query` or `mutate`).
+NerdStorage exists to address these problems. Read more about NerdStorage specifications in [our documentation](https://developer.newrelic.com/explore-docs/nerdstorage/).
+
+You can fetch NerdStorage documents with `NerdGraph` or prebuilt components like `UserStorageQuery`, `UserStorageMutation`,  `EntityStorageQuery`, `EntityStorageMutation` `AccountStorageQuery`, and `AccountStorageMutation` in the `nr1` SDK.
+
+Each of the predefined components follows the standard patterns that the [`Apollo GraphQL`](https://apollographql.com) library uses and offers a static method (either `query` or `mutate`). 
+
+For example:
 - `UserStorageQuery` takes a required `collection` prop and an optional `documentId` prop.
 - `UserStorageMutation` takes an actionType, collection, documentId, and document (the data we're writing).
 - `AccountStorageQuery` takes required `collection` and `accountId` props and an optional `documentId` prop.
