@@ -12,9 +12,9 @@ Let's start by looking at what infrastructure integrations you have available in
 
 ## Querying Infrastructure
 Now, let's retrieve information about infrastructure via GraphQL. In [GraphiQL](https://api.newrelic.com/graphiql?query=%7B%0A%20%20actor%20%7B%0A%20%20%20%20account%28id%3A%20630060%29%20%7B%0A%20%20%20%20%20%20cloud%20%7B%0A%20%20%20%20%20%20%20%20linkedAccounts%20%7B%0A%20%20%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20%20%20externalId%0A%20%20%20%20%20%20%20%20%20%20name%0A%20%20%20%20%20%20%20%20%20%20provider%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20%20%20%20%20name%0A%20%20%20%20%20%20%20%20%20%20%20%20slug%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20authLabel%0A%20%20%20%20%20%20%20%20%20%20integrations%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20%20%20%20%20name%0A%20%20%20%20%20%20%20%20%20%20%20%20service%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20slug%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20name%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20createdAt%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20updatedAt%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20provider%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20name%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A), paste the following query into the left hand side and hit the `play` button.
-> NOTE: You will need to paste in your account id in this query. You can find it in the URL of your New Relic instance. For example, in the following URL **630060** is the account number.  https://infrastructure.newrelic.com/accounts/630060/integrations 
 
-*Make sure to substitute in your account number after the `(id:`
+*Make sure to substitute in your account number after in `account(id: <YOUR-ACCOUNT-ID>)`:
+
 ```graphql
 {
   actor {
@@ -51,6 +51,8 @@ Now, let's retrieve information about infrastructure via GraphQL. In [GraphiQL](
   }
 }
 ```
+> **Note:** Read our [documentation](https://docs.newrelic.com/docs/accounts/accounts-billing/account-setup/account-id/) to learn how to find it.
+
 In the query above, we pass in the `id`  of the account we want to query. This is the `account(id: 630060)` part of the query. (For complete query syntax, see the [GraphQL queries](https://graphql.org/learn/queries/) documentation) What we are asking for is the set of providers that are linked to our account. And for each of provider, the set of services that is offered.
 
 >Note: Notice that we are 'nesting' requests, that is, we are getting information about both the parent, a cloud provider, AND the services that it offers. Normally, this would require multiple REST calls. The ability to retrieve information in this manner is one of the strong points of GraphQL. 
