@@ -54,7 +54,7 @@ import {Grid, GridItem} from 'nr1';
     }
 ```
 
-3. Save your `main.js` file and in Google Chrome, navigate to the following URL `https://one.newrelic.com?nerdpacks=local` and click my launcher.
+3. Save your `main.js` file and in Google Chrome, navigate to the following URL `https://one.newrelic.com?nerdpacks=local`. Navigate to **Apps** and click your launcher.
 
 Your browsers should show a `Grid` with `GridItems` that looks something similar to below:
 
