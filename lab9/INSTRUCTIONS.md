@@ -56,7 +56,7 @@ Next, we're going to exercise the functionality of the `Perf. Comparison` nerdle
 ### Introducing NerdStorage
 
 NerdStorage exists to address these problems.
-- It's a simple document database provided by the NR1 interface.
+- It's a simple document database provided by the New Relic One interface.
 - It's capable of storing data for an `Entity`, `Account`, or `User`.
 - A single document must be less than 64k
 - The document identifier/name must be less than 128 characters

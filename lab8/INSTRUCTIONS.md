@@ -3,13 +3,13 @@ Lab 8: 3rd Party libraries and custom visualizations
 
 ### (i.e. the Leaflet mapping exercise)
 
-The purpose of this lab is build a more full-featured experience that incorporates 3rd party libraries (explicitly the `Leaflet.js` library) into an NR1 package.
+The purpose of this lab is build a more full-featured experience that incorporates 3rd party libraries (explicitly the `Leaflet.js` library) into a Nerdpack.
 
 After completing this lab you should have a basic understanding of:
 
-* Understand one repeatable pattern (_it should be obvious that there are many ways to accomplish this_) to leverage 3rd party visualizations in NR1
+* Understand one repeatable pattern (_it should be obvious that there are many ways to accomplish this_) to leverage 3rd party visualizations in New Relic One
 * Making use of the `Grid`, `Stack`, and `Tabs` components
-* How to interact with the `navigation` object to launch a custom NR1 Nerdlet
+* How to interact with the `navigation` object to launch a custom Nerdlet
 
 ## Step 0: Setup and Prerequisites
 
@@ -55,7 +55,7 @@ Just like in [`lab7`](../lab7/INSTRUCTIONS.md), we're going to access this Nerdl
 
 3. Speaking of `css`, open the file `lab8/nerdlets/my-nerdlet/styles.scss` and notice that we've got quite a bit more code there than the previous exercises. For those that grock `css`, read and understand. For those that don't understand `css`, you're welcome. :)
 
-4. Open the file `lab8/nerdlets/my-nerdlet/javascript-error-summary.js`. Note that we have references to / usage of several `NR1` components, including `Grid`, `GridItem`, and `PieChart`. These components are relatively self-explanatory based on their usage here, but take a moment to absorb them. We're going to make use of this file later.
+4. Open the file `lab8/nerdlets/my-nerdlet/javascript-error-summary.js`. Note that we have references to / usage of several `nr1` components, including `Grid`, `GridItem`, and `PieChart`. These components are relatively self-explanatory based on their usage here, but take a moment to absorb them. We're going to make use of this file later.
 
 5. Open the **files** `lab8/components/summary-bar/index.js` and `lab8/components/summary-bar/styles.css`. We're going to make use of this component and it's associated `css` in **two** Nerdlets in this exercise.
 
@@ -81,7 +81,7 @@ You should come to screen that looks like the following:
 1. First, let's `import` the various components we're going to use in the `render` method. Add the following lines near the top of the file `lab8/nerdlets/my-nerdlet/index.js`:
 
 ```javascript
-//import the appropriate NR1 components
+//import the appropriate nr1 components
 import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, AutoSizer } from 'nr1';
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
@@ -173,7 +173,7 @@ At this point, the file `lab8/nerdlets/my-nerdlet/index.js` should look like the
 
 ```javascript
 import React from 'react';
-//import the appropriate NR1 components
+//import the appropriate nr1 components
 import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, AutoSizer } from 'nr1';
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
@@ -259,7 +259,7 @@ export default class MyNerdlet extends React.Component {
 
 ## Step 5: Populating the Map with data from a NrqlQuery component
 
-Now, we're going to make use of both the `NrqlQuery` and `CircleMarker` components to populate the `Map` with details. If you're familiar with React and the Apollo GraphQL library, some of this code will look quite familiar, as NR1 leverages Apollo behind the scenes to pull data from New Relic's NerdGraph API.
+Now, we're going to make use of both the `NrqlQuery` and `CircleMarker` components to populate the `Map` with details. If you're familiar with React and the Apollo GraphQL library, some of this code will look quite familiar, as New Relic One leverages Apollo behind the scenes to pull data from New Relic's NerdGraph API.
 
 1. **Replace** the following code to the `render` method within the **second** `StackItem` within the file `lab8/nerdlets/my-nerdlet/index.js`:
 
@@ -340,7 +340,7 @@ At this point, the file `lab8/nerdlets/my-nerdlet/index.js` should look like the
 ```javascript
 import React from 'react';
 import PropTypes from 'prop-types';
-//import the appropriate NR1 components
+//import the appropriate nr1 components
 import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, AutoSizer } from 'nr1';
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
@@ -505,7 +505,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //import the needed summary stats
 import SummaryBar from '../../components/summary-bar';
-//import the appropriate NR1 components
+//import the appropriate nr1 components
 import { Grid, GridItem, TableChart, AutoSizer, Spinner, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, BlockText } from 'nr1';
 
 export default class DetailsNerdlet extends React.Component {
@@ -586,7 +586,7 @@ The final code in `lab8/nerdlets/my-nerdlet/index.js` should look something like
 ```javascript
 import React from 'react';
 import PropTypes from 'prop-types';
-//import the appropriate NR1 components
+//import the appropriate nr1 components
 import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, AutoSizer, PlatformStateContext, NerdletStateContext, EntityByGuidQuery } from 'nr1';
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';

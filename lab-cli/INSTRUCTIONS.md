@@ -15,7 +15,7 @@ Load the prerequisites and follow the setup instructions in [Setup](../SETUP.md)
 
 # Step 1: Understand CLI credential storage
 
-Previously, when you setup the NR1 CLI in the [**Build your own application** launcher](https://one.newrelic.com/launcher/developer-center.launcher), you ran a command, `nr1 profiles:add` under the `Save your credentials` heading. Let's take a look at what's going on there.
+Previously, when you setup `nr1` in the [**Build your own application** launcher](https://one.newrelic.com/launcher/developer-center.launcher), you ran a command, `nr1 profiles:add` under the `Save your credentials` heading. Let's take a look at what's going on there.
 
 ![**Build your own application** launcher](../screenshots/lab10_screen01.png)
 

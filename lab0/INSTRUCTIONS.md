@@ -29,7 +29,7 @@ nr1 nerdpack:uuid -gf
 
 Launchers are a type of artifact within a Nerdpack that is selectable from the New Relic One "Apps" page, and serves as an entry to a Nerdlet.
 
-1. Use the NR1 CLI to create a new Launcher
+1. Use `nr1` to create a new Launcher
 
 ```bash
 # assuming we're in nr1-workshop/lab0

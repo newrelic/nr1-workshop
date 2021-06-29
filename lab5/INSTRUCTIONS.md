@@ -1,4 +1,4 @@
-Lab 5: Using  NR1 NerdGraph components
+Lab 5: Using `nr1` NerdGraph components
 ==============================================================================================
 
 The purpose of this lab is to build on the concepts we've already explored, using `NerdGraph` and exploring the `NerdGraph` components to access New Relic's `NerdGraph` API within your Nerdlets.

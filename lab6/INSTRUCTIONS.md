@@ -3,7 +3,7 @@
 The purpose of this lab is twofold:
 
 1. To expose learners to the fundamentals of New Relic's GraphQL interface, and
-2. To offer hands-on experience in interacting with the part of the NR1 SDK that can issue GraphQL requests, `NerdGraphQuery`.
+2. To offer hands-on experience in interacting with the part of the New Relic One SDK that can issue GraphQL requests, `NerdGraphQuery`.
 
 After completing this lab you should understand:
 

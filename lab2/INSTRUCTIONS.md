@@ -5,7 +5,7 @@ The purpose of this lab is explore more of the built-in capabilities of the `pro
 
 After completing this lab you should:
 
-* Have a grasp on the navigation paradigms in New Relic One and how the NR1 SDK exposes them.
+* Have a grasp on the navigation paradigms in New Relic One and how the SDK exposes them.
 * Be able to incorporate the `timeRange` fields that are set by the New Relic One time picker into your Nerdlets.
 
 ![Time Picker](../screenshots/lab2_timepicker_example.png)
@@ -76,7 +76,7 @@ return <PlatformStateContext.Consumer>
 
 ## Step 3: Load and display an Entity
 
-In this portion of the pageant, we're going to call another Nerdlet, specifically the overview experience for an APM Service, using the `navigation` object to open a predefined portion of NR1. We're also going to utilize the `Button` component.
+In this portion of the pageant, we're going to call another Nerdlet, specifically the overview experience for an APM Service, using the `navigation` object to open a predefined portion of New Relic One. We're also going to utilize the `Button` component.
 
 We need to start by adding a `Button` to the screen.
 

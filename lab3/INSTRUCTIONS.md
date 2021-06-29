@@ -341,7 +341,7 @@ Your Nerdlet should look similar to below:
 
 ## Interacting with the New Relic One UI
 
-The NR1 library also exposes components that allow you to interact with the New Relic One UI.
+The `nr1` library also exposes components that allow you to interact with the New Relic One UI.
 
 In the next few steps we'll add some UI components that updates the UI and add more detail to our charts.
 

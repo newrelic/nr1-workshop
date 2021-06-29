@@ -1,11 +1,11 @@
 Lab 7: Passing custom data to a Chart component
 ===========================================================
 
-The purpose of this lab is to demonstrate how to incorporate 3rd party data into a standard visualization in NR1. To do that, we're going to *simulate* a set of forecasting data and incorporate that data into a `LineChart` that is displaying a timeseries of `PageViews`.
+The purpose of this lab is to demonstrate how to incorporate 3rd party data into a standard visualization in New Relic One. To do that, we're going to *simulate* a set of forecasting data and incorporate that data into a `LineChart` that is displaying a timeseries of `PageViews`.
 
 After completing this lab you should understand:
 
-* How to generate a data series that can be processed by an NR1 Chart component.
+* How to generate a data series that can be processed by a chart component.
 
 ## Step 0: Setup and Prerequisites
 
@@ -48,7 +48,7 @@ You should come to screen that looks like the following:
 
 ![Captain Picard to the bridge](../screenshots/lab7_screen00.png)
 
-_Note: before you become concerned, cats and Star Trek have nothing to do with this exercise. Consider it a fun way to demonstrate what you can do with a `Grid` layout in NR1._
+_Note: before you become concerned, cats and Star Trek have nothing to do with this exercise. Consider it a fun way to demonstrate what you can do with a `Grid` layout in New Relic One._
 
 Our objective is going to be displaying a `LineChart` of `PageView` events that contrasts the current selected time window, the previous time window, and a made up set of **forecasted** data. In order to do that, we're going to need to do several things:
 
