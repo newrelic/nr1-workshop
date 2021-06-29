@@ -27,7 +27,7 @@ npm install
 
 ![Nerdlet 2 Launcher](../screenshots/lab2_screen00.png)
 
-1. If you'd like, open the `lab2/nerdlets/my-nerdlet/index.js` and change the value in the constructor of `this.accountId` to an account you want to review.
+1. Open `lab2/nerdlets/my-nerdlet/index.js`. In the　Nerdlet's constructor, change the value of `this.accountId` to an account you want to review.
 
 _Note: we're going to cover how to **not** hardcode the accountIds for NRQL queries later._
 
