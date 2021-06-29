@@ -11,6 +11,8 @@ After completing this lab you should have a basic understanding of:
 * Making use of the `Grid`, `Stack`, and `Tabs` components
 * How to interact with the `navigation` object to launch a custom Nerdlet
 
+> **Note:** This lab assumes you have a [Browser](https://docs.newrelic.com/docs/browser/) application instrumented with New Relic.
+
 ## Step 0: Setup and Prerequisites
 
 Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
@@ -22,6 +24,7 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 cd lab8
 npm install
 nr1 nerdpack:uuid -gf
+nr1 nerdpack:serve
 ```
 
 Because a picture is worth 1000 words (or more), this is what we're going to produce in this exercise.
