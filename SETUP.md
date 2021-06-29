@@ -22,7 +22,7 @@ git clone https://github.com/newrelic/nr1-workshop.git
 > 3. Running `nr1 nerdpack:serve` to stand up a local server
 > 4. Following the _INSTRUCTIONS.md_ in the given folder
 
-3. Start the `setup` NR1 package:
+3. Start the `setup` Nerdpack:
 
 ```bash
 cd nr1-workshop/setup
