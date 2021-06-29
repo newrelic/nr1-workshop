@@ -7,6 +7,8 @@ After completing this lab you should understand:
 
 * How to generate a data series that can be processed by a chart component.
 
+> **Note:** This lab assumes you have a [Browser](https://docs.newrelic.com/docs/browser/) application instrumented with New Relic.
+
 ## Step 0: Setup and Prerequisites
 
 Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
