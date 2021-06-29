@@ -22,6 +22,7 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 cd lab9
 nr1 nerdpack:uuid -gf
 npm install
+nr1 nerdpack:serve
 ```
 
 Navigate to in your browser to [`https://one.newrelic.com?nerdpacks=local`](https://one.newrelic.com?nerdpacks=local), choose `Entity Explorer` > `Browser applications` > choose an app > click on `Lab 9: Perf. Compare` > Click on the button `+ Browser Apps`. Then search for applications to add to the compare list.
