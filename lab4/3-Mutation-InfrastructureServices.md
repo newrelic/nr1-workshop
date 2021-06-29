@@ -2,7 +2,7 @@
 In GraphQL, when you update or modify data, this is called a mutation. It's represented as a top level item in the request.
 
 >Exercise: In your browser, goto [GraphiQL](https://api.newrelic.com/graphiql) and open up the Documentation Explorer using `< Docs` link in the upper left.
->Click on `mutation: RootMutationType` and explore what's possible to update via GraphQL. Find `metricPollingInterval`. What objects can be updated
+>Click on `mutation: RootMutationType` and explore what's possible to update via GraphQL. Find `metricsPollingInterval`. What objects can be updated
 <img width="25%" src="../screenshots/graphql-ex3-screen01.png" alt="Click on mutation: RoogMutationType"/>
 
 
