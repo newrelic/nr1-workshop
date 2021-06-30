@@ -34,10 +34,26 @@ The Nerdlet code that you create in this exercise will be accessed through a pre
 ```bash
 #Assuming we're in the lab1 directory
 nr1 create
-? What kind of component do you want to create? nerdlet
-? Name your component. lab1-nerdlet
-Component created successfully!
-nerdlet lab1-nerdlet is available at "./nerdlets/lab1-nerdlet"
+✔ What kind of component do you want to create? › nerdpack
+✔ Name your nerdpack. … lab1-nerdpack
+✔ Name your nerdlet. … lab1-nerdlet
+✔ Name your launcher. … lab1-launcher
+
+Installing dependencies...
+npm notice created a lockfile as package-lock.json. You should commit this file.
+added 8 packages from 3 contributors and audited 8 packages in 1.79s
+found 0 vulnerabilities
+
+ ✔  nerdpack created successfully!
+    nerdpack lab1-nerdpack is available at "./"
+
+
+ ✔  nerdlet created successfully!
+    nerdlet lab1-nerdlet is available at "./nerdlets/lab1-nerdlet"
+
+
+ ✔  launcher created successfully!
+    launcher lab1-launcher is available at "./launchers/lab1-launcher"
 
 #And if it's not already running, execute the following
 nr1 nerdpack:serve
