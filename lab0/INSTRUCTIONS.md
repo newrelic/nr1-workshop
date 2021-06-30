@@ -130,11 +130,9 @@ code .
 
 3. To draw the association precisely, open the file `lab0/package.json` and find the value of the attribute `nr1.uuid`. That uuid is the identifier of your package.
 
-4. Save the `nr1.json`, then navigate back https://one.newrelic.com/?nerdpacks=local and click on the `Lab0Launcher`. Your browser window should look similar to below with the `lab0-nerdlet` launched.
+4. Save the `nr1.json` and restart your local server with `CTRL+C` and `nr1 nerdpack:serve`. Then navigate back https://one.newrelic.com/?nerdpacks=local and click on the `Lab0Launcher`. Your browser window should look similar to below with the `lab0-nerdlet` launched.
 
 ![lab0-nerdlet](../screenshots/lab0_screen05.png)
-
-_Note: if not, restart your local developer server by typing `Ctrl`+`c` in the Terminal and then running `nr1 nerdpack:serve`._
 
 # Step 4: Creating a Nerdpack
 
