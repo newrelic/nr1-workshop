@@ -67,7 +67,7 @@ return <PlatformStateContext.Consumer>
 ```
 
 3. Now, we're going to make `duration` part of each of the four query objects.
-* `TableComponent`: `query={nrql+since}`
+* `TableChart`: `query={nrql+since}`
 * upper `LineChart`: `query={trxOverT+since}`
 * lower `LineChart`: `query={tCountNrql+since}`
 * `ScatterChart`: `query={apdexNrql+since}`
