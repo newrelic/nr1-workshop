@@ -35,11 +35,12 @@ Launchers are a type of artifact within a Nerdpack that is selectable from the N
 ```bash
 # assuming we're in nr1-workshop/lab0
 nr1 create
-? What kind of component do you want to create? launcher
-# chose launcher and name your component lab0-launcher
-? Name your component. lab0-launcher
-Component created successfully!
-launcher lab0-launcher is available at "./launchers/lab0-launcher"
+✔ What kind of component do you want to create? › launcher
+✔ Name your launcher. … lab0-launcher
+ ℹ  Remember to replace "rootNerdletId" inside launchers/lab0-launcher/nr1.json
+
+ ✔  launcher created successfully!
+    launcher lab0-launcher is available at "./launchers/lab0-launcher"
 ```
 
 You'll notice that the CLI creates a `./launchers/lab0-launcher` directory: with a nr1.json configuration.
