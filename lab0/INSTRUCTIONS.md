@@ -87,11 +87,11 @@ A Nerdlet is where the bulk of the code in your Nerdpack will live.
 ```bash
 # assuming we're in nr1-workshop/lab0
 nr1 create
-? What kind of component do you want to create? nerdlet
-? Name your component. lab0-nerdlet
-Component created successfully!
+✔ What kind of component do you want to create? › nerdlet
+✔ Name your nerdlet. … lab0-nerdlet
 
-your lab0-nerdlet is available at "./nerdlets/lab0-nerdlet"
+ ✔  nerdlet created successfully!
+    nerdlet lab0-nerdlet is available at "./nerdlets/lab0-nerdlet"
 ```
 
 You'll notice that the CLI creates three files in the `./nerdlets/lab0-nerdlet` directory: `index.js`, `styles.scss`, and a `nr1.json` configuration.
