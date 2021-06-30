@@ -5,6 +5,7 @@ The purpose of this lab is to provide hands on experience building on top of the
 * **Launcher**: An entry point into the New Relic One platform that is loaded on the "Apps" page.
 * **Nerdlet**: A visual component that renders inside the New Relic One platform at a well defined extension point. For example, a Launcher can invoke a Nerdlet (as you will see shortly). At their core, Nerdlets are React.js components.
 * **Nerdpack** (aka Package): A collection of artifacts, e.g. Nerdlets, that are "packaged" up and published into the New Relic One platform.
+* **Visualization:** This is another Nerdpack artifact that renders your data in a customized way. Unlike Nerdlets, you can add visualizations to dashboards. For now, you'll focus on Nerdlets, but you'll learn about visualizations in a later lab.
 
 In Lab0, you will create a Launcher and then add a Nerdlet to it that will be invoked when the user clicks on the Launcher. After this lab you should understand:
 
@@ -76,7 +77,7 @@ In the next steps we'll create a new Nerdlet and connect our Launcher to this Ne
 
 # Step 2: Create a Nerdlet
 
-A Nerdlet is the main artifact that is included within an Nerdpack. A Nerdlet consists of three files by default: `index.js`, `styles.scss`, and a `nr1.json` configuration.
+A Nerdlet is one of the main artifacts that can be included within a Nerdpack. A Nerdlet consists of three files by default: `index.js`, `styles.scss`, and a `nr1.json` configuration.
 
 A Nerdlet is where the bulk of the code in your Nerdpack will live.
 
