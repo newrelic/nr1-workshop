@@ -189,7 +189,7 @@ _Note: For more documentation on the `Stack` and `StackItem` and their props vie
 
 1. Creating your layout using `<Grid>`, `<GridItem>`, `<Stack>`, and `<StackItem>` components
 
-Update the import statement with your code people:
+Update the import statement:
 
 ```javascript
 import { Grid, GridItem, Stack, StackItem, ChartGroup, AreaChart, BarChart, LineChart, TableChart, PieChart, Button, TextField, Modal, Toast } from 'nr1';
