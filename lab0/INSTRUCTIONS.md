@@ -150,9 +150,26 @@ From your root directory (or the directory you want your Nerdpacks located), run
 ```bash
 # The CLI will create a new folder to contain the artifacts within your Nerdpack
 nr1 create
-? What kind of component do you want to create? nerdpack
-? Name your component. lab0-nerdpack
-Component created successfully!
+✔ What kind of component do you want to create? › nerdpack
+✔ Name your nerdpack. … lab0-nerdpack
+✔ Name your nerdlet. … lab0-nerdlet
+✔ Name your launcher. … lab0-launcher
+
+Installing dependencies...
+npm notice created a lockfile as package-lock.json. You should commit this file.
+added 8 packages from 3 contributors and audited 8 packages in 1.79s
+found 0 vulnerabilities
+
+ ✔  nerdpack created successfully!
+    nerdpack lab0-nerdpack is available at "./"
+
+
+ ✔  nerdlet created successfully!
+    nerdlet lab0-nerdlet is available at "./nerdlets/lab0-nerdlet"
+
+
+ ✔  launcher created successfully!
+    launcher lab0-launcher is available at "./launchers/lab0-launcher"
 ```
 
 You'll notice that the CLI creates a `/lab0-nerdpack` directory: including `launchers` and `nerdlets` folders, and all of the needed internal files.
