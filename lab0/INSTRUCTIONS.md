@@ -163,5 +163,4 @@ If you go into the `lab0-nerdpack` directory and run `npm install && npm start` 
 
 # For Consideration / Discussion
 
-- _How do you use a Nerdlet to build custom visualizations?_
 - _How do you access your account data?_
