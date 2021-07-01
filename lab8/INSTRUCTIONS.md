@@ -177,7 +177,7 @@ At this point, the file `lab8/nerdlets/my-nerdlet/index.js` should look like the
 ```javascript
 import React from 'react';
 //import the appropriate nr1 components
-import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, AutoSizer } from 'nr1';
+import { BlockText, Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, AutoSizer } from 'nr1';
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
@@ -344,7 +344,7 @@ At this point, the file `lab8/nerdlets/my-nerdlet/index.js` should look like the
 import React from 'react';
 import PropTypes from 'prop-types';
 //import the appropriate nr1 components
-import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, AutoSizer } from 'nr1';
+import { BlockText, Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, AutoSizer } from 'nr1';
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 import SummaryBar from '../../components/summary-bar';
@@ -587,7 +587,7 @@ The final code in `lab8/nerdlets/my-nerdlet/index.js` should look something like
 import React from 'react';
 import PropTypes from 'prop-types';
 //import the appropriate nr1 components
-import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, AutoSizer, PlatformStateContext, NerdletStateContext, EntityByGuidQuery } from 'nr1';
+import { BlockText, Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, AutoSizer, PlatformStateContext, NerdletStateContext, EntityByGuidQuery } from 'nr1';
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 import SummaryBar from '../../components/summary-bar';
