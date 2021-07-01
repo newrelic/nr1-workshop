@@ -228,7 +228,7 @@ Your browser should show a small table that displays the name and domain of your
     </StackItem>
 ```
 
-5. Save and go back to the browser window and reload the current page, you should see another table with all of the entities that match name you queried. You should be looking at a screen like the following:
+5. Save and go back to the browser window and reload the current page, you should see another table with all of the entities that match the name you queried. You should be looking at a screen like the following:
 
 ![Entity By name Query](../screenshots/lab5_screen05.png)
 
