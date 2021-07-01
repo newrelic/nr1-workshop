@@ -59,7 +59,7 @@ return <PlatformStateContext.Consumer>
       const since = ` SINCE ${duration/60/1000} MINUTES AGO`;
 
       return (<ChartGroup>
-        //the rest of the original return code here, and don't repeat the ChartGroup
+        //the rest of the original return code here
       </ChartGroup>); //
   }}
 </PlatformStateContext.Consumer>
