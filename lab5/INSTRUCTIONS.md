@@ -74,8 +74,9 @@ import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomai
 
 ```javascript
     _renderTable(data) {
-        console.debug(JSON.stringify(data));
-        const headings = Object.keys(data[0]).filter(k => k != '__typename' && k != 'id' && k != 'tags' && k != 'reporting');
+        const skipHeaders = ['__typename', 'id', 'tags', 'reporting', 'account', 'guid'];
+        const headings = Object.keys(data[0]).filter(k => !skipHeaders.includes(k));
+
         return <table className="table">
             <tbody>
                 <tr>
