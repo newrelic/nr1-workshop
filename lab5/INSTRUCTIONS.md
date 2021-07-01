@@ -281,8 +281,10 @@ export default class MyNerdlet extends React.Component {
     }
 
     _renderTable(data) {
-        console.debug(JSON.stringify(data));
-        const headings = Object.keys(data[0]).filter(k => k != '__typename' && k != 'id' && k != 'tags' && k != 'reporting');
+        console.debug(data)
+        const skipHeaders = ['__typename', 'id', 'tags', 'reporting', 'account', 'guid'];
+        const headings = Object.keys(data[0]).filter(k => !skipHeaders.includes(k));
+
         return <table className="table">
             <tbody>
                 <tr>
@@ -293,8 +295,8 @@ export default class MyNerdlet extends React.Component {
                         {headings.map((name, j) => <td key={j} className="table-data">{item[name]}</td>)}
                     </tr>
                 }) : <tr>
-                        {headings.map((name, j) => <td key={j} className="table-data">{data[0][name]}</td>)}
-                    </tr>
+                    {headings.map((name, j) => <td key={j} className="table-data">{data[0][name]}</td>)}
+                </tr>
                 }
             </tbody>
         </table>
