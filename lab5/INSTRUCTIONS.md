@@ -50,7 +50,7 @@ render() {
 }
 ```
 
-3. Save `index.js` and watch the `NerdGraph Nerdlet` reload in your Browser.
+3. Save `index.js` and watch the `NerdGraph Nerdlet` reload in your browser.
 4. Ctrl+click (or right click) on the web browser screen displaying our Nerdlet and choose the menu item `Inspect`.
 5. In the DevTools window now open, click on the `Console` tab at the top.
 6. In the `Console` tab, choose the `verbose` option on the left hand side. (It's in the drop-down next to the 'Filter' bar.)
@@ -180,7 +180,7 @@ Your browser should show a small table that displays the name and domain of your
 
 ```javascript
     <StackItem className="container">
-        <EntitiesByDomainTypeQuery entityDomain="BROWSER" entityType="APPLICATION">
+        <EntitiesByDomainTypeQuery entityDomain="APM" entityType="APPLICATION">
         {({loading, error, data}) => {
             console.debug([loading, data, error]); //eslint-disable-line
             if (loading) {
@@ -346,7 +346,7 @@ export default class MyNerdlet extends React.Component {
                 </NerdletStateContext.Consumer>
             </StackItem>
             <StackItem className="container">
-                <EntitiesByDomainTypeQuery entityDomain="BROWSER" entityType="APPLICATION">
+                <EntitiesByDomainTypeQuery entityDomain="APM" entityType="APPLICATION">
                     {({ loading, error, data }) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
