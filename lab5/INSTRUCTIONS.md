@@ -160,7 +160,7 @@ Using the `NerdGraphQuery` allows you to access data from using any type of quer
 
 # Important!
 
-In order to get this section to render, you're going to need to navigate to the `Home > Entity Explorer > _Select a Service_ > NerdGraph Nerdlet`. Do that now.
+In order to get this section to render, you're going to need to navigate to an APM or Browser service. First, navigate to **Home**. Then, select **Explorer**. From the left navigation, choose **Services - APM** or **Browser applications** and then select a service.
 
 ![Entity By Id Query](../screenshots/lab5_screen03a.png)
 
