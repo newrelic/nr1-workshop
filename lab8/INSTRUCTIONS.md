@@ -85,7 +85,7 @@ You should come to screen that looks like the following:
 
 ```javascript
 //import the appropriate nr1 components
-import { Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, AutoSizer } from 'nr1';
+import { BlockText, Tabs, TabsItem, Spinner, Stack, StackItem, NrqlQuery, navigation, PlatformStateContext, NerdletStateContext, EntityByGuidQuery, AutoSizer } from 'nr1';
 //import our 3rd party libraries for the geo mapping features
 import { CircleMarker, Map, TileLayer } from 'react-leaflet';
 //import utilities we're going to need
