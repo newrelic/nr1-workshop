@@ -137,24 +137,29 @@ Using the `NerdGraphQuery` allows you to access data from using any type of quer
 ```javascript
     <StackItem className="container">
         <NerdletStateContext.Consumer>
-        {(nerdletUrlState) => {
-            return <EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
-            {({loading, error, data}) => {
-                console.debug([loading, data, error]); //eslint-disable-line
-                if (loading) {
-                    return <Spinner/>;
-                }
-                if (error) {
-                    return <HeadingText>{error.message}</HeadingText>;
-                }
-                return <Fragment className="fragment">
-                        <HeadingText>Entity by ID</HeadingText>
-                        {this._renderTable(data.entities)}
-                </Fragment>
-            }}
-        </EntityByGuidQuery>
+            {(nerdletUrlState) => {
+                return <EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
+                    {({ loading, error, data }) => {
+                        console.debug([loading, data, error]); //eslint-disable-line
+                        if (loading) {
+                            return <Spinner />;
+                        }
+                        if (error) {
+                            return <HeadingText>{error.message}</HeadingText>;
+                        }
 
-        }}
+                        if (data.entities.length > 0) {
+                            return <Fragment className="fragment">
+                                <HeadingText>Entity by ID</HeadingText>
+                                {this._renderTable(data.entities)}
+                            </Fragment>
+                        }
+
+                        return null
+                    }}
+                </EntityByGuidQuery>
+
+            }}
         </NerdletStateContext.Consumer>
     </StackItem>
 ```
