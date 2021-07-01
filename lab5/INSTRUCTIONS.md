@@ -166,7 +166,7 @@ Using the `NerdGraphQuery` allows you to access data from using any type of quer
 
 # Important!
 
-In order to get this section to render, you're going to need to navigate to an APM or Browser service. First, navigate to **Home**. Then, select **Explorer**. From the left navigation, choose **Services - APM** or **Browser applications** and then select a service.
+In order to get this section to render, you're going to need to navigate to an APM service. First, navigate to **Home**. Then, select **Explorer**. From the left navigation, choose **Services - APM**, and then select a service.
 
 ![Entity By Id Query](../screenshots/lab5_screen03a.png)
 
@@ -267,12 +267,12 @@ You should be looking at a screen like the following:
 In the end, your `index.js` should look like this.
 
 ```javascript
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import { NerdGraphQuery, EntityByGuidQuery, EntitiesByNameQuery, EntitiesByDomainTypeQuery, EntityCountQuery, Spinner, Stack, StackItem, HeadingText, BlockText, NerdletStateContext } from 'nr1';
 
 export default class MyNerdlet extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         console.debug(props); //eslint-disable-line
         this.state = {
@@ -281,7 +281,6 @@ export default class MyNerdlet extends React.Component {
     }
 
     _renderTable(data) {
-        console.debug(data)
         const skipHeaders = ['__typename', 'id', 'tags', 'reporting', 'account', 'guid'];
         const headings = Object.keys(data[0]).filter(k => !skipHeaders.includes(k));
 
@@ -304,69 +303,71 @@ export default class MyNerdlet extends React.Component {
 
     render() {
         return (<Stack fullWidth directionType={Stack.DIRECTION_TYPE.VERTICAL}>
-            <StackItem className="container">
-                <NerdGraphQuery query={`{actor {accounts {id name}}}`}>
-                    {({loading, error, data}) => {
-                        console.debug([loading, data, error]); //eslint-disable-line
-                        if (loading) {
-                            return <Spinner/>;
-                        }
-                        if (error) {
-                            return <BlockText>{error.message}</BlockText>;
-                        }
+            <StackItem>
+                <div className="container">
+                    <NerdGraphQuery query={`{actor {accounts {id name}}}`}>
+                        {({ loading, error, data }) => {
+                            console.debug([loading, data, error]); //eslint-disable-line
+                            if (loading) {
+                                return <Spinner />;
+                            }
+                            if (error) {
+                                return <BlockText>{error.message}</BlockText>;
+                            }
 
-                        return <Fragment>
+                            return <Fragment>
                                 <HeadingText>Accounts</HeadingText>
                                 {this._renderTable(data.actor.accounts)}
-                        </Fragment>
-                    }}
-                </NerdGraphQuery>
+                            </Fragment>
+                        }}
+                    </NerdGraphQuery>
+                </div>
             </StackItem>
             <StackItem className="container">
                 <NerdletStateContext.Consumer>
-                {(nerdletUrlState) => {
-                    return <EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
-                    {({loading, error, data}) => {
-                        console.debug([loading, data, error]); //eslint-disable-line
-                        if (loading) {
-                            return <Spinner/>;
-                        }
-                        if (error) {
-                            return <HeadingText>{error.message}</HeadingText>;
-                        }
-                        return <Fragment className="fragment">
-                                <HeadingText>Entity by ID</HeadingText>
-                                {this._renderTable(data.entities)}
-                        </Fragment>
-                    }}
-                </EntityByGuidQuery>
+                    {(nerdletUrlState) => {
+                        return <EntityByGuidQuery entityGuid={nerdletUrlState.entityGuid}>
+                            {({ loading, error, data }) => {
+                                console.debug([loading, data, error]); //eslint-disable-line
+                                if (loading) {
+                                    return <Spinner />;
+                                }
+                                if (error) {
+                                    return <HeadingText>{error.message}</HeadingText>;
+                                }
+                                return <Fragment className="fragment">
+                                    <HeadingText>Entity by ID</HeadingText>
+                                    {this._renderTable(data.entities)}
+                                </Fragment>
+                            }}
+                        </EntityByGuidQuery>
 
-                }}
+                    }}
                 </NerdletStateContext.Consumer>
             </StackItem>
             <StackItem className="container">
                 <EntitiesByDomainTypeQuery entityDomain="BROWSER" entityType="APPLICATION">
-                {({loading, error, data}) => {
-                    console.debug([loading, data, error]); //eslint-disable-line
-                    if (loading) {
-                        return <Spinner/>;
-                    }
-                    if (error) {
-                        return <BlockText>{JSON.stringify(error)}</BlockText>;
-                    }
-                    return <Fragment>
-                        <HeadingText>Entity by Domain Type</HeadingText>
-                        {this._renderTable(data.entities)}
-                    </Fragment>
-                }}
+                    {({ loading, error, data }) => {
+                        console.debug([loading, data, error]); //eslint-disable-line
+                        if (loading) {
+                            return <Spinner />;
+                        }
+                        if (error) {
+                            return <BlockText>{JSON.stringify(error)}</BlockText>;
+                        }
+                        return <Fragment>
+                            <HeadingText>Entity by Domain Type</HeadingText>
+                            {this._renderTable(data.entities)}
+                        </Fragment>
+                    }}
                 </EntitiesByDomainTypeQuery>
             </StackItem>
             <StackItem className="container">
                 <EntitiesByNameQuery name={this.state.entityName}>
-                    {({loading, error, data}) => {
+                    {({ loading, error, data }) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
-                            return <Spinner/>;
+                            return <Spinner />;
                         }
                         if (error) {
                             return <BlockText>{JSON.stringify(error)}</BlockText>;
@@ -380,10 +381,10 @@ export default class MyNerdlet extends React.Component {
             </StackItem>
             <StackItem className="container">
                 <EntityCountQuery>
-                    {({loading, error, data}) => {
+                    {({ loading, error, data }) => {
                         console.debug([loading, data, error]); //eslint-disable-line
                         if (loading) {
-                            return <Spinner/>;
+                            return <Spinner />;
                         }
                         if (error) {
                             return <BlockText>{JSON.stringify(error)}</BlockText>;
@@ -396,7 +397,7 @@ export default class MyNerdlet extends React.Component {
                     }}
                 </EntityCountQuery>
             </StackItem>
-        </Stack>);
+        </Stack>)
     }
 }
 ```
