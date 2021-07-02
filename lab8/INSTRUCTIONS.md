@@ -39,7 +39,7 @@ So let's get started!
 
 For the purposes of expediency, this lab provides a lot more working code than some of the previous exercises. Please take a moment to review the following files.
 
-1. Open the file `lab8/nerdlets/my-nerdlet/nr1.json` and check out the contents. They look like the following. There are two attributes we want to pay attention to: `entities` and `actionCategory`.
+1. Open the file `lab8/nerdlets/my-nerdlet/nr1.json` and check out the contents. They look like the following. Pay attention to the `context` attribute.
 
 Just like in [`lab7`](../lab7/INSTRUCTIONS.md), we're going to access this Nerdlet via the `Entity Explorer`.
 
@@ -49,8 +49,14 @@ Just like in [`lab7`](../lab7/INSTRUCTIONS.md), we're going to access this Nerdl
     "id": "my-nerdlet",
     "description": "Describe me",
     "displayName": "Lab 8: Location Performance",
-    "entities": [{"domain": "BROWSER", "type": "APPLICATION"}],
-    "actionCategory": "monitor"
+    "context": {
+        "entities": [
+            {
+                "domain": "BROWSER",
+                "type": "APPLICATION"
+            }
+        ]
+    }
 }
 ```
 

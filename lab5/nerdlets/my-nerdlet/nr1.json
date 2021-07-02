@@ -3,11 +3,12 @@
     "id": "lab5-nerdlet",
     "displayName": "NerdGraph Nerdlet",
     "description": "Explore using NerdGraph in Nerdlet.",
-    "entities": [
-        {
-            "domain": "APM",
-            "type": "APPLICATION"
-        }
-    ],
-    "actionCategory": "monitor"
+    "context": {
+        "entities": [
+            {
+                "domain": "APM",
+                "type": "APPLICATION"
+            }
+        ]
+    }
 }

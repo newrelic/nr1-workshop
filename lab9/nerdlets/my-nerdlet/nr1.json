@@ -3,6 +3,16 @@
     "id": "my-nerdlet",
     "description": "Describe me",
     "displayName": "Lab 9: Perf. Compare",
-    "entities": [{"domain": "BROWSER", "type": "APPLICATION"}, { "domain": "APM",  "type": "APPLICATION" }],
-    "actionCategory": "monitor"
+    "context": {
+        "entities": [
+            {
+                "domain": "BROWSER",
+                "type": "APPLICATION"
+            },
+            {
+                "domain": "APM",
+                "type": "APPLICATION"
+            }
+        ]
+    }
 }

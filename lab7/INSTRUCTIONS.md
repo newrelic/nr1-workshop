@@ -20,13 +20,14 @@ Load the prequisites and follow the setup instructions in [Setup](../SETUP.md).
 cd lab7
 nr1 nerdpack:uuid -gf
 npm install
+nr1 nerdpack:serve
 ```
 
 ## Step 1: Accessing the Nerdlet
 
 You'll notice that this `Nerdlet` doesn't have a corresponding `Launcher`, so we're going to need to find it.
 
-1. Open the file `lab7/nerdlets/my-nerdlet/nr1.json` and check out the contents. They look like the following. There are two attributes we want to pay attention to: `entities` and `actionCategory`.
+1. Open the file `lab7/nerdlets/my-nerdlet/nr1.json` and check out the contents. They look like the following. Pay attention to the `context` attribute:
 
 ```json
 {
@@ -34,8 +35,14 @@ You'll notice that this `Nerdlet` doesn't have a corresponding `Launcher`, so we
     "id": "my-nerdlet",
     "description": "Describe me",
     "displayName": "Lab 7: Custom Data",
-    "entities": [{"domain": "BROWSER", "type": "APPLICATION"}],
-    "actionCategory": "monitor"
+    "context": {
+        "entities": [
+            {
+                "domain": "BROWSER",
+                "type": "APPLICATION"
+            }
+        ]
+    }
 }
 ```
 
@@ -217,4 +224,5 @@ export default class MyNerdlet extends React.Component {
 # For Consideration / Discussion
 
 * What other types of data might you chose to intermingle with performance data?
-* Does it make sense why the `Lab 7: Custom Data` Nerdlet was only displaying for `Browser Application` instances? FYI, a value of `entities: [*]` makes a Nerdlet available for all Entity Types.
+* Does it make sense why the `Lab 7: Custom Data` Nerdlet was only displaying for `Browser Application` instances?
+* Read more about how to attach a Nerdlet to your entities in [our documentation](https://developer.newrelic.com/build-apps/attach-nerdlet-to-entities/).
