@@ -49,7 +49,7 @@ You'll notice that the CLI creates a `./launchers/lab0-launcher` directory: with
 ```json
 {
     "schemaType": "LAUNCHER",
-    "id": "lab0-launcher-launcher",
+    "id": "lab0-launcher",
     "description": "Describe me",
     "displayName": "Lab0Launcher",
     "rootNerdletId": "replace-me-with-nerdlet-id"

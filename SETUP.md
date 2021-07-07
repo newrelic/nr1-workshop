@@ -32,7 +32,7 @@ nr1 nerdpack:serve
 ```
 
 Your terminal output should look like the following:
-![terminal](screenshots/setup_screen04.png)
+![terminal](screenshots/setup_screen_2021.png)
 
 Congratulations! You are now set up for building New Relic One applications. Learn how to view your Setup Exercise application in the next section.
 
