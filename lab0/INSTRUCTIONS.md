@@ -1,36 +1,38 @@
-Lab 0: Building your first Nerdpack
+Lab 0: Build your first Nerdpack
 ===================================
 
-The purpose of this lab is to provide hands on experience building on top of the New Relic One platform. Following the instructions in this lab, you will be up and running quickly. First, let's make sure you understand a few key concepts that you'll be working with.
-* **Launcher**: An entry point into the New Relic One platform that is loaded on the "Apps" page.
-* **Nerdlet**: A visual component that renders inside the New Relic One platform at a well defined extension point. For example, a Launcher can invoke a Nerdlet (as you will see shortly). At their core, Nerdlets are React.js components.
-* **Nerdpack** (aka Package): A collection of artifacts, e.g. Nerdlets, that are "packaged" up and published into the New Relic One platform.
-* **Visualization:** This is another Nerdpack artifact that renders your data in a customized way. Unlike Nerdlets, you can add visualizations to dashboards. For now, you'll focus on Nerdlets, but you'll learn about visualizations in a later lab.
+New Relic is a programmable platform. This means you can write and deploy your own code to customize how you see your data, pull in data from third-party services, and create experiences that let you get more from New Relic than what's offered by default. Before you write any code, it's important to learn the building blocks of New Relic programmability:
+* **Launcher:** An entry point into the New Relic platform that is loaded on the **Apps** page.
+* **Nerdlet:** A visual Nerdpack item that renders inside the New Relic platform at a well defined extension point. For example, a launcher can invoke a Nerdlet (as you will see shortly). At their core, Nerdlets are React.js components.
+* **Nerdpack:** A collection of Nerdlets, launchers, and visualizations that are packaged up and published to the New Relic platform.
+* **Visualization:** This is another Nerdpack item that renders your data in a customized way. Unlike Nerdlets, you can add visualizations to dashboards. 
 
-In Lab0, you will create a Launcher and then add a Nerdlet to it that will be invoked when the user clicks on the Launcher. After this lab you should understand:
+> **Note:** Focus on Nerdlets for now. You'll learn about visualizations in a later lab.
 
-* How to use the CLI to create a Launcher
-* How to use the CLI to create a Nerdlet
-* How to connect a Launcher to a Nerdlet
-* How to create and locally develop an Nerdpack
+In this lab, you're going to:
 
-# Step 0: Setup and Prerequisites
+* Create a launcher
+* Create a Nerdlet
+* Connect a Launcher to a Nerdlet
+* Create and locally develop a Nerdpack
 
-Load the prerequisites and follow the setup instructions in [Setup](../SETUP.md).
+## Set up your environment
 
-**Reminder**: Make sure that you're ready to go with your `lab0` by ensuring you've run the following commands:
+Before you begin with the lab [set up your environment](../SETUP.md).
 
-```bash
-# from the nr1-workshop directory
-cd lab0
-nr1 nerdpack:uuid -gf
-```
+> **Reminder:** Make sure that you're ready to go with the lab by ensuring you've run the following commands:
 
-# Step 1: Create a Launcher
+> ```bash
+> # from the nr1-workshop directory
+> cd lab0
+> nr1 nerdpack:uuid -gf
+> ```
 
-Launchers are a type of artifact within a Nerdpack that is selectable from the New Relic One "Apps" page, and serves as an entry to a Nerdlet.
+## Create a launcher
 
-1. Use `nr1` to create a new Launcher
+Launchers are a type of Nerdpack item that you can select from the New Relic One **Apps** page, and serves as an entry to a Nerdlet.
+
+1. Use `nr1` to create a new launcher:
 
 ```bash
 # assuming we're in nr1-workshop/lab0
@@ -43,9 +45,9 @@ nr1 create
     launcher lab0-launcher is available at "./launchers/lab0-launcher"
 ```
 
-You'll notice that the CLI creates a `./launchers/lab0-launcher` directory: with a nr1.json configuration.
+You'll notice that the CLI creates a _./launchers/lab0-launcher_ directory with a nr1.json configuration.
 
-2. Now that you have a Launcher, open the `launchers/lab0-launcher/nr1.json`. You'll see something like this.
+2. Now that you have a launcher, open the _launchers/lab0-launcher/nr1.json_. You'll see something like this.
 
 ```json
 {
@@ -66,21 +68,21 @@ nr1 nerdpack:serve
 # Note: Once you start the local server, it will automatically listen for changes in the file system. To issue commands while the local server is running, simply open a new terminal and change to the lab0 directory.
 ```
 
-4. Navigate in Google Chrome to [`https://one.newrelic.com/?nerdpacks=local`](https://one.newrelic.com/?nerdpacks=local) and click on the `Lab0Launcher`.
+4. Navigate in your browser to [`https://one.newrelic.com/?nerdpacks=local`](https://one.newrelic.com/?nerdpacks=local) and click on the `Lab0Launcher`.
 
-![lab0-launcher](../screenshots/lab0_screen01.png) <sup>Note: The icon might be a little different from the screenshot.</sup>
+![lab 0 launcher](../screenshots/lab0_screen01.png) <sup>Note: The icon might be a little different from the screenshot.</sup>
 
-5. Your browser should look _something_ like the screenshot below showing a 404 error message. Why? Remember that a Launcher is the entry point on the "Apps" page to a specific Nerdlet. Currently, the Lab 0 Launcher is not connected to a Nerdlet, which causes an error to be displayed. Let's fix that by creating a Nerdlet and connecting it to the Lab 0 Launcher.
+5. Your browser should look like the screenshot below showing a 404 error message.
 
-![lab0-launcher-clicked](../screenshots/lab0_screen02.png)
+![lab 0 launcher clicked](../screenshots/lab0_screen02.png)
 
-In the next steps we'll create a new Nerdlet and connect our Launcher to this Nerdlet.
+Why? Remember that a launcher is the entry point on the **Apps** page to a specific Nerdlet. Currently, the Lab 0 launcher is not connected to a Nerdlet causing an error to be displayed. Let's fix that by creating a Nerdlet and connecting it to the Lab 0 launcher.
 
-# Step 2: Create a Nerdlet
+In the next steps we'll create a new Nerdlet and connect our launcher to this Nerdlet.
 
-A Nerdlet is one of the main artifacts that can be included within a Nerdpack. A Nerdlet consists of three files by default: `index.js`, `styles.scss`, and a `nr1.json` configuration.
+## Create a Nerdlet
 
-A Nerdlet is where the bulk of the code in your Nerdpack will live.
+A Nerdlet is a Nerdpack item that contains the bulk of the code in your Nerdpack. It consists of three files by default: `index.js`, `styles.scss`, and a `nr1.json` configuration.
 
 1. Use the CLI to create a Nerdlet.
 
@@ -94,9 +96,9 @@ nr1 create
     nerdlet lab0-nerdlet is available at "./nerdlets/lab0-nerdlet"
 ```
 
-You'll notice that the CLI creates three files in the `./nerdlets/lab0-nerdlet` directory: `index.js`, `styles.scss`, and a `nr1.json` configuration.
+You'll notice that the CLI creates three files in the _./nerdlets/lab0-nerdlet_ directory: `index.js`, `styles.scss`, and a `nr1.json` configuration.
 
-2. Open the project in your text editor or IDE (reminder: these instructions assume Visual Studio Code, but you are free to use the IDE of your choice. Here's a shout out to all the VI users!!)
+2. Open the project in the IDE of your choice. 
 
 ```bash
 # if you're not there already, navigate to the workshop directory
@@ -106,16 +108,17 @@ code .
 # voilà
 ```
 
-3. A Nerdlet is created and added to the `./lab0/nerdlets` folder. Your code editor should look similar to the screenshot below:
+3. A Nerdlet is created and added to the _./lab0/nerdlets_ folder. Your code editor should look similar to the screenshot below:
 
-![lab0-nerdlet-created](../screenshots/lab0_screen03.png)
+![lab 0 nerdlet created](../screenshots/lab0_screen03.png)
 
+> **Note:** The images show Visual Studio Code.
 
-# Step 3: Connecting your Launcher and Nerdlet
+## Connect your launcher and Nerdlet
 
-1. Within `./lab0/launchers/lab0-launcher` open the Launcher's `nr1.json` configuration file and add the correct `rootNerdletId`.
+1. Within _./lab0/launchers/lab0-launcher_ open the launcher's `nr1.json` configuration file and add the correct `rootNerdletId`.
 
-![lab0-launcher](../screenshots/lab0_screen04.png)
+![lab 0 launcher](../screenshots/lab0_screen04.png)
 
 2. Replace the code within `./lab0/launchers/lab0-launcher/nr1.json` with the JSON object below.
 
@@ -133,22 +136,22 @@ code .
 
 4. Save the `nr1.json` and restart your local server with `CTRL+C` and `nr1 nerdpack:serve`. Then navigate back https://one.newrelic.com/?nerdpacks=local and click on the `Lab0Launcher`. Your browser window should look similar to below with the `lab0-nerdlet` launched.
 
-![lab0-nerdlet](../screenshots/lab0_screen05.png)
+![lab 0 nerdlet](../screenshots/lab0_screen05.png)
 
-# Step 4: Creating a Nerdpack
+## Create a Nerdpack
 
-## What is a Nerdpack?
+### What is a Nerdpack?
 
-A Nerdpack is a deployable unit that contains one or more artifacts. A Nerdlet is the main artifact in a Nerdpack, but Nerdpacks can also include Launchers, overlays, hooks, and entities.
+A Nerdpack is a deployable unit that contains one or more Nerdpack items. A Nerdlet is the main Nerdpack item in a Nerdpack, but Nerdpacks can also include launchers, overlays, hooks, and entities.
 
-In steps 1-3 we were creating a `lab0` Nerdpack. Yet, there is a quicker way to create a Nerdpack with a Launcher and Nerdlet already connected.
+Following the previous instructions, you were creating a `lab0` Nerdpack. Yet, there is a quicker way to create a Nerdpack with a launcher and Nerdlet already connected.
 
-**`nr1 create` will do it for you!**
+**`nr1 create`** will do it for you!
 
-From your root directory (or the directory you want your Nerdpacks located), run the following command in your terminal:
+From your project directory, run the following command in your terminal:
 
 ```bash
-# The CLI will create a new folder to contain the artifacts within your Nerdpack
+# The CLI will create a new folder to contain the Nerdpack items within your Nerdpack
 nr1 create
 ✔ What kind of component do you want to create? › nerdpack
 ✔ Name your nerdpack. … lab0-nerdpack
@@ -172,12 +175,12 @@ found 0 vulnerabilities
     launcher lab0-launcher is available at "./launchers/lab0-launcher"
 ```
 
-You'll notice that the CLI creates a `/lab0-nerdpack` directory: including `launchers` and `nerdlets` folders, and all of the needed internal files.
+You'll notice that the CLI creates a _/lab0-nerdpack_ directory: including _launchers_ and _nerdlets_ folders, and all of the needed internal files.
 
-![lab0-package](../screenshots/lab0_screen06.png)
+![lab 0 package](../screenshots/lab0_screen06.png)
 
 If you go into the `lab0-nerdpack` directory and run `npm install && npm start` you will be able to run your package!
 
-# For Consideration / Discussion
+## For Consideration / Discussion
 
 - _How do you access your account data?_
