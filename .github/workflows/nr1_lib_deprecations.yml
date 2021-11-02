@@ -1,0 +1,29 @@
+name: NR1 Library Deprecation Checks
+
+on: [push, workflow_dispatch]
+
+jobs:
+  nr1_lib_deprecations:
+    name: Run NR1 Library Deprecation Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Default Branch
+        id: default-branch
+        uses: actions/github-script@v2
+        with:
+          script: |
+            const data = await github.repos.get(context.repo)
+            return data.data && data.data.default_branch === context.ref.split('/').slice(-1)[0]
+      - name: Checkout Self
+        if: ${{ steps.default-branch.outputs.result == 'true' }}
+        uses: actions/checkout@v2
+      - name: Run Repolinter
+        if: ${{ steps.default-branch.outputs.result == 'true' }}
+        uses: newrelic/repolinter-action@v1
+        with:
+          output_name: 'NR1 library deprecation issues'
+          label_name: 'nr1-deprecations'
+          label_color: '800000'
+          # FIXME: Replace with the appropriate ruleset URL
+          config_url: https://raw.githubusercontent.com/newrelic/.github/main/repolinter-rulesets/nr1-lib-deprecations.yml
+          output_type: issue
